@@ -3,6 +3,7 @@ package me.cadox8.deud.items;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.API;
+import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.items.food.ChickenItem;
 import me.cadox8.deud.items.objects.KeyItem;
@@ -14,6 +15,7 @@ import me.cadox8.deud.items.weapons.WeaponItem;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.Random;
 
 public abstract class Item {
@@ -59,8 +61,18 @@ public abstract class Item {
     }
 
 
-    public abstract void use();
+    public abstract void use(Player p);
     public abstract Item createNew(int x, int y, int count);
+
+    public void removeItem(Player p) {
+        if (getCount() == 1) {
+            p.getInventory().removeItem(this);
+            p.getInventory().setUsableItem(Item.hand);
+            return;
+        }
+        count--;
+    }
+
 
     public void tick(){
         if(API.getWorld().getEntityManager().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)){
@@ -87,9 +99,20 @@ public abstract class Item {
         bounds.y = y;
     }
 
-    public static Item getRandom() {
+    public static Item getRandom(Item... banedIDs) {
+        Integer[] ids = new Integer[banedIDs.length];
+        int x = 0;
+
+        for (Item i : banedIDs) {
+            ids[x] = i.getId();
+            x++;
+        }
+        return getRandom(ids);
+    }
+    public static Item getRandom(Integer... banedIDs) {
         Item i = items[new Random().nextInt(items.length)];
         i.setCount(1);
+        if (Arrays.asList(banedIDs).contains(i.getId())) return getRandom(banedIDs);
         return i;
     }
 

@@ -23,11 +23,11 @@ public class Log {
     }
 
 
-    public static void log(String text){
+    public static void log(Object text){
         log(LogType.DEBUG, text);
     }
 
-    public static void log(LogType type, String text){
+    public static void log(LogType type, Object text){
         String time = "[" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH)) + "]";
         String log;
 

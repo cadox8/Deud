@@ -1,5 +1,6 @@
 package me.cadox8.deud.items.weapons;
 
+import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.items.Item;
 
 import java.awt.image.BufferedImage;
@@ -11,7 +12,7 @@ public class HandItem extends WeaponItem {
     }
 
     @Override
-    public void use() {
+    public void use(Player p) {
 
     }
 

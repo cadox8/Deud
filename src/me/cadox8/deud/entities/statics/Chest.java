@@ -6,6 +6,7 @@ import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.tiles.Tile;
+import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 
@@ -27,10 +28,12 @@ public class Chest extends StaticEntity {
     }
 
     public void open(Player p) {
+        Log.log(p.getInventory().keyCount());
         if (p.getInventory().keyCount() == 0) return;
-        p.getInventory().removeItem(Item.keyItem);
+        p.getInventory().getInventoryItems().stream().filter(i -> i.getId() == Item.keyItem.getId()).findFirst().get().removeItem(p);
 
-        Item random = Item.getRandom();
+        Item random = Item.getRandom(Item.hand, Item.keyItem);
+        Log.log(random.toString());
         p.getInventory().addItem(random);
 
         if (isExplosive()) new Explosion(5, 3).perform();

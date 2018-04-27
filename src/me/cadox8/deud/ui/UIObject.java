@@ -36,8 +36,6 @@ public abstract class UIObject {
     }
 
     public void onMouseRelease(MouseEvent e) {
-        if (hovering) {
-            onClick();
-        }
+        if (hovering) onClick();
     }
 }

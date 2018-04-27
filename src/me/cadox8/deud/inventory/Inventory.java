@@ -12,6 +12,7 @@ import me.cadox8.deud.utils.DeudColor;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Inventory {
@@ -98,8 +99,17 @@ public class Inventory {
 
     public void removeItem(Item item) {
         if (inventoryItems.size() == 0) return;
+        Optional<Item> ite = inventoryItems.stream().filter(it -> it.getId() == item.getId()).findAny();
+        if (!ite.isPresent()) return;
+        Item i = ite.get();
 
-        for (Item i : inventoryItems) {
+        if (i.getCount() - item.getCount() <= 0) {
+            inventoryItems.remove(item);
+            return;
+        }
+        i.setCount(i.getCount() - item.getCount());
+
+/*        for (Item i : inventoryItems) {
             if (i.getId() == item.getId()) {
                 if (i.getCount() - item.getCount() <= 0) {
                     inventoryItems.remove(item);
@@ -108,7 +118,7 @@ public class Inventory {
                 i.setCount(i.getCount() - item.getCount());
                 return;
             }
-        }
+        }*/
     }
 
     private void dropItem(Item item) {

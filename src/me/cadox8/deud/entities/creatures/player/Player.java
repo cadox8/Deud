@@ -171,8 +171,9 @@ public class Player extends Creature {
 
         if (API.getKeyManager().tests) {
             FileUtils.save(this);
-            addHunger(10);
+            setHunger(getMaxHunger());
             addExp(20);
+            setHealth(getMaxHealth());
             API.getWorld().getEntityManager().freezeCreatures();
         }
 
@@ -198,7 +199,7 @@ public class Player extends Creature {
             setDirection(2);
         }
 
-        if (API.getKeyManager().enter) inventory.getUsableItem().use();
+        if (API.getKeyManager().enter) inventory.getUsableItem().use(this);
 
         if (API.getKeyManager().shift) {
             if (hunger <= 0.0) {
@@ -263,21 +264,6 @@ public class Player extends Creature {
             }
         }
     }
-
-    public void addHunger(double hunger) {
-        if (isFullHunger()) return;
-        if (getHunger() + hunger >= getMaxHunger()) {
-            setHunger(getMaxHunger());
-            return;
-        }
-        setHunger(getHunger() + hunger);
-    }
-
-    public boolean isFullHunger(){
-        return getHunger() == getMaxHunger();
-    }
-
-
 
     //
     private void drawImage(Graphics g, BufferedImage image, int pos){

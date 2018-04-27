@@ -1,6 +1,7 @@
 package me.cadox8.deud.items.food;
 
 import lombok.Getter;
+import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.items.Item;
 
 import java.awt.image.BufferedImage;
@@ -16,11 +17,19 @@ public abstract class FoodItem extends Item {
     }
 
     @Override
-    public void use() {
-        consume();
+    public void use(Player p) {
+        consume(p);
     }
 
-    protected void consume() {
+    protected void consume(Player p) {
+        if (p.getHunger() == p.getMaxHunger()) return;
 
+        removeItem(p);
+
+        if (p.getHunger() + foodRegen >= p.getMaxHunger()) {
+            p.setHunger(p.getMaxHunger());
+            return;
+        }
+        p.setHunger(p.getHunger() + foodRegen);
     }
 }

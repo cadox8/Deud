@@ -19,7 +19,7 @@ import java.util.Random;
 public abstract class Entity {
 
     protected static final int DEFAULT_HEALTH = 10;
-    protected static final int DEFAULT_DAMAGE = 5;
+    protected static final int DEFAULT_DAMAGE = 3;
     protected static final float DEFAULT_ARMOR = 0;
 
     private static final double DMG_UP_PER_LVL = 0.1;
