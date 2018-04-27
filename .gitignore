@@ -22,5 +22,5 @@
 hs_err_pid*
 .idea/
 Deud.iml
-target/
 lib/
+out/
