@@ -1,0 +1,43 @@
+.network-name {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.loadInfo {
+    font-size: 11px;
+}
+
+.important {
+    font-size: 20px;
+}
+
+.name {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -25px;
+}
+
+.justify {
+    text-align: justify;
+}
+
+.centered {
+    text-align: center;
+}
+
+.info {
+    text-align: center;
+    font-size: 75px;
+}
+
+footer {
+    padding: 20px 0;
+    background-color: #f8f8f8;
+}
+
+p.copyright {
+    margin: 10px 0 0;
+}
