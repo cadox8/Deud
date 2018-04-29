@@ -128,7 +128,5 @@ public class Inventory {
 
     public int keyCount() {
         return inventoryItems.stream().filter(i -> i.getId() == 2).collect(Collectors.toList()).size();
- /*       for (Item i : inventoryItems) if (i.getId() == 2) return i.getCount();
-        return 0;*/
     }
 }

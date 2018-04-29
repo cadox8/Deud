@@ -199,7 +199,7 @@ public class Player extends Creature {
             setDirection(2);
         }
 
-        if (API.getKeyManager().enter) inventory.getUsableItem().use(this);
+        if (API.getMouseManager().isRightPressed()) inventory.getUsableItem().use(this);
 
         if (API.getKeyManager().shift) {
             if (hunger <= 0.0) {
