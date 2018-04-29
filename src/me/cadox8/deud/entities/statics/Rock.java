@@ -19,10 +19,6 @@ public class Rock extends StaticEntity {
     }
 
     @Override
-    public void tick() {
-    }
-
-    @Override
     public void die() {
         dropItem(Item.rockItem);
     }
@@ -30,9 +26,5 @@ public class Rock extends StaticEntity {
     @Override
     public void render(Graphics g) {
         g.drawImage(Assets.stone, (int) (x - API.getGameCamera().getXOffset()), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
-    }
-
-    @Override
-    public void specialRender(Graphics g) {
     }
 }

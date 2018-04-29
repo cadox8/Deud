@@ -1,16 +1,14 @@
 package me.cadox8.deud.gfx;
 
+import lombok.AllArgsConstructor;
 import me.cadox8.deud.utils.DeudColor;
 
 import java.awt.image.BufferedImage;
 
+@AllArgsConstructor
 public class Sprites {
 
     private BufferedImage sprites;
-
-    public Sprites(BufferedImage sprites) {
-        this.sprites = sprites;
-    }
 
     public BufferedImage crop(int x, int y, int width, int height) {
         return sprites.getSubimage(x, y, width, height);

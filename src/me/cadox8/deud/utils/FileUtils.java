@@ -1,17 +1,16 @@
 package me.cadox8.deud.utils;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.inventory.Inventory;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class FileUtils {
-
-    //ToDo: Change to Gson
 
     private static File f = new File(Launcher.GAME_FILE + "saves", "save.json");
 
@@ -19,34 +18,39 @@ public class FileUtils {
     public static void save(Player p){
         Location l = p.getLocation();
         Inventory i = p.getInventory();
-        /*try {
-            JSONObject data = new JSONObject();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-            JSONArray loc = new JSONArray();
+        try {
+            JsonObject data = new JsonObject();
+
+            JsonArray loc = new JsonArray();
             loc.add(l.getX());
             loc.add(l.getY());
             loc.add(l.getDirection());
 
-            JSONArray inv = new JSONArray();
-            for (Item it : i.getInventoryItems()) inv.add(it.getId());
+            JsonArray inv = new JsonArray();
+            i.getInventoryItems().forEach(item -> {
+                JsonObject it = new JsonObject();
+                it.addProperty(item.getId() + "", item.getCount());
+                inv.add(it);
+            });
 
-            data.put("Health", p.getHealth());
-            data.put("Money", p.getMoney());
-            data.put("Inventory", inv);
-            data.put("Location", loc);
+            data.addProperty("Health", p.getHealth());
+            data.addProperty("Money", p.getMoney());
+            data.add("Inventory", inv);
+            data.add("Location", loc);
 
             BufferedWriter w = new BufferedWriter(new FileWriter(f));
 
-            if (f.exists()) f.delete();
-            f.mkdirs();
+            if (f.exists()) f.delete(); f.mkdirs();
 
-            w.write(data.toJSONString());
+            w.write(gson.toJson(data));
             w.close();
 
             Log.log(Log.LogType.SUCCESS, "Data saved successfully");
         } catch (IOException e){
             Log.log(Log.LogType.DANGER, "Error while saving data. Does 'C:/Deud/saves' exist?");
-        }*/
+        }
     }
 
     public static void load() {

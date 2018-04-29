@@ -45,7 +45,7 @@ public class MenuState extends State {
             public void onClick() {
                 try {
                     API.getMouseManager().setUIManager(null);
-                    Desktop.getDesktop().browse(new URI("https://projectalpha.es/deud/releases.php"));
+                    Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
                     API.getMouseManager().setUIManager(uiManager);
                 } catch (URISyntaxException | IOException e){
                     Log.log(Log.LogType.DANGER, "Link doesn't exist");
@@ -64,6 +64,6 @@ public class MenuState extends State {
         uiManager.render(g);
         g.setColor(DeudColor.WHITE.toColor());
         g.drawString("Version: " + Launcher.VERSION, 5, 595);
-        g.drawString("© Deud 2016-2017 - The Game is property of Cadox8", 505, 595);
+        g.drawString("© Deud 2016-2018 - The Game is property of Cadox8", 505, 595);
     }
 }

@@ -39,9 +39,7 @@ public class EntityManager {
         while (it.hasNext()) {
             Entity e = it.next();
             e.tick();
-            if (!e.isActive()) {
-                it.remove();
-            }
+            if (!e.isActive()) it.remove();
         }
         entities.sort(renderSorter);
     }
@@ -59,5 +57,9 @@ public class EntityManager {
 
     public void freezeCreatures() {
         entities.stream().filter(e -> e instanceof Creature).filter(e -> !(e instanceof Player)).forEach(e -> ((Creature)e).setFreeze(true));
+    }
+
+    public void killAll() {
+        entities.forEach(Entity::kill);
     }
 }

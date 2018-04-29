@@ -114,10 +114,10 @@ public class World {
         }
     }
 
+    @Override
     public String toString() {
-        return "World{name:" + worldName() + "}";
+        return "World{Name:" + worldName() + "}";
     }
-
     public String worldName() {
         return path.split("/")[2].split(".")[0];
     }

@@ -19,33 +19,24 @@ public class UIManager {
     }
 
     public void tick() {
-        for (UIObject o : objects) {
-            o.tick();
-        }
+        objects.forEach(UIObject::tick);
     }
 
     public void render(Graphics g) {
-        for (UIObject o : objects) {
-            o.render(g);
-        }
+        objects.forEach(o -> o.render(g));
     }
 
     public void onMouseMove(MouseEvent e) {
-        for (UIObject o : objects) {
-            o.onMouseMove(e);
-        }
+        objects.forEach(o -> o.onMouseMove(e));
     }
 
     public void onMouseRelease(MouseEvent e) {
-        for (UIObject o : objects) {
-            o.onMouseRelease(e);
-        }
+        objects.forEach(o -> o.onMouseRelease(e));
     }
 
     public void addObject(UIObject o) {
         objects.add(o);
     }
-
     public void removeObject(UIObject o) {
         objects.remove(o);
     }

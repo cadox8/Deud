@@ -28,7 +28,7 @@ public class ItemManager {
     }
 
     public void render(Graphics g) {
-        for(Item i : items) i.render(g);
+        items.forEach(i -> i.render(g));
     }
 
     public void addItem(Item i) {

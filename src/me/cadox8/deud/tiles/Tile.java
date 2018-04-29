@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 
 public class Tile {
 
-    //STATIC STUFF HERE
     public static Tile[] tiles = new Tile[256];
 
     //Tiles
@@ -26,6 +25,8 @@ public class Tile {
 
     //Variations
     public static Tile rotateRoadTile = new RotateRoadTile(7, 90);
+
+
 
     public static final int TILEWIDTH = 64, TILEHEIGHT = 64;
 
@@ -50,7 +51,10 @@ public class Tile {
     public void tick() {}
 
     public void render(Graphics g, int x, int y) {
-        g.drawImage(texture, x, y, TILEWIDTH, TILEHEIGHT, null);
+        render(g, x, y,  TILEWIDTH, TILEHEIGHT);
+    }
+    public void render(Graphics g, int x, int y, int width, int height) {
+        g.drawImage(texture, x, y, width, height, null);
     }
 
     public boolean isSolid() {

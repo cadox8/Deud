@@ -126,6 +126,11 @@ public abstract class Entity {
         return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), bounds.width, bounds.height);
     }
 
+    public void kill() {
+        setHealth(0);
+    }
+
+
 
     public void addExp(double xp) {
         if (getLevel() >= MAX_LEVEL) {

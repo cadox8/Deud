@@ -26,7 +26,6 @@ public abstract class AI {
     public AI(API API, Entity entity, float speed, int delay) {
         this(API, entity, speed, delay, new Rectangle(0, 0, 0, 0));
     }
-
     public AI(API API, Entity entity, float speed, int delay, Rectangle bounds) {
         this.API = API;
         this.entity = entity;

@@ -44,14 +44,6 @@ public class SignEntity extends StaticEntity {
     }
 
     @Override
-    public void tick() {
-    }
-
-    @Override
-    public void die() {
-    }
-
-    @Override
     public void render(Graphics g) {
         if (sign != null) sign.render(g);
     }

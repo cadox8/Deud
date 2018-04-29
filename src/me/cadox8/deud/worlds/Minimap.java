@@ -15,8 +15,7 @@ public class Minimap {
     private World world;
     private Player player;
 
-    private int imgWidth = 3;
-    private int imgHeight = 3;
+    private int imgWidth = 8;
 
     private List<TileData> tiles;
 
@@ -31,7 +30,8 @@ public class Minimap {
 
         for (TileData td : tiles) {
             if (td == null) continue;
-            g.drawImage(td.getBi(), 641 + td.getX(), 6 + td.getY(), imgWidth, imgHeight, null);
+            td.getTile().render(g, 641 + td.getX(), 6 + td.getY(), imgWidth, imgWidth);
+            //g.drawImage(td.getBi(), 641 + td.getX(), 6 + td.getY(), imgWidth, imgWidth, null);
             //g.fillRect((int)player.getX() + 641, (int)player.getY() + 6, 5, 5);
         }
     }
@@ -52,10 +52,10 @@ public class Minimap {
                 if (t.getId() == 9) continue;
 
                 TileData td = new TileData(t, new Color(t.getTexture().getRGB(0, 0)));
-                BufferedImage bi = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
+                BufferedImage bi = new BufferedImage(imgWidth, imgWidth, BufferedImage.TYPE_INT_RGB);
 
                 for (int d = 0; d < imgWidth; d++){
-                    for (int da = 0; da < imgHeight; da++){
+                    for (int da = 0; da < imgWidth; da++){
                         bi.setRGB(d, da, td.getColor().getRGB());
                     }
                 }
