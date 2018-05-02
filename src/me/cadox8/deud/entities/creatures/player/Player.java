@@ -3,6 +3,7 @@ package me.cadox8.deud.entities.creatures.player;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.API;
+import me.cadox8.deud.audio.Sound;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.gfx.Animation;
@@ -46,10 +47,10 @@ public class Player extends Creature {
         bounds.height = 19;
 
         //Animatons
-        animDown = new Animation(500, Models.player_down);
-        animUp = new Animation(500, Models.player_up);
-        animLeft = new Animation(500, Models.player_left);
-        animRight = new Animation(500, Models.player_right);
+        animDown = new Animation((int)(speed * 166), Models.player_down);
+        animUp = new Animation((int)(speed * 166), Models.player_up);
+        animLeft = new Animation((int)(speed * 166), Models.player_left);
+        animRight = new Animation((int)(speed * 166), Models.player_right);
 
         inventory = new Inventory(API, this);
         inventory.setUsableItem(Item.hand);
@@ -64,6 +65,11 @@ public class Player extends Creature {
         setArmor(DEFAULT_ARMOR);
 
         setAttackCooldown(300);
+
+        animations[0] = animDown;
+        animations[1] = animUp;
+        animations[2] = animLeft;
+        animations[3] = animRight;
     }
 
     @Override
@@ -177,7 +183,10 @@ public class Player extends Creature {
             API.getWorld().getEntityManager().freezeCreatures();
         }
 
-        if (API.getKeyManager().debug) API.setDebug(!API.isDebug());
+        if (API.getKeyManager().debug) {
+            Sound.playSound(Sound.ENTITY_WALK_GRASS);
+            API.setDebug(!API.isDebug());
+        }
 
         if (isFreeze()) return;
 

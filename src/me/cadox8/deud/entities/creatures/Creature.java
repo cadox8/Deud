@@ -11,6 +11,7 @@ import me.cadox8.deud.sign.Sign;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.Random;
 
 public abstract class Creature extends Entity {
@@ -34,6 +35,12 @@ public abstract class Creature extends Entity {
         xMove = 0;
         yMove = 0;
     }
+
+
+    public void fixAnimations() {
+        if (animations[0] != null) Arrays.asList(animations).forEach(a -> a.setSpeed((int)(speed * 166.66)));
+    }
+
 
     private SignEntity se;
     public void move() {

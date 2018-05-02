@@ -8,6 +8,7 @@ import me.cadox8.deud.worlds.World;
 import java.util.HashMap;
 import java.util.Map;
 
+@Deprecated
 public class Location {
 
     private API API;

@@ -23,4 +23,6 @@ public abstract class StaticEntity extends Entity {
 
     @Override
     public void specialRender(Graphics g) {}
+
+    public void fixAnimations() {}
 }

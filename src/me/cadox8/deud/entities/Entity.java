@@ -60,6 +60,7 @@ public abstract class Entity {
     @Getter @Setter protected Entity killer;
 
     @Getter @Setter protected Animation animDown, animUp, animLeft, animRight;
+    @Getter @Setter protected Animation[] animations = new Animation[4];
 
     public Entity(API API, float x, float y, int width, int height, int level) {
         this.API = API;
@@ -80,10 +81,10 @@ public abstract class Entity {
 
 
     public abstract void tick();
+    public abstract void fixAnimations();
     public abstract void render(Graphics g);
     public abstract void specialRender(Graphics g);
     public abstract void die();
-
 
     public void hurt(Entity attacker) {
         if (!isDamageable()) return;

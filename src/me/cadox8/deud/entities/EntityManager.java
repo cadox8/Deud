@@ -39,6 +39,7 @@ public class EntityManager {
         while (it.hasNext()) {
             Entity e = it.next();
             e.tick();
+            e.fixAnimations();
             if (!e.isActive()) it.remove();
         }
         entities.sort(renderSorter);
@@ -48,7 +49,6 @@ public class EntityManager {
         for (Entity e : entities) e.specialRender(g);
         for (Entity e : entities) e.render(g);
         player.postRender(g);
-
     }
 
     public void addEntity(Entity e) {
