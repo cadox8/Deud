@@ -1,18 +1,30 @@
-package me.cadox8.deud.utils;
+package me.cadox8.deud.saves;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.inventory.Inventory;
+import me.cadox8.deud.utils.Location;
+import me.cadox8.deud.utils.Log;
 
 import java.io.*;
 
 public class FileUtils {
 
     private static File f = new File(Launcher.GAME_FILE + "saves", "save.json");
+
+    public static void checkFile() {
+        try {
+            if (!f.exists()) {
+                f.getParentFile().mkdirs();
+                f.createNewFile();
+            }
+        } catch (IOException e) { }
+    }
 
     @SuppressWarnings("Unchecked")
     public static void save(Player p){
@@ -53,15 +65,16 @@ public class FileUtils {
         }
     }
 
-    public static void load() {
-        if (!f.exists()) return;
+    public static PlayerData load() {
+        if (!f.exists()) return null;
 
         try {
-            BufferedReader r = new BufferedReader(new FileReader(f));
+            JsonReader reader = new JsonReader(new FileReader(f));
+            Gson g = new GsonBuilder().create();
 
-
+            return g.fromJson(reader, PlayerData.class);
         } catch (IOException e) {
-
+            return null;
         }
     }
 }

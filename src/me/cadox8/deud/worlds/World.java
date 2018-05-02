@@ -13,6 +13,7 @@ import me.cadox8.deud.entities.statics.SignEntity;
 import me.cadox8.deud.entities.statics.Tree;
 import me.cadox8.deud.items.ItemManager;
 import me.cadox8.deud.tiles.Tile;
+import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
@@ -21,6 +22,8 @@ import java.util.Arrays;
 public class World {
 
     private API API;
+
+    @Getter private int worldID, room;
 
     @Getter private int width, height;
     private int spawnX, spawnY;
@@ -101,17 +104,21 @@ public class World {
     private void loadWorld(String path) {
         String file = Utils.loadFileAsString(path);
         String[] tokens = file.split("\\s+");
-        width = Utils.parseInt(tokens[0]);
-        height = Utils.parseInt(tokens[1]);
-        spawnX = Utils.parseInt(tokens[2]);
-        spawnY = Utils.parseInt(tokens[3]);
+        worldID = Utils.parseInt(tokens[0]);
+        room = Utils.parseInt(tokens[1]);
+        width = Utils.parseInt(tokens[2]);
+        height = Utils.parseInt(tokens[3]);
+        spawnX = Utils.parseInt(tokens[4]);
+        spawnY = Utils.parseInt(tokens[5]);
 
         tiles = new int[width][height];
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
+                tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 6]);
             }
         }
+
+        Log.log("WorldID | Room\n" + getWorldID() + " | " + getRoom());
     }
 
     @Override
@@ -119,6 +126,6 @@ public class World {
         return "World{Name:" + worldName() + "}";
     }
     public String worldName() {
-        return path.split("/")[2].split(".")[0];
+        return path.split("/")[2].split("\\.")[0];
     }
 }

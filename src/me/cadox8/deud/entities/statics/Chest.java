@@ -12,13 +12,16 @@ import java.awt.*;
 public class Chest extends StaticEntity {
 
     public Chest(API API, float x, float y) {
-        this(API,x, y, false);
+        this(API,x, y, true);
     }
     public Chest(API API, float x, float y, boolean explosive) {
         super(API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
         setExplosive(explosive);
+
+        setDamage(5);
+        setLevel(0);
 
         bounds.x = 3;
         bounds.y = (int) (height / 2f);
@@ -33,7 +36,7 @@ public class Chest extends StaticEntity {
         Item random = Item.getRandom(Item.hand, Item.keyItem);
         p.getInventory().addItem(random);
 
-        if (isExplosive()) new Explosion(5, 3).perform();
+        if (isExplosive()) new Explosion(getAPI(),5, 3, this).perform();
     }
 
     @Override

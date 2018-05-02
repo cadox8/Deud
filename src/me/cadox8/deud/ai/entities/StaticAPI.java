@@ -4,14 +4,14 @@ import me.cadox8.deud.ai.AI;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.statics.StaticEntity;
 
-public class BlocksAI extends AI {
+public class StaticAPI extends AI {
 
     private StaticEntity staticEntity;
 
     private int tempDelay = 0;
     private int direction = 0;
 
-    public BlocksAI(API API, StaticEntity staticEntity, float speed, int delay) {
+    public StaticAPI(API API, StaticEntity staticEntity, float speed, int delay) {
         super(API, staticEntity, speed, delay);
         this.staticEntity = staticEntity;
         tempDelay = delay;

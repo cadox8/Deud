@@ -45,7 +45,7 @@ public abstract class Item {
 
     @Getter @Setter protected Rectangle bounds;
 
-    @Getter @Setter protected int x, y, count;
+    @Getter protected int x, y, count;
     @Getter @Setter protected boolean pickedUp = false;
 
 
@@ -116,6 +116,11 @@ public abstract class Item {
         return i;
     }
 
+
+    public Item setCount(int count) {
+        this.count = count;
+        return this;
+    }
 
     @Override
     public String toString() {

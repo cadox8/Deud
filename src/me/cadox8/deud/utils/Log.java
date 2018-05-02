@@ -2,7 +2,6 @@ package me.cadox8.deud.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import me.cadox8.deud.Launcher;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,7 +30,7 @@ public class Log {
         String time = "[" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH)) + "]";
         String log;
 
-        if (Launcher.d.isW10()) {
+        if (System.getProperty("os.name").contains("10")) {
             log = time + type.getColor() + type.getPrefix() + " \u001B[0m" + text;
         } else {
             log = time + type.getPrefix() + " " + text;

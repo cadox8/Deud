@@ -1,5 +1,8 @@
 package me.cadox8.deud.utils;
 
+import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.worlds.World;
+
 import javax.imageio.ImageIO;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -8,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class Utils {
 
@@ -64,5 +68,23 @@ public class Utils {
         BufferedImage newImage = new BufferedImage(texture.getHeight(), texture.getWidth(), texture.getType());
 
         return op.filter(texture, newImage);
+    }
+
+    public static ArrayList<Entity> getNearbyEntities(Location center, double radius, int amount) {
+        World world = center.getWorld();
+        double increment = (2 * Math.PI) / amount;
+        ArrayList<Entity> entities = new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            double angle = i * increment;
+            double x = center.getX() + (radius * Math.cos(angle));
+            double y = center.getY() + (radius * Math.sin(angle));
+
+/*            world.getEntityManager().getEntities().stream().filter(e -> e instanceof Creature).forEach(e -> System.out.println("Entity: " + e.getLocation().toString()));
+            System.out.println(new Location(world, (float) x, (float) y).toString());*/
+
+            //entities.add(world.getEntityManager().getEntities().stream().filter(e -> e.getLocation().equals(new Location(world, (float) x, (float) y))).findFirst().get());
+        }
+        return entities;
     }
 }

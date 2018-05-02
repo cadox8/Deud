@@ -94,7 +94,7 @@ public abstract class Entity {
 
         if (API.isDebug()) Log.log("Health: " + getHealth());
 
-        if (this instanceof Creature) new Knockback(0.25, attacker, (Creature) this).perform();
+        if (this instanceof Creature) new Knockback(getAPI(), 0.25, attacker, (Creature) this).perform();
 
         if (health <= 0) {
             active = false;

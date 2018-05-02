@@ -1,16 +1,17 @@
 package me.cadox8.deud.attributes;
 
+import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.Creature;
 
 public class Knockback extends Attribute {
 
-    private double percent;
-    private Entity damager;
-    private Creature damaged;
+    private final double percent;
+    private final Entity damager;
+    private final Creature damaged;
 
-    public Knockback(double percent, Entity damager, Creature damaged){
-        super(0, "Knockback");
+    public Knockback(API API, double percent, Entity damager, Creature damaged){
+        super(API,0, "Knockback");
         this.percent = percent;
         this.damager = damager;
         this.damaged = damaged;

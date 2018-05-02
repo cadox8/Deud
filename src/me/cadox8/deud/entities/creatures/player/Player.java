@@ -2,6 +2,7 @@ package me.cadox8.deud.entities.creatures.player;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.audio.Sound;
 import me.cadox8.deud.entities.Entity;
@@ -13,8 +14,9 @@ import me.cadox8.deud.gfx.textures.Models;
 import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
+import me.cadox8.deud.saves.FileUtils;
+import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.utils.DeudColor;
-import me.cadox8.deud.utils.FileUtils;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 import me.cadox8.deud.worlds.Minimap;
@@ -70,6 +72,18 @@ public class Player extends Creature {
         animations[1] = animUp;
         animations[2] = animLeft;
         animations[3] = animRight;
+
+        inventory.addItem(Item.chickenItem);
+        inventory.addItem(Item.keyItem.setCount(8));
+
+        if (Launcher.getPlayerData() != null) {
+            PlayerData pd = Launcher.getPlayerData();
+
+            setHealth(pd.getHealth());
+            setMoney(pd.getMoney());
+
+            //inventory.getInventoryItems().addAll(Arrays.asList(pd.getInventory()));
+        }
     }
 
     @Override

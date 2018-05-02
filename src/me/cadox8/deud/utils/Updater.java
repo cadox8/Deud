@@ -17,7 +17,7 @@ public class Updater {
         try {
             URL u = new URL("https://cadox8.github.io/Deud/version.txt");
             String version = new BufferedReader(new InputStreamReader(u.openStream())).readLine().split("%")[1];
-            Log.log(version);
+            Log.log("Version: " + version);
             return version;
         } catch (IOException e){}
         return Launcher.VERSION;
