@@ -3,6 +3,7 @@ package me.cadox8.deud.gfx;
 import lombok.AllArgsConstructor;
 import me.cadox8.deud.utils.DeudColor;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 @AllArgsConstructor
@@ -42,11 +43,24 @@ public class Sprites {
                 int g = (int) (Math.random() * 256);
                 int b = (int) (Math.random() * 256);
 
-                int p = (a << 24) | (r << 16) | (g << 8) | b; //pixel
+                int p = (a << 24) | (r << 16) | (g << 8) | b;
 
                 img.setRGB(x, y, p);
             }
         }
+        return img;
+    }
+
+    public BufferedImage resizeImage(BufferedImage imgOrigin, int width, int height) {
+        Image image = imgOrigin.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+
+        if (image instanceof BufferedImage) return (BufferedImage) image;
+
+        BufferedImage img = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D bGr = img.createGraphics();
+        bGr.drawImage(img, 0, 0, null);
+        bGr.dispose();
         return img;
     }
 }

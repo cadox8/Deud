@@ -38,13 +38,15 @@ public class World {
 
     public World(API API, String path) {
         this.API = API;
+        this.path = path;
+
         this.entityManager = new EntityManager(API, new Player(API, 100, 100));
         this.itemManager = new ItemManager(API);
 
-        this.path = path;
-
         addEntities();
         loadWorld(path);
+
+
 
         this.entityManager.getPlayer().setX(spawnX);
         this.entityManager.getPlayer().setY(spawnY);
@@ -118,12 +120,13 @@ public class World {
             }
         }
 
-        Log.log("WorldID | Room\n" + getWorldID() + " | " + getRoom());
+        Log.log("WorldID | Room");
+        Log.log(getWorldID() + " | " + getRoom());
     }
 
     @Override
     public String toString() {
-        return "World{Name:" + worldName() + "}";
+        return "World{ Name: " + worldName() + "}";
     }
     public String worldName() {
         return path.split("/")[2].split("\\.")[0];

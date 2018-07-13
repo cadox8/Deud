@@ -17,7 +17,8 @@ public class Assets {
     public static BufferedImage stone, tree, tree2;
 
     //Items
-    public static BufferedImage wood, mp3, bug, sushi, chest;
+    public static BufferedImage bug;
+    public static BufferedImage wood, mp3,  sushi, chest;
     public static BufferedImage key, save;
 
     public static BufferedImage food, hearth, shield, xp, coin, sword;
@@ -46,11 +47,12 @@ public class Assets {
 
         wood = getImage(0, 0);
         mp3 = getImage(5, 0);
-        bug = sprites.randomImage(WIDTH, HEIGHT);
         chest = getImage(6, 0);
         sushi = getImage(9, 0);
 
         fire = getImage(7, 0);
+
+        bug = sprites.randomImage(WIDTH, HEIGHT);
 
         save = getImage(2, 0);
         key = getImage(3, 0);

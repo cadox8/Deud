@@ -6,22 +6,22 @@ import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.items.food.ChickenItem;
-import me.cadox8.deud.items.objects.KeyItem;
-import me.cadox8.deud.items.objects.ObjectItem;
-import me.cadox8.deud.items.objects.RockItem;
-import me.cadox8.deud.items.objects.WoodItem;
+import me.cadox8.deud.items.objects.*;
 import me.cadox8.deud.items.weapons.HandItem;
 import me.cadox8.deud.items.weapons.WeaponItem;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public abstract class Item {
 
-    public static Item[] items = new Item[5]; //All items
+    public static Item[] items = new Item[6]; //All items
 
+    //Bug
+    public static final ObjectItem bugItem = new BugItem(Assets.bug, 5, "3RR0R");
 
     //Objects
     public static final ObjectItem woodItem = new WoodItem(Assets.wood, 0, "Wood");
@@ -110,12 +110,16 @@ public abstract class Item {
         return getRandom(ids);
     }
     public static Item getRandom(Integer... banedIDs) {
+        List<Integer> baned = Arrays.asList(banedIDs);
+        baned.add(bugItem.getId());
         Item i = items[new Random().nextInt(items.length)];
+
         i.setCount(1);
-        if (Arrays.asList(banedIDs).contains(i.getId())) return getRandom(banedIDs);
+
+        if (banedIDs.length >= items.length) return bugItem;
+        if (baned.contains(i.getId())) return getRandom(banedIDs);
         return i;
     }
-
 
     public Item setCount(int count) {
         this.count = count;

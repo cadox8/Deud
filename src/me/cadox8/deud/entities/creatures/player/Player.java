@@ -2,7 +2,6 @@ package me.cadox8.deud.entities.creatures.player;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.audio.Sound;
 import me.cadox8.deud.entities.Entity;
@@ -76,8 +75,8 @@ public class Player extends Creature {
         inventory.addItem(Item.chickenItem);
         inventory.addItem(Item.keyItem.setCount(8));
 
-        if (Launcher.getPlayerData() != null) {
-            PlayerData pd = Launcher.getPlayerData();
+        if (getAPI().getGame().getPlayerData() != null) {
+            PlayerData pd = getAPI().getGame().getPlayerData();
 
             setHealth(pd.getHealth());
             setMoney(pd.getMoney());
@@ -195,6 +194,7 @@ public class Player extends Creature {
             addExp(20);
             setHealth(getMaxHealth());
             API.getWorld().getEntityManager().freezeCreatures();
+            System.exit(0);
         }
 
         if (API.getKeyManager().debug) {

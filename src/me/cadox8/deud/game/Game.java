@@ -11,6 +11,7 @@ import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.gfx.textures.Models;
 import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
+import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.MenuState;
 import me.cadox8.deud.states.State;
@@ -23,6 +24,8 @@ public class Game implements Runnable {
     @Getter private Display display;
     @Getter private int width, height;
     private String title;
+
+    @Getter @Setter private PlayerData playerData;
 
     @Getter @Setter private boolean running = false;
     private Thread thread;
@@ -71,7 +74,7 @@ public class Game implements Runnable {
         API = new API(this);
         gameCamera = new GameCamera(API, 0, 0);
 
-        gameState = new GameState(API, "test");
+        gameState = new GameState(API, "world");
         menuState = new MenuState(API);
 
         State.setState(menuState);
@@ -123,6 +126,8 @@ public class Game implements Runnable {
 
             if (timer >= 1000000000) {
                 //Log.log("FPS: " + ticks);
+                width = display.getFrame().getWidth();
+                height = display.getFrame().getHeight();
                 ticks = 0;
                 timer = 0;
             }
