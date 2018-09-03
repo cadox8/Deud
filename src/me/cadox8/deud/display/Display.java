@@ -25,22 +25,23 @@ public class Display {
     private void createDisplay() {
         frame = new JFrame(title);
         //frame.setCursor(new Cursor(Cursor.TEXT_CURSOR));
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
-        //frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        frame.setSize(new Dimension(width, height));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setVisible(true);
 
         canvas = new Canvas();
-        canvas.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
-        canvas.setMaximumSize(Toolkit.getDefaultToolkit().getScreenSize());
-        canvas.setMinimumSize(Toolkit.getDefaultToolkit().getScreenSize());
+        canvas.setPreferredSize(new Dimension(width, height));
+        canvas.setMaximumSize(new Dimension(width, height));
+        canvas.setMinimumSize(new Dimension(width, height));
         canvas.setFocusable(false);
 
         frame.setIconImage(Utils.loadImage("/utils/icon.png")); //Icon
 
         frame.add(canvas);
         frame.pack();
+        frame.setLocationRelativeTo(null);
     }
 }

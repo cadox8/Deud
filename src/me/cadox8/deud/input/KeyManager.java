@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyManager implements KeyListener {
 
     private boolean[] keys, justPressed, cantPress;
-    public boolean up, down, left, right, shift, enter, drop;
+    public boolean up, down, left, right, shift, enter, drop, esc;
     public boolean debug, tests;
     public boolean options;
 
@@ -42,7 +42,7 @@ public class KeyManager implements KeyListener {
         debug = keys[KeyEvent.VK_F1];
         tests = keys[KeyEvent.VK_F2];
 
-        options = keys[KeyEvent.VK_ESCAPE];
+        esc = keys[KeyEvent.VK_ESCAPE];
     }
 
     public boolean keyJustPressed(int keyCode) {

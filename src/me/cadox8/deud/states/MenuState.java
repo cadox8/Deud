@@ -28,12 +28,12 @@ public class MenuState extends State {
 
         uiManager.addObject(new UIImage(0, 0, API.getWidth(), API.getHeight(), GUI.background));
 
-        uiManager.addObject(new UIImageButton(150, 450, 200, 100, GUI.play, () -> {
+        uiManager.addObject(new UIImageButton(150, 650, 200, 100, GUI.play, () -> {
             API.getMouseManager().setUIManager(null);
             setState(API.getGame().gameState);
         }));
 
-        uiManager.addObject(new UIImageButton(450, 450, 200, 100, GUI.exit, () -> System.exit(0)));
+        uiManager.addObject(new UIImageButton(650, 650, 200, 100, GUI.exit, () -> System.exit(0)));
 
         if (!Updater.timeToUpdate()) return;
         uiManager.addObject(new UIText(5, 15, DeudColor.RED, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
@@ -58,7 +58,7 @@ public class MenuState extends State {
     public void render(Graphics g) {
         uiManager.render(g);
         g.setColor(DeudColor.WHITE.toColor());
-        g.drawString("Version: " + Launcher.VERSION, 5, 595);
-        g.drawString("© Deud 2016-2018 - The Game is property of Cadox8", 505, 595);
+        g.drawString("Version: " + Launcher.VERSION, 5, 795);
+        g.drawString("© Deud 2016-2018 - The Game is property of Cadox8", 705, 795);
     }
 }

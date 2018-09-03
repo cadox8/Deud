@@ -189,11 +189,14 @@ public class Player extends Creature {
         yMove = 0;
 
         if (API.getKeyManager().tests) {
-            FileUtils.save(this);
             setHunger(getMaxHunger());
             addExp(20);
             setHealth(getMaxHealth());
             API.getWorld().getEntityManager().freezeCreatures();
+        }
+
+        if (API.getKeyManager().esc) {
+            FileUtils.save(this);
             System.exit(0);
         }
 

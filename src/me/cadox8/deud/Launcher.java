@@ -23,7 +23,7 @@ public class Launcher {
 
         FileUtils.checkFile();
 
-        Game game = new Game("Deud" + " ~~ " + VERSION, 800, 600);
+        Game game = new Game("Deud" + " ~~ " + VERSION, 1000, 800);
         game.start();
 
         game.setPlayerData(FileUtils.load());

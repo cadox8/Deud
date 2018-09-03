@@ -12,18 +12,18 @@ import me.cadox8.deud.entities.statics.Rock;
 import me.cadox8.deud.entities.statics.SignEntity;
 import me.cadox8.deud.entities.statics.Tree;
 import me.cadox8.deud.items.ItemManager;
+import me.cadox8.deud.particles.Particle;
+import me.cadox8.deud.particles.Particles;
 import me.cadox8.deud.tiles.Tile;
-import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class World {
 
     private API API;
-
-    @Getter private int worldID, room;
 
     @Getter private int width, height;
     private int spawnX, spawnY;
@@ -36,6 +36,8 @@ public class World {
     // Item
     @Getter private ItemManager itemManager;
 
+    private ArrayList<Particle> particles;
+
     public World(API API, String path) {
         this.API = API;
         this.path = path;
@@ -46,7 +48,8 @@ public class World {
         addEntities();
         loadWorld(path);
 
-
+        particles = new ArrayList<>();
+        particles.add(Particles.EXPLOSION.build());
 
         this.entityManager.getPlayer().setX(spawnX);
         this.entityManager.getPlayer().setY(spawnY);
@@ -73,6 +76,7 @@ public class World {
     public void tick() {
         itemManager.tick();
         entityManager.tick();
+        particles.forEach(particle -> particle.tick());
     }
 
     public void render(Graphics g) {
@@ -93,6 +97,8 @@ public class World {
         itemManager.render(g);
         //Entities
         entityManager.render(g);
+
+        particles.forEach(p -> p.render(g, 5, 5));
     }
 
     public Tile getTile(int x, int y) {
@@ -106,22 +112,17 @@ public class World {
     private void loadWorld(String path) {
         String file = Utils.loadFileAsString(path);
         String[] tokens = file.split("\\s+");
-        worldID = Utils.parseInt(tokens[0]);
-        room = Utils.parseInt(tokens[1]);
-        width = Utils.parseInt(tokens[2]);
-        height = Utils.parseInt(tokens[3]);
-        spawnX = Utils.parseInt(tokens[4]);
-        spawnY = Utils.parseInt(tokens[5]);
+        width = Utils.parseInt(tokens[0]);
+        height = Utils.parseInt(tokens[1]);
+        spawnX = Utils.parseInt(tokens[2]);
+        spawnY = Utils.parseInt(tokens[3]);
 
         tiles = new int[width][height];
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 6]);
+                tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
             }
         }
-
-        Log.log("WorldID | Room");
-        Log.log(getWorldID() + " | " + getRoom());
     }
 
     @Override

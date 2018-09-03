@@ -25,6 +25,9 @@ public class Assets {
 
     public static BufferedImage fire;
 
+    // Particles
+    public static BufferedImage[] explosion;
+
     public static void init() {
         sprites = new Sprites(Utils.loadImage("/textures/sprites/basic.png"));
 
@@ -63,6 +66,9 @@ public class Assets {
         hearth = getImage(0, 1);
         shield = getImage(1, 0);
         coin = getImage(8, 0);
+
+        sprites = new Sprites(Utils.loadImage("/textures/sprites/exp.png"));
+        explosion = getParticles(96, 96, 7);
     }
 
     private static BufferedImage getImage(int x, int y) {
@@ -71,5 +77,12 @@ public class Assets {
 
     private static BufferedImage getImage(int x, int y, int width, int height) {
         return sprites.crop(width * x, height * y, width, height);
+    }
+
+    private static BufferedImage[] getParticles(int width, int height, int image) {
+        BufferedImage[] images = new BufferedImage[image];
+
+        for (int i = 0; i < image; i++) images[i] = getImage(i, 0, width, height);
+        return images;
     }
 }

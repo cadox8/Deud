@@ -11,12 +11,17 @@ public class Animation {
     private long lastTime, timer;
     private BufferedImage[] frames;
 
+    @Getter @Setter private boolean end;
+    @Getter @Setter private boolean finished;
+
     public Animation(int speed, BufferedImage[] frames) {
         this.speed = speed;
         this.frames = frames;
         index = 0;
         timer = 0;
         lastTime = System.currentTimeMillis();
+        setFinished(false);
+        setEnd(false);
     }
 
     public void tick() {
@@ -26,7 +31,10 @@ public class Animation {
         if (timer > speed) {
             index++;
             timer = 0;
-            if (index >= frames.length) index = 0;
+            if (index >= frames.length) {
+                if (end) setFinished(true);
+                index = 0;
+            }
         }
     }
 
