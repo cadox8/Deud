@@ -1,69 +1,64 @@
 package me.cadox8.deud.audio;
 
-import me.cadox8.deud.utils.Log;
-
 import javax.sound.sampled.*;
-import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class SoundClip {
 
     private final String PATH = "/sounds/";
-    private Clip clip = null;
-    private FloatControl gainControl;
+    private final int BUFFER_SIZE = 128000;
+    private File soundFile;
+    private AudioInputStream audioStream;
+    private AudioFormat audioFormat;
+    private SourceDataLine sourceLine;
 
-    private Sound sound;
-
-    public SoundClip(Sound sound) {
-        this.sound = sound;
-        if (sound == Sound.NONE) return;
+    public void playSound(String filename){
+        try {
+            soundFile = new File(getClass().getResource(PATH + filename + ".wav").toURI());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
 
         try {
-            InputStream audioSrc = SoundClip.class.getResourceAsStream(PATH + sound.getName() + ".wav");
-            InputStream bufferedIn = new BufferedInputStream(audioSrc);
-            AudioInputStream ais = AudioSystem.getAudioInputStream(bufferedIn);
-            AudioFormat baseFormat = ais.getFormat();
-            AudioFormat decodeFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, baseFormat.getSampleRate(), 16, baseFormat.getChannels(), baseFormat.getChannels() * 2, baseFormat.getSampleRate(), false);
-            AudioInputStream dais = AudioSystem.getAudioInputStream(decodeFormat, ais);
-
-            clip = AudioSystem.getClip();
-            clip.open(dais);
-
-            gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
-            Log.log(Log.LogType.DANGER, "Sound Error");
+            audioStream = AudioSystem.getAudioInputStream(soundFile);
+        } catch (Exception e){
+            e.printStackTrace();
+            System.exit(1);
         }
-    }
 
-    public void play() {
-        if (clip == null) return;
+        audioFormat = audioStream.getFormat();
 
-        stop();
-        clip.setFramePosition(0);
-        setVolume(sound.getVolume());
-        while (isRunning()) clip.start();
-    }
+        DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
+        try {
+            sourceLine = (SourceDataLine) AudioSystem.getLine(info);
+            sourceLine.open(audioFormat);
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+            System.exit(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
 
-    private void stop() {
-        if (isRunning()) clip.stop();
-    }
+        sourceLine.start();
 
-    public void close() {
-        stop();
-        clip.drain();
-        clip.close();
-    }
+        int nBytesRead = 0;
+        byte[] abData = new byte[BUFFER_SIZE];
+        while (nBytesRead != -1) {
+            try {
+                nBytesRead = audioStream.read(abData, 0, abData.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (nBytesRead >= 0) {
+                @SuppressWarnings("unused")
+                int nBytesWritten = sourceLine.write(abData, 0, nBytesRead);
+            }
+        }
 
-    public void loop() {
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-        play();
-    }
-
-    public void setVolume(float volume) {
-        gainControl.setValue(volume);
-    }
-    public boolean isRunning() {
-        return clip.isRunning();
+        sourceLine.drain();
+        sourceLine.close();
     }
 }

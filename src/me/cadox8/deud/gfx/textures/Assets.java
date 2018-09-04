@@ -67,7 +67,7 @@ public class Assets {
         shield = getImage(1, 0);
         coin = getImage(8, 0);
 
-        sprites = new Sprites(Utils.loadImage("/textures/sprites/exp.png"));
+        sprites = new Sprites(Utils.loadImage("/textures/sprites/particles.png"));
         explosion = getParticles(96, 96, 7);
     }
 

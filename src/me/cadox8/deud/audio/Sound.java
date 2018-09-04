@@ -12,11 +12,7 @@ public enum Sound {
     @Getter private String name;
     @Getter private float volume;
 
-    public static void playSound(Sound sound) {
-        new SoundClip(sound).play();
-    }
-    public static void playSoundLoop(Sound sound) {
-        SoundClip clip = new SoundClip(sound);
-        clip.loop();
+    public void playSound() {
+        new SoundClip().playSound(getName());
     }
 }

@@ -22,8 +22,8 @@ import java.awt.image.BufferStrategy;
 public class Game implements Runnable {
 
     @Getter private Display display;
-    @Getter private int width, height;
-    private String title;
+    @Getter private final int width, height;
+    private final String title;
 
     @Getter @Setter private PlayerData playerData;
 
@@ -38,8 +38,8 @@ public class Game implements Runnable {
     public State menuState;
 
     //Input
-    @Getter private KeyManager keyManager;
-    @Getter private MouseManager mouseManager;
+    @Getter private final KeyManager keyManager;
+    @Getter private final MouseManager mouseManager;
 
     //Camera
     @Getter private GameCamera gameCamera;
@@ -126,8 +126,6 @@ public class Game implements Runnable {
 
             if (timer >= 1000000000) {
                 //Log.log("FPS: " + ticks);
-                width = display.getFrame().getWidth();
-                height = display.getFrame().getHeight();
                 ticks = 0;
                 timer = 0;
             }

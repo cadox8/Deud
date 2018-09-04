@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 @RequiredArgsConstructor
 public enum Particles {
 
-    EXPLOSION(Assets.explosion, 80);
+    EXPLOSION(Assets.explosion, 100);
 
     @Getter private final BufferedImage[] images;
     @Getter private final int velocity;

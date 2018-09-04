@@ -127,7 +127,7 @@ public class Player extends Creature {
 
         //if (API.isDebug()) {
             g.setColor(DeudColor.WHITE.toColor());
-            g.drawString("X: " + x + " Y: " + y + " Dir: " + direction, 655, 595);
+            g.drawString("X: " + x + " Y: " + y + " Dir: " + direction, 1105, 795);
         //}
     }
 
@@ -175,12 +175,12 @@ public class Player extends Creature {
         drawString(g, getArmor(),  3);
 
         //Item
-        g.drawImage(inventory.getUsableItem().getTexture(), 753, 470, null);
-        Text.drawString(g, inventory.getUsableItem().getName(), 742, 486 + Assets.HEIGHT, 2);
+        g.drawImage(inventory.getUsableItem().getTexture(), 1152, 670, null);
+        Text.drawString(g, inventory.getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, 2);
 
         if (getHealth() <= 0) {
-            Text.drawString(g, "You lose", 125, 330, DeudColor.BLACK, 3);
-            Text.drawString(g, ":(", 367, 315, DeudColor.BLACK, 0);
+            Text.drawString(g, "You lose", 125, 530, DeudColor.BLACK, 3);
+            Text.drawString(g, ":(", 367, 515, DeudColor.BLACK, 0);
         }
     }
 
@@ -201,7 +201,7 @@ public class Player extends Creature {
         }
 
         if (API.getKeyManager().debug) {
-            Sound.playSound(Sound.ENTITY_WALK_GRASS);
+            Sound.ENTITY_WALK_GRASS.playSound();
             API.setDebug(!API.isDebug());
         }
 
@@ -293,7 +293,7 @@ public class Player extends Creature {
 
     //
     private void drawImage(Graphics g, BufferedImage image, int pos){
-        int infoY = 400;
+        int infoY = 600;
         int infoX = 10;
         int y = infoY;
 
@@ -307,7 +307,7 @@ public class Player extends Creature {
         drawString(g, value + "", pos);
     }
     private void drawString(Graphics g, String text, int pos){
-        int infoY = 421;
+        int infoY = 621;
         int infoX = 45;
         int y = infoY;
 

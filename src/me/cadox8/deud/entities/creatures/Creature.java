@@ -119,7 +119,7 @@ public abstract class Creature extends Entity {
         }
     }
 
-    protected boolean collisionWithTile(int x, int y) {
+    private boolean collisionWithTile(int x, int y) {
         return API.getWorld().getTile(x, y).isSolid();
     }
 

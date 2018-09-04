@@ -33,7 +33,7 @@ public class MenuState extends State {
             setState(API.getGame().gameState);
         }));
 
-        uiManager.addObject(new UIImageButton(650, 650, 200, 100, GUI.exit, () -> System.exit(0)));
+        uiManager.addObject(new UIImageButton(900, 650, 200, 100, GUI.exit, () -> System.exit(0)));
 
         if (!Updater.timeToUpdate()) return;
         uiManager.addObject(new UIText(5, 15, DeudColor.RED, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
@@ -59,6 +59,6 @@ public class MenuState extends State {
         uiManager.render(g);
         g.setColor(DeudColor.WHITE.toColor());
         g.drawString("Version: " + Launcher.VERSION, 5, 795);
-        g.drawString("© Deud 2016-2018 - The Game is property of Cadox8", 705, 795);
+        g.drawString("© Deud 2016-2018 - The Game is property of Cadox8", 955, 795);
     }
 }
