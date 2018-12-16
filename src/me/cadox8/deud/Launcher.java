@@ -1,5 +1,6 @@
 package me.cadox8.deud;
 
+import lombok.Getter;
 import me.cadox8.deud.exceptions.JavaVersionException;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.saves.FileUtils;
@@ -13,9 +14,11 @@ public class Launcher {
     public static final String VERSION = "Alpha v0.6.0";
     public static final String GAME_FILE = "C:" + File.separator + "Deud" + File.separator;
 
+    @Getter private static Game game;
+
     public static void main(String[] args) {
         try {
-            if (!new JavaCheck().isJava1_8()) throw new JavaVersionException("Deud needs Java 1.9 or above to run");
+            if (!new JavaCheck().isJavaVersion()) throw new JavaVersionException("Deud needs Java 1.9 or above to run");
         } catch (JavaVersionException e) {
             Log.log(Log.LogType.DANGER, e.getMessage());
             return;
@@ -23,11 +26,7 @@ public class Launcher {
 
         FileUtils.checkFile();
 
-        Game game = new Game("Deud" + " ~~ " + VERSION, 1250, 800);
+        game = new Game("Deud" + " ~~ " + VERSION, 1250, 800);
         game.start();
-
-        game.setPlayerData(FileUtils.load());
-        if (game.getPlayerData().getHealth() <= 0) game.getPlayerData().setHealth(10); // Temporal
-        game.setSettings(FileUtils.loadSettings());
     }
 }

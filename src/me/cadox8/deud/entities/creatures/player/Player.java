@@ -17,6 +17,7 @@ import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.settings.Settings;
 import me.cadox8.deud.utils.DeudColor;
+import me.cadox8.deud.utils.Location;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 import me.cadox8.deud.worlds.Minimap;
@@ -79,10 +80,16 @@ public class Player extends Creature {
         inventory.addItem(Item.keyItem.setCount(8));
 
         if (getAPI().getGame().getPlayerData() != null) {
-            PlayerData pd = getAPI().getGame().getPlayerData();
+            final PlayerData pd = getAPI().getGame().getPlayerData();
+            final Location loc = pd.getLocation();
 
             setHealth(pd.getHealth());
             setMoney(pd.getMoney());
+            setLocation(loc);
+
+            setX(loc.getX());
+            setY(loc.getY());
+            setDirection(loc.getDirection());
 
             //inventory.getInventoryItems().addAll(Arrays.asList(pd.getInventory()));
         }

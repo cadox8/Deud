@@ -2,26 +2,34 @@ package me.cadox8.deud.utils;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import me.cadox8.deud.api.API;
+import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.worlds.World;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Deprecated
+@ToString
 public class Location {
 
-    private API API;
+    @Setter private static API API;
 
     @Getter @Setter private World world;
     @Getter @Setter private float x;
     @Getter @Setter private float y;
     @Getter @Setter private int direction;
 
-    public Location(World world, float x, float y) {
-        this(world, x, y, 0);
+    public Location(Entity en) {
+        this.world = en.getAPI().getWorld();
+        this.x = en.getX();
+        this.y = en.getY();
+        this.direction = en.getDirection();
     }
 
+    public Location(float x, float y, int direction) {
+        this(API.getWorld(), x, y, direction);
+    }
     public Location(World world, float x, float y, int direction) {
         this.world = world;
         this.x = x;
@@ -34,15 +42,14 @@ public class Location {
         this.y += y;
     }
 
+    public void teleport(float x, float y, int direction) {
+        teleport(API.getWorld(), x, y, direction);
+    }
     public void teleport(World world, float x, float y, int direction) {
         setWorld(world);
         setX(x);
         setY(y);
         setDirection(direction);
-    }
-
-    public void teleport(float x, float y, int direction) {
-        teleport(API.getWorld(), x, y, direction);
     }
 
     public int getXDistance(Location location) {
@@ -53,6 +60,8 @@ public class Location {
         return (int) (getY() - location.getY());
     }
 
+
+    // Save Utils.
     public Map<String, Object> serializeLocation() {
         Map<String, Object> location = new HashMap<>();
 
@@ -64,7 +73,12 @@ public class Location {
         return location;
     }
 
-    public String toString() {
-        return "Location:{World:" + world.worldName() + ",X:" + getX() + ",Y:" + getY() + ",Direction:" + getDirection() + "}";
+    public Location deSerializeLocation(Map<String, Object> location) {
+        final World world = new World(API, (String)location.get("world"));
+        final float x = (float)location.get("x");
+        final float y = (float)location.get("y");
+        final int direction = (int)location.get("direction");
+
+        return new Location(world, x, y, direction);
     }
 }

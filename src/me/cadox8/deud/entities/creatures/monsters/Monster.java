@@ -1,11 +1,16 @@
 package me.cadox8.deud.entities.creatures.monsters;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.creatures.Creature;
+import me.cadox8.deud.items.Item;
 
 import java.awt.*;
 
 public abstract class Monster extends Creature {
+
+    @Getter @Setter private Item itemInHand = Item.hand;
 
     public Monster(int id, String name, API API, float x, float y, int width, int height) {
         this(id, name, API, x, y, width, height, 0);

@@ -1,6 +1,7 @@
 package me.cadox8.deud.worlds;
 
 import lombok.Getter;
+import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.creatures.friends.Fairy;
@@ -14,8 +15,8 @@ import me.cadox8.deud.entities.statics.Tree;
 import me.cadox8.deud.items.ItemManager;
 import me.cadox8.deud.particles.Particle;
 import me.cadox8.deud.tiles.Tile;
+import me.cadox8.deud.utils.Location;
 import me.cadox8.deud.utils.Utils;
-import java.util.List;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -41,8 +42,16 @@ public class World {
     public World(API API, String path) {
         this.API = API;
         this.path = path;
+        Location loc;
 
-        this.entityManager = new EntityManager(API, new Player(API, 100, 100));
+        try {
+            loc = Launcher.getGame().getPlayerData().getLocation();
+        } catch (NullPointerException e) {
+            loc = new Location(500, 500, 0);
+        }
+
+        System.out.println(loc.getX() + " " + loc.getY());
+        this.entityManager = new EntityManager(API, new Player(API, loc.getX(), loc.getY()));
         this.itemManager = new ItemManager(API);
 
         addEntities();

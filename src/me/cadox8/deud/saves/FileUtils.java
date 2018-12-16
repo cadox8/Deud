@@ -75,14 +75,9 @@ public class FileUtils {
         final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         try {
-            JsonObject data = new JsonObject();
+            final JsonObject data = new JsonObject();
 
-            JsonArray loc = new JsonArray();
-            loc.add(l.getX());
-            loc.add(l.getY());
-            loc.add(l.getDirection());
-
-            JsonArray inv = new JsonArray();
+            final JsonArray inv = new JsonArray();
             i.getInventoryItems().forEach(item -> {
                 JsonObject it = new JsonObject();
                 it.addProperty(item.getId() + "", item.getCount());
@@ -92,9 +87,9 @@ public class FileUtils {
             data.addProperty("Health", p.getHealth());
             data.addProperty("Money", p.getMoney());
             data.add("Inventory", inv);
-            data.add("Location", loc);
+            data.add("Location", gson.toJsonTree(p.getLocation().serializeLocation()).getAsJsonObject());
 
-            BufferedWriter w = new BufferedWriter(new FileWriter(saves));
+            final BufferedWriter w = new BufferedWriter(new FileWriter(saves));
 
             if (saves.exists()) saves.delete(); saves.mkdirs();
 
@@ -111,10 +106,7 @@ public class FileUtils {
         if (!saves.exists()) return null;
 
         try {
-            JsonReader reader = new JsonReader(new FileReader(saves));
-            Gson g = new GsonBuilder().create();
-
-            return g.fromJson(reader, PlayerData.class);
+            return new GsonBuilder().create().fromJson(new JsonReader(new FileReader(saves)), PlayerData.class);
         } catch (IOException e) {
             return null;
         }

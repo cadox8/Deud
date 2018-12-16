@@ -78,8 +78,10 @@ public abstract class AI {
         if (creature.isFreeze()) return;
 
         tempDelay = delay;
-        Location playerLocation = new Location(entity.getAPI().getWorld(), player.getX(), player.getY());
-        Location creatureLocation = new Location(entity.getAPI().getWorld(), creature.getX(), creature.getY());
+/*        Location playerLocation = new Location(entity.getAPI().getWorld(), player.getX(), player.getY());
+        Location creatureLocation = new Location(entity.getAPI().getWorld(), creature.getX(), creature.getY());*/
+        Location playerLocation = new Location(player);
+        Location creatureLocation = new Location(creature);
 
         if (playerLocation.getY() > creatureLocation.getY()) {
             if (!entity.checkEntityCollisions(creature.getSpeed(), 0f)) {

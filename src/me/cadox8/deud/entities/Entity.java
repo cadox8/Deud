@@ -2,10 +2,8 @@ package me.cadox8.deud.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import me.cadox8.deud.ai.AI;
 import me.cadox8.deud.api.API;
-import me.cadox8.deud.attributes.Knockback;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.monsters.Monster;
 import me.cadox8.deud.entities.creatures.player.Player;
@@ -84,7 +82,7 @@ public abstract class Entity {
         damage = DEFAULT_DAMAGE;
         armor = DEFAULT_ARMOR;
 
-        this.location = new Location(API.getWorld(), x, y, direction); //No more nulls :D
+        this.location = new Location(this);
 
         bounds = new Rectangle(0, 0, width, height);
     }
@@ -105,7 +103,7 @@ public abstract class Entity {
         if (API.isDebug()) Log.log("Health: " + getHealth());
 
         if (this instanceof Creature) {
-            if (attacker instanceof Monster) Item.hand.getAttributes().forEach(a -> a.perform(attacker, (Creature) this));
+            if (attacker instanceof Monster) ((Monster)attacker).getItemInHand().getAttributes().forEach(a -> a.perform(attacker, (Creature) this));
             if (attacker instanceof Player) ((Player) attacker).getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, (Creature) this));
         }
 
@@ -206,7 +204,7 @@ public abstract class Entity {
 
 
     public Location getLocation() {
-        return new Location(API.getWorld(), getX(), getY(), getDirection());
+        return new Location(this);
     }
 
     //Utils
