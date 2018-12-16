@@ -11,6 +11,9 @@ public class GUI {
     public static BufferedImage[] play;
     public static BufferedImage[] exit;
     public static BufferedImage[] background;
+
+    public static BufferedImage[] buttons;
+
     public static BufferedImage inventoryScreen;
 
     public static BufferedImage none;
@@ -23,8 +26,12 @@ public class GUI {
         play[1] = gui.crop(0, 35, 93, 35);
 
         exit = new BufferedImage[2];
-        exit[0] = gui.crop(97, 0, 89, 33);
-        exit[1] = gui.crop(97, 39, 89, 33);
+        exit[0] = gui.crop(94, 0, 89, 33);
+        exit[1] = gui.crop(94, 39, 89, 32);
+
+        buttons = new BufferedImage[2];
+        buttons[0] = gui.crop(0, 71, 90, 16);
+        buttons[1] = gui.crop(92, 71, 90, 16);
 
         background = new BufferedImage[1];
         background[0] = Utils.loadImage("/utils/menu.png");

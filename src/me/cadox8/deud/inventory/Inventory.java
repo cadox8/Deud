@@ -80,7 +80,7 @@ public class Inventory {
                     break;
             }
         }
-        Item item = inventoryItems.get(selectedItem);
+        final Item item = inventoryItems.get(selectedItem);
         g.drawImage(item.getTexture(), invImageX, invImageY, invImageWidth, invImageHeight, null);
         Text.drawString(g, Integer.toString(item.getCount()), invCountX, invCountY, true, DeudColor.WHITE, 0);
     }
@@ -88,26 +88,18 @@ public class Inventory {
 
     // Inventory methods
     public void addItem(Item item) {
-        for (Item i : inventoryItems) {
-            if (i.getId() == item.getId()) {
-                i.setCount(i.getCount() + item.getCount());
-                return;
-            }
-        }
-        inventoryItems.add(item);
+        inventoryItems.stream().filter(i -> i.getId() == item.getId()).findFirst().ifPresentOrElse(i -> i.addCount(item.getCount()), () -> inventoryItems.add(item));
     }
 
     public void removeItem(Item item) {
         if (inventoryItems.size() == 0) return;
-        Optional<Item> ite = inventoryItems.stream().filter(it -> it.getId() == item.getId()).findAny();
-        if (!ite.isPresent()) return;
-        Item i = ite.get();
-
-        if (i.getCount() - item.getCount() <= 0) {
-            inventoryItems.remove(item);
-            return;
-        }
-        i.setCount(i.getCount() - item.getCount());
+        inventoryItems.stream().filter(it -> it.getId() == item.getId()).findFirst().ifPresent(i -> {
+            if (i.getCount() - item.getCount() <= 0) {
+                inventoryItems.remove(item);
+                return;
+            }
+            i.setCount(i.getCount() - item.getCount());
+        });
 
 /*        for (Item i : inventoryItems) {
             if (i.getId() == item.getId()) {

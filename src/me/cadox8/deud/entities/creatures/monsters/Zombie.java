@@ -9,7 +9,7 @@ import me.cadox8.deud.items.Item;
 public class Zombie extends Monster {
 
     public Zombie(API API, float x, float y) {
-        super(API, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+        super(2, "Zombie", API, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         bounds.x = 20;
         bounds.y = 44;

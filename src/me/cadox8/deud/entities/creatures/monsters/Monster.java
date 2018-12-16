@@ -7,12 +7,12 @@ import java.awt.*;
 
 public abstract class Monster extends Creature {
 
-    public Monster(API API, float x, float y, int width, int height) {
-        this(API, x, y, width, height, 0);
+    public Monster(int id, String name, API API, float x, float y, int width, int height) {
+        this(id, name, API, x, y, width, height, 0);
     }
 
-    public Monster(API API, float x, float y, int width, int height, int level) {
-        super(API, x, y, width, height, level);
+    public Monster(int id, String name, API API, float x, float y, int width, int height, int level) {
+        super(id, name, API, x, y, width, height, level);
     }
 
     @Override

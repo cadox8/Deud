@@ -10,7 +10,7 @@ import java.awt.*;
 public class Tree extends StaticEntity {
 
     public Tree(API API, float x, float y) {
-        super(API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(5, "Tree", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         bounds.x = 10;
         bounds.y = (int) (height / 1.5f);

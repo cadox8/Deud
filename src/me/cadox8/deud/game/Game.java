@@ -12,8 +12,10 @@ import me.cadox8.deud.gfx.textures.Models;
 import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
 import me.cadox8.deud.saves.PlayerData;
+import me.cadox8.deud.settings.Settings;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.MenuState;
+import me.cadox8.deud.states.OptionsState;
 import me.cadox8.deud.states.State;
 
 import java.awt.*;
@@ -26,6 +28,7 @@ public class Game implements Runnable {
     private final String title;
 
     @Getter @Setter private PlayerData playerData;
+    @Getter @Setter private Settings settings;
 
     @Getter @Setter private boolean running = false;
     private Thread thread;
@@ -36,6 +39,7 @@ public class Game implements Runnable {
     //States
     public State gameState;
     public State menuState;
+    public State optionsState;
 
     //Input
     @Getter private final KeyManager keyManager;
@@ -76,6 +80,7 @@ public class Game implements Runnable {
 
         gameState = new GameState(API, "world");
         menuState = new MenuState(API);
+        //optionsState = new OptionsState(API);
 
         State.setState(menuState);
     }

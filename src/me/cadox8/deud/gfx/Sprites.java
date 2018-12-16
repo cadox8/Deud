@@ -5,6 +5,7 @@ import me.cadox8.deud.utils.DeudColor;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.RasterFormatException;
 
 @AllArgsConstructor
 public class Sprites {
@@ -12,7 +13,13 @@ public class Sprites {
     private BufferedImage sprites;
 
     public BufferedImage crop(int x, int y, int width, int height) {
-        return sprites.getSubimage(x, y, width, height);
+        try {
+            return sprites.getSubimage(x, y, width, height);
+        } catch (RasterFormatException e) {
+            e.printStackTrace();
+            System.exit(6);
+            return null;
+        }
     }
 
     public BufferedImage coloredSprite(int width, int height, DeudColor color) {

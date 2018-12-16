@@ -10,7 +10,7 @@ import java.awt.*;
 public class Rock extends StaticEntity {
 
     public Rock(API API, float x, float y) {
-        super(API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(6, "Rock", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         bounds.x = 3;
         bounds.y = (int) (height / 2f);

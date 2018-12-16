@@ -25,12 +25,12 @@ public abstract class Creature extends Entity {
 
     @Getter @Setter protected boolean freeze = false;
 
-    public Creature(API API, float x, float y, int width, int height) {
-        this(API, x, y, width, height, 0);
+    public Creature(int id, String name, API API, float x, float y, int width, int height) {
+        this(id, name, API, x, y, width, height, 0);
     }
 
-    public Creature(API API, float x, float y, int width, int height, int level) {
-        super(API, x, y, width, height, level);
+    public Creature(int id, String name, API API, float x, float y, int width, int height, int level) {
+        super(id, name, API, x, y, width, height, level);
         speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
@@ -64,12 +64,12 @@ public abstract class Creature extends Entity {
 
         // Chest
         if (getEntityCollision(xMove, 0f) instanceof Chest) {
-            Chest chest = (Chest) getEntityCollision(xMove, 0f);
+            final Chest chest = (Chest) getEntityCollision(xMove, 0f);
             chest.open((Player)this);
             return;
         }
         if (getEntityCollision(0f, yMove) instanceof Chest) {
-            Chest chest = (Chest) getEntityCollision(0f, yMove);
+            final Chest chest = (Chest) getEntityCollision(0f, yMove);
             chest.open((Player)this);
             return;
         }

@@ -1,19 +1,21 @@
 package me.cadox8.deud.particles;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.gfx.Animation;
+import me.cadox8.deud.gfx.textures.Assets;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
-public class Particle {
+public enum Particle {
 
-    @Getter private final Particles particle;
+    EXPLOSION(Assets.explosion, 100);
+
     @Getter private final Animation animation;
 
-    public Particle(Particles particle) {
-        this.particle = particle;
-        animation = new Animation(particle.getVelocity(), particle.getImages());
-        animation.setEnd(true);
+    Particle(BufferedImage[] images, int velocity) {
+        animation = new Animation(velocity, images);
     }
 
     public void render(Graphics g, int x, int y) {
@@ -22,5 +24,10 @@ public class Particle {
 
     public void tick() {
         animation.tick();
+    }
+
+    public Particle withEnd() {
+        animation.withEnd(true);
+        return this;
     }
 }

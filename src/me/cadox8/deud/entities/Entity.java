@@ -2,10 +2,13 @@ package me.cadox8.deud.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import me.cadox8.deud.ai.AI;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.attributes.Knockback;
 import me.cadox8.deud.entities.creatures.Creature;
+import me.cadox8.deud.entities.creatures.monsters.Monster;
+import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.Animation;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.utils.Location;
@@ -17,6 +20,11 @@ import java.text.DecimalFormat;
 import java.util.Random;
 
 public abstract class Entity {
+
+    // Internal Data
+    @Getter private final int INTERNAL_ID;
+    @Getter private final String INTERNAL_NAME;
+    //
 
     protected static final int DEFAULT_HEALTH = 10;
     protected static final int DEFAULT_DAMAGE = 3;
@@ -62,7 +70,9 @@ public abstract class Entity {
     @Getter @Setter protected Animation animDown, animUp, animLeft, animRight;
     @Getter @Setter protected Animation[] animations = new Animation[4];
 
-    public Entity(API API, float x, float y, int width, int height, int level) {
+    public Entity(int id, String name, API API, float x, float y, int width, int height, int level) {
+        INTERNAL_ID = id;
+        INTERNAL_NAME = name;
         this.API = API;
         this.x = x;
         this.y = y;
@@ -94,10 +104,13 @@ public abstract class Entity {
 
         if (API.isDebug()) Log.log("Health: " + getHealth());
 
-        if (this instanceof Creature) new Knockback(getAPI(), 0.25, attacker, (Creature) this).perform();
+        if (this instanceof Creature) {
+            if (attacker instanceof Monster) Item.hand.getAttributes().forEach(a -> a.perform(attacker, (Creature) this));
+            if (attacker instanceof Player) ((Player) attacker).getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, (Creature) this));
+        }
 
         if (health <= 0) {
-            active = false;
+            if (!(this instanceof Player)) active = false;
             this.killer = attacker;
             die();
         }
@@ -116,11 +129,12 @@ public abstract class Entity {
     }
 
     public Entity getEntityCollision(float xOffset, float yOffset) {
-        for (Entity e : API.getWorld().getEntityManager().getEntities()) {
+        return API.getWorld().getEntityManager().getEntities().stream().filter(e -> !e.equals(this)).filter(e -> e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))).findFirst().orElse(null);
+/*        for (Entity e : API.getWorld().getEntityManager().getEntities()) {
             if (e.equals(this)) continue;
             if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) return e;
         }
-        return null;
+        return null;*/
     }
 
     public Rectangle getCollisionBounds(float xOffset, float yOffset) {
@@ -141,10 +155,10 @@ public abstract class Entity {
         }
         setXP(getXp() + xp);
 
-        if (getXPToNextLevel() <= 0) ajustLevel();
+        if (getXPToNextLevel() <= 0) adjustLevel();
     }
 
-    private void ajustLevel() {
+    private void adjustLevel() {
         setXP(getXp() - xpToNextLevel());
         setLevel(getLevel() + 1);
 
@@ -155,7 +169,7 @@ public abstract class Entity {
         setHealth(getHealth() + (getMaxHealth() - oldMaxHealth));
         setArmor(getArmor() + (int)(ARMOR_UP_PER_LVL * getLevel()));
 
-        if (getXPToNextLevel() <= 0) ajustLevel();
+        if (getXPToNextLevel() <= 0) adjustLevel();
     }
 
     private double getXPToNextLevel() {
@@ -207,5 +221,11 @@ public abstract class Entity {
         }
         DecimalFormat df = new DecimalFormat("#.##");
         this.xp = Double.valueOf(df.format(xp).replaceAll(",", "."));
+    }
+
+
+    @Override
+    public String toString() {
+        return "Entity: {ID: " + getINTERNAL_ID() + ", Name: " + getINTERNAL_NAME() + ", X: " + getX() + ", Y: " + getY() + "}";
     }
 }

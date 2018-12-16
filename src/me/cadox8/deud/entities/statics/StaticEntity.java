@@ -11,8 +11,8 @@ public abstract class StaticEntity extends Entity {
 
     @Getter @Setter protected boolean explosive = false;
 
-    public StaticEntity(API API, float x, float y, int width, int height) {
-        super(API, x, y, width, height, 0);
+    public StaticEntity(int id, String name, API API, float x, float y, int width, int height) {
+        super(id, name, API, x, y, width, height, 0);
     }
 
     @Override

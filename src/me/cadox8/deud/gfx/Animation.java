@@ -11,8 +11,8 @@ public class Animation {
     private long lastTime, timer;
     private BufferedImage[] frames;
 
-    @Getter @Setter private boolean end;
-    @Getter @Setter private boolean finished;
+    private boolean withEnd;
+    @Getter private boolean end;
 
     public Animation(int speed, BufferedImage[] frames) {
         this.speed = speed;
@@ -20,8 +20,8 @@ public class Animation {
         index = 0;
         timer = 0;
         lastTime = System.currentTimeMillis();
-        setFinished(false);
-        setEnd(false);
+        withEnd(false);
+        end = false;
     }
 
     public void tick() {
@@ -32,7 +32,7 @@ public class Animation {
             index++;
             timer = 0;
             if (index >= frames.length) {
-                if (end) setFinished(true);
+                if (hasEnd()) end = true;
                 index = 0;
             }
         }
@@ -40,5 +40,12 @@ public class Animation {
 
     public BufferedImage getCurrentFrame() {
         return frames[index];
+    }
+
+    public void withEnd(boolean end) {
+        withEnd = end;
+    }
+    public boolean hasEnd() {
+        return withEnd;
     }
 }

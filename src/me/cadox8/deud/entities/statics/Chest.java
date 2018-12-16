@@ -15,7 +15,7 @@ public class Chest extends StaticEntity {
         this(API,x, y, true);
     }
     public Chest(API API, float x, float y, boolean explosive) {
-        super(API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(8, "Chest", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
         setExplosive(explosive);
@@ -31,12 +31,12 @@ public class Chest extends StaticEntity {
 
     public void open(Player p) {
         if (p.getInventory().keyCount() == 0) return;
-        p.getInventory().getInventoryItems().stream().filter(i -> i.getId() == Item.keyItem.getId()).findFirst().get().removeItem(p);
+        p.getInventory().removeItem(Item.keyItem);
+        //p.getInventory().getInventoryItems().stream().filter(i -> i.getId() == Item.keyItem.getId()).findFirst().get().removeItem(p);
 
-        Item random = Item.getRandom(Item.hand, Item.keyItem);
-        p.getInventory().addItem(random);
+        p.getInventory().addItem(Item.getRandom(Item.hand, Item.keyItem));
 
-        if (isExplosive()) new Explosion(getAPI(),5, 3, this).perform();
+        if (isExplosive()) new Explosion(getAPI(),5, 3).perform(this, null);
     }
 
     @Override

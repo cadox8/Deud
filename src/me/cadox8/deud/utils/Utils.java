@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class Utils {
@@ -53,21 +54,17 @@ public class Utils {
     }
 
     public static double round(int places, double value) {
-        return new BigDecimal(value).setScale(places, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return new BigDecimal(value).setScale(places, RoundingMode.HALF_UP).doubleValue();
     }
 
     public static BufferedImage rotateImage(double degrees, BufferedImage texture) {
-        AffineTransform tx = new AffineTransform();
+        final AffineTransform tx = new AffineTransform();
 
         tx.translate(texture.getHeight() / 2, texture.getWidth() / 2);
         tx.rotate(Math.toRadians(degrees));
         tx.translate(-texture.getWidth() / 2, -texture.getHeight() / 2);
 
-        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-
-        BufferedImage newImage = new BufferedImage(texture.getHeight(), texture.getWidth(), texture.getType());
-
-        return op.filter(texture, newImage);
+        return new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR).filter(texture, new BufferedImage(texture.getHeight(), texture.getWidth(), texture.getType()));
     }
 
     public static ArrayList<Entity> getNearbyEntities(Location center, double radius, int amount) {

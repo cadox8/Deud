@@ -3,6 +3,7 @@ package me.cadox8.deud.items;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.API;
+import me.cadox8.deud.attributes.Attribute;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.items.food.ChickenItem;
@@ -12,6 +13,7 @@ import me.cadox8.deud.items.weapons.WeaponItem;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -32,16 +34,18 @@ public abstract class Item {
     public static final ChickenItem chickenItem = new ChickenItem(Assets.food, 3, "Chicken", 3);
 
     //Weapons
-    public static final WeaponItem hand = new HandItem(Assets.bug, 4, "Hand", 0);
+    public static final WeaponItem hand = new HandItem(Assets.hand, 4, "Hand", 0);
 
 
     // Class
     public static final int ITEMWIDTH = 32, ITEMHEIGHT = 32;
 
     @Getter @Setter protected API API;
-    @Getter @Setter protected final BufferedImage texture;
+    @Getter protected final BufferedImage texture;
     @Getter protected final int id;
     @Getter @Setter protected String name;
+
+    @Getter @Setter private List<Attribute> attributes;
 
     @Getter @Setter protected Rectangle bounds;
 
@@ -54,6 +58,7 @@ public abstract class Item {
         this.id = id;
         this.name = name;
         this.count = 1;
+        this.attributes = new ArrayList<>();
 
         bounds = new Rectangle(x, y, ITEMWIDTH, ITEMHEIGHT);
 
@@ -71,6 +76,11 @@ public abstract class Item {
             return;
         }
         count--;
+    }
+
+    public Item addAttributes(Attribute... attributes) {
+        this.attributes.addAll(Arrays.asList(attributes));
+        return this;
     }
 
 
@@ -110,17 +120,19 @@ public abstract class Item {
         return getRandom(ids);
     }
     public static Item getRandom(Integer... banedIDs) {
-        List<Integer> baned = Arrays.asList(banedIDs);
-        baned.add(bugItem.getId());
-        Item i = items[new Random().nextInt(items.length)];
+        final List<Integer> baned = Arrays.asList(banedIDs);
+        final Item i = items[new Random().nextInt(items.length)];
 
         i.setCount(1);
 
         if (banedIDs.length >= items.length) return bugItem;
-        if (baned.contains(i.getId())) return getRandom(banedIDs);
+        if (baned.contains(i.getId()) || i.getId() == bugItem.getId()) return getRandom(banedIDs);
         return i;
     }
 
+    public Item addCount(int count) {
+        return setCount(getCount() + count);
+    }
     public Item setCount(int count) {
         this.count = count;
         return this;

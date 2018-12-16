@@ -19,7 +19,7 @@ public class SignEntity extends StaticEntity {
     @Getter private List<String> whatToSay;
 
     public SignEntity(API API, float x, float y, int type, List<String> whatToSay) {
-        super(API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(7, "Sign", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
 

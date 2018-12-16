@@ -24,8 +24,6 @@ public class Display {
 
     private void createDisplay() {
         frame = new JFrame(title);
-        //frame.setCursor(new Cursor(Cursor.TEXT_CURSOR));
-        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
         frame.setSize(new Dimension(width, height));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

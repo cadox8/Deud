@@ -1,12 +1,14 @@
 package me.cadox8.deud.saves;
 
+import lombok.Data;
 import lombok.Getter;
 
+@Data
 public class PlayerData {
 
-    @Getter private int Money;
-    @Getter private int Health;
+    private int Money;
+    private int Health;
 
-    @Getter private String[] Location;
+    private String[] Location;
     //@Getter private String[] Inventory;
 }

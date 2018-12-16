@@ -7,12 +7,12 @@ import java.awt.*;
 
 public abstract class Friendly extends Creature {
 
-    public Friendly(API API, float x, float y, int width, int height) {
-        this(API, x, y, width, height, 0);
+    public Friendly(int id, String name, API API, float x, float y, int width, int height) {
+        this(id, name, API, x, y, width, height, 0);
     }
 
-    public Friendly(API API, float x, float y, int width, int height, int level) {
-        super(API, x, y, width, height, level);
+    public Friendly(int id, String name, API API, float x, float y, int width, int height, int level) {
+        super(id, name, API, x, y, width, height, level);
     }
 
     @Override

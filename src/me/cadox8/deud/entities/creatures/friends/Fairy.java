@@ -9,7 +9,7 @@ import me.cadox8.deud.items.Item;
 public class Fairy extends Friendly {
 
     public Fairy(API API, float x, float y) {
-        super(API, x, y, 42, 42);
+        super(4, "Fairy", API, x, y, 42, 42);
 
         bounds.x = 12;
         bounds.y = 23;

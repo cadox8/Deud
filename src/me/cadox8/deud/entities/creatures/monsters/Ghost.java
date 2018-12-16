@@ -8,7 +8,7 @@ import me.cadox8.deud.gfx.textures.Models;
 public class Ghost extends Monster {
 
     public Ghost(API API, float x, float y) {
-        super(API, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+        super(3, "Ghost", API, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         bounds.x = 20;
         bounds.y = 44;

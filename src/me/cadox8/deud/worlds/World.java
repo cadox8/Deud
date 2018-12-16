@@ -13,9 +13,9 @@ import me.cadox8.deud.entities.statics.SignEntity;
 import me.cadox8.deud.entities.statics.Tree;
 import me.cadox8.deud.items.ItemManager;
 import me.cadox8.deud.particles.Particle;
-import me.cadox8.deud.particles.Particles;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.utils.Utils;
+import java.util.List;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class World {
         loadWorld(path);
 
         particles = new ArrayList<>();
-        particles.add(Particles.EXPLOSION.build());
+        particles.add(Particle.EXPLOSION);
 
         this.entityManager.getPlayer().setX(spawnX);
         this.entityManager.getPlayer().setY(spawnY);
@@ -76,7 +76,10 @@ public class World {
     public void tick() {
         itemManager.tick();
         entityManager.tick();
-        particles.forEach(particle -> particle.tick());
+
+        // Particles
+        particles.forEach(Particle::tick);
+        particles.removeIf(p -> p.getAnimation().hasEnd());
     }
 
     public void render(Graphics g) {
@@ -127,7 +130,7 @@ public class World {
 
     @Override
     public String toString() {
-        return "World{ Name: " + worldName() + "}";
+        return "World{Name: " + worldName() + "}";
     }
     public String worldName() {
         return path.split("/")[2].split("\\.")[0];

@@ -10,12 +10,12 @@ import java.io.File;
 
 public class Launcher {
 
-    public static final String VERSION = "Alpha v0.5.5";
+    public static final String VERSION = "Alpha v0.6.0";
     public static final String GAME_FILE = "C:" + File.separator + "Deud" + File.separator;
 
     public static void main(String[] args) {
         try {
-            if (!new JavaCheck().isJava1_8()) throw new JavaVersionException("Deud needs Java 1.8 or above to run");
+            if (!new JavaCheck().isJava1_8()) throw new JavaVersionException("Deud needs Java 1.9 or above to run");
         } catch (JavaVersionException e) {
             Log.log(Log.LogType.DANGER, e.getMessage());
             return;
@@ -27,5 +27,7 @@ public class Launcher {
         game.start();
 
         game.setPlayerData(FileUtils.load());
+        if (game.getPlayerData().getHealth() <= 0) game.getPlayerData().setHealth(10); // Temporal
+        game.setSettings(FileUtils.loadSettings());
     }
 }

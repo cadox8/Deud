@@ -43,6 +43,7 @@ public class MenuState extends State {
                 API.getMouseManager().setUIManager(uiManager);
             } catch (URISyntaxException | IOException e){
                 Log.log(Log.LogType.DANGER, "Link doesn't exist");
+                e.printStackTrace();
             }
         }));
     }

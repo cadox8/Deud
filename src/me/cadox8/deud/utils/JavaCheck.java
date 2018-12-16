@@ -6,7 +6,7 @@ public class JavaCheck {
 
     @Getter private boolean java1_8 = false;
 
-    private static final double MIN_JAVA_VERSION = 1.8;
+    private static final double MIN_JAVA_VERSION = 1.9;
 
     public JavaCheck() {
         double version = Double.valueOf(System.getProperty("java.runtime.version").split("\\.")[0]);

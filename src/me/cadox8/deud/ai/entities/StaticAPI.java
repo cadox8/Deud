@@ -8,7 +8,7 @@ public class StaticAPI extends AI {
 
     private StaticEntity staticEntity;
 
-    private int tempDelay = 0;
+    private int tempDelay;
     private int direction = 0;
 
     public StaticAPI(API API, StaticEntity staticEntity, float speed, int delay) {
