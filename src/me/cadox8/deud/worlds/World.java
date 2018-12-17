@@ -47,7 +47,7 @@ public class World {
         try {
             loc = Launcher.getGame().getPlayerData().getLocation();
         } catch (NullPointerException e) {
-            loc = new Location(500, 500, 0);
+            loc = new Location(spawnX, spawnY, 0);
         }
 
         System.out.println(loc.getX() + " " + loc.getY());
@@ -59,9 +59,6 @@ public class World {
 
         particles = new ArrayList<>();
         particles.add(Particle.EXPLOSION);
-
-        this.entityManager.getPlayer().setX(spawnX);
-        this.entityManager.getPlayer().setY(spawnY);
     }
 
     private void addEntities() {
