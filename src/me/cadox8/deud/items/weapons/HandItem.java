@@ -19,7 +19,7 @@ public class HandItem extends WeaponItem {
 
     @Override
     public Item createNew(int x, int y, int count) {
-        Item i = new HandItem(texture, id, name, getDamage());
+        final Item i = new HandItem(texture, id, name, getDamage());
         i.setPosition(x, y);
         i.setCount(count);
         return i;

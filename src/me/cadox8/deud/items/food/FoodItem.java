@@ -21,7 +21,7 @@ public abstract class FoodItem extends Item {
         consume(p);
     }
 
-    protected void consume(Player p) {
+    private void consume(Player p) {
         if (p.getHunger() == p.getMaxHunger()) return;
 
         removeItem(p);

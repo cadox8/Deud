@@ -11,6 +11,7 @@ import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.settings.Settings;
 import me.cadox8.deud.utils.Location;
 import me.cadox8.deud.utils.Log;
+import net.arikia.dev.drpc.DiscordRPC;
 
 import java.io.*;
 
@@ -100,6 +101,8 @@ public class FileUtils {
         } catch (IOException e){
             Log.log(Log.LogType.DANGER, "Error while saving data. Does 'C:/Deud/saves' exist?");
         }
+
+        DiscordRPC.discordShutdown();
     }
 
     public static PlayerData load() {

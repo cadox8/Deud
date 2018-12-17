@@ -13,7 +13,10 @@ public class SoundClip {
     private AudioFormat audioFormat;
     private SourceDataLine sourceLine;
 
+    private boolean running = false;
+
     public void playSound(String filename){
+        if (running) return;
         try {
             soundFile = new File(getClass().getResource(PATH + filename + ".wav").toURI());
         } catch (Exception e) {
@@ -37,12 +40,10 @@ public class SoundClip {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
             System.exit(1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
         }
 
         sourceLine.start();
+        running = true;
 
         int nBytesRead = 0;
         byte[] abData = new byte[BUFFER_SIZE];
@@ -60,5 +61,6 @@ public class SoundClip {
 
         sourceLine.drain();
         sourceLine.close();
+        running = false;
     }
 }

@@ -23,7 +23,7 @@ public class Settings {
         return parseGamemode(mode);
     }
 
-    public static Gamemode parseGamemode(int gamemode) {
+    private Gamemode parseGamemode(int gamemode) {
         return Arrays.asList(Gamemode.values()).stream().filter(g -> g.getGamemode() == gamemode).findFirst().orElse(Gamemode.SURVIVAL);
     }
 

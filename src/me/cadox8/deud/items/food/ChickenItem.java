@@ -12,7 +12,7 @@ public class ChickenItem extends FoodItem {
 
     @Override
     public Item createNew(int x, int y, int count) {
-        Item i = new ChickenItem(texture, id, name, getFoodRegen());
+        final Item i = new ChickenItem(texture, id, name, getFoodRegen());
         i.setPosition(x, y);
         i.setCount(count);
         return i;

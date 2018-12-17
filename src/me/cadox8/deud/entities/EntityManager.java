@@ -17,14 +17,12 @@ public class EntityManager {
     @Getter @Setter private Player player;
 
     @Getter @Setter private ArrayList<Entity> entities;
-    private Comparator<Entity> renderSorter = new Comparator<Entity>() {
-        @Override
-        public int compare(Entity a, Entity b) {
-            if (a.getY() + a.getHeight() < b.getY() + b.getHeight()) {
-                return -1;
-            }
-            return 1;
+
+    private Comparator<Entity> renderSorter = (Entity a, Entity b) -> {
+        if (a.getY() + a.getHeight() < b.getY() + b.getHeight()) {
+            return -1;
         }
+        return 1;
     };
 
     public EntityManager(API API, Player player) {

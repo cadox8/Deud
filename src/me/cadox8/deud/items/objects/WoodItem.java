@@ -12,7 +12,7 @@ public class WoodItem extends ObjectItem {
 
     @Override
     public Item createNew(int x, int y, int count) {
-        Item i = new WoodItem(texture, id, name);
+        final Item i = new WoodItem(texture, id, name);
         i.setPosition(x, y);
         i.setCount(count);
         return i;

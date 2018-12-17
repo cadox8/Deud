@@ -8,6 +8,8 @@ import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.items.food.ChickenItem;
 import me.cadox8.deud.items.objects.*;
+import me.cadox8.deud.items.potions.HealthPotion;
+import me.cadox8.deud.items.potions.PotionItem;
 import me.cadox8.deud.items.weapons.HandItem;
 import me.cadox8.deud.items.weapons.WeaponItem;
 
@@ -35,6 +37,9 @@ public abstract class Item {
 
     //Weapons
     public static final WeaponItem hand = new HandItem(Assets.hand, 4, "Hand", 0);
+
+    // Potions
+    public static final PotionItem healthPotion = new HealthPotion(1);
 
 
     // Class

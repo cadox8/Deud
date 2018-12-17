@@ -2,6 +2,7 @@ package me.cadox8.deud.game;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.display.Display;
 import me.cadox8.deud.gfx.GameCamera;
@@ -17,6 +18,7 @@ import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.MenuState;
 import me.cadox8.deud.states.OptionsState;
 import me.cadox8.deud.states.State;
+import net.arikia.dev.drpc.DiscordRPC;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -83,11 +85,13 @@ public class Game implements Runnable {
         //optionsState = new OptionsState(API);
 
         State.setState(menuState);
+        Launcher.getDiscord().createNewPresence(API.getWorld().getEntityManager().getPlayer());
     }
 
     private void tick() {
         keyManager.tick();
         if (State.getState() != null) State.getState().tick();
+        DiscordRPC.discordRunCallbacks();
     }
 
     private void render() {
@@ -109,7 +113,7 @@ public class Game implements Runnable {
         init();
 
         int fps = 60;
-        double timePerTick = 1000000000 / fps;
+        double timePerTick = 1000000000f / fps;
         double delta = 0;
         long now;
         long lastTime = System.nanoTime();

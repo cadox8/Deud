@@ -12,7 +12,9 @@ public enum Sound {
     @Getter private String name;
     @Getter private float volume;
 
+    private final SoundClip sound = new SoundClip();
+
     public void playSound() {
-        new SoundClip().playSound(getName());
+        sound.playSound(getName());
     }
 }
