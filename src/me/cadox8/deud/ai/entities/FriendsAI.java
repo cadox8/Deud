@@ -15,6 +15,7 @@ public class FriendsAI extends AI {
 
     @Override
     public void getMove() {
+        if (isNoAI()) return;
         randomMove(creature);
     }
 

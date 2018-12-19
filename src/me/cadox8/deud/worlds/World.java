@@ -1,26 +1,21 @@
 package me.cadox8.deud.worlds;
 
 import lombok.Getter;
-import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.API;
+import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityManager;
-import me.cadox8.deud.entities.creatures.friends.Fairy;
-import me.cadox8.deud.entities.creatures.monsters.Ghost;
-import me.cadox8.deud.entities.creatures.monsters.Zombie;
 import me.cadox8.deud.entities.creatures.player.Player;
-import me.cadox8.deud.entities.statics.Chest;
-import me.cadox8.deud.entities.statics.Rock;
-import me.cadox8.deud.entities.statics.SignEntity;
-import me.cadox8.deud.entities.statics.Tree;
+import me.cadox8.deud.game.Game;
 import me.cadox8.deud.items.ItemManager;
 import me.cadox8.deud.particles.Particle;
+import me.cadox8.deud.saves.EntityData;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.utils.Location;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class World {
 
@@ -45,12 +40,10 @@ public class World {
         Location loc;
 
         try {
-            loc = Launcher.getGame().getPlayerData().getLocation();
+            loc = Game.getInstance().getPlayerData().getLocation();
         } catch (NullPointerException e) {
             loc = new Location(spawnX, spawnY, 0);
         }
-
-        System.out.println(loc.getX() + " " + loc.getY());
         this.entityManager = new EntityManager(API, new Player(API, loc.getX(), loc.getY()));
         this.itemManager = new ItemManager(API);
 
@@ -62,21 +55,24 @@ public class World {
     }
 
     private void addEntities() {
-        //Static Entities
-        entityManager.addEntity(new Tree(API, 130, 250));
-        entityManager.addEntity(new Rock(API, 130, 450));
-        entityManager.addEntity(new Tree(API, 130, 650));
-        entityManager.addEntity(new Rock(API, 130, 850));
-
-        entityManager.addEntity(new SignEntity(API, 500, 150, 0, Arrays.asList("This is a Test")));
-        entityManager.addEntity(new SignEntity(API, 500, 250, 1, Arrays.asList("Hello World", "asdasd", "sadasd")));
-
-        entityManager.addEntity(new Chest(API, 600, 120));
-
-        //Creatures
-        entityManager.addEntity(new Fairy(API, 135, 100));
-        entityManager.addEntity(new Zombie(API, 200, 100));
-        entityManager.addEntity(new Ghost(API, 300, 100));
+        if (Game.getInstance().getEntityData() == null) {
+            new WorldEntities(API, entityManager).loadEntities();
+        } else {
+            Game.getInstance().getEntityData().getEntities().forEach(e -> {
+                try {
+                    final Location l = e.getLocation();
+                    final EntityData.EntityType type = EntityData.EntityType.parseClass(e.getType());
+                    if (type == null) return;
+                    if (type == EntityData.EntityType.SIGN) {
+                        entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY(), e.getSignType(), e.getText()));
+                    } else {
+                        entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY()));
+                    }
+                } catch (IllegalAccessException | InvocationTargetException | InstantiationException er) {
+                    er.printStackTrace();
+                }
+            });
+        }
     }
 
     public void tick() {

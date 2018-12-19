@@ -7,7 +7,6 @@ import me.cadox8.deud.ui.UIImage;
 import me.cadox8.deud.ui.UIImageButton;
 import me.cadox8.deud.ui.UIManager;
 import me.cadox8.deud.ui.UIText;
-import me.cadox8.deud.utils.DeudColor;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Updater;
 
@@ -36,7 +35,7 @@ public class MenuState extends State {
         uiManager.addObject(new UIImageButton(900, 650, 200, 100, GUI.exit, () -> System.exit(0)));
 
         if (!Updater.timeToUpdate()) return;
-        uiManager.addObject(new UIText(5, 15, DeudColor.RED, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
+        uiManager.addObject(new UIText(5, 15, Color.RED, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
             try {
                 API.getMouseManager().setUIManager(null);
                 Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
@@ -58,7 +57,7 @@ public class MenuState extends State {
     @Override
     public void render(Graphics g) {
         uiManager.render(g);
-        g.setColor(DeudColor.WHITE.toColor());
+        g.setColor(Color.WHITE);
         g.drawString("Version: " + Launcher.VERSION, 5, 795);
         g.drawString("© Deud 2016-2018 - The Game is property of Cadox8", 955, 795);
     }

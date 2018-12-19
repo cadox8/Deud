@@ -1,7 +1,10 @@
 package me.cadox8.deud.saves;
 
 import lombok.Data;
+import lombok.Getter;
 import me.cadox8.deud.utils.Location;
+
+import java.util.Map;
 
 @Data
 public class PlayerData {
@@ -9,7 +12,7 @@ public class PlayerData {
     private int Money;
     private int Health;
     private LocationUtils Location;
-    //@Getter private String[] Inventory;
+    @Getter private Map<Integer, Integer>[] Inventory;
 
     public LocationUtils locUtils() {
         return Location;

@@ -3,7 +3,6 @@ package me.cadox8.deud.worlds;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.tiles.TileData;
-import me.cadox8.deud.utils.DeudColor;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -38,7 +37,7 @@ public class Minimap {
 
 
     private void drawRect(Graphics g){
-        g.setColor(DeudColor.BLACK.toColor());
+        g.setColor(Color.BLACK);
         g.drawRect(640, 5, 155, 105);
     }
 

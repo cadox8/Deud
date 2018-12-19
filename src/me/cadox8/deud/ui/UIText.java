@@ -1,18 +1,16 @@
 package me.cadox8.deud.ui;
 
-import me.cadox8.deud.utils.DeudColor;
-
 import java.awt.*;
 
 public class UIText extends UIObject {
 
     private String text;
-    private DeudColor color;
+    private Color color;
     private ClickListener clicker;
 
     private int fixedX, fixedY;
 
-    public UIText(float x, float y, DeudColor color, String text, ClickListener clicker) {
+    public UIText(float x, float y, Color color, String text, ClickListener clicker) {
         super(x, y - 12, 250, 15);
         this.text = text;
         this.color = color;
@@ -28,7 +26,7 @@ public class UIText extends UIObject {
 
     @Override
     public void render(Graphics g) {
-        g.setColor(color.toColor());
+        g.setColor(color);
         g.drawString(text, fixedX, fixedY);
     }
 

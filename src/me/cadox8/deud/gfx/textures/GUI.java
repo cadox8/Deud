@@ -1,9 +1,9 @@
 package me.cadox8.deud.gfx.textures;
 
 import me.cadox8.deud.gfx.Sprites;
-import me.cadox8.deud.utils.DeudColor;
 import me.cadox8.deud.utils.Utils;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class GUI {
@@ -38,6 +38,6 @@ public class GUI {
 
         inventoryScreen = Utils.loadImage("/textures/gui/inventoryScreen.png");
 
-        none = gui.coloredSprite(32, 32, DeudColor.TRANSPARENT);
+        none = gui.coloredSprite(32, 32, new Color(0, 0, 0, 255));
     }
 }

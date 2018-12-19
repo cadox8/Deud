@@ -1,7 +1,6 @@
 package me.cadox8.deud.gfx;
 
 import lombok.AllArgsConstructor;
-import me.cadox8.deud.utils.DeudColor;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,7 +21,7 @@ public class Sprites {
         }
     }
 
-    public BufferedImage coloredSprite(int width, int height, DeudColor color) {
+    public BufferedImage coloredSprite(int width, int height, Color color) {
         BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
         for (int y = 0; y < height; y++) {

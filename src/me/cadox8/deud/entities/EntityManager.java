@@ -44,8 +44,8 @@ public class EntityManager {
     }
 
     public void render(Graphics g) {
-        for (Entity e : entities) e.specialRender(g);
-        for (Entity e : entities) e.render(g);
+        entities.forEach(e -> e.specialRender(g));
+        entities.forEach(e -> e.render(g));
         player.postRender(g);
     }
 

@@ -12,11 +12,11 @@ import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.gfx.textures.Models;
 import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
+import me.cadox8.deud.saves.EntityData;
 import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.settings.Settings;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.MenuState;
-import me.cadox8.deud.states.OptionsState;
 import me.cadox8.deud.states.State;
 import net.arikia.dev.drpc.DiscordRPC;
 
@@ -25,11 +25,14 @@ import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable {
 
+    @Getter private static Game instance;
+
     @Getter private Display display;
     @Getter private final int width, height;
     private final String title;
 
     @Getter @Setter private PlayerData playerData;
+    @Getter @Setter private EntityData entityData;
     @Getter @Setter private Settings settings;
 
     @Getter @Setter private boolean running = false;
@@ -55,6 +58,8 @@ public class Game implements Runnable {
     @Getter private API API;
 
     public Game(String title, int width, int height) {
+        instance = this;
+
         this.width = width;
         this.height = height;
         this.title = title;

@@ -22,7 +22,7 @@ import java.util.Random;
 
 public abstract class Item {
 
-    public static Item[] items = new Item[6]; //All items
+    public static Item[] items = new Item[7]; //All items
 
     //Bug
     public static final ObjectItem bugItem = new BugItem(Assets.bug, 5, "3RR0R");

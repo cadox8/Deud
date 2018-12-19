@@ -18,12 +18,15 @@ public class SignEntity extends StaticEntity {
     @Setter @Getter private Sign sign;
     @Getter private List<String> whatToSay;
 
+    @Getter private int type;
+
     public SignEntity(API API, float x, float y, int type, List<String> whatToSay) {
         super(7, "Sign", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
 
         this.whatToSay = whatToSay;
+        this.type = type;
 
         switch (type) {
             case 0:

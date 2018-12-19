@@ -7,12 +7,10 @@ import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.utils.DeudColor;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Inventory {
@@ -73,16 +71,16 @@ public class Inventory {
 
             switch (i) {
                 case 0:
-                    Text.drawString(g, "> " + inventoryItems.get(selectedItem + i).getName() + " <", invListCenterX, invListCenterY + i * invListSpacing, true, DeudColor.YELLOW, 0);
+                    Text.drawString(g, "> " + inventoryItems.get(selectedItem + i).getName() + " <", invListCenterX, invListCenterY + i * invListSpacing, true, Color.YELLOW, 0);
                     break;
                 default:
-                    Text.drawString(g, inventoryItems.get(selectedItem + i).getName(), invListCenterX, invListCenterY + i * invListSpacing, true, DeudColor.WHITE, 0);
+                    Text.drawString(g, inventoryItems.get(selectedItem + i).getName(), invListCenterX, invListCenterY + i * invListSpacing, true, Color.WHITE, 0);
                     break;
             }
         }
         final Item item = inventoryItems.get(selectedItem);
         g.drawImage(item.getTexture(), invImageX, invImageY, invImageWidth, invImageHeight, null);
-        Text.drawString(g, Integer.toString(item.getCount()), invCountX, invCountY, true, DeudColor.WHITE, 0);
+        Text.drawString(g, Integer.toString(item.getCount()), invCountX, invCountY, true, Color.WHITE, 0);
     }
 
 

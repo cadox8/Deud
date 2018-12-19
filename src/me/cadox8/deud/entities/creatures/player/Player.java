@@ -16,7 +16,6 @@ import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.settings.Settings;
-import me.cadox8.deud.utils.DeudColor;
 import me.cadox8.deud.utils.Location;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
@@ -24,6 +23,7 @@ import me.cadox8.deud.worlds.Minimap;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 public class Player extends Creature {
 
@@ -52,10 +52,10 @@ public class Player extends Creature {
         bounds.height = 19;
 
         //Animatons
-        animDown = new Animation((int)(speed * 166), Models.player_down);
-        animUp = new Animation((int)(speed * 166), Models.player_up);
-        animLeft = new Animation((int)(speed * 166), Models.player_left);
-        animRight = new Animation((int)(speed * 166), Models.player_right);
+        animDown = new Animation((int)(speed * 600), Models.player_down);
+        animUp = new Animation((int)(speed * 600), Models.player_up);
+        animLeft = new Animation((int)(speed * 600), Models.player_left);
+        animRight = new Animation((int)(speed * 600), Models.player_right);
 
         inventory = new Inventory(API, this);
         inventory.setUsableItem(Item.hand);
@@ -76,9 +76,6 @@ public class Player extends Creature {
         animations[2] = animLeft;
         animations[3] = animRight;
 
-        inventory.addItem(Item.chickenItem);
-        inventory.addItem(Item.keyItem.setCount(8));
-
         if (getAPI().getGame().getPlayerData() != null) {
             final PlayerData pd = getAPI().getGame().getPlayerData();
             final Location loc = pd.getLocation();
@@ -91,7 +88,11 @@ public class Player extends Creature {
             setY(loc.getY());
             setDirection(loc.getDirection());
 
-            //inventory.getInventoryItems().addAll(Arrays.asList(pd.getInventory()));
+            Arrays.asList(pd.getInventory()).forEach(items -> items.forEach((id, count) -> {
+                final Item i = Item.items[id];
+                i.setCount(count);
+                inventory.addItem(i);
+            }));
         }
     }
 
@@ -137,7 +138,7 @@ public class Player extends Creature {
         inventory.render(g);
 
         //if (API.isDebug()) {
-            g.setColor(DeudColor.WHITE.toColor());
+            g.setColor(Color.WHITE);
             g.drawString("X: " + x + " Y: " + y + " Dir: " + direction, 1105, 795);
         //}
     }
@@ -147,7 +148,6 @@ public class Player extends Creature {
         map.paintMap(g);
         inventory.render(g);
     }
-
 
     private void renderInfo(Graphics g) {
         if (inventory.isActive()) {
@@ -190,8 +190,8 @@ public class Player extends Creature {
         Text.drawString(g, inventory.getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, 2);
 
         if (getHealth() <= 0) {
-            Text.drawString(g, "You lose", 125, 530, DeudColor.BLACK, 3);
-            Text.drawString(g, ":(", 367, 515, DeudColor.BLACK, 0);
+            Text.drawString(g, "You lose", 125, 530, Color.BLACK, 3);
+            Text.drawString(g, ":(", 367, 515, Color.BLACK, 0);
         }
     }
 

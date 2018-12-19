@@ -1,7 +1,7 @@
 package me.cadox8.deud.states;
 
-import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.API;
+import me.cadox8.deud.game.Game;
 import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.utils.Location;
 import me.cadox8.deud.worlds.World;
@@ -15,12 +15,13 @@ public class GameState extends State {
     public GameState(API API, String map) {
         super(API);
         Location.setAPI(API);
-        Launcher.getGame().setPlayerData(FileUtils.load());
-        if (Launcher.getGame().getPlayerData() != null && Launcher.getGame().getPlayerData().getHealth() <= 0) Launcher.getGame().getPlayerData().setHealth(10); // Temporal
-        Launcher.getGame().setSettings(FileUtils.loadSettings());
+        Game.getInstance().setPlayerData(FileUtils.load());
+        Game.getInstance().setEntityData(FileUtils.loadEntities());
+        if (Game.getInstance().getPlayerData() != null && Game.getInstance().getPlayerData().getHealth() <= 0) Game.getInstance().getPlayerData().setHealth(10); // Temporal
+        Game.getInstance().setSettings(FileUtils.loadSettings());
 
         try {
-            map = Launcher.getGame().getPlayerData().locUtils().getWorld();
+            map = Game.getInstance().getPlayerData().locUtils().getWorld();
         } catch (NullPointerException e) {}
 
         world = new World(API, "resources/worlds/" + map + ".txt");
