@@ -5,6 +5,7 @@ import lombok.Setter;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Iterator;
 
 public class EntityManager {
 
-    @Getter @Setter private API API;
+    @Getter @Setter private static API API;
     @Getter @Setter private Player player;
 
     @Getter @Setter private ArrayList<Entity> entities;
@@ -26,7 +27,7 @@ public class EntityManager {
     };
 
     public EntityManager(API API, Player player) {
-        this.API = API;
+        EntityManager.API = API;
         this.player = player;
         entities = new ArrayList<>();
         addEntity(player);
@@ -47,6 +48,7 @@ public class EntityManager {
         entities.forEach(e -> e.specialRender(g));
         entities.forEach(e -> e.render(g));
         player.postRender(g);
+        //entities.forEach(e -> g.drawRect((int)e.getBounds().getX() + (int)e.getX(), (int)e.getBounds().getY() + (int)e.getY(), (int)e.getBounds().getWidth(), (int)e.getBounds().getHeight()));
     }
 
     public void addEntity(Entity e) {
@@ -62,5 +64,57 @@ public class EntityManager {
 
     public void killAll() {
         entities.forEach(Entity::kill);
+    }
+
+
+    public static void checkAttacks(Entity attacker) {
+        checkAttacks(attacker, 0, 0);
+    }
+    public static void checkAttacks(Entity attacker, float xMove, float yMove) {
+        attacker.attackTimer += System.currentTimeMillis() - attacker.lastAttackTimer;
+        attacker.lastAttackTimer = System.currentTimeMillis();
+        if (attacker.attackTimer < attacker.attackCooldown) {
+            if (API.isDebug()) Log.log("Attack in cooldown: " + attacker.attackTimer + "/" + attacker.attackCooldown);
+            return;
+        }
+        if (attacker instanceof Player && ((Player) attacker).getInventory().isActive()) return;
+
+        final Rectangle cb = attacker.getCollisionBounds(0, 0);
+        final Rectangle ar = new Rectangle();
+
+        final int arSize = 20;
+        ar.width = arSize;
+        ar.height = arSize;
+
+        if (attacker instanceof Player && !API.getMouseManager().isLeftPressed()) return;
+
+        switch (attacker.getDirection()) {
+            case 0: // Down
+                ar.x = cb.x + cb.width / 2 - arSize / 2;
+                ar.y = cb.y + cb.height;
+                break;
+            case 1: // Up
+                ar.x = cb.x + cb.width / 2 - arSize / 2;
+                ar.y = cb.y - arSize;
+                break;
+            case 2: // Right
+                ar.x = cb.x + cb.width + arSize / 4 - 4;
+                ar.y = cb.y + cb.height / 2 - arSize / 2;
+                break;
+            case 3: // Left
+                ar.x = cb.x - cb.width + arSize / 4 - 1;
+                ar.y = cb.y + cb.height / 2 - arSize / 2;
+                break;
+        }
+
+        attacker.attackTimer = 0;
+
+        for (Entity e : API.getWorld().getEntityManager().getEntities()) {
+            if (e.equals(attacker)) continue;
+            if (e.getCollisionBounds(xMove, yMove).intersects(ar)) {
+                e.hurt(attacker);
+                return;
+            }
+        }
     }
 }

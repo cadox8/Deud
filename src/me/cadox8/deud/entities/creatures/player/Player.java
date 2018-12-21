@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.audio.Sound;
-import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.EntityManager;
+import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.gfx.Animation;
 import me.cadox8.deud.gfx.fonts.Text;
@@ -16,7 +17,6 @@ import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.settings.Settings;
-import me.cadox8.deud.utils.Location;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 import me.cadox8.deud.worlds.Minimap;
@@ -110,7 +110,7 @@ public class Player extends Creature {
         API.getGameCamera().centerOnEntity(this);
 
         // Attack
-        checkAttacks();
+        EntityManager.checkAttacks(this);
 
         // Inventory
         inventory.tick();
@@ -255,52 +255,7 @@ public class Player extends Creature {
         }
     }
 
-    private void checkAttacks() {
-        attackTimer += System.currentTimeMillis() - lastAttackTimer;
-        lastAttackTimer = System.currentTimeMillis();
-        if (attackTimer < attackCooldown) {
-            if (API.isDebug()) Log.log("Attack in cooldown: " + attackTimer + "/" + attackCooldown);
-            return;
-        }
-        if (inventory.isActive()) return;
 
-        Rectangle cb = getCollisionBounds(0, 0);
-        Rectangle ar = new Rectangle();
-        int arSize = 20;
-        ar.width = arSize;
-        ar.height = arSize;
-
-        if (!API.getMouseManager().isLeftPressed()) return;
-
-        switch (getDirection()) {
-            case 0:
-                ar.x = cb.x + cb.width / 2 - arSize / 2;
-                ar.y = cb.y + cb.height;
-                break;
-            case 1:
-                ar.x = cb.x + cb.width / 2 - arSize / 2;
-                ar.y = cb.y - arSize;
-                break;
-            case 2:
-                ar.x = cb.x - arSize;
-                ar.y = cb.y + cb.height / 2 - arSize / 2;
-                break;
-            case 3:
-                ar.x = cb.x + cb.width;
-                ar.y = cb.y + cb.height / 2 - arSize / 2;
-                break;
-        }
-
-        attackTimer = 0;
-
-        for (Entity e : API.getWorld().getEntityManager().getEntities()) {
-            if (e.equals(this)) continue;
-            if (e.getCollisionBounds(0, 0).intersects(ar)) {
-                e.hurt(this);
-                return;
-            }
-        }
-    }
 
     //
     private void drawImage(Graphics g, BufferedImage image, int pos){

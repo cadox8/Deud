@@ -1,10 +1,9 @@
-package me.cadox8.deud.utils;
+package me.cadox8.deud.entities;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import me.cadox8.deud.api.API;
-import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.worlds.World;
 
 import java.util.HashMap;

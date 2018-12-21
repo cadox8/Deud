@@ -15,7 +15,7 @@ public class Updater {
 
     public static String getWebVersion(){
         try {
-            final String version = new BufferedReader(new InputStreamReader(new URL("https://cadox8.github.io/Deud/version.txt").openStream())).readLine().split("%")[1];
+            final String version = new BufferedReader(new InputStreamReader(new URL("https://cadox8.github.io/Deud/version.txt").openStream())).readLine();
             Log.log("Web Version: " + version + " || Game Version: " + Launcher.VERSION);
             return version;
         } catch (IOException e){}

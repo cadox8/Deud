@@ -1,9 +1,9 @@
 package me.cadox8.deud.states;
 
 import me.cadox8.deud.api.API;
+import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.saves.FileUtils;
-import me.cadox8.deud.utils.Location;
 import me.cadox8.deud.worlds.World;
 
 import java.awt.*;

@@ -3,9 +3,10 @@ package me.cadox8.deud.ai;
 import lombok.Getter;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.EntityManager;
+import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
-import me.cadox8.deud.utils.Location;
 
 import java.awt.*;
 import java.util.Random;
@@ -78,16 +79,14 @@ public abstract class AI {
         if (creature.isFreeze()) return;
 
         tempDelay = delay;
-/*        Location playerLocation = new Location(entity.getAPI().getWorld(), player.getX(), player.getY());
-        Location creatureLocation = new Location(entity.getAPI().getWorld(), creature.getX(), creature.getY());*/
-        Location playerLocation = new Location(player);
-        Location creatureLocation = new Location(creature);
+        final Location playerLocation = new Location(player);
+        final Location creatureLocation = new Location(creature);
 
         if (playerLocation.getY() > creatureLocation.getY()) {
             if (!entity.checkEntityCollisions(creature.getSpeed(), 0f)) {
                 creature.setYMove(creature.getSpeed());
             } else {
-                attack(0, creature.getSpeed());
+                attack(creature,0, creature.getSpeed());
             }
             creature.setDirection(0);
         }
@@ -95,7 +94,7 @@ public abstract class AI {
             if (!entity.checkEntityCollisions(-creature.getSpeed(), 0f)) {
                 creature.setYMove(-creature.getSpeed());
             } else {
-                attack(0, -creature.getSpeed());
+                attack(creature,0, -creature.getSpeed());
             }
             creature.setDirection(1);
         }
@@ -103,7 +102,7 @@ public abstract class AI {
             if (!entity.checkEntityCollisions(-creature.getSpeed(), 0f)) {
                 creature.setXMove(creature.getSpeed());
             } else {
-                attack(creature.getSpeed(), 0);
+                attack(creature, creature.getSpeed(), 0);
             }
             creature.setDirection(2);
         }
@@ -111,7 +110,7 @@ public abstract class AI {
             if (!entity.checkEntityCollisions(-creature.getSpeed(), 0f)) {
                 creature.setXMove(-creature.getSpeed());
             } else {
-                attack(-creature.getSpeed(), 0);
+                attack(creature, -creature.getSpeed(), 0);
             }
             creature.setDirection(3);
         }
@@ -121,9 +120,9 @@ public abstract class AI {
         return tempDelay != 0;
     }
 
-    private void attack(float xMove, float yMove) {
-        boolean isAttacking;
-
+    private void attack(Entity attacker, float xMove, float yMove) {
+        EntityManager.checkAttacks(attacker, xMove, yMove);
+/*
         entity.setAttackTimer(entity.getAttackTimer() + System.currentTimeMillis() - entity.getLastAttackTimer());
         entity.setLastAttackTimer(System.currentTimeMillis());
         if (entity.getAttackTimer() < entity.getAttackCooldown()) return;
@@ -137,7 +136,7 @@ public abstract class AI {
                     player.hurt(entity);
                 }
             }
-        }
+        }*/
     }
 
     //TODO: Change

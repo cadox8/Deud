@@ -9,7 +9,6 @@ import me.cadox8.deud.entities.creatures.monsters.Monster;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.Animation;
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.utils.Location;
 import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
@@ -95,12 +94,11 @@ public abstract class Entity {
     public abstract void die();
 
     public void hurt(Entity attacker) {
+        Log.log("Health: " + getHealth());
         if (!isDamageable()) return;
 
         int amt = attacker.getDamage() + (int) (DMG_UP_PER_LVL * attacker.getLevel());
         health -= amt;
-
-        if (API.isDebug()) Log.log("Health: " + getHealth());
 
         if (this instanceof Creature) {
             if (attacker instanceof Monster) ((Monster)attacker).getItemInHand().getAttributes().forEach(a -> a.perform(attacker, (Creature) this));

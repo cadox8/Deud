@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.friends.Fairy;
 import me.cadox8.deud.entities.creatures.monsters.Ghost;
 import me.cadox8.deud.entities.creatures.monsters.Zombie;
@@ -11,7 +12,6 @@ import me.cadox8.deud.entities.statics.Chest;
 import me.cadox8.deud.entities.statics.Rock;
 import me.cadox8.deud.entities.statics.SignEntity;
 import me.cadox8.deud.entities.statics.Tree;
-import me.cadox8.deud.utils.Location;
 
 import java.util.Arrays;
 import java.util.List;

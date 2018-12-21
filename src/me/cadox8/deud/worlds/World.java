@@ -4,13 +4,13 @@ import lombok.Getter;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityManager;
+import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.items.ItemManager;
 import me.cadox8.deud.particles.Particle;
 import me.cadox8.deud.saves.EntityData;
 import me.cadox8.deud.tiles.Tile;
-import me.cadox8.deud.utils.Location;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;

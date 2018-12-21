@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class UIImage extends UIObject {
 
-    private BufferedImage[] images;
+    protected BufferedImage[] images;
 
     public UIImage(float x, float y, int width, int height, BufferedImage[] images) {
         super(x, y, width, height);

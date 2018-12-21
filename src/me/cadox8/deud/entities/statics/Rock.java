@@ -12,7 +12,7 @@ public class Rock extends StaticEntity {
     public Rock(API API, float x, float y) {
         super(6, "Rock", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
-        bounds.x = 3;
+        bounds.x = 2;
         bounds.y = (int) (height / 2f);
         bounds.width = width - 6;
         bounds.height = (int) (height - height / 2f);

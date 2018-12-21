@@ -2,7 +2,7 @@ package me.cadox8.deud.saves;
 
 import lombok.Data;
 import lombok.Getter;
-import me.cadox8.deud.utils.Location;
+import me.cadox8.deud.entities.Location;
 
 import java.util.Map;
 

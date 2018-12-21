@@ -23,8 +23,8 @@ public class Chest extends StaticEntity {
         setDamage(5);
         setLevel(0);
 
-        bounds.x = 3;
-        bounds.y = (int) (height / 2f);
+        bounds.x = 2;
+        bounds.y = (int) (height / 2f) - 5;
         bounds.width = width - 6;
         bounds.height = (int) (height - height / 2f);
     }

@@ -1,6 +1,7 @@
 package me.cadox8.deud.utils;
 
 import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.worlds.World;
 
 import javax.imageio.ImageIO;
@@ -20,11 +21,9 @@ public class Utils {
         StringBuilder builder = new StringBuilder();
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader(path));
+            final BufferedReader br = new BufferedReader(new FileReader(path));
             String line;
-            while ((line = br.readLine()) != null) {
-                builder.append(line + "\n");
-            }
+            while ((line = br.readLine()) != null) builder.append(line + "\n");
 
             br.close();
         } catch (IOException e) {

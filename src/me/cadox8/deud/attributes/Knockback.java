@@ -1,6 +1,5 @@
 package me.cadox8.deud.attributes;
 
-import lombok.Setter;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.Creature;
@@ -16,7 +15,7 @@ public class Knockback extends Attribute {
 
     @Override
     public void perform(Entity damager, Creature damaged) {
-        final float speed = (float)(damaged.getSpeed() + (percent * damaged.getSpeed()));
+        final float speed = (float)(percent * damaged.getSpeed());
 
         switch (damager.getDirection()) {
             case 0:
@@ -36,5 +35,6 @@ public class Knockback extends Attribute {
                 //damaged.setX(damaged.getX() - (float)(percent * damaged.getX()));
                 break;
         }
+        damaged.move();
     }
 }
