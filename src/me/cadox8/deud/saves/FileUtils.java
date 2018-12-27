@@ -8,6 +8,7 @@ import com.google.gson.stream.JsonReader;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.SignEntity;
 import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.settings.Settings;
@@ -20,20 +21,17 @@ import java.util.List;
 
 public class FileUtils {
 
-    private static File saves = new File(Launcher.GAME_FILE + "saves", "save.json");
-    private static File saveEntities = new File(Launcher.GAME_FILE + "saves", "entities.json");
+    private static File saves = new File(Launcher.GAME_FILE + "saves", "player.json");
     private static File config = new File(Launcher.GAME_FILE, "config.json");
 
     public static void checkFile() {
+        final File file = new File(Launcher.GAME_FILE + "saves/entities");
         try {
             if (!saves.exists()) {
                 saves.getParentFile().mkdirs();
                 saves.createNewFile();
             }
-            if (!saveEntities.exists()) {
-                saveEntities.getParentFile().mkdirs();
-                saveEntities.createNewFile();
-            }
+            if (!file.exists()) file.mkdirs();
             if (!config.exists()) {
                 config.createNewFile();
                 saveSettings(new Settings());
@@ -125,6 +123,7 @@ public class FileUtils {
     public static void saveEntities(World world) throws IOException {
         final Gson gson = new GsonBuilder().setPrettyPrinting().create();
         final List<Entity> entities = world.getEntityManager().getEntities();
+        final File saveEntities = new File(Launcher.GAME_FILE + "saves/entities", "ent_" + world.worldName() +".json");
 
         final JsonObject data = new JsonObject();
         final JsonArray ent = new JsonArray();
@@ -135,10 +134,11 @@ public class FileUtils {
             en.add("location", gson.toJsonTree(e.getLocation().serializeLocation()).getAsJsonObject());
             if (e instanceof SignEntity) {
                 final JsonArray text = new JsonArray();
-                ((SignEntity) e).getWhatToSay().forEach(text::add);
+                ((SignEntity) e).getText().forEach(text::add);
                 en.addProperty("signType", ((SignEntity) e).getType());
                 en.add("text", text);
             }
+            if (e instanceof Door) en.addProperty("map", ((Door) e).getMap());
             ent.add(en);
         });
 
@@ -151,7 +151,8 @@ public class FileUtils {
         Log.log(Log.LogType.SUCCESS, "Entity Data saved successfully");
     }
 
-    public static EntityData loadEntities() {
+    public static EntityData loadEntities(String world) {
+        final File saveEntities = new File(Launcher.GAME_FILE + "saves/entities", "ent_" + world +".json");
         if (!saveEntities.exists()) return null;
 
         try {

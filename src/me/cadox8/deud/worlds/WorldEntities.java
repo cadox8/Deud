@@ -1,6 +1,5 @@
 package me.cadox8.deud.worlds;
 
-import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.creatures.friends.Fairy;
@@ -13,27 +12,43 @@ import me.cadox8.deud.entities.statics.Tree;
 
 import java.util.Arrays;
 
-@RequiredArgsConstructor
 public class WorldEntities {
 
     private final API API;
     private final EntityManager entityManager;
+    private final String world;
 
-    public void loadEntities() {
-        // Static Entities
-        entityManager.addEntity(new Tree(API, 130, 250));
-        entityManager.addEntity(new Rock(API, 130, 450));
-        entityManager.addEntity(new Tree(API, 130, 650));
-        entityManager.addEntity(new Rock(API, 130, 850));
+    public WorldEntities(API API, EntityManager entityManager, String world) {
+        this.API = API;
+        this.entityManager = entityManager;
+        this.world = world;
 
-        entityManager.addEntity(new SignEntity(API, 500, 150, 0, Arrays.asList("This is a Test")));
-        entityManager.addEntity(new SignEntity(API, 500, 250, 1, Arrays.asList("Hello World", "asdasd", "sadasd")));
+        loadEntities();
+    }
 
-        entityManager.addEntity(new Chest(API, 600, 120));
+    private void loadEntities() {
+        switch (world.toLowerCase()) {
+            case "main":
+                // Static Entities
+                entityManager.addEntity(new Tree(API, 130, 250));
+                entityManager.addEntity(new Rock(API, 130, 450));
+                entityManager.addEntity(new Tree(API, 130, 650));
+                entityManager.addEntity(new Rock(API, 130, 850));
 
-        // Creatures
-        entityManager.addEntity(new Fairy(API, 135, 100));
-        entityManager.addEntity(new Zombie(API, 200, 100));
-        entityManager.addEntity(new Ghost(API, 300, 100));
+                entityManager.addEntity(new SignEntity(API, 500, 150, 0, Arrays.asList("This is a Test")));
+                entityManager.addEntity(new SignEntity(API, 500, 250, 1, Arrays.asList("Hello World", "asdasd", "sadasd")));
+
+                entityManager.addEntity(new Chest(API, 600, 120));
+
+                // Creatures
+                entityManager.addEntity(new Fairy(API, 135, 100));
+                entityManager.addEntity(new Zombie(API, 200, 100));
+                entityManager.addEntity(new Ghost(API, 300, 100));
+                break;
+            case "second":
+                // Creatures
+                entityManager.addEntity(new Fairy(API, 135, 100));
+                break;
+        }
     }
 }

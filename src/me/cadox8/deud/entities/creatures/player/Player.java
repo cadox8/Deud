@@ -7,6 +7,7 @@ import me.cadox8.deud.audio.Sound;
 import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
+import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.gfx.Animation;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
@@ -200,6 +201,7 @@ public class Player extends Creature {
         yMove = 0;
 
         if (API.getKeyManager().tests) {
+            new Door(API, 0, 0, "main").changeWorld();
             setHunger(getMaxHunger());
             addExp(20);
             setHealth(getMaxHealth());
@@ -212,6 +214,7 @@ public class Player extends Creature {
         }
 
         if (API.getKeyManager().debug) {
+            new Door(API, 0, 0, "second").changeWorld();
             Sound.ENTITY_WALK_GRASS.playSound();
             API.setDebug(!API.isDebug());
         }
@@ -282,15 +285,6 @@ public class Player extends Creature {
         if (pos == 5) y = infoY + (Assets.HEIGHT * (pos - 1)) + 9;
 
         Text.drawString(g, text, infoX, y, 2);
-    }
-
-    private boolean isInDoor(int map) {
-        switch (map) {
-            case 0:
-                return getX() >= 490 && getX() <= 531 && getY() >= 452 && getY() <= 520;
-            default:
-                return false;
-        }
     }
 
     public void loadMiniMap(){

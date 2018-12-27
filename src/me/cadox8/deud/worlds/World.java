@@ -39,16 +39,18 @@ public class World {
         this.path = path;
         Location loc;
 
+        loadWorld(path);
+
         try {
             loc = Game.getInstance().getPlayerData().getLocation();
         } catch (NullPointerException e) {
             loc = new Location(spawnX, spawnY, 0);
         }
+
         this.entityManager = new EntityManager(API, new Player(API, loc.getX(), loc.getY()));
         this.itemManager = new ItemManager(API);
 
         addEntities();
-        loadWorld(path);
 
         particles = new ArrayList<>();
         particles.add(Particle.EXPLOSION);
@@ -56,17 +58,25 @@ public class World {
 
     private void addEntities() {
         if (Game.getInstance().getEntityData() == null) {
-            new WorldEntities(API, entityManager).loadEntities();
+            new WorldEntities(API, entityManager, worldName());
         } else {
             Game.getInstance().getEntityData().getEntities().forEach(e -> {
                 try {
                     final Location l = e.getLocation();
                     final EntityData.EntityType type = EntityData.EntityType.parseClass(e.getType());
                     if (type == null) return;
-                    if (type == EntityData.EntityType.SIGN) {
-                        entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY(), e.getSignType(), e.getText()));
-                    } else {
-                        entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY()));
+
+                    switch (type) {
+                        case SIGN:
+                            entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY(), e.getSignType(), e.getText()));
+                            break;
+                        case DOOR:
+                            entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY(), e.getMap()));
+                            break;
+
+                        default:
+                            entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY()));
+                            break;
                     }
                 } catch (IllegalAccessException | InvocationTargetException | InstantiationException er) {
                     er.printStackTrace();
@@ -115,8 +125,7 @@ public class World {
     }
 
     private void loadWorld(String path) {
-        String file = Utils.loadFileAsString(path);
-        String[] tokens = file.split("\\s+");
+        final String[] tokens = Utils.loadFileAsString(path).split("\\s+");
         width = Utils.parseInt(tokens[0]);
         height = Utils.parseInt(tokens[1]);
         spawnX = Utils.parseInt(tokens[2]);
@@ -132,7 +141,7 @@ public class World {
 
     @Override
     public String toString() {
-        return "World{Name: " + worldName() + "}";
+        return "World{Name: " + worldName() + ", Entities: " + entityManager.getEntities().toString() + "}";
     }
     public String worldName() {
         return path.split("/")[2].split("\\.")[0];

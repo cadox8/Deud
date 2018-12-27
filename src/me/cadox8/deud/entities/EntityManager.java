@@ -5,6 +5,7 @@ import lombok.Setter;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.entities.statics.SignEntity;
 import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
@@ -39,7 +40,10 @@ public class EntityManager {
             Entity e = it.next();
             e.tick();
             e.fixAnimations();
-            if (!e.isActive()) it.remove();
+            if (!e.isActive()) {
+                it.remove();
+                entities.remove(e);
+            }
         }
         entities.sort(renderSorter);
     }
@@ -47,6 +51,7 @@ public class EntityManager {
     public void render(Graphics g) {
         entities.forEach(e -> e.specialRender(g));
         entities.forEach(e -> e.render(g));
+        entities.stream().filter(e -> e instanceof SignEntity).forEach(e -> ((SignEntity) e).signRender(g));
         player.postRender(g);
         //entities.forEach(e -> g.drawRect((int)e.getBounds().getX() + (int)e.getX(), (int)e.getBounds().getY() + (int)e.getY(), (int)e.getBounds().getWidth(), (int)e.getBounds().getHeight()));
     }
@@ -60,6 +65,10 @@ public class EntityManager {
     }
     public void freezePlayer() {
         entities.stream().filter(e -> e instanceof Player).findFirst().ifPresent(p -> ((Player)p).setFreeze(true));
+    }
+
+    public void removeEntity(Entity en) {
+        en.setActive(false);
     }
 
     public void killAll() {

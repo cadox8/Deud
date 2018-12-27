@@ -3,21 +3,21 @@ package me.cadox8.deud.saves;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.friends.Fairy;
 import me.cadox8.deud.entities.creatures.monsters.Ghost;
 import me.cadox8.deud.entities.creatures.monsters.Zombie;
-import me.cadox8.deud.entities.statics.Chest;
-import me.cadox8.deud.entities.statics.Rock;
-import me.cadox8.deud.entities.statics.SignEntity;
-import me.cadox8.deud.entities.statics.Tree;
+import me.cadox8.deud.entities.statics.*;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Data
 public class EntityData {
+
+    @Getter @Setter private static String world;
 
     private Entities[] entities;
 
@@ -28,8 +28,10 @@ public class EntityData {
     @Data
     public class Entities {
 
+        private String world;
         private String type;
         private int signType;
+        private String map;
         private String[] text;
         private PlayerData.LocationUtils location;
 
@@ -49,7 +51,8 @@ public class EntityData {
         CHEST(Chest.class),
         ROCK(Rock.class),
         SIGN(SignEntity.class),
-        TREE(Tree.class);
+        TREE(Tree.class),
+        DOOR(Door.class);
 
         private Class<? extends Entity> supClass;
 

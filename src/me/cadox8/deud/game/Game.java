@@ -42,7 +42,7 @@ public class Game implements Runnable {
     private Graphics g;
 
     //States
-    public State gameState;
+    @Setter public State gameState;
     public State menuState;
     public State optionsState;
 
@@ -85,7 +85,7 @@ public class Game implements Runnable {
         API = new API(this);
         gameCamera = new GameCamera(API, 0, 0);
 
-        gameState = new GameState(API, "world");
+        gameState = new GameState(API, "second");
         menuState = new MenuState(API);
         //optionsState = new OptionsState(API);
 

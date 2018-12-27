@@ -13,7 +13,7 @@ public class Sign {
 
     private final int textX = signX + 45, textY = signY + 45;
 
-    private List<String> text;
+    private final List<String> text;
 
     public Sign(List<String> text) {
         this.text = text;

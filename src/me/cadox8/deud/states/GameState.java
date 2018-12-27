@@ -13,18 +13,24 @@ public class GameState extends State {
     private World world;
 
     public GameState(API API, String map) {
+        this(API, map, false);
+    }
+    public GameState(API API, String map, boolean change) {
         super(API);
         Location.setAPI(API);
-        Game.getInstance().setPlayerData(FileUtils.load());
-        Game.getInstance().setEntityData(FileUtils.loadEntities());
+        if (!change) Game.getInstance().setPlayerData(FileUtils.load());
         if (Game.getInstance().getPlayerData() != null && Game.getInstance().getPlayerData().getHealth() <= 0) Game.getInstance().getPlayerData().setHealth(10); // Temporal
         Game.getInstance().setSettings(FileUtils.loadSettings());
 
-        try {
-            map = Game.getInstance().getPlayerData().locUtils().getWorld();
-        } catch (NullPointerException e) {}
+        if (!change) {
+            try {
+                map = Game.getInstance().getPlayerData().locUtils().getWorld();
+            } catch (NullPointerException e) {}
+        }
 
-        world = new World(API, "resources/worlds/" + map + ".txt");
+        Game.getInstance().setEntityData(FileUtils.loadEntities(map));
+
+        world = new World(API, "resources/worlds/" + map + "/world.txt");
 
         API.setWorld(world);
         API.getWorld().getEntityManager().getPlayer().loadMiniMap();

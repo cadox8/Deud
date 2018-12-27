@@ -1,0 +1,9 @@
+Player -> 1
+Zombie -> 2
+Ghost -> 3
+Fairy -> 4
+Tree -> 5
+Rock -> 6
+Sign -> 7
+Chest -> 8
+Door -> 9

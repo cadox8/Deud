@@ -6,6 +6,7 @@ import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Chest;
+import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.SignEntity;
 import me.cadox8.deud.sign.Sign;
 import me.cadox8.deud.tiles.Tile;
@@ -52,12 +53,12 @@ public abstract class Creature extends Entity {
         // Sign
         if (getEntityCollision(xMove, 0f) instanceof SignEntity) {
             se = (SignEntity) getEntityCollision(xMove, 0f);
-            se.setSign(new Sign(se.getWhatToSay()));
+            se.setSign(new Sign(se.getText()));
             return;
         }
         if (getEntityCollision(0f, yMove) instanceof SignEntity) {
             se = (SignEntity) getEntityCollision(0f, yMove);
-            se.setSign(new Sign(se.getWhatToSay()));
+            se.setSign(new Sign(se.getText()));
             return;
         }
         if (se != null && se.getSign() != null) se.setSign(null);
@@ -71,6 +72,18 @@ public abstract class Creature extends Entity {
         if (getEntityCollision(0f, yMove) instanceof Chest) {
             final Chest chest = (Chest) getEntityCollision(0f, yMove);
             chest.open((Player)this);
+            return;
+        }
+
+        // Door
+        if (getEntityCollision(xMove, 0f) instanceof Door) {
+            final Door door = (Door) getEntityCollision(xMove, 0f);
+            door.changeWorld();
+            return;
+        }
+        if (getEntityCollision(0f, yMove) instanceof Door) {
+            final Door door = (Door) getEntityCollision(0f, yMove);
+            door.changeWorld();
             return;
         }
     }

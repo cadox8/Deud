@@ -16,16 +16,16 @@ public class SignEntity extends StaticEntity {
 
     private BufferedImage img;
     @Setter @Getter private Sign sign;
-    @Getter private List<String> whatToSay;
+    @Getter private List<String> text;
 
-    @Getter private int type;
+    @Getter private final int type;
 
-    public SignEntity(API API, float x, float y, int type, List<String> whatToSay) {
+    public SignEntity(API API, float x, float y, int type, List<String> text) {
         super(7, "Sign", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
 
-        this.whatToSay = whatToSay;
+        this.text = text;
         this.type = type;
 
         switch (type) {
@@ -48,11 +48,19 @@ public class SignEntity extends StaticEntity {
 
     @Override
     public void render(Graphics g) {
-        if (sign != null) sign.render(g);
     }
 
     @Override
     public void specialRender(Graphics g) {
         g.drawImage(img, (int) (x - API.getGameCamera().getXOffset()), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
+    }
+
+    public void signRender(Graphics g) {
+        if (sign != null) sign.render(g);
+    }
+
+    @Override
+    public String toString() {
+        return "Entity: {ID: " + getINTERNAL_ID() + ", Name: " + getINTERNAL_NAME() + ", X: " + getX() + ", Y: " + getY() + ", Type: " + getType() + ", Text: " + getText().toString() + "}";
     }
 }

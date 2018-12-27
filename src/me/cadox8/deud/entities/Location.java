@@ -12,7 +12,7 @@ import java.util.Map;
 @ToString
 public class Location {
 
-    @Setter private static API API;
+    @Setter @Getter private static API API;
 
     @Getter @Setter private World world;
     @Getter @Setter private float x;

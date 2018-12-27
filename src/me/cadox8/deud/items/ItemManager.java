@@ -1,7 +1,6 @@
 package me.cadox8.deud.items;
 
 import lombok.Getter;
-import lombok.Setter;
 import me.cadox8.deud.api.API;
 
 import java.awt.*;
@@ -10,8 +9,8 @@ import java.util.Iterator;
 
 public class ItemManager {
 
-    @Getter @Setter private API API;
-    public ArrayList<Item> items;
+    @Getter private final API API;
+    public final ArrayList<Item> items;
 
     public ItemManager(API API) {
         this.API = API;
@@ -21,7 +20,7 @@ public class ItemManager {
     public void tick() {
         Iterator<Item> it = items.iterator();
         while(it.hasNext()) {
-            Item i = it.next();
+            final Item i = it.next();
             i.tick();
             if (i.isPickedUp()) it.remove();
         }
