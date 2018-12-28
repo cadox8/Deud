@@ -1,0 +1,22 @@
+{
+  "entities": [
+    {
+      "type": "Fairy",
+      "location": {
+        "world": "springwood",
+        "x": 135.0,
+        "y": 100.0,
+        "direction": 2
+      }
+    },
+    {
+      "type": "Zombie",
+      "location": {
+        "world": "springwood",
+        "x": 500.0,
+        "y": 107.0,
+        "direction": 1
+      }
+    }
+  ]
+}

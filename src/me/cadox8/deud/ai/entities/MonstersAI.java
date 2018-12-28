@@ -2,9 +2,7 @@ package me.cadox8.deud.ai.entities;
 
 import me.cadox8.deud.ai.AI;
 import me.cadox8.deud.api.API;
-import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.Creature;
-import me.cadox8.deud.entities.creatures.player.Player;
 
 import java.awt.*;
 
@@ -26,18 +24,5 @@ public class MonstersAI extends AI {
             return;
         }
         randomMove(creature);
-    }
-
-    @Override
-    public boolean isTracking() {
-        for (Entity e : API.getWorld().getEntityManager().getEntities()) {
-            if (e instanceof Player) {
-                if (getTrackingArea().intersects(e.getCollisionBounds(0, 0))) {
-                    player = (Player) e;
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

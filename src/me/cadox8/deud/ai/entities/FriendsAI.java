@@ -1,5 +1,7 @@
 package me.cadox8.deud.ai.entities;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.cadox8.deud.ai.AI;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.creatures.Creature;
@@ -7,6 +9,8 @@ import me.cadox8.deud.entities.creatures.Creature;
 public class FriendsAI extends AI {
 
     private Creature creature;
+
+    @Setter @Getter private boolean angry;
 
     public FriendsAI(API API, Creature creature, float speed, int delay) {
         super(API, creature, speed, delay);
@@ -17,6 +21,16 @@ public class FriendsAI extends AI {
     public void getMove() {
         if (isNoAI()) return;
         randomMove(creature);
+
+        if (isAngry()) {
+            if (isTracking()) {
+                trackPlayer(creature);
+            } else {
+                randomMove(creature);
+            }
+        } else {
+            randomMove(creature);
+        }
     }
 
     @Override

@@ -3,6 +3,7 @@ package me.cadox8.deud.gfx.textures;
 import me.cadox8.deud.gfx.Sprites;
 import me.cadox8.deud.utils.Utils;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Assets {
@@ -17,7 +18,7 @@ public class Assets {
     public static BufferedImage stone, tree, tree2;
 
     //Items
-    public static BufferedImage bug;
+    public static BufferedImage bug, voidImg;
     public static BufferedImage wood, mp3,  sushi, chest;
     public static BufferedImage key, save;
 
@@ -29,10 +30,13 @@ public class Assets {
     public static BufferedImage[] explosion;
 
     public static void init() {
+        sprites = new Sprites(Utils.loadImage("/textures/sprites/terrain.png"));
+        dirt = getImage(7, 1);
+        grass = getImage(1, 11);
+
         sprites = new Sprites(Utils.loadImage("/textures/sprites/basic.png"));
 
-        dirt = getImage(0, 0);
-        grass = getImage(1, 0);
+
         road = getImage(2, 0);
         sand = getImage(3, 0);
         road2 = getImage(4, 0);
@@ -56,6 +60,7 @@ public class Assets {
         fire = getImage(7, 0);
 
         bug = sprites.randomImage(WIDTH, HEIGHT);
+        voidImg = sprites.coloredSprite(WIDTH, HEIGHT, Color.BLACK);
 
         save = getImage(2, 0);
         key = getImage(3, 0);

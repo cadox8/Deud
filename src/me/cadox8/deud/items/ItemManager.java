@@ -18,7 +18,7 @@ public class ItemManager {
     }
 
     public void tick() {
-        Iterator<Item> it = items.iterator();
+        final Iterator<Item> it = items.iterator();
         while(it.hasNext()) {
             final Item i = it.next();
             i.tick();

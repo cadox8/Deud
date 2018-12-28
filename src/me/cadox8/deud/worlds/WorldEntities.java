@@ -1,16 +1,13 @@
 package me.cadox8.deud.worlds;
 
 import me.cadox8.deud.api.API;
+import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityManager;
-import me.cadox8.deud.entities.creatures.friends.Fairy;
-import me.cadox8.deud.entities.creatures.monsters.Ghost;
-import me.cadox8.deud.entities.creatures.monsters.Zombie;
-import me.cadox8.deud.entities.statics.Chest;
-import me.cadox8.deud.entities.statics.Rock;
-import me.cadox8.deud.entities.statics.SignEntity;
-import me.cadox8.deud.entities.statics.Tree;
+import me.cadox8.deud.entities.Location;
+import me.cadox8.deud.game.Game;
+import me.cadox8.deud.saves.EntityData;
 
-import java.util.Arrays;
+import java.lang.reflect.InvocationTargetException;
 
 public class WorldEntities {
 
@@ -23,32 +20,31 @@ public class WorldEntities {
         this.entityManager = entityManager;
         this.world = world;
 
-        loadEntities();
+        load();
     }
 
-    private void loadEntities() {
-        switch (world.toLowerCase()) {
-            case "main":
-                // Static Entities
-                entityManager.addEntity(new Tree(API, 130, 250));
-                entityManager.addEntity(new Rock(API, 130, 450));
-                entityManager.addEntity(new Tree(API, 130, 650));
-                entityManager.addEntity(new Rock(API, 130, 850));
+    private void load() {
+        Game.getInstance().getEntityData().getEntities().forEach(e -> {
+            try {
+                final Location l = e.getLocation();
+                final EntityData.EntityType type = EntityData.EntityType.parseClass(e.getType());
+                if (type == null) return;
 
-                entityManager.addEntity(new SignEntity(API, 500, 150, 0, Arrays.asList("This is a Test")));
-                entityManager.addEntity(new SignEntity(API, 500, 250, 1, Arrays.asList("Hello World", "asdasd", "sadasd")));
+                switch (type) {
+                    case SIGN:
+                        entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY(), e.getSignType(), e.getText()));
+                        break;
+                    case DOOR:
+                        entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY(), e.getMap()));
+                        break;
 
-                entityManager.addEntity(new Chest(API, 600, 120));
-
-                // Creatures
-                entityManager.addEntity(new Fairy(API, 135, 100));
-                entityManager.addEntity(new Zombie(API, 200, 100));
-                entityManager.addEntity(new Ghost(API, 300, 100));
-                break;
-            case "second":
-                // Creatures
-                entityManager.addEntity(new Fairy(API, 135, 100));
-                break;
-        }
+                    default:
+                        entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY()));
+                        break;
+                }
+            } catch (IllegalAccessException | InvocationTargetException | InstantiationException er) {
+                er.printStackTrace();
+            }
+        });
     }
 }

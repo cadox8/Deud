@@ -1,8 +1,9 @@
 package me.cadox8.deud.worlds;
 
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 import lombok.Getter;
 import me.cadox8.deud.api.API;
-import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.player.Player;
@@ -14,7 +15,9 @@ import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
-import java.lang.reflect.InvocationTargetException;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class World {
@@ -57,31 +60,15 @@ public class World {
     }
 
     private void addEntities() {
-        if (Game.getInstance().getEntityData() == null) {
+        try {
+            if (Game.getInstance().getEntityData() == null) {
+                final EntityData data = new GsonBuilder().create().fromJson(new JsonReader(new FileReader(new File("resources/worlds/" + worldName() + "/entities.json"))), EntityData.class);
+                Game.getInstance().setEntityData(data);
+            }
             new WorldEntities(API, entityManager, worldName());
-        } else {
-            Game.getInstance().getEntityData().getEntities().forEach(e -> {
-                try {
-                    final Location l = e.getLocation();
-                    final EntityData.EntityType type = EntityData.EntityType.parseClass(e.getType());
-                    if (type == null) return;
-
-                    switch (type) {
-                        case SIGN:
-                            entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY(), e.getSignType(), e.getText()));
-                            break;
-                        case DOOR:
-                            entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY(), e.getMap()));
-                            break;
-
-                        default:
-                            entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY()));
-                            break;
-                    }
-                } catch (IllegalAccessException | InvocationTargetException | InstantiationException er) {
-                    er.printStackTrace();
-                }
-            });
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(5);
         }
     }
 

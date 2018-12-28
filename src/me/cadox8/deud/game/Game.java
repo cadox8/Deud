@@ -85,7 +85,7 @@ public class Game implements Runnable {
         API = new API(this);
         gameCamera = new GameCamera(API, 0, 0);
 
-        gameState = new GameState(API, "second");
+        gameState = new GameState(API, "springwood");
         menuState = new MenuState(API);
         //optionsState = new OptionsState(API);
 

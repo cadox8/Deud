@@ -52,7 +52,7 @@ public class Player extends Creature {
         bounds.width = 25;
         bounds.height = 19;
 
-        //Animatons
+        // Animations
         animDown = new Animation((int)(speed * 600), Models.player_down);
         animUp = new Animation((int)(speed * 600), Models.player_up);
         animLeft = new Animation((int)(speed * 600), Models.player_left);

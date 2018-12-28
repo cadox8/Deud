@@ -22,12 +22,14 @@ public class Tile {
     public static Tile sandTile = new SandTile(6);
     public static Tile rotateDoorTile = new Door2Tile(8);
     public static Tile bug = new BugTile(9);
+    public static Tile voidTile = new VoidTile(10);
 
     //Variations
     public static Tile rotateRoadTile = new RotateRoadTile(7, 90);
 
 
 
+    //------------------------------------------------------------------------------//
     public static final int TILEWIDTH = 64, TILEHEIGHT = 64;
 
     @Getter protected BufferedImage texture;

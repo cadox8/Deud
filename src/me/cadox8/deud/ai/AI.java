@@ -25,7 +25,7 @@ public abstract class AI {
     private int tempDelay = 0;
 
     public AI(API API, Entity entity, float speed, int delay) {
-        this(API, entity, speed, delay, new Rectangle(0, 0, 0, 0));
+        this(API, entity, speed, delay, new Rectangle(0, 0, 250, 250));
     }
     public AI(API API, Entity entity, float speed, int delay, Rectangle bounds) {
         this.API = API;
@@ -39,7 +39,19 @@ public abstract class AI {
     }
 
     public abstract void getMove();
-    protected abstract boolean isTracking();
+
+
+    public boolean isTracking() {
+        for (Entity e : API.getWorld().getEntityManager().getEntities()) {
+            if (e instanceof Player) {
+                if (getTrackingArea().intersects(e.getCollisionBounds(0, 0))) {
+                    player = (Player) e;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     protected void randomMove(Creature creature) {
         while (isOnDelay()) {

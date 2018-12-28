@@ -6,6 +6,7 @@ import me.cadox8.deud.ai.AI;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.monsters.Monster;
+import me.cadox8.deud.entities.creatures.npcs.NPC;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.Animation;
 import me.cadox8.deud.items.Item;
@@ -102,6 +103,7 @@ public abstract class Entity {
 
         if (this instanceof Creature) {
             if (attacker instanceof Monster) ((Monster)attacker).getItemInHand().getAttributes().forEach(a -> a.perform(attacker, (Creature) this));
+            if (attacker instanceof NPC) ((NPC)attacker).getItems().get(0).getAttributes().forEach(a -> a.perform(attacker, (NPC) this));
             if (attacker instanceof Player) ((Player) attacker).getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, (Creature) this));
         }
 
@@ -150,7 +152,6 @@ public abstract class Entity {
             return;
         }
         setXP(getXp() + xp);
-
         if (getXPToNextLevel() <= 0) adjustLevel();
     }
 
@@ -215,8 +216,7 @@ public abstract class Entity {
             this.xp = 0;
             return;
         }
-        DecimalFormat df = new DecimalFormat("#.##");
-        this.xp = Double.valueOf(df.format(xp).replaceAll(",", "."));
+        this.xp = Double.valueOf(new DecimalFormat("#.##").format(xp).replaceAll(",", "."));
     }
 
 
