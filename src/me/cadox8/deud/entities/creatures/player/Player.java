@@ -214,7 +214,6 @@ public class Player extends Creature {
         }
 
         if (API.getKeyManager().debug) {
-            new Door(API, 0, 0, "second").changeWorld();
             Sound.ENTITY_WALK_GRASS.playSound();
             API.setDebug(!API.isDebug());
         }

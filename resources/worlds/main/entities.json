@@ -1,0 +1,13 @@
+{
+  "entities": [
+    {
+      "type": "Fairy",
+      "location": {
+        "world": "main",
+        "x": 135.0,
+        "y": 100.0,
+        "direction": 2
+      }
+    }
+  ]
+}

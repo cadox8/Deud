@@ -17,6 +17,15 @@
         "y": 107.0,
         "direction": 1
       }
+    },
+    {
+      "type": "Ghost",
+      "location": {
+        "world": "springwood",
+        "x": 500.0,
+        "y": 107.0,
+        "direction": 1
+      }
     }
   ]
 }
