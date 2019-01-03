@@ -14,6 +14,8 @@ public class Models {
 
     public static BufferedImage[] player_down, player_up, player_left, player_right;
 
+    public static BufferedImage[] npc_down, npc_up, npc_left, npc_right;
+
     public static BufferedImage[] fairy_down, fairy_up, fairy_left, fairy_right;
 
     public static BufferedImage[] zombie_down, zombie_up, zombie_left, zombie_right;
@@ -73,6 +75,19 @@ public class Models {
         setImage(model, ghost_up, 1);
         setImage(model, ghost_right, 2);
         setImage(model, ghost_left, 3);
+
+        //Npc
+        model = new Sprites(Utils.loadImage("/textures/models/npc1.png"));
+
+        npc_down = new BufferedImage[3];
+        npc_up = new BufferedImage[3];
+        npc_right = new BufferedImage[3];
+        npc_left = new BufferedImage[3];
+
+        setImage(model, npc_down, 0);
+        setImage(model, npc_up, 1);
+        setImage(model, npc_right, 2);
+        setImage(model, npc_left, 3);
     }
 
     private static String randomGender() {

@@ -9,6 +9,7 @@ import me.cadox8.deud.Launcher;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Door;
+import me.cadox8.deud.entities.statics.Shop;
 import me.cadox8.deud.entities.statics.SignEntity;
 import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.settings.Settings;
@@ -47,7 +48,6 @@ public class FileUtils {
 
             settings.addProperty("volume", s.getVolume());
             settings.addProperty("windows", s.getWindows());
-            settings.addProperty("mode", s.getMode());
 
             final BufferedWriter w = new BufferedWriter(new FileWriter(config));
             if (config.exists()) config.delete(); config.createNewFile();
@@ -139,6 +139,7 @@ public class FileUtils {
                 en.add("text", text);
             }
             if (e instanceof Door) en.addProperty("map", ((Door) e).getMap());
+            if (e instanceof Shop) en.addProperty("itemID", ((Shop) e).getDrop().getId());
             ent.add(en);
         });
 

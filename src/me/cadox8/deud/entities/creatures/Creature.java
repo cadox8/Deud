@@ -147,4 +147,7 @@ public abstract class Creature extends Entity {
 
     @Override
     public void specialRender(Graphics g) {}
+
+    @Override
+    public void getHurt() {}
 }

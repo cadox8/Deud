@@ -6,7 +6,7 @@ import me.cadox8.deud.ai.AI;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.monsters.Monster;
-import me.cadox8.deud.entities.creatures.npcs.NPC;
+import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.Animation;
 import me.cadox8.deud.items.Item;
@@ -92,10 +92,12 @@ public abstract class Entity {
     public abstract void fixAnimations();
     public abstract void render(Graphics g);
     public abstract void specialRender(Graphics g);
+    public abstract void getHurt();
     public abstract void die();
 
     public void hurt(Entity attacker) {
         Log.log("Health: " + getHealth());
+        getHurt();
         if (!isDamageable()) return;
 
         int amt = attacker.getDamage() + (int) (DMG_UP_PER_LVL * attacker.getLevel());
@@ -103,7 +105,7 @@ public abstract class Entity {
 
         if (this instanceof Creature) {
             if (attacker instanceof Monster) ((Monster)attacker).getItemInHand().getAttributes().forEach(a -> a.perform(attacker, (Creature) this));
-            if (attacker instanceof NPC) ((NPC)attacker).getItems().get(0).getAttributes().forEach(a -> a.perform(attacker, (NPC) this));
+            if (attacker instanceof Npc) ((Npc)attacker).getItems().get(0).getAttributes().forEach(a -> a.perform(attacker, (Npc) this));
             if (attacker instanceof Player) ((Player) attacker).getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, (Creature) this));
         }
 

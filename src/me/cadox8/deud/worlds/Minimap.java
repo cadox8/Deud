@@ -25,14 +25,14 @@ public class Minimap {
     }
 
     public void paintMap(Graphics g){
-        drawRect(g);
+/*        drawRect(g);
 
         for (TileData td : tiles) {
             if (td == null) continue;
             td.getTile().render(g, 641 + td.getX(), 6 + td.getY(), imgWidth, imgWidth);
             //g.drawImage(td.getBi(), 641 + td.getX(), 6 + td.getY(), imgWidth, imgWidth, null);
             //g.fillRect((int)player.getX() + 641, (int)player.getY() + 6, 5, 5);
-        }
+        }*/
     }
 
 

@@ -42,8 +42,6 @@ public class Player extends Creature {
     private float old_speed = -1;
     private Minimap map;
 
-    private Settings.Gamemode gamemode = Settings.Gamemode.SURVIVAL;
-
     public Player(API API, float x, float y) {
         super(1, "Player", API, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 

@@ -5,6 +5,7 @@ import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.game.Game;
+import me.cadox8.deud.items.Item;
 import me.cadox8.deud.saves.EntityData;
 
 import java.lang.reflect.InvocationTargetException;
@@ -36,6 +37,9 @@ public class WorldEntities {
                         break;
                     case DOOR:
                         entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY(), e.getMap()));
+                        break;
+                    case SHOP:
+                        entityManager.addEntity((Entity) type.getSupClass().getConstructors()[0].newInstance(API, l.getX(), l.getY(), Item.items[e.getItemID()]));
                         break;
 
                     default:

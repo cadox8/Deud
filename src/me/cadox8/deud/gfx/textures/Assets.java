@@ -26,6 +26,8 @@ public class Assets {
 
     public static BufferedImage fire;
 
+    public static BufferedImage shop1, shop2, shop3, shop4, shop5, shop6, shop7, shop8, shop9, shop10, shop11, shop12;
+
     // Particles
     public static BufferedImage[] explosion;
 
@@ -34,8 +36,20 @@ public class Assets {
         dirt = getImage(7, 1);
         grass = getImage(1, 11);
 
-        sprites = new Sprites(Utils.loadImage("/textures/sprites/basic.png"));
+        shop1 = getImage(12, 0);
+        shop2 = getImage(13, 0);
+        shop3 = getImage(14, 0);
+        shop4 = getImage(15, 0);
+        shop5 = getImage(12, 1);
+        shop6 = getImage(13, 1);
+        shop7 = getImage(14, 1);
+        shop8 = getImage(15, 1);
+        shop9 = getImage(12, 2);
+        shop10 = getImage(13, 2);
+        shop11 = getImage(14, 2);
+        shop12 = getImage(15, 2);
 
+        sprites = new Sprites(Utils.loadImage("/textures/sprites/basic.png"));
 
         road = getImage(2, 0);
         sand = getImage(3, 0);

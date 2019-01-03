@@ -8,3 +8,4 @@ Sign -> 7
 Chest -> 8
 Door -> 9
 NPC -> 10
+Shop -> 11

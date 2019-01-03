@@ -10,20 +10,12 @@
       }
     },
     {
-      "type": "Zombie",
+      "type": "Shop",
+      "itemID": 1,
       "location": {
         "world": "springwood",
         "x": 500.0,
-        "y": 107.0,
-        "direction": 1
-      }
-    },
-    {
-      "type": "Ghost",
-      "location": {
-        "world": "springwood",
-        "x": 500.0,
-        "y": 107.0,
+        "y": 407.0,
         "direction": 1
       }
     }

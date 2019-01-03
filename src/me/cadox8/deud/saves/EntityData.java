@@ -9,6 +9,7 @@ import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.friends.Fairy;
 import me.cadox8.deud.entities.creatures.monsters.Ghost;
 import me.cadox8.deud.entities.creatures.monsters.Zombie;
+import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.statics.*;
 
 import java.util.Arrays;
@@ -32,6 +33,7 @@ public class EntityData {
         private String type;
         private int signType;
         private String map;
+        private int itemID;
         private String[] text;
         private PlayerData.LocationUtils location;
 
@@ -52,7 +54,9 @@ public class EntityData {
         ROCK(Rock.class),
         SIGN(SignEntity.class),
         TREE(Tree.class),
-        DOOR(Door.class);
+        DOOR(Door.class),
+        SHOP(Shop.class),
+        NPC(Npc.class);
 
         private Class<? extends Entity> supClass;
 
