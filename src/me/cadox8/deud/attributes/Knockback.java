@@ -36,5 +36,6 @@ public class Knockback extends Attribute {
                 break;
         }
         damaged.move();
+        new Stun(API, 5).perform(damager, damaged);
     }
 }

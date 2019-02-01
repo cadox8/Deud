@@ -1,4 +1,4 @@
-package me.cadox8.deud.sign;
+package me.cadox8.deud.entities.statics.sign;
 
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;

@@ -10,7 +10,7 @@ import me.cadox8.deud.worlds.World;
 
 public class API {
 
-    @Getter @Setter private Game game;
+    @Getter private final Game game;
     @Getter @Setter private World world;
 
     @Getter @Setter private boolean debug = false;

@@ -115,7 +115,7 @@ public abstract class Item {
     }
 
     public static Item getRandom(Item... banedIDs) {
-        Integer[] ids = new Integer[banedIDs.length];
+        final Integer[] ids = new Integer[banedIDs.length];
         int x = 0;
 
         for (Item i : banedIDs) {

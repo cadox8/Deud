@@ -43,7 +43,6 @@ public class Inventory {
             active = !active;
             API.getWorld().getEntityManager().getPlayer().setFreeze(active);
         }
-
         if (!active) return;
 
         if (API.getKeyManager().keyJustPressed(KeyEvent.VK_W)) selectedItem--;

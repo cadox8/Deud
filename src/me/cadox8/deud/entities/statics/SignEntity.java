@@ -3,8 +3,8 @@ package me.cadox8.deud.entities.statics;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.API;
+import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.gfx.textures.Assets;
-import me.cadox8.deud.sign.Sign;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.utils.Utils;
 
