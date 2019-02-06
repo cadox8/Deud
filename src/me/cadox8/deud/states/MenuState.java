@@ -34,6 +34,8 @@ public class MenuState extends State {
 
         uiManager.addObject(new UIImageButton(900, 650, 200, 100, GUI.exit, () -> System.exit(0)));
 
+        uiManager.addObject(new UIImage(API.getWidth() - 97, 0, 97, 151, GUI.logo));
+
         if (!Updater.timeToUpdate()) return;
         uiManager.addObject(new UIText(5, 15, Color.RED, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
             try {

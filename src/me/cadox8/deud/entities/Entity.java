@@ -200,6 +200,7 @@ public abstract class Entity {
         dropItem(item, 1);
     }
     public void dropItem(Item item, float percent){
+        if (item == null) return;
         if (percent >= new Random().nextFloat()) API.getWorld().getItemManager().addItem(item.createNew((int) x, (int) y, item.getCount()));
     }
 

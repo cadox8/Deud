@@ -16,6 +16,8 @@ public class GUI {
 
     public static BufferedImage inventoryScreen;
 
+    public static BufferedImage logo;
+
     public static BufferedImage none;
 
     public static void init() {
@@ -35,6 +37,8 @@ public class GUI {
 
         background = new BufferedImage[1];
         background[0] = Utils.loadImage("/utils/menu.png");
+
+        logo = Utils.loadImage("/utils/icon.png");
 
         inventoryScreen = Utils.loadImage("/textures/gui/inventoryScreen.png");
 

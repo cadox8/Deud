@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class Shop extends StaticEntity {
 
-    private boolean hasDroppped = false;
+    private boolean hasDropped = false;
     @Getter private final Item drop;
 
     public Shop(API API, float x, float y, Item drop) {
@@ -34,26 +34,26 @@ public class Shop extends StaticEntity {
 
     @Override
     public void getHurt() {
-        hasDroppped = true;
-        if (drop != null) dropItem(drop);
+        if (!hasDropped) dropItem(drop);
+        hasDropped = true;
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.shop9, (int) (x - API.getGameCamera().getXOffset()), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.shop5, (int) (x - API.getGameCamera().getXOffset()), (int) ((y - API.getGameCamera().getYOffset()) - height), width, height, null);
-        g.drawImage(Assets.shop1, (int) (x - API.getGameCamera().getXOffset()), (int) ((y - API.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+        g.drawImage(Assets.shop[8], (int) (x - API.getGameCamera().getXOffset()), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.shop[4], (int) (x - API.getGameCamera().getXOffset()), (int) ((y - API.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.shop[0], (int) (x - API.getGameCamera().getXOffset()), (int) ((y - API.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
 
-        g.drawImage(Assets.shop10, (int) (x - API.getGameCamera().getXOffset() + width), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.shop6, (int) (x - API.getGameCamera().getXOffset() + width), (int) ((y - API.getGameCamera().getYOffset()) - height), width, height, null);
-        g.drawImage(Assets.shop2, (int) (x - API.getGameCamera().getXOffset() + width), (int) ((y - API.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+        g.drawImage(Assets.shop[9], (int) (x - API.getGameCamera().getXOffset() + width), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.shop[5], (int) (x - API.getGameCamera().getXOffset() + width), (int) ((y - API.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.shop[1], (int) (x - API.getGameCamera().getXOffset() + width), (int) ((y - API.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
 
-        g.drawImage(Assets.shop11, (int) (x - API.getGameCamera().getXOffset() + (width * 2)), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.shop7, (int) (x - API.getGameCamera().getXOffset() + (width * 2)), (int) ((y - API.getGameCamera().getYOffset()) - height), width, height, null);
-        g.drawImage(Assets.shop3, (int) (x - API.getGameCamera().getXOffset() + (width * 2)), (int) ((y - API.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+        g.drawImage(Assets.shop[10], (int) (x - API.getGameCamera().getXOffset() + (width * 2)), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.shop[6], (int) (x - API.getGameCamera().getXOffset() + (width * 2)), (int) ((y - API.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.shop[2], (int) (x - API.getGameCamera().getXOffset() + (width * 2)), (int) ((y - API.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
 
-        g.drawImage(Assets.shop12, (int) (x - API.getGameCamera().getXOffset() + (width * 3)), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.shop8, (int) (x - API.getGameCamera().getXOffset() + (width * 3)), (int) ((y - API.getGameCamera().getYOffset()) - height), width, height, null);
-        g.drawImage(Assets.shop4, (int) (x - API.getGameCamera().getXOffset() + (width * 3)), (int) ((y - API.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+        g.drawImage(Assets.shop[11], (int) (x - API.getGameCamera().getXOffset() + (width * 3)), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.shop[7], (int) (x - API.getGameCamera().getXOffset() + (width * 3)), (int) ((y - API.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.shop[3], (int) (x - API.getGameCamera().getXOffset() + (width * 3)), (int) ((y - API.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
     }
 }

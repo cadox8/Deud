@@ -12,7 +12,8 @@ public class Assets {
     private static Sprites sprites;
 
     //Tiles
-    public static BufferedImage dirt, grass, road, sand, road2, brick, door, door2, sign, sign2;
+    public static BufferedImage dirt, grass, grass_dirt1, grass_dirt2, sand, brick, door, door2, sign, sign2;
+    public static BufferedImage wooden_path;
 
     //Static Entities
     public static BufferedImage stone, tree, tree2;
@@ -26,7 +27,7 @@ public class Assets {
 
     public static BufferedImage fire;
 
-    public static BufferedImage shop1, shop2, shop3, shop4, shop5, shop6, shop7, shop8, shop9, shop10, shop11, shop12;
+    public static BufferedImage[] shop;
 
     // Particles
     public static BufferedImage[] explosion;
@@ -35,26 +36,30 @@ public class Assets {
         sprites = new Sprites(Utils.loadImage("/textures/sprites/terrain.png"));
         dirt = getImage(7, 1);
         grass = getImage(1, 11);
+        grass_dirt1 = getImage(7, 0);
+        grass_dirt2 = getImage(6, 0);
+        wooden_path = getImage(10, 4);
 
-        shop1 = getImage(12, 0);
-        shop2 = getImage(13, 0);
-        shop3 = getImage(14, 0);
-        shop4 = getImage(15, 0);
-        shop5 = getImage(12, 1);
-        shop6 = getImage(13, 1);
-        shop7 = getImage(14, 1);
-        shop8 = getImage(15, 1);
-        shop9 = getImage(12, 2);
-        shop10 = getImage(13, 2);
-        shop11 = getImage(14, 2);
-        shop12 = getImage(15, 2);
+        shop = new BufferedImage[12];
+
+        int y_shop = 0;
+        int x_shop = 12;
+        for (int i = 0; i < shop.length; i++) {
+            shop[i] = getImage(x_shop, y_shop);
+            x_shop += 1;
+            if (i == 3 || i == 7) {
+                x_shop = 12;
+                y_shop += 1;
+            }
+        }
+
+        sprites = new Sprites(Utils.loadImage("/textures/sprites/castle.png"));
+
+        brick = getImage(1, 1);
 
         sprites = new Sprites(Utils.loadImage("/textures/sprites/basic.png"));
 
-        road = getImage(2, 0);
         sand = getImage(3, 0);
-        road2 = getImage(4, 0);
-        brick = getImage(5, 0);
         door = getImage(9, 0);
         door2 = getImage(9, 1);
         sign = getImage(0, 1);

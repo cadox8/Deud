@@ -26,15 +26,14 @@ public class API {
     public KeyManager getKeyManager() {
         return game.getKeyManager();
     }
-
     public MouseManager getMouseManager() {
         return game.getMouseManager();
     }
 
+
     public int getWidth() {
         return game.getWidth();
     }
-
     public int getHeight() {
         return game.getHeight();
     }

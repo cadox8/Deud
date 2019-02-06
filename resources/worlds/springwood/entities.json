@@ -18,6 +18,15 @@
         "y": 407.0,
         "direction": 1
       }
+    },
+    {
+      "type": "Zombie",
+      "location": {
+        "world": "springwood",
+        "x": 100.0,
+        "y": 407.0,
+        "direction": 1
+      }
     }
   ]
 }

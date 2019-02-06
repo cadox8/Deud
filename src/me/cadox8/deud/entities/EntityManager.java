@@ -21,9 +21,7 @@ public class EntityManager {
     @Getter @Setter private ArrayList<Entity> entities;
 
     private Comparator<Entity> renderSorter = (Entity a, Entity b) -> {
-        if (a.getY() + a.getHeight() < b.getY() + b.getHeight()) {
-            return -1;
-        }
+        if (a.getY() + a.getHeight() < b.getY() + b.getHeight()) return -1;
         return 1;
     };
 

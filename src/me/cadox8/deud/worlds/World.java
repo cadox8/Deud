@@ -3,6 +3,7 @@ package me.cadox8.deud.worlds;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
@@ -12,6 +13,7 @@ import me.cadox8.deud.items.ItemManager;
 import me.cadox8.deud.particles.Particle;
 import me.cadox8.deud.saves.EntityData;
 import me.cadox8.deud.tiles.Tile;
+import me.cadox8.deud.tiles.Tiles;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
@@ -26,7 +28,7 @@ public class World {
 
     @Getter private int width, height;
     private int spawnX, spawnY;
-    private int[][] tiles;
+    private TileUtils[][] tiles;
 
     private String path;
 
@@ -89,7 +91,6 @@ public class World {
 
         for (int y = yStart; y < yEnd; y++) {
             for (int x = xStart; x < xEnd; x++) {
-                //Magic
                 //getTile(x, y).createNewRotated(45).render(g, (int) (x * Tile.TILEWIDTH - API.getGameCamera().getXOffset()), (int) (y * Tile.TILEHEIGHT - API.getGameCamera().getYOffset()));
                 getTile(x, y).render(g, (int) (x * Tile.TILEWIDTH - API.getGameCamera().getXOffset()), (int) (y * Tile.TILEHEIGHT - API.getGameCamera().getYOffset()));
             }
@@ -104,10 +105,11 @@ public class World {
     }
 
     public Tile getTile(int x, int y) {
-        if (x < 0 || y < 0 || x >= width || y >= height) return Tile.bug;
-        Tile t = Tile.tiles[tiles[x][y]];
+        if (x < 0 || y < 0 || x >= width || y >= height) return Tiles.VOID.build();
+        final TileUtils tu = tiles[x][y];
+        final Tile t = Tiles.getTile(tu.getId(), tu.getSubID());
 
-        if (t == null) return Tile.bug;
+        if (t == null) return Tiles.VOID.build();
         return t;
     }
 
@@ -118,10 +120,16 @@ public class World {
         spawnX = Utils.parseInt(tokens[2]);
         spawnY = Utils.parseInt(tokens[3]);
 
-        tiles = new int[width][height];
+        tiles = new TileUtils[width][height];
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
+                final String token = tokens[(x + y * width) + 4];
+                if (token.contains(":")) {
+                    final String[] parts = token.split(":");
+                    tiles[x][y] = new TileUtils(Utils.parseInt(parts[0]), Utils.parseInt(parts[1]));
+                } else {
+                    tiles[x][y] = new TileUtils(Utils.parseInt(token), 0);
+                }
             }
         }
     }
@@ -132,5 +140,12 @@ public class World {
     }
     public String worldName() {
         return path.split("/")[2].split("\\.")[0];
+    }
+
+
+    @RequiredArgsConstructor
+    public class TileUtils {
+        @Getter private final int id;
+        @Getter private final int subID;
     }
 }
