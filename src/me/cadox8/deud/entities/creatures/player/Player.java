@@ -4,9 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.API;
 import me.cadox8.deud.audio.Sound;
+import me.cadox8.deud.dialog.Dialog;
+import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
+import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.gfx.Animation;
 import me.cadox8.deud.gfx.fonts.Text;
@@ -17,12 +20,13 @@ import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.saves.PlayerData;
-import me.cadox8.deud.settings.Settings;
+import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 import me.cadox8.deud.worlds.Minimap;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
@@ -218,6 +222,16 @@ public class Player extends Creature {
 
         if (isFreeze()) return;
 
+        if (API.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+            final Entity en = EntityManager.getEntity(this, 0, 0);
+            if (en != null && en instanceof Npc) {
+                final Npc npc = (Npc) en;
+                final Dialog dialog = new Dialog(API);
+                if (npc.getText().isEmpty()) return;
+                dialog.addText(npc.getText());
+                ((GameState)API.getGame().getGameState()).setDialog(dialog);
+            }
+        }
 
         if (API.getKeyManager().up) {
             yMove = -speed;

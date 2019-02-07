@@ -33,9 +33,9 @@ public class World {
     private String path;
 
     //Entities
-    @Getter private EntityManager entityManager;
+    @Getter private final EntityManager entityManager;
     // Item
-    @Getter private ItemManager itemManager;
+    @Getter private final ItemManager itemManager;
 
     private ArrayList<Particle> particles;
 
@@ -144,7 +144,7 @@ public class World {
 
 
     @RequiredArgsConstructor
-    public class TileUtils {
+    private class TileUtils {
         @Getter private final int id;
         @Getter private final int subID;
     }

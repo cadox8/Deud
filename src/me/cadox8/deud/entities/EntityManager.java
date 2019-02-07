@@ -85,17 +85,24 @@ public class EntityManager {
             return;
         }
         if (attacker instanceof Player && ((Player) attacker).getInventory().isActive()) return;
+        if (attacker instanceof Player && !API.getMouseManager().isLeftPressed()) return;
+        attacker.attackTimer = 0;
 
-        final Rectangle cb = attacker.getCollisionBounds(0, 0);
+        final Entity en = getEntity(attacker, xMove, yMove);
+        if (en == null) return;
+        en.hurt(attacker);
+    }
+
+    public static Entity getEntity(Entity speaker, float xMove, float yMove) {
+        Entity finalEntity = null;
+        final Rectangle cb = speaker.getCollisionBounds(0, 0);
         final Rectangle ar = new Rectangle();
 
         final int arSize = 20;
         ar.width = arSize;
         ar.height = arSize;
 
-        if (attacker instanceof Player && !API.getMouseManager().isLeftPressed()) return;
-
-        switch (attacker.getDirection()) {
+        switch (speaker.getDirection()) {
             case 0: // Down
                 ar.x = cb.x + cb.width / 2 - arSize / 2;
                 ar.y = cb.y + cb.height;
@@ -114,14 +121,10 @@ public class EntityManager {
                 break;
         }
 
-        attacker.attackTimer = 0;
-
         for (Entity e : API.getWorld().getEntityManager().getEntities()) {
-            if (e.equals(attacker)) continue;
-            if (e.getCollisionBounds(xMove, yMove).intersects(ar)) {
-                e.hurt(attacker);
-                return;
-            }
+            if (e.equals(speaker)) continue;
+            if (e.getCollisionBounds(xMove, yMove).intersects(ar)) finalEntity = e;
         }
+        return finalEntity;
     }
 }

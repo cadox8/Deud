@@ -42,7 +42,7 @@ public class Game implements Runnable {
     private Graphics g;
 
     //States
-    @Setter public State gameState;
+    @Getter @Setter public State gameState;
     public State menuState;
     public State optionsState;
 
