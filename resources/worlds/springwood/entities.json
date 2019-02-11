@@ -11,7 +11,12 @@
     },
     {
       "type": "Shop",
-      "itemID": 1,
+      "items": [
+        {
+          "id": 1,
+          "count": 1
+        }
+      ],
       "location": {
         "world": "springwood",
         "x": 500.0,

@@ -11,6 +11,7 @@ import me.cadox8.deud.entities.creatures.monsters.Ghost;
 import me.cadox8.deud.entities.creatures.monsters.Zombie;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.statics.*;
+import me.cadox8.deud.items.Item;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,17 +30,42 @@ public class EntityData {
     @Data
     public class Entities {
 
-        private String world;
-        private String type;
-        private int signType;
-        private String map;
-        private int itemID;
-        private String[] text;
-        private PlayerData.LocationUtils location;
+        private String world = "";
 
+        private String type = "";
+        private int health = 0;
+        private int maxHealth = 0;
+        private PlayerData.LocationUtils location = null;
+
+        private int signType = 0;
+
+        private String map = "";
+
+        private String[] text = new String[0];
+        private ItemHelper[] items = new ItemHelper[0];
+
+        private String displayName = "";
+
+
+        public String[] getTextArray() {
+            return text;
+        }
         public List<String> getText() { return Arrays.asList(text); }
         public Location getLocation() {
             return new Location(location.getX(), location.getY(),location.getDirection());
+        }
+
+        public Item[] getItems() {
+            final Item[] it = new Item[items.length];
+            for (int x = 0; x < it.length; x++) it[x] = Item.items[items[x].getId()].setCount(items[x].getCount());
+            return it;
+        }
+
+        @Data
+        public class ItemHelper {
+
+            private int id = 0;
+            private int count = 0;
         }
     }
 
@@ -61,7 +87,7 @@ public class EntityData {
         private Class<? extends Entity> supClass;
 
         public static EntityType parseClass(String name) {
-            return Arrays.asList(EntityType.values()).stream().filter(e -> e.name().toLowerCase().equalsIgnoreCase(name.toLowerCase())).findFirst().get();
+            return Arrays.asList(EntityType.values()).stream().filter(e -> e.name().toLowerCase().equalsIgnoreCase(name.toLowerCase())).findFirst().orElse(null);
         }
     }
 }

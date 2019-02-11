@@ -7,16 +7,17 @@ import me.cadox8.deud.items.Item;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class Shop extends StaticEntity {
 
     private boolean hasDropped = false;
-    @Getter private final Item drop;
+    @Getter private final Item[] drops;
 
-    public Shop(API API, float x, float y, Item drop) {
+    public Shop(API API, float x, float y, Item... drops) {
         super(11, "Shop", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
-        this.drop = drop;
+        this.drops = drops;
 
         setDamageable(false);
 
@@ -34,7 +35,7 @@ public class Shop extends StaticEntity {
 
     @Override
     public void getHurt() {
-        if (!hasDropped) dropItem(drop);
+        if (!hasDropped) Arrays.asList(drops).forEach(this::dropItem);
         hasDropped = true;
     }
 

@@ -9,10 +9,10 @@ import java.util.Map;
 @Data
 public class PlayerData {
 
-    private int Money;
-    private int Health;
-    private LocationUtils Location;
-    @Getter private Map<Integer, Integer>[] Inventory;
+    private int Money = 0;
+    private int Health = 0;
+    private LocationUtils Location = new LocationUtils();
+    @Getter private Map<Integer, Integer>[] Inventory = null;
 
     public LocationUtils locUtils() {
         return Location;
@@ -24,9 +24,9 @@ public class PlayerData {
     @Data
     public class LocationUtils {
 
-        private String world;
-        private float x;
-        private float y;
-        private int direction;
+        private String world = "";
+        private float x = 0;
+        private float y = 0;
+        private int direction = 0;
     }
 }

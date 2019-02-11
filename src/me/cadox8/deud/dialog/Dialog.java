@@ -2,6 +2,7 @@ package me.cadox8.deud.dialog;
 
 import lombok.Getter;
 import me.cadox8.deud.api.API;
+import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.fonts.Text;
 
 import java.awt.*;
@@ -12,14 +13,16 @@ import java.util.List;
 public class Dialog {
 
     private final API api;
+    private final Player p;
 
     private final List<String> text;
     private int page = 0;
 
     @Getter private boolean end = false;
 
-    public Dialog(API api) {
+    public Dialog(API api, Player p) {
         this.api = api;
+        this.p = p;
         text = new ArrayList<>();
     }
 
@@ -30,12 +33,16 @@ public class Dialog {
 
 
     public void tick() {
-        if (text.size() > 4) {
-            if (api.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)) page++;
-            if (api.getKeyManager().keyJustPressed(KeyEvent.VK_UP)) {
-                if (page == 0) return;
-                page--;
-            }
+        if (!end) {
+            p.setFreeze(true);
+        } else {
+            p.setFreeze(false);
+        }
+
+        if (api.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)) page++;
+        if (api.getKeyManager().keyJustPressed(KeyEvent.VK_UP)) {
+            if (page == 0) return;
+            page--;
         }
     }
 
@@ -69,7 +76,7 @@ public class Dialog {
 
         try {
             temp.addAll(text.subList(index, text.size() >= (index + 4) ? index + 4 : text.size()));
-        } catch (IllegalArgumentException e) { // 0 Problems here
+        } catch (IllegalArgumentException e) { // Problems? Nope
             end = true;
         }
         if (temp.isEmpty()) end = true;

@@ -17,14 +17,14 @@ import java.util.Random;
 
 public class Npc extends Creature {
 
-    @Getter private final String name;
+    @Getter private final String displayName;
     @Getter private final List<String> text;
     @Getter private final List<Item> items;
 
-    public Npc(API API, float x, float y, String name, BufferedImage[]... textures) {
-        super(10, "Npc", API, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+    public Npc(API API, float x, float y, String displayName, BufferedImage[]... textures) {
+        super(10, "NPC", API, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
-        this.name = name;
+        this.displayName = displayName;
         this.text = new ArrayList<>();
         this.items = new ArrayList<>();
 

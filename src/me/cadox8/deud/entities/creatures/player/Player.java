@@ -226,8 +226,8 @@ public class Player extends Creature {
             final Entity en = EntityManager.getEntity(this, 0, 0);
             if (en != null && en instanceof Npc) {
                 final Npc npc = (Npc) en;
-                final Dialog dialog = new Dialog(API);
                 if (npc.getText().isEmpty()) return;
+                final Dialog dialog = new Dialog(API, this);
                 dialog.addText(npc.getText());
                 ((GameState)API.getGame().getGameState()).setDialog(dialog);
             }
