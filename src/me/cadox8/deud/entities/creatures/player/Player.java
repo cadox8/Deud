@@ -32,6 +32,8 @@ import java.util.Arrays;
 
 public class Player extends Creature {
 
+    @Getter @Setter private String nick;
+
     // Inventory
     @Getter @Setter private Inventory inventory;
 
@@ -83,6 +85,7 @@ public class Player extends Creature {
             final PlayerData pd = getAPI().getGame().getPlayerData();
             final Location loc = pd.getLocation();
 
+            setNick(pd.getNick());
             setHealth(pd.getHealth());
             setMoney(pd.getMoney());
             setLocation(loc);

@@ -39,7 +39,7 @@ public abstract class Item {
     public static final WeaponItem hand = new HandItem(Assets.hand, 4, "Hand", 0);
 
     // Potions
-    public static final PotionItem healthPotion = new HealthPotion(1);
+    public static final PotionItem healthPotion = new HealthPotion(6, 1);
 
 
     // Class

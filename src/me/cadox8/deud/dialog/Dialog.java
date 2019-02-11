@@ -13,7 +13,7 @@ import java.util.List;
 public class Dialog {
 
     private final API api;
-    private final Player p;
+    private final Player player;
 
     private final List<String> text;
     private int page = 0;
@@ -22,21 +22,23 @@ public class Dialog {
 
     public Dialog(API api, Player p) {
         this.api = api;
-        this.p = p;
+        this.player = p;
         text = new ArrayList<>();
     }
 
     public Dialog addText(List<String> newText) {
-        text.addAll(newText);
+        final List<String> tempList = new ArrayList<>();
+        newText.forEach(t -> tempList.add(t.replaceAll("%player%", player.getNick())));
+        text.addAll(tempList);
         return this;
     }
 
 
     public void tick() {
         if (!end) {
-            p.setFreeze(true);
+            player.setFreeze(true);
         } else {
-            p.setFreeze(false);
+            player.setFreeze(false);
         }
 
         if (api.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)) page++;
@@ -80,6 +82,7 @@ public class Dialog {
             end = true;
         }
         if (temp.isEmpty()) end = true;
+        if (end) return new ArrayList<>();
         return temp;
     }
 }

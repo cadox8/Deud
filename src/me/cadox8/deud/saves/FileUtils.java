@@ -89,6 +89,7 @@ public class FileUtils {
                 inv.add(it);
             });
 
+            data.addProperty("nick", p.getNick());
             data.addProperty("Health", p.getHealth());
             data.addProperty("Money", p.getMoney());
             data.add("Inventory", inv);

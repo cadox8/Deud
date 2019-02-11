@@ -9,6 +9,7 @@ import java.util.Map;
 @Data
 public class PlayerData {
 
+    private String nick;
     private int Money = 0;
     private int Health = 0;
     private LocationUtils Location = new LocationUtils();
