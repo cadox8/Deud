@@ -3,7 +3,7 @@ package me.cadox8.deud.game;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.Launcher;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.display.Display;
 import me.cadox8.deud.gfx.GameCamera;
 import me.cadox8.deud.gfx.fonts.Fonts;
@@ -54,8 +54,8 @@ public class Game implements Runnable {
     @Getter private GameCamera gameCamera;
 
 
-    //API
-    @Getter private API API;
+    //GameAPI
+    @Getter private GameAPI GameAPI;
 
     public Game(String title, int width, int height) {
         instance = this;
@@ -82,15 +82,15 @@ public class Game implements Runnable {
         Assets.init();
         Models.init();
 
-        API = new API(this);
-        gameCamera = new GameCamera(API, 0, 0);
+        GameAPI = new GameAPI(this);
+        gameCamera = new GameCamera(GameAPI, 0, 0);
 
-        gameState = new GameState(API, "springwood");
-        menuState = new MenuState(API);
-        //optionsState = new OptionsState(API);
+        gameState = new GameState(GameAPI, "springwood");
+        menuState = new MenuState(GameAPI);
+        //optionsState = new OptionsState(GameAPI);
 
         State.setState(menuState);
-        Launcher.getDiscord().createNewPresence(API.getWorld().getEntityManager().getPlayer());
+        Launcher.getDiscord().createNewPresence(GameAPI.getWorld().getEntityManager().getPlayer());
     }
 
     private void tick() {

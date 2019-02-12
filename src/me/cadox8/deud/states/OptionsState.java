@@ -1,6 +1,6 @@
 package me.cadox8.deud.states;
 
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.ui.UIImageButton;
 import me.cadox8.deud.ui.UIManager;
@@ -13,14 +13,14 @@ public class OptionsState extends State {
 
     private UIManager uiManager;
 
-    public OptionsState(API API) {
-        super(API);
+    public OptionsState(GameAPI GameAPI) {
+        super(GameAPI);
 
-        uiManager = new UIManager(API);
-        API.getMouseManager().setUIManager(uiManager);
+        uiManager = new UIManager(GameAPI);
+        GameAPI.getMouseManager().setUIManager(uiManager);
 
 
-        uiManager.addObject(new UIWall(0, 0, API.getWidth(), API.getHeight(), Color.GRAY));
+        uiManager.addObject(new UIWall(0, 0, GameAPI.getWidth(), GameAPI.getHeight(), Color.GRAY));
 
         uiManager.addObject(new UIImageButton(5, 5, 250, 70, GUI.buttons, () -> System.out.println("Test")));
         uiManager.addObject(new UIText(5, 5, Color.BLACK, "Test", () -> {}));

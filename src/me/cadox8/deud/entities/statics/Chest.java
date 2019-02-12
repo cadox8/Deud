@@ -1,6 +1,6 @@
 package me.cadox8.deud.entities.statics;
 
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.attributes.Explosion;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
@@ -11,11 +11,11 @@ import java.awt.*;
 
 public class Chest extends StaticEntity {
 
-    public Chest(API API, float x, float y) {
-        this(API,x, y, true);
+    public Chest(GameAPI GameAPI, float x, float y) {
+        this(GameAPI,x, y, true);
     }
-    public Chest(API API, float x, float y, boolean explosive) {
-        super(8, "Chest", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public Chest(GameAPI GameAPI, float x, float y, boolean explosive) {
+        super(8, "Chest", GameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
         setExplosive(explosive);
@@ -36,11 +36,11 @@ public class Chest extends StaticEntity {
 
         p.getInventory().addItem(Item.getRandom(Item.hand, Item.keyItem));
 
-        if (isExplosive()) new Explosion(getAPI(),5, 3).perform(this, null);
+        if (isExplosive()) new Explosion(this.getGameAPI(),5, 3).perform(this, null);
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.chest, (int) (x - API.getGameCamera().getXOffset()), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.chest, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
     }
 }

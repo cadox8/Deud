@@ -1,6 +1,6 @@
 package me.cadox8.deud.attributes;
 
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.Creature;
 
@@ -8,8 +8,8 @@ public class Knockback extends Attribute {
 
     private final double percent;
 
-    public Knockback(API API, double percent){
-        super(API,0, "Knockback");
+    public Knockback(GameAPI GameAPI, double percent){
+        super(GameAPI,0, "Knockback");
         this.percent = percent;
     }
 

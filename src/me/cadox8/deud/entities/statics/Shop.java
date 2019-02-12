@@ -1,7 +1,7 @@
 package me.cadox8.deud.entities.statics;
 
 import lombok.Getter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.tiles.Tile;
@@ -14,8 +14,8 @@ public class Shop extends StaticEntity {
     private boolean hasDropped = false;
     @Getter private final Item[] drops;
 
-    public Shop(API API, float x, float y, Item... drops) {
-        super(11, "Shop", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public Shop(GameAPI GameAPI, float x, float y, Item... drops) {
+        super(11, "Shop", GameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         this.drops = drops;
 
@@ -41,20 +41,20 @@ public class Shop extends StaticEntity {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.shop[8], (int) (x - API.getGameCamera().getXOffset()), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.shop[4], (int) (x - API.getGameCamera().getXOffset()), (int) ((y - API.getGameCamera().getYOffset()) - height), width, height, null);
-        g.drawImage(Assets.shop[0], (int) (x - API.getGameCamera().getXOffset()), (int) ((y - API.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+        g.drawImage(Assets.shop[8], (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.shop[4], (int) (x - GameAPI.getGameCamera().getXOffset()), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.shop[0], (int) (x - GameAPI.getGameCamera().getXOffset()), (int) ((y - GameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
 
-        g.drawImage(Assets.shop[9], (int) (x - API.getGameCamera().getXOffset() + width), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.shop[5], (int) (x - API.getGameCamera().getXOffset() + width), (int) ((y - API.getGameCamera().getYOffset()) - height), width, height, null);
-        g.drawImage(Assets.shop[1], (int) (x - API.getGameCamera().getXOffset() + width), (int) ((y - API.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+        g.drawImage(Assets.shop[9], (int) (x - GameAPI.getGameCamera().getXOffset() + width), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.shop[5], (int) (x - GameAPI.getGameCamera().getXOffset() + width), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.shop[1], (int) (x - GameAPI.getGameCamera().getXOffset() + width), (int) ((y - GameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
 
-        g.drawImage(Assets.shop[10], (int) (x - API.getGameCamera().getXOffset() + (width * 2)), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.shop[6], (int) (x - API.getGameCamera().getXOffset() + (width * 2)), (int) ((y - API.getGameCamera().getYOffset()) - height), width, height, null);
-        g.drawImage(Assets.shop[2], (int) (x - API.getGameCamera().getXOffset() + (width * 2)), (int) ((y - API.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+        g.drawImage(Assets.shop[10], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 2)), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.shop[6], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 2)), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.shop[2], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 2)), (int) ((y - GameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
 
-        g.drawImage(Assets.shop[11], (int) (x - API.getGameCamera().getXOffset() + (width * 3)), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.shop[7], (int) (x - API.getGameCamera().getXOffset() + (width * 3)), (int) ((y - API.getGameCamera().getYOffset()) - height), width, height, null);
-        g.drawImage(Assets.shop[3], (int) (x - API.getGameCamera().getXOffset() + (width * 3)), (int) ((y - API.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+        g.drawImage(Assets.shop[11], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 3)), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.shop[7], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 3)), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.shop[3], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 3)), (int) ((y - GameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
     }
 }

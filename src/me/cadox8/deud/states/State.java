@@ -2,18 +2,18 @@ package me.cadox8.deud.states;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 
 import java.awt.*;
 
 public abstract class State {
 
-    protected API API;
+    protected GameAPI gameAPI;
 
     @Getter @Setter private static State state = null;
 
-    public State(API API) {
-        this.API = API;
+    public State(GameAPI gameAPI) {
+        this.gameAPI = gameAPI;
     }
 
 

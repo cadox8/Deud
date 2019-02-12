@@ -2,7 +2,7 @@ package me.cadox8.deud.entities.creatures.npcs;
 
 import lombok.Getter;
 import me.cadox8.deud.ai.entities.FriendsAI;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.gfx.Animation;
 import me.cadox8.deud.items.Item;
@@ -21,8 +21,8 @@ public class Npc extends Creature {
     @Getter private final List<String> text;
     @Getter private final List<Item> items;
 
-    public Npc(API API, float x, float y, String displayName, BufferedImage[]... textures) {
-        super(10, "NPC", API, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+    public Npc(GameAPI GameAPI, float x, float y, String displayName, BufferedImage[]... textures) {
+        super(10, "NPC", GameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         this.displayName = displayName;
         this.text = new ArrayList<>();
@@ -51,7 +51,7 @@ public class Npc extends Creature {
         animations[2] = animLeft;
         animations[3] = animRight;
 
-        ai = new FriendsAI(API, this, getSpeed(), 50);
+        ai = new FriendsAI(GameAPI, this, getSpeed(), 50);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Npc extends Creature {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getCurrentAnimationFrame(), (int) (x - API.getGameCamera().getXOffset()), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(getCurrentAnimationFrame(), (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
     }
 
     @Override

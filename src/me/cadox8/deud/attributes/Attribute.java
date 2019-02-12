@@ -1,18 +1,18 @@
 package me.cadox8.deud.attributes;
 
 import lombok.Getter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.Creature;
 
 public abstract class Attribute {
 
-    protected final API API;
+    protected final GameAPI GameAPI;
     @Getter private final int id;
     @Getter private final String name;
 
-    public Attribute(API API, int id, String name) {
-        this.API = API;
+    public Attribute(GameAPI GameAPI, int id, String name) {
+        this.GameAPI = GameAPI;
         this.id = id;
         this.name = name;
     }

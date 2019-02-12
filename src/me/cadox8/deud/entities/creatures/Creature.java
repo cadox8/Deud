@@ -2,7 +2,7 @@ package me.cadox8.deud.entities.creatures;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Chest;
@@ -26,12 +26,12 @@ public abstract class Creature extends Entity {
 
     @Getter @Setter protected boolean freeze = false;
 
-    public Creature(int id, String name, API API, float x, float y, int width, int height) {
-        this(id, name, API, x, y, width, height, 0);
+    public Creature(int id, String name, GameAPI GameAPI, float x, float y, int width, int height) {
+        this(id, name, GameAPI, x, y, width, height, 0);
     }
 
-    public Creature(int id, String name, API API, float x, float y, int width, int height, int level) {
-        super(id, name, API, x, y, width, height, level);
+    public Creature(int id, String name, GameAPI GameAPI, float x, float y, int width, int height, int level) {
+        super(id, name, GameAPI, x, y, width, height, level);
         speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
@@ -133,7 +133,7 @@ public abstract class Creature extends Entity {
     }
 
     private boolean collisionWithTile(int x, int y) {
-        return API.getWorld().getTile(x, y).isSolid();
+        return GameAPI.getWorld().getTile(x, y).isSolid();
     }
 
     protected void ajustXP(float droppedXP){

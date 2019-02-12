@@ -1,6 +1,6 @@
 package me.cadox8.deud.entities.statics;
 
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.tiles.Tile;
@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class Rock extends StaticEntity {
 
-    public Rock(API API, float x, float y) {
-        super(6, "Rock", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public Rock(GameAPI GameAPI, float x, float y) {
+        super(6, "Rock", GameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         bounds.x = 2;
         bounds.y = (int) (height / 2f);
@@ -25,6 +25,6 @@ public class Rock extends StaticEntity {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.stone, (int) (x - API.getGameCamera().getXOffset()), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.stone, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
     }
 }

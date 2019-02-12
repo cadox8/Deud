@@ -2,7 +2,7 @@ package me.cadox8.deud.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.SignEntity;
@@ -15,7 +15,7 @@ import java.util.Iterator;
 
 public class EntityManager {
 
-    @Getter @Setter private static API API;
+    @Getter @Setter private static GameAPI GameAPI;
     @Getter @Setter private Player player;
 
     @Getter @Setter private ArrayList<Entity> entities;
@@ -25,8 +25,8 @@ public class EntityManager {
         return 1;
     };
 
-    public EntityManager(API API, Player player) {
-        EntityManager.API = API;
+    public EntityManager(GameAPI GameAPI, Player player) {
+        EntityManager.GameAPI = GameAPI;
         this.player = player;
         entities = new ArrayList<>();
         addEntity(player);
@@ -81,11 +81,11 @@ public class EntityManager {
         attacker.attackTimer += System.currentTimeMillis() - attacker.lastAttackTimer;
         attacker.lastAttackTimer = System.currentTimeMillis();
         if (attacker.attackTimer < attacker.attackCooldown) {
-            if (API.isDebug()) Log.log("Attack in cooldown: " + attacker.attackTimer + "/" + attacker.attackCooldown);
+            if (GameAPI.isDebug()) Log.log("Attack in cooldown: " + attacker.attackTimer + "/" + attacker.attackCooldown);
             return;
         }
         if (attacker instanceof Player && ((Player) attacker).getInventory().isActive()) return;
-        if (attacker instanceof Player && !API.getMouseManager().isLeftPressed()) return;
+        if (attacker instanceof Player && !GameAPI.getMouseManager().isLeftPressed()) return;
         attacker.attackTimer = 0;
 
         final Entity en = getEntity(attacker, xMove, yMove);
@@ -121,7 +121,7 @@ public class EntityManager {
                 break;
         }
 
-        for (Entity e : API.getWorld().getEntityManager().getEntities()) {
+        for (Entity e : GameAPI.getWorld().getEntityManager().getEntities()) {
             if (e.equals(speaker)) continue;
             if (e.getCollisionBounds(xMove, yMove).intersects(ar)) finalEntity = e;
         }

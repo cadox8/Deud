@@ -3,7 +3,7 @@ package me.cadox8.deud.ai.entities;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.ai.AI;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.Creature;
 
 public class FriendsAI extends AI {
@@ -12,8 +12,8 @@ public class FriendsAI extends AI {
 
     @Setter @Getter private boolean angry;
 
-    public FriendsAI(API API, Creature creature, float speed, int delay) {
-        super(API, creature, speed, delay);
+    public FriendsAI(GameAPI GameAPI, Creature creature, float speed, int delay) {
+        super(GameAPI, creature, speed, delay);
         this.creature = creature;
     }
 

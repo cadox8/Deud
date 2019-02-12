@@ -11,7 +11,7 @@ public class HandItem extends WeaponItem {
     public HandItem(BufferedImage texture, int id, String name, int damage) {
         super(texture, id, name, damage);
 
-        addAttributes(new Knockback(getAPI(), 8));
+        addAttributes(new Knockback(this.getGameAPI(), 8));
     }
 
     @Override

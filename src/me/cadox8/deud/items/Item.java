@@ -2,7 +2,7 @@ package me.cadox8.deud.items;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.attributes.Attribute;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
@@ -45,7 +45,7 @@ public abstract class Item {
     // Class
     public static final int ITEMWIDTH = 32, ITEMHEIGHT = 32;
 
-    @Getter @Setter protected API API;
+    @Getter @Setter protected GameAPI GameAPI;
     @Getter protected final BufferedImage texture;
     @Getter protected final int id;
     @Getter @Setter protected String name;
@@ -90,15 +90,15 @@ public abstract class Item {
 
 
     public void tick(){
-        if(API.getWorld().getEntityManager().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)){
+        if(GameAPI.getWorld().getEntityManager().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)){
             pickedUp = true;
-            API.getWorld().getEntityManager().getPlayer().getInventory().addItem(this);
+            GameAPI.getWorld().getEntityManager().getPlayer().getInventory().addItem(this);
         }
     }
 
     public void render(Graphics g){
-        if(API == null) return;
-        render(g, (int) (x - API.getGameCamera().getXOffset()), (int) (y - API.getGameCamera().getYOffset()));
+        if(GameAPI == null) return;
+        render(g, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()));
     }
 
     public void render(Graphics g, int x, int y){

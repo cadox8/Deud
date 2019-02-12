@@ -2,7 +2,7 @@ package me.cadox8.deud.entities.statics;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.tiles.Tile;
@@ -20,8 +20,8 @@ public class SignEntity extends StaticEntity {
 
     @Getter private final int type;
 
-    public SignEntity(API API, float x, float y, int type, List<String> text) {
-        super(7, "Sign", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public SignEntity(GameAPI GameAPI, float x, float y, int type, List<String> text) {
+        super(7, "Sign", GameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
 
@@ -52,7 +52,7 @@ public class SignEntity extends StaticEntity {
 
     @Override
     public void specialRender(Graphics g) {
-        g.drawImage(img, (int) (x - API.getGameCamera().getXOffset()), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(img, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
     }
 
     public void signRender(Graphics g) {

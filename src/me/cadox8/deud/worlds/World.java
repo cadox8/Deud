@@ -4,7 +4,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.player.Player;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class World {
 
-    private API API;
+    private GameAPI GameAPI;
 
     @Getter private int width, height;
     private int spawnX, spawnY;
@@ -39,8 +39,8 @@ public class World {
 
     private ArrayList<Particle> particles;
 
-    public World(API API, String path) {
-        this.API = API;
+    public World(GameAPI GameAPI, String path) {
+        this.GameAPI = GameAPI;
         this.path = path;
         Location loc;
 
@@ -52,8 +52,8 @@ public class World {
             loc = new Location(spawnX, spawnY, 0);
         }
 
-        this.entityManager = new EntityManager(API, new Player(API, loc.getX(), loc.getY()));
-        this.itemManager = new ItemManager(API);
+        this.entityManager = new EntityManager(GameAPI, new Player(GameAPI, loc.getX(), loc.getY()));
+        this.itemManager = new ItemManager(GameAPI);
 
         addEntities();
 
@@ -67,7 +67,7 @@ public class World {
                 final EntityData data = new GsonBuilder().create().fromJson(new JsonReader(new FileReader(new File("resources/worlds/" + worldName() + "/entities.json"))), EntityData.class);
                 Game.getInstance().setEntityData(data);
             }
-            new WorldEntities(API, entityManager, worldName());
+            new WorldEntities(GameAPI, entityManager, worldName());
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(5);
@@ -84,15 +84,15 @@ public class World {
     }
 
     public void render(Graphics g) {
-        int xStart = (int) Math.max(0, API.getGameCamera().getXOffset() / Tile.TILEWIDTH);
-        int xEnd = (int) Math.min(width, (API.getGameCamera().getXOffset() + API.getWidth()) / Tile.TILEWIDTH + 1);
-        int yStart = (int) Math.max(0, API.getGameCamera().getYOffset() / Tile.TILEHEIGHT);
-        int yEnd = (int) Math.min(height, (API.getGameCamera().getYOffset() + API.getHeight()) / Tile.TILEHEIGHT + 1);
+        int xStart = (int) Math.max(0, GameAPI.getGameCamera().getXOffset() / Tile.TILEWIDTH);
+        int xEnd = (int) Math.min(width, (GameAPI.getGameCamera().getXOffset() + GameAPI.getWidth()) / Tile.TILEWIDTH + 1);
+        int yStart = (int) Math.max(0, GameAPI.getGameCamera().getYOffset() / Tile.TILEHEIGHT);
+        int yEnd = (int) Math.min(height, (GameAPI.getGameCamera().getYOffset() + GameAPI.getHeight()) / Tile.TILEHEIGHT + 1);
 
         for (int y = yStart; y < yEnd; y++) {
             for (int x = xStart; x < xEnd; x++) {
-                //getTile(x, y).createNewRotated(45).render(g, (int) (x * Tile.TILEWIDTH - API.getGameCamera().getXOffset()), (int) (y * Tile.TILEHEIGHT - API.getGameCamera().getYOffset()));
-                getTile(x, y).render(g, (int) (x * Tile.TILEWIDTH - API.getGameCamera().getXOffset()), (int) (y * Tile.TILEHEIGHT - API.getGameCamera().getYOffset()));
+                //getTile(x, y).createNewRotated(45).render(g, (int) (x * Tile.TILEWIDTH - GameAPI.getGameCamera().getXOffset()), (int) (y * Tile.TILEHEIGHT - GameAPI.getGameCamera().getYOffset()));
+                getTile(x, y).render(g, (int) (x * Tile.TILEWIDTH - GameAPI.getGameCamera().getXOffset()), (int) (y * Tile.TILEHEIGHT - GameAPI.getGameCamera().getYOffset()));
             }
         }
 

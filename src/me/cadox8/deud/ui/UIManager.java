@@ -2,7 +2,7 @@ package me.cadox8.deud.ui;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 public class UIManager {
 
-    private API API;
+    private GameAPI GameAPI;
     @Getter @Setter private ArrayList<UIObject> objects;
 
-    public UIManager(API API) {
-        this.API = API;
+    public UIManager(GameAPI GameAPI) {
+        this.GameAPI = GameAPI;
         objects = new ArrayList<>();
     }
 

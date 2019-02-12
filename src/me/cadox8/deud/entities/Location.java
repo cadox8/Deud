@@ -3,7 +3,7 @@ package me.cadox8.deud.entities;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.worlds.World;
 
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import java.util.Map;
 @ToString
 public class Location {
 
-    @Setter @Getter private static API API;
+    @Setter @Getter private static GameAPI GameAPI;
 
     @Getter @Setter private World world;
     @Getter @Setter private float x;
@@ -20,14 +20,14 @@ public class Location {
     @Getter @Setter private int direction;
 
     public Location(Entity en) {
-        this.world = en.getAPI().getWorld();
+        this.world = en.getGameAPI().getWorld();
         this.x = en.getX();
         this.y = en.getY();
         this.direction = en.getDirection();
     }
 
     public Location(float x, float y, int direction) {
-        this(API.getWorld(), x, y, direction);
+        this(GameAPI.getWorld(), x, y, direction);
     }
     public Location(World world, float x, float y, int direction) {
         this.world = world;
@@ -42,7 +42,7 @@ public class Location {
     }
 
     public void teleport(float x, float y, int direction) {
-        teleport(API.getWorld(), x, y, direction);
+        teleport(GameAPI.getWorld(), x, y, direction);
     }
     public void teleport(World world, float x, float y, int direction) {
         setWorld(world);
@@ -73,7 +73,7 @@ public class Location {
     }
 
     public Location deSerializeLocation(Map<String, Object> location) {
-        final World world = new World(API, (String)location.get("world"));
+        final World world = new World(GameAPI, (String)location.get("world"));
         final float x = (float)location.get("x");
         final float y = (float)location.get("y");
         final int direction = (int)location.get("direction");

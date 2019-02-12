@@ -1,7 +1,7 @@
 package me.cadox8.deud.items;
 
 import lombok.Getter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -9,11 +9,11 @@ import java.util.Iterator;
 
 public class ItemManager {
 
-    @Getter private final API API;
+    @Getter private final GameAPI GameAPI;
     public final ArrayList<Item> items;
 
-    public ItemManager(API API) {
-        this.API = API;
+    public ItemManager(GameAPI GameAPI) {
+        this.GameAPI = GameAPI;
         items = new ArrayList<>();
     }
 
@@ -32,7 +32,7 @@ public class ItemManager {
 
     public void addItem(Item i) {
         if(i.isPickedUp()) i.setPickedUp(false);
-        i.setAPI(API);
+        i.setGameAPI(GameAPI);
         items.add(i);
     }
 }

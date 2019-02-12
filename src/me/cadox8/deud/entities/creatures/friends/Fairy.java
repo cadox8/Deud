@@ -1,15 +1,15 @@
 package me.cadox8.deud.entities.creatures.friends;
 
 import me.cadox8.deud.ai.entities.FriendsAI;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.gfx.Animation;
 import me.cadox8.deud.gfx.textures.Models;
 import me.cadox8.deud.items.Item;
 
 public class Fairy extends Friendly {
 
-    public Fairy(API API, float x, float y) {
-        super(4, "Fairy", API, x, y, 42, 42);
+    public Fairy(GameAPI GameAPI, float x, float y) {
+        super(4, "Fairy", GameAPI, x, y, 42, 42);
 
         bounds.x = 12;
         bounds.y = 23;
@@ -26,7 +26,7 @@ public class Fairy extends Friendly {
         setDamage(0);
         setSpeed(10.0f);
 
-        ai = new FriendsAI(API, this, getSpeed(), 50);
+        ai = new FriendsAI(GameAPI, this, getSpeed(), 50);
     }
 
     @Override

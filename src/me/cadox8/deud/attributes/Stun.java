@@ -1,6 +1,6 @@
 package me.cadox8.deud.attributes;
 
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.Creature;
 
@@ -9,8 +9,8 @@ public class Stun extends Attribute {
     private double time;
     private Thread stop;
 
-    public Stun(API API, int time) {
-        super(API, 2, "Stun");
+    public Stun(GameAPI GameAPI, int time) {
+        super(GameAPI, 2, "Stun");
         this.time = time;
     }
 

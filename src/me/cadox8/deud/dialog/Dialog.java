@@ -1,7 +1,7 @@
 package me.cadox8.deud.dialog;
 
 import lombok.Getter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.fonts.Text;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Dialog {
 
-    private final API api;
+    private final GameAPI gameApi;
     private final Player player;
 
     private final List<String> text;
@@ -20,8 +20,8 @@ public class Dialog {
 
     @Getter private boolean end = false;
 
-    public Dialog(API api, Player p) {
-        this.api = api;
+    public Dialog(GameAPI gameApi, Player p) {
+        this.gameApi = gameApi;
         this.player = p;
         text = new ArrayList<>();
     }
@@ -41,8 +41,8 @@ public class Dialog {
             player.setFreeze(false);
         }
 
-        if (api.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)) page++;
-        if (api.getKeyManager().keyJustPressed(KeyEvent.VK_UP)) {
+        if (gameApi.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)) page++;
+        if (gameApi.getKeyManager().keyJustPressed(KeyEvent.VK_UP)) {
             if (page == 0) return;
             page--;
         }
@@ -50,12 +50,12 @@ public class Dialog {
 
     public void render(Graphics g) {
         g.setColor(Color.BLACK);
-        g.drawRect(0, api.getHeight() - 100, api.getWidth(), 100);
-        g.fillRect(0, api.getHeight() - 100, api.getWidth(), 100);
+        g.drawRect(0, gameApi.getHeight() - 100, gameApi.getWidth(), 100);
+        g.fillRect(0, gameApi.getHeight() - 100, gameApi.getWidth(), 100);
 
         int p = 1;
         for (String s : renderText()) {
-            Text.drawString(g, s, 5, api.getHeight() - 97 + (p * 20), Color.WHITE, 2);
+            Text.drawString(g, s, 5, gameApi.getHeight() - 97 + (p * 20), Color.WHITE, 2);
             p++;
         }
     }

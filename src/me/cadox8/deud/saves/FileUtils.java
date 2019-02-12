@@ -102,7 +102,7 @@ public class FileUtils {
             w.write(gson.toJson(data));
             w.close();
 
-            saveEntities(p.getAPI().getWorld());
+            saveEntities(p.getGameAPI().getWorld());
 
             Log.log(Log.LogType.SUCCESS, "Data saved successfully");
         } catch (IOException e){

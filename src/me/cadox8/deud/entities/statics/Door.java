@@ -1,7 +1,7 @@
 package me.cadox8.deud.entities.statics;
 
 import lombok.Getter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.states.GameState;
@@ -14,8 +14,8 @@ public class Door extends StaticEntity {
 
     @Getter private final String map;
 
-    public Door(API API, float x, float y, String map) {
-        super(9, "Door", API, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public Door(GameAPI GameAPI, float x, float y, String map) {
+        super(9, "Door", GameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         this.map = map;
 
@@ -28,17 +28,17 @@ public class Door extends StaticEntity {
     }
 
     public void changeWorld() {
-        FileUtils.save(API.getWorld().getEntityManager().getPlayer());
-        API.getWorld().getEntityManager().getEntities().forEach(API.getWorld().getEntityManager()::removeEntity);
+        FileUtils.save(GameAPI.getWorld().getEntityManager().getPlayer());
+        GameAPI.getWorld().getEntityManager().getEntities().forEach(GameAPI.getWorld().getEntityManager()::removeEntity);
 
-        final GameState gameState = new GameState(API, getMap(), true);
+        final GameState gameState = new GameState(GameAPI, getMap(), true);
 
-        API.getGame().setGameState(gameState);
+        GameAPI.getGame().setGameState(gameState);
         State.setState(gameState);
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.bug, (int) (x - API.getGameCamera().getXOffset()), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.bug, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
     }
 }

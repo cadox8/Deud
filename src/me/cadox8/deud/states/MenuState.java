@@ -1,7 +1,7 @@
 package me.cadox8.deud.states;
 
 import me.cadox8.deud.Launcher;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.ui.UIImage;
 import me.cadox8.deud.ui.UIImageButton;
@@ -19,29 +19,29 @@ public class MenuState extends State {
 
     private UIManager uiManager;
 
-    public MenuState(API API) {
-        super(API);
+    public MenuState(GameAPI GameAPI) {
+        super(GameAPI);
 
-        uiManager = new UIManager(API);
-        API.getMouseManager().setUIManager(uiManager);
+        uiManager = new UIManager(GameAPI);
+        GameAPI.getMouseManager().setUIManager(uiManager);
 
-        uiManager.addObject(new UIImage(0, 0, API.getWidth(), API.getHeight(), GUI.background));
+        uiManager.addObject(new UIImage(0, 0, GameAPI.getWidth(), GameAPI.getHeight(), GUI.background));
 
         uiManager.addObject(new UIImageButton(150, 650, 200, 100, GUI.play, () -> {
-            API.getMouseManager().setUIManager(null);
-            setState(API.getGame().gameState);
+            GameAPI.getMouseManager().setUIManager(null);
+            setState(GameAPI.getGame().gameState);
         }));
 
         uiManager.addObject(new UIImageButton(900, 650, 200, 100, GUI.exit, () -> System.exit(0)));
 
-        uiManager.addObject(new UIImage(API.getWidth() - 97, 0, 97, 151, GUI.logo));
+        uiManager.addObject(new UIImage(GameAPI.getWidth() - 97, 0, 97, 151, GUI.logo));
 
         if (!Updater.timeToUpdate()) return;
         uiManager.addObject(new UIText(5, 15, Color.RED, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
             try {
-                API.getMouseManager().setUIManager(null);
+                GameAPI.getMouseManager().setUIManager(null);
                 Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
-                API.getMouseManager().setUIManager(uiManager);
+                GameAPI.getMouseManager().setUIManager(uiManager);
             } catch (URISyntaxException | IOException e){
                 Log.log(Log.LogType.DANGER, "Link doesn't exist");
                 e.printStackTrace();

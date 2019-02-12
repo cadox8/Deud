@@ -3,7 +3,7 @@ package me.cadox8.deud.entities;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.ai.AI;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.monsters.Monster;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
@@ -32,7 +32,7 @@ public abstract class Entity {
     private static final double HEALTH_UP_PER_LVL = 0.13;
     private static final double ARMOR_UP_PER_LVL = 0.086;
 
-    @Getter @Setter protected API API;
+    @Getter @Setter protected GameAPI GameAPI;
 
     @Getter @Setter protected AI ai;
 
@@ -68,10 +68,10 @@ public abstract class Entity {
     @Getter @Setter protected Animation animDown, animUp, animLeft, animRight;
     @Getter @Setter protected Animation[] animations = new Animation[4];
 
-    public Entity(int id, String name, API API, float x, float y, int width, int height, int level) {
+    public Entity(int id, String name, GameAPI GameAPI, float x, float y, int width, int height, int level) {
         INTERNAL_ID = id;
         INTERNAL_NAME = name;
-        this.API = API;
+        this.GameAPI = GameAPI;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -117,7 +117,7 @@ public abstract class Entity {
     }
 
     public boolean checkEntityCollisions(float xOffset, float yOffset) {
-        for (Entity e : API.getWorld().getEntityManager().getEntities()) {
+        for (Entity e : GameAPI.getWorld().getEntityManager().getEntities()) {
             if (e.equals(this)) continue;
 
             if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) {
@@ -129,8 +129,8 @@ public abstract class Entity {
     }
 
     public Entity getEntityCollision(float xOffset, float yOffset) {
-        return API.getWorld().getEntityManager().getEntities().stream().filter(e -> !e.equals(this)).filter(e -> e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))).findFirst().orElse(null);
-/*        for (Entity e : API.getWorld().getEntityManager().getEntities()) {
+        return GameAPI.getWorld().getEntityManager().getEntities().stream().filter(e -> !e.equals(this)).filter(e -> e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))).findFirst().orElse(null);
+/*        for (Entity e : GameAPI.getWorld().getEntityManager().getEntities()) {
             if (e.equals(this)) continue;
             if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) return e;
         }
@@ -201,7 +201,7 @@ public abstract class Entity {
     }
     public void dropItem(Item item, float percent){
         if (item == null) return;
-        if (percent >= new Random().nextFloat()) API.getWorld().getItemManager().addItem(item.createNew((int) x, (int) y, item.getCount()));
+        if (percent >= new Random().nextFloat()) GameAPI.getWorld().getItemManager().addItem(item.createNew((int) x, (int) y, item.getCount()));
     }
 
 

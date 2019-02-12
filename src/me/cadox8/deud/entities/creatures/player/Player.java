@@ -2,7 +2,7 @@ package me.cadox8.deud.entities.creatures.player;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.audio.Sound;
 import me.cadox8.deud.dialog.Dialog;
 import me.cadox8.deud.entities.Entity;
@@ -48,8 +48,8 @@ public class Player extends Creature {
     private float old_speed = -1;
     private Minimap map;
 
-    public Player(API API, float x, float y) {
-        super(1, "Player", API, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+    public Player(GameAPI GameAPI, float x, float y) {
+        super(1, "Player", GameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         bounds.x = 20;
         bounds.y = 44;
@@ -62,7 +62,7 @@ public class Player extends Creature {
         animLeft = new Animation((int)(speed * 600), Models.player_left);
         animRight = new Animation((int)(speed * 600), Models.player_right);
 
-        inventory = new Inventory(API, this);
+        inventory = new Inventory(GameAPI, this);
         inventory.setUsableItem(Item.hand);
 
         setMaxHunger(10);
@@ -81,8 +81,8 @@ public class Player extends Creature {
         animations[2] = animLeft;
         animations[3] = animRight;
 
-        if (getAPI().getGame().getPlayerData() != null) {
-            final PlayerData pd = getAPI().getGame().getPlayerData();
+        if (this.getGameAPI().getGame().getPlayerData() != null) {
+            final PlayerData pd = this.getGameAPI().getGame().getPlayerData();
             final Location loc = pd.getLocation();
 
             setNick(pd.getNick());
@@ -113,7 +113,7 @@ public class Player extends Creature {
         //Movement
         getInput();
         move();
-        API.getGameCamera().centerOnEntity(this);
+        GameAPI.getGameCamera().centerOnEntity(this);
 
         // Attack
         EntityManager.checkAttacks(this);
@@ -131,19 +131,19 @@ public class Player extends Creature {
     @Override
     public void die() {
         Log.log(Log.LogType.DANGER, "You lose");
-        API.getWorld().getEntityManager().freezeCreatures();
-        API.getWorld().getEntityManager().freezePlayer();
+        GameAPI.getWorld().getEntityManager().freezeCreatures();
+        GameAPI.getWorld().getEntityManager().freezePlayer();
         //System.exit(0);
     }
 
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getCurrentAnimationFrame(), (int) (x - API.getGameCamera().getXOffset()), (int) (y - API.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(getCurrentAnimationFrame(), (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
 
         inventory.render(g);
 
-        //if (API.isDebug()) {
+        //if (GameAPI.isDebug()) {
             g.setColor(Color.WHITE);
             g.drawString("X: " + x + " Y: " + y + " Dir: " + direction, 1105, 795);
         //}
@@ -205,57 +205,57 @@ public class Player extends Creature {
         xMove = 0;
         yMove = 0;
 
-        if (API.getKeyManager().tests) {
-            new Door(API, 0, 0, "main").changeWorld();
+        if (GameAPI.getKeyManager().tests) {
+            new Door(GameAPI, 0, 0, "main").changeWorld();
             setHunger(getMaxHunger());
             addExp(20);
             setHealth(getMaxHealth());
-            API.getWorld().getEntityManager().freezeCreatures();
+            GameAPI.getWorld().getEntityManager().freezeCreatures();
         }
 
-        if (API.getKeyManager().esc) {
+        if (GameAPI.getKeyManager().esc) {
             FileUtils.save(this);
             System.exit(0);
         }
 
-        if (API.getKeyManager().debug) {
+        if (GameAPI.getKeyManager().debug) {
             Sound.ENTITY_WALK_GRASS.playSound();
-            API.setDebug(!API.isDebug());
+            GameAPI.setDebug(!GameAPI.isDebug());
         }
 
         if (isFreeze()) return;
 
-        if (API.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+        if (GameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
             final Entity en = EntityManager.getEntity(this, 0, 0);
             if (en != null && en instanceof Npc) {
                 final Npc npc = (Npc) en;
                 if (npc.getText().isEmpty()) return;
-                final Dialog dialog = new Dialog(API, this);
+                final Dialog dialog = new Dialog(GameAPI, this);
                 dialog.addText(npc.getText());
-                ((GameState)API.getGame().getGameState()).setDialog(dialog);
+                ((GameState) GameAPI.getGame().getGameState()).setDialog(dialog);
             }
         }
 
-        if (API.getKeyManager().up) {
+        if (GameAPI.getKeyManager().up) {
             yMove = -speed;
             setDirection(1);
         }
-        if (API.getKeyManager().down) {
+        if (GameAPI.getKeyManager().down) {
             yMove = speed;
             setDirection(0);
         }
-        if (API.getKeyManager().left) {
+        if (GameAPI.getKeyManager().left) {
             xMove = -speed;
             setDirection(3);
         }
-        if (API.getKeyManager().right) {
+        if (GameAPI.getKeyManager().right) {
             xMove = speed;
             setDirection(2);
         }
 
-        if (API.getMouseManager().isRightPressed()) inventory.getUsableItem().use(this);
+        if (GameAPI.getMouseManager().isRightPressed()) inventory.getUsableItem().use(this);
 
-        if (API.getKeyManager().shift) {
+        if (GameAPI.getKeyManager().shift) {
             if (hunger <= 0.0) {
                 hunger = 0;
                 if (old_speed != -1) setSpeed(old_speed);
@@ -302,6 +302,6 @@ public class Player extends Creature {
     }
 
     public void loadMiniMap(){
-        map = new Minimap(API.getWorld(), this);
+        map = new Minimap(GameAPI.getWorld(), this);
     }
 }

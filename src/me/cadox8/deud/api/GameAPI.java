@@ -8,14 +8,14 @@ import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
 import me.cadox8.deud.worlds.World;
 
-public class API {
+public class GameAPI {
 
     @Getter private final Game game;
     @Getter @Setter private World world;
 
     @Getter @Setter private boolean debug = false;
 
-    public API(Game game) {
+    public GameAPI(Game game) {
         this.game = game;
     }
 

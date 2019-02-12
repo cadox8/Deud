@@ -2,7 +2,7 @@ package me.cadox8.deud.inventory;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class Inventory {
 
-    @Getter @Setter private API API;
+    @Getter @Setter private GameAPI GameAPI;
     @Getter @Setter private Player player;
     @Getter @Setter private boolean active = false;
 
@@ -32,23 +32,23 @@ public class Inventory {
 
     private final int invCountX = 484, invCountY = 172;
 
-    public Inventory(API API, Player player) {
-        this.API = API;
+    public Inventory(GameAPI GameAPI, Player player) {
+        this.GameAPI = GameAPI;
         this.player = player;
         inventoryItems = new ArrayList<>();
     }
 
     public void tick() {
-        if (API.getKeyManager().keyJustPressed(KeyEvent.VK_E)) {
+        if (GameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_E)) {
             active = !active;
-            API.getWorld().getEntityManager().getPlayer().setFreeze(active);
+            GameAPI.getWorld().getEntityManager().getPlayer().setFreeze(active);
         }
         if (!active) return;
 
-        if (API.getKeyManager().keyJustPressed(KeyEvent.VK_W)) selectedItem--;
-        if (API.getKeyManager().keyJustPressed(KeyEvent.VK_S)) selectedItem++;
-        if (API.getKeyManager().keyJustPressed(KeyEvent.VK_Q)) dropItem(inventoryItems.get(selectedItem));
-        if (API.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && inventoryItems.get(selectedItem) != null) setUsableItem(inventoryItems.get(selectedItem));
+        if (GameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_W)) selectedItem--;
+        if (GameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_S)) selectedItem++;
+        if (GameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_Q)) dropItem(inventoryItems.get(selectedItem));
+        if (GameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && inventoryItems.get(selectedItem) != null) setUsableItem(inventoryItems.get(selectedItem));
 
         if (selectedItem < 0) selectedItem = inventoryItems.size() - 1;
         if (selectedItem >= inventoryItems.size()) selectedItem = 0;

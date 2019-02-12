@@ -2,7 +2,7 @@ package me.cadox8.deud.entities.statics;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.api.API;
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 
 import java.awt.*;
@@ -11,8 +11,8 @@ public abstract class StaticEntity extends Entity {
 
     @Getter @Setter protected boolean explosive = false;
 
-    public StaticEntity(int id, String name, API API, float x, float y, int width, int height) {
-        super(id, name, API, x, y, width, height, 0);
+    public StaticEntity(int id, String name, GameAPI GameAPI, float x, float y, int width, int height) {
+        super(id, name, GameAPI, x, y, width, height, 0);
     }
 
     @Override
