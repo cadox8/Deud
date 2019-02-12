@@ -7,7 +7,8 @@ import lombok.Getter;
 public enum Sound {
 
     NONE("", 0),
-    ENTITY_WALK_GRASS("entity_walk_grass", 5);
+    ENTITY_WALK_GRASS("entity_walk_grass", 5),
+    TOWN("town", 0.5f);
 
     @Getter private String name;
     @Getter private float volume;

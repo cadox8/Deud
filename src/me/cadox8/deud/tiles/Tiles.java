@@ -6,7 +6,6 @@ import me.cadox8.deud.gfx.textures.Assets;
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -35,10 +34,7 @@ public enum Tiles {
     private boolean solid = false;
 
     public static Tile getTile(int id, int subID) {
-        final Optional<Tiles> tile = Arrays.asList(values()).stream().filter(t -> t.id == id && t.subID == subID).findFirst();
-
-        if (!tile.isPresent()) return null;
-        return tile.get().build();
+        return Arrays.stream(values()).filter(t -> t.id == id && t.subID == subID).findFirst().orElse(VOID).build();
     }
 
 
@@ -46,7 +42,6 @@ public enum Tiles {
         final Tile tile = new Tile(id, texture, subID, solid);
         if (subID != 0) return tile.createNewRotated(parseDegrees());
         return tile;
-
     }
 
     private int parseDegrees() {
