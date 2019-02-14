@@ -2,6 +2,7 @@ package me.cadox8.deud.api;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.gfx.GameCamera;
 import me.cadox8.deud.input.KeyManager;
@@ -30,6 +31,9 @@ public class GameAPI {
         return game.getMouseManager();
     }
 
+    public EntityManager getEntityManager() {
+        return world.getEntityManager();
+    }
 
     public int getWidth() {
         return game.getWidth();

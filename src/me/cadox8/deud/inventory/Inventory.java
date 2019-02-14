@@ -97,17 +97,6 @@ public class Inventory {
             }
             i.setCount(i.getCount() - item.getCount());
         });
-
-/*        for (Item i : inventoryItems) {
-            if (i.getId() == item.getId()) {
-                if (i.getCount() - item.getCount() <= 0) {
-                    inventoryItems.remove(item);
-                    return;
-                }
-                i.setCount(i.getCount() - item.getCount());
-                return;
-            }
-        }*/
     }
 
     private void dropItem(Item item) {

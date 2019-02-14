@@ -1,7 +1,12 @@
 package me.cadox8.deud.input;
 
+import lombok.Getter;
+import lombok.Setter;
+import me.cadox8.deud.ui.UIField;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
 
 public class KeyManager implements KeyListener {
 
@@ -10,10 +15,14 @@ public class KeyManager implements KeyListener {
     public boolean debug, tests;
     public boolean options;
 
+    @Getter @Setter private UIField writingTo;
+
     public KeyManager() {
         keys = new boolean[256];
         justPressed = new boolean[keys.length];
         cantPress = new boolean[keys.length];
+
+        writingTo = null;
     }
 
     public void tick() {
@@ -63,5 +72,14 @@ public class KeyManager implements KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+        if (writingTo != null) {
+            if (e.getKeyChar() == 8) {
+                if (writingTo.getText().toCharArray().length <= 0) return;
+                writingTo.setText(String.valueOf(Arrays.copyOfRange(writingTo.getText().toCharArray(), 0, writingTo.getText().toCharArray().length - 1)));
+                return;
+            }
+            writingTo.setText(writingTo.getText() + e.getKeyChar());
+        }
+    }
 }

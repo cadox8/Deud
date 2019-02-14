@@ -1,5 +1,6 @@
 package me.cadox8.deud.entities;
 
+import jdk.jfr.Experimental;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ToString
+@Experimental
 public class Location {
 
     @Setter @Getter private static GameAPI GameAPI;
@@ -54,13 +56,12 @@ public class Location {
     public int getXDistance(Location location) {
         return (int) (getX() - location.getX());
     }
-
     public int getYDistance(Location location) {
         return (int) (getY() - location.getY());
     }
 
 
-    // Save Utils.
+    // Save Utils
     public Map<String, Object> serializeLocation() {
         Map<String, Object> location = new HashMap<>();
 

@@ -1,5 +1,6 @@
 package me.cadox8.deud.tiles;
 
+import jdk.jfr.Experimental;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 @RequiredArgsConstructor
+@Experimental
 public class TileData {
 
     @Getter private final Tile tile;

@@ -54,8 +54,8 @@ public class Game implements Runnable {
     @Getter private GameCamera gameCamera;
 
 
-    //GameAPI
-    @Getter private GameAPI GameAPI;
+    //gameAPI
+    @Getter private GameAPI gameAPI;
 
     public Game(String title, int width, int height) {
         instance = this;
@@ -82,15 +82,15 @@ public class Game implements Runnable {
         Assets.init();
         Models.init();
 
-        GameAPI = new GameAPI(this);
-        gameCamera = new GameCamera(GameAPI, 0, 0);
+        gameAPI = new GameAPI(this);
+        gameCamera = new GameCamera(gameAPI, 0, 0);
 
-        gameState = new GameState(GameAPI, "springwood");
-        menuState = new MenuState(GameAPI);
-        //optionsState = new OptionsState(GameAPI);
+        gameState = new GameState(gameAPI, "springwood");
+        menuState = new MenuState(gameAPI);
+        //optionsState = new OptionsState(gameAPI);
 
         State.setState(menuState);
-        Launcher.getDiscord().createNewPresence(GameAPI.getWorld().getEntityManager().getPlayer());
+        Launcher.getDiscord().createNewPresence(gameAPI.getWorld().getEntityManager().getPlayer());
     }
 
     private void tick() {

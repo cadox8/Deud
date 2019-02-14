@@ -1,12 +1,10 @@
 package me.cadox8.deud.states;
 
+import com.github.javafaker.Faker;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.gfx.textures.GUI;
-import me.cadox8.deud.ui.UIImage;
-import me.cadox8.deud.ui.UIImageButton;
-import me.cadox8.deud.ui.UIManager;
-import me.cadox8.deud.ui.UIText;
+import me.cadox8.deud.ui.*;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Updater;
 
@@ -19,29 +17,44 @@ public class MenuState extends State {
 
     private UIManager uiManager;
 
-    public MenuState(GameAPI GameAPI) {
-        super(GameAPI);
+    public MenuState(GameAPI gameAPI) {
+        super(gameAPI);
 
-        uiManager = new UIManager(GameAPI);
-        GameAPI.getMouseManager().setUIManager(uiManager);
+        uiManager = new UIManager(gameAPI);
+        gameAPI.getMouseManager().setUIManager(uiManager);
 
-        uiManager.addObject(new UIImage(0, 0, GameAPI.getWidth(), GameAPI.getHeight(), GUI.background));
+        uiManager.addObject(new UIImage(0, 0, gameAPI.getWidth(), gameAPI.getHeight(), GUI.background)); // Must be the first
+
+        uiManager.addObject(new UIText((gameAPI.getHeight() / 2) - 35, 96, Color.WHITE, "Nick:", () -> {}));
+        final UIField nick = new UIField(gameAPI.getHeight() / 2, 100, 100, 20, gameAPI);
+        uiManager.addObject(nick);
 
         uiManager.addObject(new UIImageButton(150, 650, 200, 100, GUI.play, () -> {
-            GameAPI.getMouseManager().setUIManager(null);
-            setState(GameAPI.getGame().gameState);
+            gameAPI.getMouseManager().setUIManager(null);
+            setState(gameAPI.getGame().gameState);
+
+            if (gameAPI.getGame().getPlayerData() == null) {
+                if (nick.getText().equalsIgnoreCase("")) {
+                    gameAPI.getEntityManager().getPlayer().setNick(new Faker().name().firstName());
+                } else {
+                    gameAPI.getEntityManager().getPlayer().setNick(nick.getText());
+                }
+            }
+
+            Log.log("Player nick: " + gameAPI.getEntityManager().getPlayer().getNick());
         }));
 
         uiManager.addObject(new UIImageButton(900, 650, 200, 100, GUI.exit, () -> System.exit(0)));
 
-        uiManager.addObject(new UIImage(GameAPI.getWidth() - 97, 0, 97, 151, GUI.logo));
+        uiManager.addObject(new UIImage(gameAPI.getWidth() - 97, 0, 97, 151, GUI.logo));
+
 
         if (!Updater.timeToUpdate()) return;
         uiManager.addObject(new UIText(5, 15, Color.RED, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
             try {
-                GameAPI.getMouseManager().setUIManager(null);
+                gameAPI.getMouseManager().setUIManager(null);
                 Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
-                GameAPI.getMouseManager().setUIManager(uiManager);
+                gameAPI.getMouseManager().setUIManager(uiManager);
             } catch (URISyntaxException | IOException e){
                 Log.log(Log.LogType.DANGER, "Link doesn't exist");
                 e.printStackTrace();
