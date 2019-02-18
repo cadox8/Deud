@@ -14,6 +14,8 @@ public class GUI {
 
     public static BufferedImage[] buttons;
 
+    public static BufferedImage dialog;
+
     public static BufferedImage inventoryScreen;
 
     public static BufferedImage logo;
@@ -39,6 +41,7 @@ public class GUI {
         background[0] = Utils.loadImage("/utils/menu.png");
 
         logo = Utils.loadImage("/utils/icon.png");
+        dialog = Utils.loadImage("/textures/gui/dialog.png");
 
         inventoryScreen = Utils.loadImage("/textures/gui/inventoryScreen.png");
 

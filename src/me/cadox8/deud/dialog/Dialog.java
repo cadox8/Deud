@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.fonts.Text;
+import me.cadox8.deud.gfx.textures.GUI;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -50,12 +51,13 @@ public class Dialog {
 
     public void render(Graphics g) {
         g.setColor(Color.BLACK);
-        g.drawRect(0, gameApi.getHeight() - 100, gameApi.getWidth(), 100);
-        g.fillRect(0, gameApi.getHeight() - 100, gameApi.getWidth(), 100);
+        g.drawImage(GUI.dialog, 0, gameApi.getHeight() - 100, gameApi.getWidth(), 100, null);
+/*        g.drawRect(0, gameApi.getHeight() - 100, gameApi.getWidth(), 100);
+        g.fillRect(0, gameApi.getHeight() - 100, gameApi.getWidth(), 100);*/
 
         int p = 1;
         for (String s : renderText()) {
-            Text.drawString(g, s, 5, gameApi.getHeight() - 97 + (p * 20), Color.WHITE, 2);
+            Text.drawString(g, s, 80, gameApi.getHeight() - 97 + (p * 20), Color.WHITE, 2);
             p++;
         }
     }
