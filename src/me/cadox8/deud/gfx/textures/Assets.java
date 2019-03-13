@@ -27,7 +27,7 @@ public class Assets {
 
     public static BufferedImage fire;
 
-    public static BufferedImage[] shop;
+    public static BufferedImage[] post_Shop, house1, house2, house3;
 
     // Particles
     public static BufferedImage[] explosion;
@@ -40,18 +40,25 @@ public class Assets {
         grass_dirt2 = getImage(6, 0);
         wooden_path = getImage(10, 4);
 
-        shop = new BufferedImage[12];
-
+        post_Shop = new BufferedImage[12];
         int y_shop = 0;
         int x_shop = 12;
-        for (int i = 0; i < shop.length; i++) {
-            shop[i] = getImage(x_shop, y_shop);
+        for (int i = 0; i < post_Shop.length; i++) {
+            post_Shop[i] = getImage(x_shop, y_shop);
             x_shop += 1;
             if (i == 3 || i == 7) {
                 x_shop = 12;
                 y_shop += 1;
             }
         }
+
+        sprites = new Sprites(Utils.loadImage("/textures/sprites/buildings.png"));
+
+        house1 = getHouse(9, 0, 12);
+        house2 = getHouse(12, 9, 12);
+
+        door = getImage(5, 9);
+        door2 = getImage(5, 10);
 
         sprites = new Sprites(Utils.loadImage("/textures/sprites/castle.png"));
 
@@ -60,8 +67,6 @@ public class Assets {
         sprites = new Sprites(Utils.loadImage("/textures/sprites/basic.png"));
 
         sand = getImage(3, 0);
-        door = getImage(9, 0);
-        door2 = getImage(9, 1);
         sign = getImage(0, 1);
         sign2 = getImage(1, 1);
 
@@ -109,5 +114,18 @@ public class Assets {
 
         for (int i = 0; i < image; i++) images[i] = getImage(i, 0, width, height);
         return images;
+    }
+
+    private static BufferedImage[] getHouse(int size, int xStart, int yStart) {
+        final BufferedImage[] textures = new BufferedImage[size];
+        for (int i = 0; i < textures.length; i++) {
+            textures[i] = getImage(xStart, yStart);
+            xStart += 1;
+            if (i == 2 || i == 5) {
+                xStart = 0;
+                yStart += 1;
+            }
+        }
+        return textures;
     }
 }

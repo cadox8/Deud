@@ -10,6 +10,16 @@
       }
     },
     {
+      "type": "Door",
+      "map": "test",
+      "location": {
+        "world": "springwood",
+        "x": 769.0,
+        "y": 520.0,
+        "direction": 0
+      }
+    },
+    {
       "type": "Shop",
       "items": [
         {
@@ -19,7 +29,7 @@
       ],
       "location": {
         "world": "springwood",
-        "x": 500.0,
+        "x": 350.0,
         "y": 407.0,
         "direction": 1
       }

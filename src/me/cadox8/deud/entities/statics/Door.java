@@ -7,6 +7,7 @@ import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.State;
 import me.cadox8.deud.tiles.Tile;
+import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 
@@ -28,6 +29,7 @@ public class Door extends StaticEntity {
     }
 
     public void changeWorld() {
+        Log.log("Teleporting to " + map);
         FileUtils.save(GameAPI.getWorld().getEntityManager().getPlayer());
         GameAPI.getWorld().getEntityManager().getEntities().forEach(GameAPI.getWorld().getEntityManager()::removeEntity);
 
@@ -39,6 +41,7 @@ public class Door extends StaticEntity {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.bug, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.door2, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.door, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
     }
 }

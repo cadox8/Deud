@@ -53,6 +53,7 @@ public class Game implements Runnable {
     //Camera
     @Getter private GameCamera gameCamera;
 
+    @Getter @Setter private static boolean first = true;
 
     //gameAPI
     @Getter private GameAPI gameAPI;
@@ -87,7 +88,7 @@ public class Game implements Runnable {
 
         gameState = new GameState(gameAPI, "springwood");
         menuState = new MenuState(gameAPI);
-        //optionsState = new OptionsState(gameAPI);
+        //optionsState = new PlayerState(gameAPI);
 
         State.setState(menuState);
         Launcher.getDiscord().createNewPresence(gameAPI.getWorld().getEntityManager().getPlayer());

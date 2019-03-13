@@ -41,20 +41,20 @@ public class Shop extends StaticEntity {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.shop[8], (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.shop[4], (int) (x - GameAPI.getGameCamera().getXOffset()), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
-        g.drawImage(Assets.shop[0], (int) (x - GameAPI.getGameCamera().getXOffset()), (int) ((y - GameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+        g.drawImage(Assets.post_Shop[8], (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.post_Shop[4], (int) (x - GameAPI.getGameCamera().getXOffset()), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.post_Shop[0], (int) (x - GameAPI.getGameCamera().getXOffset()), (int) ((y - GameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
 
-        g.drawImage(Assets.shop[9], (int) (x - GameAPI.getGameCamera().getXOffset() + width), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.shop[5], (int) (x - GameAPI.getGameCamera().getXOffset() + width), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
-        g.drawImage(Assets.shop[1], (int) (x - GameAPI.getGameCamera().getXOffset() + width), (int) ((y - GameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+        g.drawImage(Assets.post_Shop[9], (int) (x - GameAPI.getGameCamera().getXOffset() + width), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.post_Shop[5], (int) (x - GameAPI.getGameCamera().getXOffset() + width), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.post_Shop[1], (int) (x - GameAPI.getGameCamera().getXOffset() + width), (int) ((y - GameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
 
-        g.drawImage(Assets.shop[10], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 2)), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.shop[6], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 2)), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
-        g.drawImage(Assets.shop[2], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 2)), (int) ((y - GameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+        g.drawImage(Assets.post_Shop[10], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 2)), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.post_Shop[6], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 2)), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.post_Shop[2], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 2)), (int) ((y - GameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
 
-        g.drawImage(Assets.shop[11], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 3)), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.shop[7], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 3)), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
-        g.drawImage(Assets.shop[3], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 3)), (int) ((y - GameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+        g.drawImage(Assets.post_Shop[11], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 3)), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.post_Shop[7], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 3)), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.post_Shop[3], (int) (x - GameAPI.getGameCamera().getXOffset() + (width * 3)), (int) ((y - GameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
     }
 }

@@ -130,11 +130,6 @@ public abstract class Entity {
 
     public Entity getEntityCollision(float xOffset, float yOffset) {
         return GameAPI.getWorld().getEntityManager().getEntities().stream().filter(e -> !e.equals(this)).filter(e -> e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))).findFirst().orElse(null);
-/*        for (Entity e : GameAPI.getWorld().getEntityManager().getEntities()) {
-            if (e.equals(this)) continue;
-            if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) return e;
-        }
-        return null;*/
     }
 
     public Rectangle getCollisionBounds(float xOffset, float yOffset) {

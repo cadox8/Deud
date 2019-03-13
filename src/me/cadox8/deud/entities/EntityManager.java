@@ -58,11 +58,14 @@ public class EntityManager {
         entities.add(e);
     }
 
+    public void freezeAll() {
+        entities.stream().filter(e -> e instanceof Creature).findFirst().ifPresent(e -> ((Creature)e).setFreeze(!((Creature)e).isFreeze()));
+    }
     public void freezeCreatures() {
-        entities.stream().filter(e -> e instanceof Creature).filter(e -> !(e instanceof Player)).forEach(e -> ((Creature)e).setFreeze(true));
+        entities.stream().filter(e -> e instanceof Creature).filter(e -> !(e instanceof Player)).forEach(e -> ((Creature)e).setFreeze(!((Creature)e).isFreeze()));
     }
     public void freezePlayer() {
-        entities.stream().filter(e -> e instanceof Player).findFirst().ifPresent(p -> ((Player)p).setFreeze(true));
+        entities.stream().filter(e -> e instanceof Player).findFirst().ifPresent(e -> ((Player)e).setFreeze(!((Player)e).isFreeze()));
     }
 
     public void removeEntity(Entity en) {

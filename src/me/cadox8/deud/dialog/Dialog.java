@@ -52,8 +52,6 @@ public class Dialog {
     public void render(Graphics g) {
         g.setColor(Color.BLACK);
         g.drawImage(GUI.dialog, 0, gameApi.getHeight() - 100, gameApi.getWidth(), 100, null);
-/*        g.drawRect(0, gameApi.getHeight() - 100, gameApi.getWidth(), 100);
-        g.fillRect(0, gameApi.getHeight() - 100, gameApi.getWidth(), 100);*/
 
         int p = 1;
         for (String s : renderText()) {

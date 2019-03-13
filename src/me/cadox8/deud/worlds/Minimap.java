@@ -25,14 +25,13 @@ public class Minimap {
     }
 
     public void paintMap(Graphics g){
-/*        drawRect(g);
+        drawRect(g);
 
         for (TileData td : tiles) {
             if (td == null) continue;
-            td.getTile().render(g, 641 + td.getX(), 6 + td.getY(), imgWidth, imgWidth);
-            //g.drawImage(td.getBi(), 641 + td.getX(), 6 + td.getY(), imgWidth, imgWidth, null);
-            //g.fillRect((int)player.getX() + 641, (int)player.getY() + 6, 5, 5);
-        }*/
+            g.drawImage(td.getBi(), 641 + td.getX(), 6 + td.getY(), null);
+            //td.getTile().render(g, 641 + td.getX(), 6 + td.getY(), 20, 20);
+        }
     }
 
 
@@ -46,12 +45,12 @@ public class Minimap {
 
         for (int y = 0; y < world.getHeight() + 2; y++) {
             for (int x = 0; x < world.getWidth() + 2; x++) {
-                Tile t = world.getTile(x, y);
+                final Tile t = world.getTile(x, y);
 
-                if (t.getId() == 9) continue;
+                if (t.getId() == 8) continue;
 
-                TileData td = new TileData(t, new Color(t.getTexture().getRGB(0, 0)));
-                BufferedImage bi = new BufferedImage(imgWidth, imgWidth, BufferedImage.TYPE_INT_RGB);
+                final TileData td = new TileData(t, new Color(t.getTexture().getRGB(0, 0)));
+                final BufferedImage bi = new BufferedImage(imgWidth, imgWidth, BufferedImage.TYPE_INT_RGB);
 
                 for (int d = 0; d < imgWidth; d++){
                     for (int da = 0; da < imgWidth; da++){

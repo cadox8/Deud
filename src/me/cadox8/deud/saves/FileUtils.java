@@ -12,6 +12,7 @@ import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.Shop;
 import me.cadox8.deud.entities.statics.SignEntity;
+import me.cadox8.deud.game.Game;
 import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.settings.Settings;
 import me.cadox8.deud.utils.Log;
@@ -78,6 +79,7 @@ public class FileUtils {
     public static void save(Player p){
         final Inventory i = p.getInventory();
         final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Game.setFirst(false);
 
         try {
             final JsonObject data = new JsonObject();

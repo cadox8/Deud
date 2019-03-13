@@ -1,10 +1,12 @@
 package me.cadox8.deud.states;
 
-import com.github.javafaker.Faker;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.gfx.textures.GUI;
-import me.cadox8.deud.ui.*;
+import me.cadox8.deud.ui.UIImage;
+import me.cadox8.deud.ui.UIImageButton;
+import me.cadox8.deud.ui.UIManager;
+import me.cadox8.deud.ui.UIText;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Updater;
 
@@ -25,21 +27,11 @@ public class MenuState extends State {
 
         uiManager.addObject(new UIImage(0, 0, gameAPI.getWidth(), gameAPI.getHeight(), GUI.background)); // Must be the first
 
-        uiManager.addObject(new UIText((gameAPI.getHeight() / 2) - 35, 96, Color.WHITE, "Nick:", () -> {}));
-        final UIField nick = new UIField(gameAPI.getHeight() / 2, 100, 100, 20, gameAPI);
-        uiManager.addObject(nick);
-
         uiManager.addObject(new UIImageButton(150, 650, 200, 100, GUI.play, () -> {
             gameAPI.getMouseManager().setUIManager(null);
             setState(gameAPI.getGame().gameState);
 
-            if (gameAPI.getGame().getPlayerData() == null) {
-                if (nick.getText().equalsIgnoreCase("")) {
-                    gameAPI.getEntityManager().getPlayer().setNick(new Faker().name().firstName());
-                } else {
-                    gameAPI.getEntityManager().getPlayer().setNick(nick.getText());
-                }
-            }
+            if (gameAPI.getGame().getPlayerData() == null) gameAPI.getEntityManager().getPlayer().setNick("Arya");
 
             Log.log("Player nick: " + gameAPI.getEntityManager().getPlayer().getNick());
         }));
