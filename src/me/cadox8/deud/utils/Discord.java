@@ -1,6 +1,5 @@
 package me.cadox8.deud.utils;
 
-import me.cadox8.deud.Launcher;
 import me.cadox8.deud.entities.creatures.player.Player;
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
@@ -15,7 +14,7 @@ public class Discord {
     }
 
     public void createNewPresence(Player p){
-        final DiscordRichPresence.Builder rich = new DiscordRichPresence.Builder("Level: " + p.getLevel()).setDetails("Playing on map " + p.getGameAPI().getWorld().worldName() + "\n Deud v" + Launcher.VERSION);
+        final DiscordRichPresence.Builder rich = new DiscordRichPresence.Builder("Level: " + p.getLevel()).setDetails("Map: " + p.getGameAPI().getWorld().worldName());
         rich.setStartTimestamps(System.currentTimeMillis() / 1000);
         rich.setBigImage("icono_big", "DeudGame");
         DiscordRPC.discordUpdatePresence(rich.build());
