@@ -2,15 +2,15 @@ package me.cadox8.deud.worlds;
 
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.Shop;
-import me.cadox8.deud.entities.statics.SignEntity;
+import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.gfx.textures.Models;
-import me.cadox8.deud.saves.EntityData;
 import me.cadox8.deud.utils.Log;
 
 import java.lang.reflect.InvocationTargetException;

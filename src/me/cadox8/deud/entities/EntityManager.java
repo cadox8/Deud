@@ -5,7 +5,7 @@ import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
-import me.cadox8.deud.entities.statics.SignEntity;
+import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.utils.Log;
 
 import java.awt.*;

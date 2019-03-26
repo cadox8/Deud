@@ -7,8 +7,8 @@ import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Chest;
 import me.cadox8.deud.entities.statics.Door;
-import me.cadox8.deud.entities.statics.SignEntity;
 import me.cadox8.deud.entities.statics.sign.Sign;
+import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;

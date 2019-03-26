@@ -2,6 +2,7 @@ package me.cadox8.deud.entities.statics;
 
 import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.dialog.Dialog;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.states.GameState;
@@ -10,6 +11,8 @@ import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
+import java.io.File;
+import java.util.Arrays;
 
 public class Door extends StaticEntity {
 
@@ -29,6 +32,10 @@ public class Door extends StaticEntity {
     }
 
     public void changeWorld() {
+        if (!new File("resources/worlds/" + map + "/world.txt").exists()) {
+            ((GameState)getGameAPI().getGame().getGameState()).setDialog(new Dialog(getGameAPI(), getGameAPI().getEntityManager().getPlayer()).addText(Arrays.asList("You hear sounds inside but the door seems to be locked")));
+            return;
+        }
         Log.log("Teleporting to " + map);
         FileUtils.save(GameAPI.getWorld().getEntityManager().getPlayer());
         GameAPI.getWorld().getEntityManager().getEntities().forEach(GameAPI.getWorld().getEntityManager()::removeEntity);

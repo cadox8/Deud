@@ -76,10 +76,9 @@ public class Utils {
             double x = center.getX() + (radius * Math.cos(angle));
             double y = center.getY() + (radius * Math.sin(angle));
 
-/*            world.getEntityManager().getEntities().stream().filter(e -> e instanceof Creature).forEach(e -> System.out.println("Entity: " + e.getLocation().toString()));
-            System.out.println(new Location(world, (float) x, (float) y).toString());*/
-
-            //entities.add(world.getEntityManager().getEntities().stream().filter(e -> e.getLocation().equals(new Location(world, (float) x, (float) y))).findFirst().get());
+            if (world.getEntityManager().getEntities().stream().anyMatch(e -> e.getLocation().equals(new Location(world, (float) x, (float) y, 0)))) {
+                entities.add(world.getEntityManager().getEntities().stream().filter(e -> e.getLocation().equals(new Location(world, (float) x, (float) y, 0))).findFirst().get());
+            }
         }
         return entities;
     }

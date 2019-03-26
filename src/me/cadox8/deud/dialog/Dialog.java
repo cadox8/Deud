@@ -2,6 +2,7 @@ package me.cadox8.deud.dialog;
 
 import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
@@ -15,6 +16,7 @@ public class Dialog {
 
     private final GameAPI gameApi;
     private final Player player;
+    private final Npc npc;
 
     private final List<String> text;
     private int page = 0;
@@ -22,9 +24,13 @@ public class Dialog {
     @Getter private boolean end = false;
 
     public Dialog(GameAPI gameApi, Player p) {
+        this(gameApi, p, null);
+    }
+    public Dialog(GameAPI gameApi, Player p, Npc npc) {
         this.gameApi = gameApi;
         this.player = p;
-        text = new ArrayList<>();
+        this.npc = npc;
+        text = npc == null ? new ArrayList<>() : npc.getText();
     }
 
     public Dialog addText(List<String> newText) {
@@ -55,6 +61,7 @@ public class Dialog {
 
         int p = 1;
         for (String s : renderText()) {
+            s = s.replaceAll("%npc%", npc == null ? "" : npc.getDisplayName()).replaceAll("%player%", player.getNick());
             Text.drawString(g, s, 80, gameApi.getHeight() - 97 + (p * 20), Color.WHITE, 2);
             p++;
         }

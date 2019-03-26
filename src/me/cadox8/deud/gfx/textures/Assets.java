@@ -117,12 +117,13 @@ public class Assets {
     }
 
     private static BufferedImage[] getHouse(int size, int xStart, int yStart) {
+        final int x = xStart;
         final BufferedImage[] textures = new BufferedImage[size];
         for (int i = 0; i < textures.length; i++) {
             textures[i] = getImage(xStart, yStart);
             xStart += 1;
             if (i == 2 || i == 5) {
-                xStart = 0;
+                xStart = x;
                 yStart += 1;
             }
         }

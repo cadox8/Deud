@@ -4,7 +4,6 @@ import me.cadox8.deud.gfx.Sprites;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 public class Models {
 
@@ -25,7 +24,7 @@ public class Models {
 
     public static void init() {
         //Player
-        model = new Sprites(Utils.loadImage("/textures/models/" + randomGender() + ".png"));
+        model = new Sprites(Utils.loadImage("/textures/models/female.png"));
 
         player_down = new BufferedImage[3];
         player_up = new BufferedImage[3];
@@ -88,17 +87,6 @@ public class Models {
         setImage(model, npc_up, 1);
         setImage(model, npc_right, 2);
         setImage(model, npc_left, 3);
-    }
-
-    private static String randomGender() {
-        switch (new Random().nextInt(2)) {
-            case 0:
-                return "male";
-            case 1:
-                return "female";
-            default:
-                return randomGender();
-        }
     }
 
     private static void setImage(Sprites model, BufferedImage[] image, int direction) {

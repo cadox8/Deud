@@ -7,11 +7,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.Shop;
-import me.cadox8.deud.entities.statics.SignEntity;
+import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.settings.Settings;
@@ -92,10 +93,10 @@ public class FileUtils {
             });
 
             data.addProperty("nick", p.getNick());
-            data.addProperty("Health", p.getHealth());
-            data.addProperty("Money", p.getMoney());
-            data.add("Inventory", inv);
-            data.add("Location", gson.toJsonTree(p.getLocation().serializeLocation()).getAsJsonObject());
+            data.addProperty("health", p.getHealth());
+            data.addProperty("money", p.getMoney());
+            data.add("inventory", inv);
+            data.add("location", gson.toJsonTree(p.getLocation().serializeLocation()).getAsJsonObject());
 
             final BufferedWriter w = new BufferedWriter(new FileWriter(saves));
 

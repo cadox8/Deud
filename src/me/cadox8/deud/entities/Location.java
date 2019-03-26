@@ -61,6 +61,10 @@ public class Location {
     }
 
 
+    public boolean equals(Location checkLoc) {
+        return checkLoc.getWorld().worldName().equalsIgnoreCase(getWorld().worldName()) && checkLoc.getX() == getX() && checkLoc.getY() == getY();
+    }
+
     // Save Utils
     public Map<String, Object> serializeLocation() {
         Map<String, Object> location = new HashMap<>();

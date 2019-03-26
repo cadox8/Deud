@@ -82,7 +82,6 @@ public class Inventory {
         Text.drawString(g, Integer.toString(item.getCount()), invCountX, invCountY, true, Color.WHITE, 0);
     }
 
-
     // Inventory methods
     public void addItem(Item item) {
         inventoryItems.stream().filter(i -> i.getId() == item.getId()).findFirst().ifPresentOrElse(i -> i.addCount(item.getCount()), () -> inventoryItems.add(item));

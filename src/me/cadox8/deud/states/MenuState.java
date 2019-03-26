@@ -66,6 +66,6 @@ public class MenuState extends State {
         uiManager.render(g);
         g.setColor(Color.WHITE);
         g.drawString("Version: " + Launcher.VERSION, 5, 795);
-        g.drawString("© Deud 2016-2018 - The Game is property of Cadox8", 955, 795);
+        g.drawString("© Deud 2016-2019 - The Game is property of Cadox8", 955, 795);
     }
 }

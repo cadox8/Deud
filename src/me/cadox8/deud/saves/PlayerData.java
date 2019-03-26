@@ -10,16 +10,16 @@ import java.util.Map;
 public class PlayerData {
 
     private String nick;
-    private int Money = 0;
-    private int Health = 0;
-    private LocationUtils Location = new LocationUtils();
-    @Getter private Map<Integer, Integer>[] Inventory = null;
+    private int money = 0;
+    private int health = 0;
+    private LocationUtils location = new LocationUtils();
+    @Getter private Map<Integer, Integer>[] inventory = null;
 
     public LocationUtils locUtils() {
-        return Location;
+        return location;
     }
     public Location getLocation() {
-        return new Location(Location.getX(), Location.getY(),Location.getDirection());
+        return new Location(location.getX(), location.getY(), location.getDirection());
     }
 
     @Data

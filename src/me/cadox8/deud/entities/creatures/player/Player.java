@@ -10,7 +10,6 @@ import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
-import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.gfx.Animation;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
@@ -131,8 +130,7 @@ public class Player extends Creature {
     @Override
     public void die() {
         Log.log(Log.LogType.DANGER, "You lose");
-        GameAPI.getWorld().getEntityManager().freezeCreatures();
-        GameAPI.getWorld().getEntityManager().freezePlayer();
+        GameAPI.getWorld().getEntityManager().freezeAll();
         //System.exit(0);
     }
 
@@ -206,7 +204,8 @@ public class Player extends Creature {
         yMove = 0;
 
         if (GameAPI.getKeyManager().tests) {
-            new Door(GameAPI, 0, 0, "main").changeWorld();
+            Utils.getNearbyEntities(getLocation(), 5, 5);
+            //new Door(GameAPI, 0, 0, "main").changeWorld();
             setHunger(getMaxHunger());
             addExp(20);
             setHealth(getMaxHealth());
@@ -230,8 +229,7 @@ public class Player extends Creature {
             if (en != null && en instanceof Npc) {
                 final Npc npc = (Npc) en;
                 if (npc.getText().isEmpty()) return;
-                final Dialog dialog = new Dialog(GameAPI, this);
-                dialog.addText(npc.getText());
+                final Dialog dialog = new Dialog(GameAPI, this, npc);
                 ((GameState) GameAPI.getGame().getGameState()).setDialog(dialog);
             }
         }

@@ -1,9 +1,9 @@
-package me.cadox8.deud.entities.statics;
+package me.cadox8.deud.entities.statics.sign;
 
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.statics.sign.Sign;
+import me.cadox8.deud.entities.statics.StaticEntity;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.utils.Utils;

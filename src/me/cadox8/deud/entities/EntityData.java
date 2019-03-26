@@ -1,17 +1,17 @@
-package me.cadox8.deud.saves;
+package me.cadox8.deud.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.entities.Entity;
-import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.friends.Fairy;
 import me.cadox8.deud.entities.creatures.monsters.Ghost;
 import me.cadox8.deud.entities.creatures.monsters.Zombie;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.statics.*;
+import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.items.Item;
+import me.cadox8.deud.saves.PlayerData;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,8 +29,6 @@ public class EntityData {
 
     @Data
     public class Entities {
-
-        private String world = "";
 
         private String type = "";
         private int health = 0;

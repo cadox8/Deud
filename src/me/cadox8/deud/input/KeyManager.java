@@ -13,7 +13,6 @@ public class KeyManager implements KeyListener {
     private boolean[] keys, justPressed, cantPress;
     public boolean up, down, left, right, shift, enter, drop, esc;
     public boolean debug, tests;
-    public boolean options;
 
     @Getter @Setter private UIField writingTo;
 
