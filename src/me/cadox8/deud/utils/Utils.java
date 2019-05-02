@@ -52,6 +52,20 @@ public class Utils {
         }
     }
 
+    public static int directionToDregrees(int direction) {
+        switch (direction) {
+            case 0:
+                return 90;
+            case 1:
+                return 270;
+            case 3:
+                return 180;
+
+            default:
+                return 0;
+        }
+    }
+
     public static double round(int places, double value) {
         return new BigDecimal(value).setScale(places, RoundingMode.HALF_UP).doubleValue();
     }

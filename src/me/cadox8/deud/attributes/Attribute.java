@@ -3,9 +3,9 @@ package me.cadox8.deud.attributes;
 import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
-import me.cadox8.deud.entities.creatures.Creature;
+import me.cadox8.deud.runnable.DeudTask;
 
-public abstract class Attribute {
+public abstract class Attribute extends DeudTask {
 
     protected final GameAPI GameAPI;
     @Getter private final int id;
@@ -17,5 +17,8 @@ public abstract class Attribute {
         this.name = name;
     }
 
-    public abstract void perform(Entity damager, Creature damaged);
+    public abstract void perform(Entity damager, Entity damaged);
+
+    @Override
+    public void run() {}
 }

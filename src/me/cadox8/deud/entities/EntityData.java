@@ -8,6 +8,7 @@ import me.cadox8.deud.entities.creatures.friends.Fairy;
 import me.cadox8.deud.entities.creatures.monsters.Ghost;
 import me.cadox8.deud.entities.creatures.monsters.Zombie;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
+import me.cadox8.deud.entities.creatures.projectiles.Arrow;
 import me.cadox8.deud.entities.statics.*;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.items.Item;
@@ -80,7 +81,8 @@ public class EntityData {
         TREE(Tree.class),
         DOOR(Door.class),
         SHOP(Shop.class),
-        NPC(Npc.class);
+        NPC(Npc.class),
+        ARROW(Arrow.class);
 
         private Class<? extends Entity> supClass;
 

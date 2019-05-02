@@ -2,7 +2,6 @@ package me.cadox8.deud.attributes;
 
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
-import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.utils.Utils;
 
 public class Explosion extends Attribute {
@@ -18,7 +17,7 @@ public class Explosion extends Attribute {
     }
 
     @Override
-    public void perform(Entity damager, Creature damaged) {
+    public void perform(Entity damager, Entity damaged) {
         Utils.getNearbyEntities(damager.getLocation(), 5, 30).forEach(e -> e.hurt(damager));
     }
 }

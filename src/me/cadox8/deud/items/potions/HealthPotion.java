@@ -14,6 +14,7 @@ public class HealthPotion extends PotionItem {
 
     @Override
     public void use(Player p) {
+        if (isInfinity()) return;
         if (p.getHealth() == p.getMaxHealth()) return;
         final int health = BASE_HEALTH + (BASE_HEALTH * (level - 1));
 

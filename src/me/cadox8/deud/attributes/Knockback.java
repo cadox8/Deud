@@ -14,27 +14,28 @@ public class Knockback extends Attribute {
     }
 
     @Override
-    public void perform(Entity damager, Creature damaged) {
-        final float speed = (float)(percent * damaged.getSpeed());
+    public void perform(Entity damager, Entity damaged) {
+        if (!(damaged instanceof Creature)) return;
+        final float speed = (float)(percent * ((Creature)damaged).getSpeed());
 
         switch (damager.getDirection()) {
             case 0:
-                damaged.setYMove(speed);
+                ((Creature)damaged).setYMove(speed);
                 //damaged.setY(damaged.getY() + (float)(percent * damaged.getY()));
                 break;
             case 1:
-                damaged.setYMove(-speed);
+                ((Creature)damaged).setYMove(-speed);
                 //damaged.setY(damaged.getY() - (float)(percent * damaged.getY()));
                 break;
             case 2:
-                damaged.setXMove(speed);
+                ((Creature)damaged).setXMove(speed);
                 //damaged.setX(damaged.getX() + (float)(percent * damaged.getX()));
                 break;
             case 3:
-                damaged.setXMove(-speed);
+                ((Creature)damaged).setXMove(-speed);
                 //damaged.setX(damaged.getX() - (float)(percent * damaged.getX()));
                 break;
         }
-        damaged.move();
+        ((Creature)damaged).move();
     }
 }

@@ -24,7 +24,6 @@ public class GameState extends State {
         Location.setGameAPI(gameAPI);
         if (!change) Game.getInstance().setPlayerData(FileUtils.load());
         if (Game.getInstance().getPlayerData() != null && Game.getInstance().getPlayerData().getHealth() <= 0) Game.getInstance().getPlayerData().setHealth(10); // Temporal (Maybe not so temporal...)
-        Game.getInstance().setSettings(FileUtils.loadSettings());
 
         if (!change) {
             try {

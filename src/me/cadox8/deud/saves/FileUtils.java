@@ -15,7 +15,6 @@ import me.cadox8.deud.entities.statics.Shop;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.inventory.Inventory;
-import me.cadox8.deud.settings.Settings;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.worlds.World;
 import net.arikia.dev.drpc.DiscordRPC;
@@ -39,41 +38,9 @@ public class FileUtils {
             if (!file.exists()) file.mkdirs();
             if (!config.exists()) {
                 config.createNewFile();
-                saveSettings(new Settings());
             }
         } catch (IOException e) { }
     }
-
-    public static void saveSettings(Settings s) {
-        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        try {
-            final JsonObject settings = new JsonObject();
-
-            settings.addProperty("volume", s.getVolume());
-            settings.addProperty("windows", s.getWindows());
-
-            final BufferedWriter w = new BufferedWriter(new FileWriter(config));
-            if (config.exists()) config.delete(); config.createNewFile();
-
-            w.write(gson.toJson(settings));
-            w.close();
-            Log.log(Log.LogType.SUCCESS, "Config saved successfully");
-        } catch (IOException e) {
-            Log.log(Log.LogType.DANGER, "Error while saving settings. Does 'C:/Deud/config.json' exist?");
-        }
-    }
-
-    public static Settings loadSettings() {
-        if (!config.exists()) return new Settings();
-
-        try {
-            return new GsonBuilder().create().fromJson(new JsonReader(new FileReader(config)), Settings.class);
-        } catch (IOException e) {
-            return new Settings();
-        }
-    }
-
 
 
     @SuppressWarnings("Unchecked")

@@ -107,10 +107,7 @@ public class World {
     public Tile getTile(int x, int y) {
         if (x < 0 || y < 0 || x >= width || y >= height) return Tiles.VOID.build();
         final TileUtils tu = tiles[x][y];
-        final Tile t = Tiles.getTile(tu.getId(), tu.getSubID());
-
-        if (t == null) return Tiles.VOID.build();
-        return t;
+        return Tiles.getTile(tu.getId(), tu.getSubID());
     }
 
     private void loadWorld(String path) {

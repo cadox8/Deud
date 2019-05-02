@@ -18,6 +18,7 @@ public abstract class FoodItem extends Item {
 
     @Override
     public void use(Player p) {
+        if (isInfinity()) return;
         consume(p);
     }
 

@@ -14,7 +14,6 @@ import me.cadox8.deud.gfx.textures.Models;
 import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
 import me.cadox8.deud.saves.PlayerData;
-import me.cadox8.deud.settings.Settings;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.MenuState;
 import me.cadox8.deud.states.State;
@@ -33,7 +32,6 @@ public class Game implements Runnable {
 
     @Getter @Setter private PlayerData playerData;
     @Getter @Setter private EntityData entityData;
-    @Getter @Setter private Settings settings;
 
     @Getter @Setter private boolean running = false;
     private Thread thread;

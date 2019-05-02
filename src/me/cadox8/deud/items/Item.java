@@ -57,6 +57,7 @@ public abstract class Item {
     @Getter protected int x, y, count;
     @Getter @Setter protected boolean pickedUp = false;
 
+    @Getter @Setter protected boolean infinity = false;
 
     public Item(BufferedImage texture, int id, String name){
         this.texture = texture;
@@ -114,6 +115,9 @@ public abstract class Item {
         bounds.y = y;
     }
 
+    public static Item getRandom() {
+        return getRandom(-5);
+    }
     public static Item getRandom(Item... banedIDs) {
         final Integer[] ids = new Integer[banedIDs.length];
         int x = 0;
