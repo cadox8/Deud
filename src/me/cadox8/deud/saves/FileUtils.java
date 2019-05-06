@@ -113,7 +113,10 @@ public class FileUtils {
                 en.addProperty("signType", ((SignEntity) e).getType());
                 en.add("text", text);
             }
-            if (e instanceof Door) en.addProperty("map", ((Door) e).getMap());
+            if (e instanceof Door) {
+                en.addProperty("map", ((Door) e).getMap());
+                en.addProperty("neededItem", -1);
+            }
             if (e instanceof Shop) {
                 final JsonArray items = new JsonArray();
                 Arrays.asList(((Shop) e).getDrops()).forEach(i -> {

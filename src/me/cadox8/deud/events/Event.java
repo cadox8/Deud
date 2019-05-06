@@ -10,7 +10,6 @@ import me.cadox8.deud.api.GameAPI;
 public abstract class Event {
 
     @Getter protected final @NonNull GameAPI gameAPI;
-    private String name;
 
     @Getter @Setter private boolean cancelled = false;
 
@@ -22,7 +21,6 @@ public abstract class Event {
     }
 
     public String getEventName() {
-        if (name == null) name = getClass().getSimpleName();
-        return name;
+        return getClass().getSimpleName();
     }
 }

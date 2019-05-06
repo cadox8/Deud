@@ -26,7 +26,7 @@ public abstract class Projectile extends Creature {
     }
 
     public void shot(int direction) {
-        texture = Utils.rotateImage(Utils.directionToDregrees(direction) ,texture);
+        texture = Utils.rotateImage(Utils.directionToDegrees(direction) ,texture);
     }
 
     public void addAttributes(Attribute... attributes) {

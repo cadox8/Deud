@@ -1,9 +1,12 @@
 package me.cadox8.deud.entities.statics;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.dialog.Dialog;
+import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
+import me.cadox8.deud.items.Item;
 import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.State;
@@ -17,6 +20,7 @@ import java.util.Arrays;
 public class Door extends StaticEntity {
 
     @Getter private final String map;
+    @Getter @Setter private int neededItem = -1;
 
     public Door(GameAPI gameAPI, float x, float y, String map) {
         super(9, "Door", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
@@ -31,9 +35,13 @@ public class Door extends StaticEntity {
         bounds.height = (int) (height - height / 2f);
     }
 
-    public void changeWorld() {
+    public void changeWorld(Player p) {
+        if (!canOpen(p)) {
+            ((GameState)getGameAPI().getGame().getGameState()).setDialog(new Dialog(getGameAPI(), p).addText(Arrays.asList("You need " + Item.items[neededItem].getName() + " to open this")));
+            return;
+        }
         if (!new File("resources/worlds/" + map + "/world.txt").exists()) {
-            ((GameState)getGameAPI().getGame().getGameState()).setDialog(new Dialog(getGameAPI(), getGameAPI().getEntityManager().getPlayer()).addText(Arrays.asList("You hear sounds inside but the door seems to be locked")));
+            ((GameState)getGameAPI().getGame().getGameState()).setDialog(new Dialog(getGameAPI(), p).addText(Arrays.asList("You hear sounds inside but the door seems to be locked")));
             return;
         }
         Log.log("Teleporting to " + map);
@@ -50,5 +58,11 @@ public class Door extends StaticEntity {
     public void render(Graphics g) {
         g.drawImage(Assets.door2, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
         g.drawImage(Assets.door, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) ((y - gameAPI.getGameCamera().getYOffset()) - height), width, height, null);
+    }
+
+
+    private boolean canOpen(Player p) {
+        if (neededItem == -1) return true;
+        return p.getInventory().hasItem(neededItem);
     }
 }

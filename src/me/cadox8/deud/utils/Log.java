@@ -35,7 +35,6 @@ public class Log {
         } else {
             log = time + type.getPrefix() + " " + text;
         }
-
         System.out.println(log);
     }
 }

@@ -39,6 +39,7 @@ public class EntityData {
         private int signType = 0;
 
         private String map = "";
+        private int neededItem = -1;
 
         private String[] text = new String[0];
         private ItemHelper[] items = new ItemHelper[0];

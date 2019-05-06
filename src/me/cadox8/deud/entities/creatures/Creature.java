@@ -78,12 +78,12 @@ public abstract class Creature extends Entity {
         // Door
         if (getEntityCollision(xMove, 0f) instanceof Door) {
             final Door door = (Door) getEntityCollision(xMove, 0f);
-            door.changeWorld();
+            door.changeWorld((Player) this);
             return;
         }
         if (getEntityCollision(0f, yMove) instanceof Door) {
             final Door door = (Door) getEntityCollision(0f, yMove);
-            door.changeWorld();
+            door.changeWorld((Player) this);
             return;
         }
     }
@@ -146,7 +146,7 @@ public abstract class Creature extends Entity {
 
 
     @Override
-    public void specialRender(Graphics g) {}
+    public void preRender(Graphics g) {}
 
     @Override
     public void getHurt() {}

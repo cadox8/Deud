@@ -51,7 +51,7 @@ public class SignEntity extends StaticEntity {
     }
 
     @Override
-    public void specialRender(Graphics g) {
+    public void preRender(Graphics g) {
         g.drawImage(img, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
     }
 

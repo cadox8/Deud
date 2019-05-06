@@ -93,7 +93,7 @@ public abstract class Entity {
     public abstract void tick();
     public abstract void fixAnimations();
     public abstract void render(Graphics g);
-    public abstract void specialRender(Graphics g);
+    public abstract void preRender(Graphics g);
     public abstract void getHurt();
     public abstract void die();
 

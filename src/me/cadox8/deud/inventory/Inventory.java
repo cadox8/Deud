@@ -11,7 +11,6 @@ import me.cadox8.deud.items.Item;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class Inventory {
 
@@ -27,9 +26,7 @@ public class Inventory {
 
     //Inventory
     private final int invX = 64, invY = 48, invWidth = 512, invHeight = 384, invListCenterX = invX + 171, invListCenterY = invY + invHeight / 2 + 5, invListSpacing = 30;
-
     private final int invImageX = 452, invImageY = 82, invImageWidth = 64, invImageHeight = 64;
-
     private final int invCountX = 484, invCountY = 172;
 
     public Inventory(GameAPI GameAPI, Player player) {
@@ -103,7 +100,11 @@ public class Inventory {
         removeItem(item);
     }
 
+    public boolean hasItem(int item) {
+        return inventoryItems.stream().anyMatch(i -> i.getId() == item);
+    }
+
     public int keyCount() {
-        return inventoryItems.stream().filter(i -> i.getId() == 2).collect(Collectors.toList()).size();
+        return (int)inventoryItems.stream().filter(i -> i.getId() == 2).count();
     }
 }

@@ -47,7 +47,7 @@ public class EntityManager {
     }
 
     public void render(Graphics g) {
-        entities.forEach(e -> e.specialRender(g));
+        entities.forEach(e -> e.preRender(g));
         entities.forEach(e -> e.render(g));
         entities.stream().filter(e -> e instanceof SignEntity).forEach(e -> ((SignEntity) e).signRender(g));
         player.postRender(g);

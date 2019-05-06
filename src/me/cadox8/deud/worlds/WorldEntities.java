@@ -17,12 +17,12 @@ import java.lang.reflect.InvocationTargetException;
 
 public class WorldEntities {
 
-    private final GameAPI GameAPI;
+    private final GameAPI gameAPI;
     private final EntityManager entityManager;
     private final String world;
 
-    public WorldEntities(GameAPI GameAPI, EntityManager entityManager, String world) {
-        this.GameAPI = GameAPI;
+    public WorldEntities(GameAPI gameAPI, EntityManager entityManager, String world) {
+        this.gameAPI = gameAPI;
         this.entityManager = entityManager;
         this.world = world;
 
@@ -39,25 +39,25 @@ public class WorldEntities {
 
                 switch (type) {
                     case SIGN:
-                        en = new SignEntity(GameAPI, l.getX(), l.getY(), e.getSignType(), e.getText());
+                        en = new SignEntity(gameAPI, l.getX(), l.getY(), e.getSignType(), e.getText());
                         break;
                     case DOOR:
-                        en = new Door(GameAPI, l.getX(), l.getY(), e.getMap());
+                        en = new Door(gameAPI, l.getX(), l.getY(), e.getMap());
+                        ((Door)en).setNeededItem(e.getNeededItem());
                         break;
                     case SHOP:
-                        en = new Shop(GameAPI, l.getX(), l.getY(), e.getItems());
+                        en = new Shop(gameAPI, l.getX(), l.getY(), e.getItems());
                         break;
                     case NPC:
-                        en = new Npc(GameAPI, l.getX(), l.getY(), e.getDisplayName(), Models.npc_down, Models.npc_up, Models.npc_left, Models.npc_right);
+                        en = new Npc(gameAPI, l.getX(), l.getY(), e.getDisplayName(), Models.npc_down, Models.npc_up, Models.npc_left, Models.npc_right);
                         ((Npc) en).addTexts(e.getTextArray());
                         ((Npc) en).addItems(e.getItems());
                         break;
 
                     default:
-                        en = (Entity) type.getSupClass().getConstructors()[0].newInstance(GameAPI, l.getX(), l.getY());
+                        en = (Entity) type.getSupClass().getConstructors()[0].newInstance(gameAPI, l.getX(), l.getY());
                         break;
                 }
-
                 en.setMaxHealth(e.getMaxHealth());
                 en.setHealth(e.getHealth());
                 entityManager.addEntity(en);

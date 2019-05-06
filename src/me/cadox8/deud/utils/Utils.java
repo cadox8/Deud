@@ -52,7 +52,7 @@ public class Utils {
         }
     }
 
-    public static int directionToDregrees(int direction) {
+    public static int directionToDegrees(int direction) {
         switch (direction) {
             case 0:
                 return 90;
@@ -80,6 +80,7 @@ public class Utils {
         return new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR).filter(texture, new BufferedImage(texture.getHeight(), texture.getWidth(), texture.getType()));
     }
 
+    // ToDo: Fix this
     public static ArrayList<Entity> getNearbyEntities(Location center, double radius, int amount) {
         World world = center.getWorld();
         double increment = (2 * Math.PI) / amount;

@@ -42,7 +42,6 @@ public class Game implements Runnable {
     //States
     @Getter @Setter public State gameState;
     public State menuState;
-    public State optionsState;
 
     //Input
     @Getter private final KeyManager keyManager;
@@ -86,7 +85,6 @@ public class Game implements Runnable {
 
         gameState = new GameState(gameAPI, "springwood");
         menuState = new MenuState(gameAPI);
-        //optionsState = new PlayerState(gameAPI);
 
         State.setState(menuState);
         Launcher.getDiscord().createNewPresence(gameAPI.getWorld().getEntityManager().getPlayer());

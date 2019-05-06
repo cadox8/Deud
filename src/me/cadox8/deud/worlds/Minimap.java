@@ -14,7 +14,7 @@ public class Minimap {
     private World world;
     private Player player;
 
-    private int imgWidth = 8;
+    private int imgSize = 8;
 
     private List<TileData> tiles;
 
@@ -50,10 +50,10 @@ public class Minimap {
                 if (t.getId() == 8) continue;
 
                 final TileData td = new TileData(t, new Color(t.getTexture().getRGB(0, 0)));
-                final BufferedImage bi = new BufferedImage(imgWidth, imgWidth, BufferedImage.TYPE_INT_RGB);
+                final BufferedImage bi = new BufferedImage(imgSize, imgSize, BufferedImage.TYPE_INT_RGB);
 
-                for (int d = 0; d < imgWidth; d++){
-                    for (int da = 0; da < imgWidth; da++){
+                for (int d = 0; d < imgSize; d++){
+                    for (int da = 0; da < imgSize; da++){
                         bi.setRGB(d, da, td.getColor().getRGB());
                     }
                 }

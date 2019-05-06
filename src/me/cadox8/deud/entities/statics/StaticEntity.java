@@ -25,7 +25,7 @@ public abstract class StaticEntity extends Entity {
     public void getHurt() {}
 
     @Override
-    public void specialRender(Graphics g) {}
+    public void preRender(Graphics g) {}
 
     public void fixAnimations() {}
 }

@@ -19,4 +19,12 @@ public abstract class State {
 
     public abstract void tick();
     public abstract void render(Graphics g);
+
+    public String toString() {
+        return "State:{Name: " + getStateName() + "}";
+    }
+
+    public String getStateName() {
+        return getClass().getSimpleName();
+    }
 }

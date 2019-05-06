@@ -8,8 +8,7 @@ import net.arikia.dev.drpc.DiscordRichPresence;
 public class Discord {
 
     public Discord() {
-        final DiscordEventHandlers handlers = new DiscordEventHandlers.Builder().setReadyEventHandler((user) -> Log.log(Log.LogType.SUCCESS, "Deud hooked into " + user.username + "#" + user.discriminator + "!")).build();
-
+        final DiscordEventHandlers handlers = new DiscordEventHandlers.Builder().setReadyEventHandler((user) -> Log.log(Log.LogType.SUCCESS, "Deud hooked into Discord (" + user.username + "#" + user.discriminator + ")!")).build();
         DiscordRPC.discordInitialize("524279850887020544", handlers, true);
     }
 
