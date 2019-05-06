@@ -4,16 +4,13 @@ import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.projectiles.Projectile;
-import me.cadox8.deud.events.Event;
 
-public class ProjectileHitEvent extends Event {
+public class ProjectileHitEvent extends ProjectileEvent {
 
-    private Projectile projectile;
     private Entity damaged;
 
     public ProjectileHitEvent(GameAPI gameAPI, @NonNull Projectile projectile, @NonNull Entity damaged) {
-        super(gameAPI);
-        this.projectile = projectile;
+        super(gameAPI, projectile);
         this.damaged = damaged;
     }
 

@@ -5,17 +5,15 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.projectiles.Arrow;
 import me.cadox8.deud.entities.creatures.projectiles.Projectile;
-import me.cadox8.deud.events.Event;
 import me.cadox8.deud.items.Item;
 
-public class ProjectileShotEvent extends Event {
+public class ProjectileShotEvent extends ProjectileEvent {
 
-    private Projectile projectile;
     private Entity shooter;
     private Item item;
 
     public ProjectileShotEvent(GameAPI gameAPI, @NonNull Item item, @NonNull Entity shooter) {
-        super(gameAPI);
+        super(gameAPI, null);
         this.item = item;
         this.shooter = shooter;
     }
