@@ -91,9 +91,9 @@ public abstract class Item {
 
 
     public void tick(){
-        if(gameAPI.getWorld().getEntityManager().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)){
+        if(gameAPI.getWorld().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)){
             pickedUp = true;
-            gameAPI.getWorld().getEntityManager().getPlayer().getInventory().addItem(this);
+            gameAPI.getWorld().getPlayer().getInventory().addItem(this);
         }
     }
 

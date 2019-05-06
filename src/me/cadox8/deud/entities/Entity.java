@@ -30,9 +30,9 @@ public abstract class Entity {
     protected static final int DEFAULT_DAMAGE = 3;
     protected static final float DEFAULT_ARMOR = 0;
 
-    private static final double DMG_UP_PER_LVL = 0.1;
-    private static final double HEALTH_UP_PER_LVL = 0.13;
-    private static final double ARMOR_UP_PER_LVL = 0.086;
+    private static final double DMG_UP_PER_LVL = 0.13;
+    private static final double HEALTH_UP_PER_LVL = 0.17;
+    private static final double ARMOR_UP_PER_LVL = 0.09;
 
     @Getter @Setter protected GameAPI gameAPI;
 
@@ -59,8 +59,6 @@ public abstract class Entity {
 
     @Getter @Setter private boolean active = true;
 
-    @Setter private Location location;
-
     @Getter @Setter protected Rectangle bounds;
 
     @Getter @Setter private Entity collisionEntity;
@@ -84,8 +82,6 @@ public abstract class Entity {
         damage = DEFAULT_DAMAGE;
         armor = DEFAULT_ARMOR;
 
-        this.location = new Location(this);
-
         bounds = new Rectangle(0, 0, width, height);
     }
 
@@ -106,9 +102,9 @@ public abstract class Entity {
         health -= amt;
 
         if (this instanceof Creature) {
-            if (attacker instanceof Monster) ((Monster)attacker).getItemInHand().getAttributes().forEach(a -> a.perform(attacker, (Creature) this));
-            if (attacker instanceof Npc) ((Npc)attacker).getItems().get(0).getAttributes().forEach(a -> a.perform(attacker, (Npc) this));
-            if (attacker instanceof Player) ((Player) attacker).getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, (Creature) this));
+            if (attacker instanceof Monster) ((Monster)attacker).getItemInHand().getAttributes().forEach(a -> a.perform(attacker, this));
+            if (attacker instanceof Npc) ((Npc)attacker).getItems().get(0).getAttributes().forEach(a -> a.perform(attacker, this));
+            if (attacker instanceof Player) ((Player) attacker).getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
         }
 
         if (attacker instanceof Projectile) {
@@ -202,7 +198,6 @@ public abstract class Entity {
         if (item == null) return;
         if (percent >= new Random().nextFloat()) gameAPI.getWorld().getItemManager().addItem(item.createNew((int) x, (int) y, item.getCount()));
     }
-
 
     public Location getLocation() {
         return new Location(this);

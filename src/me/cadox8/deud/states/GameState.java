@@ -36,7 +36,7 @@ public class GameState extends State {
         world = new World(gameAPI, "resources/worlds/" + map + "/world.txt");
 
         gameAPI.setWorld(world);
-        gameAPI.getWorld().getEntityManager().getPlayer().loadMiniMap();
+        gameAPI.getWorld().getPlayer().loadMiniMap();
     }
 
     @Override

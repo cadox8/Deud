@@ -31,9 +31,9 @@ public class MenuState extends State {
             gameAPI.getMouseManager().setUIManager(null);
             setState(gameAPI.getGame().gameState);
 
-            if (gameAPI.getGame().getPlayerData() == null) gameAPI.getEntityManager().getPlayer().setNick("Arya");
+            if (gameAPI.getGame().getPlayerData() == null) gameAPI.getPlayer().setNick("Arya");
 
-            Log.log("Player nick: " + gameAPI.getEntityManager().getPlayer().getNick());
+            Log.log("Player nick: " + gameAPI.getPlayer().getNick());
         }));
 
         uiManager.addObject(new UIImageButton(900, 650, 200, 100, GUI.exit, () -> System.exit(0)));

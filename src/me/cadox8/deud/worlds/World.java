@@ -139,6 +139,9 @@ public class World {
         return path.split("/")[2].split("\\.")[0];
     }
 
+    public Player getPlayer() {
+        return getEntityManager().getPlayer();
+    }
 
     @RequiredArgsConstructor
     private class TileUtils {

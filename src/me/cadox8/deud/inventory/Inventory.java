@@ -38,7 +38,7 @@ public class Inventory {
     public void tick() {
         if (GameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_E)) {
             active = !active;
-            GameAPI.getWorld().getEntityManager().getPlayer().setFreeze(active);
+            GameAPI.getWorld().getPlayer().setFreeze(active);
         }
         if (!active) return;
 
