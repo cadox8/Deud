@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class Rock extends StaticEntity {
 
-    public Rock(GameAPI GameAPI, float x, float y) {
-        super(6, "Rock", GameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public Rock(GameAPI gameAPI, float x, float y) {
+        super(6, "Rock", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         bounds.x = 2;
         bounds.y = (int) (height / 2f);
@@ -25,6 +25,6 @@ public class Rock extends StaticEntity {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.stone, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.stone, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
     }
 }

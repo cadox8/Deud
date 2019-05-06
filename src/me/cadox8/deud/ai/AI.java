@@ -13,7 +13,7 @@ import java.util.Random;
 
 public abstract class AI {
 
-    protected GameAPI GameAPI;
+    protected GameAPI gameAPI;
     private Entity entity;
     protected Player player;
 
@@ -24,11 +24,11 @@ public abstract class AI {
     @Getter protected Rectangle bounds;
     private int tempDelay = 0;
 
-    public AI(GameAPI GameAPI, Entity entity, float speed, int delay) {
-        this(GameAPI, entity, speed, delay, new Rectangle(0, 0, 250, 250));
+    public AI(GameAPI gameAPI, Entity entity, float speed, int delay) {
+        this(gameAPI, entity, speed, delay, new Rectangle(0, 0, 250, 250));
     }
-    public AI(GameAPI GameAPI, Entity entity, float speed, int delay, Rectangle bounds) {
-        this.GameAPI = GameAPI;
+    public AI(GameAPI gameAPI, Entity entity, float speed, int delay, Rectangle bounds) {
+        this.gameAPI = gameAPI;
         this.entity = entity;
         this.speed = speed;
         this.delay = delay;
@@ -42,7 +42,7 @@ public abstract class AI {
 
 
     public boolean isTracking() {
-        for (Entity e : GameAPI.getWorld().getEntityManager().getEntities()) {
+        for (Entity e : gameAPI.getWorld().getEntityManager().getEntities()) {
             if (e instanceof Player) {
                 if (getTrackingArea().intersects(e.getCollisionBounds(0, 0))) {
                     player = (Player) e;
@@ -139,7 +139,7 @@ public abstract class AI {
         entity.setLastAttackTimer(System.currentTimeMillis());
         if (entity.getAttackTimer() < entity.getAttackCooldown()) return;
 
-        for (Entity e : GameAPI.getWorld().getEntityManager().getEntities()) {
+        for (Entity e : gameAPI.getWorld().getEntityManager().getEntities()) {
             if (e instanceof Player) {
                 if (e.getCollisionBounds(xMove, yMove).intersects(player.getCollisionBounds(0, 0))) {
                     isAttacking = true;

@@ -14,7 +14,7 @@ import java.util.Map;
 @Experimental
 public class Location {
 
-    @Setter @Getter private static GameAPI GameAPI;
+    @Setter @Getter private static GameAPI gameAPI;
 
     @Getter @Setter private World world;
     @Getter @Setter private float x;
@@ -29,7 +29,7 @@ public class Location {
     }
 
     public Location(float x, float y, int direction) {
-        this(GameAPI.getWorld(), x, y, direction);
+        this(gameAPI.getWorld(), x, y, direction);
     }
     public Location(World world, float x, float y, int direction) {
         this.world = world;
@@ -44,7 +44,7 @@ public class Location {
     }
 
     public void teleport(float x, float y, int direction) {
-        teleport(GameAPI.getWorld(), x, y, direction);
+        teleport(gameAPI.getWorld(), x, y, direction);
     }
     public void teleport(World world, float x, float y, int direction) {
         setWorld(world);
@@ -78,7 +78,7 @@ public class Location {
     }
 
     public Location deSerializeLocation(Map<String, Object> location) {
-        final World world = new World(GameAPI, (String)location.get("world"));
+        final World world = new World(gameAPI, (String)location.get("world"));
         final float x = (float)location.get("x");
         final float y = (float)location.get("y");
         final int direction = (int)location.get("direction");

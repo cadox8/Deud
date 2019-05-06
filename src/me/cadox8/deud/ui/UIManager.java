@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 public class UIManager {
 
-    private GameAPI GameAPI;
+    private GameAPI gameAPI;
     @Getter @Setter private ArrayList<UIObject> objects;
 
-    public UIManager(GameAPI GameAPI) {
-        this.GameAPI = GameAPI;
+    public UIManager(GameAPI gameAPI) {
+        this.gameAPI = gameAPI;
         objects = new ArrayList<>();
     }
 

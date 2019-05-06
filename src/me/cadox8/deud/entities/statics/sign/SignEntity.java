@@ -20,8 +20,8 @@ public class SignEntity extends StaticEntity {
 
     @Getter private final int type;
 
-    public SignEntity(GameAPI GameAPI, float x, float y, int type, List<String> text) {
-        super(7, "Sign", GameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public SignEntity(GameAPI gameAPI, float x, float y, int type, List<String> text) {
+        super(7, "Sign", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
 
@@ -52,7 +52,7 @@ public class SignEntity extends StaticEntity {
 
     @Override
     public void specialRender(Graphics g) {
-        g.drawImage(img, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(img, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
     }
 
     public void signRender(Graphics g) {

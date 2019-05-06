@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class Tree extends StaticEntity {
 
-    public Tree(GameAPI GameAPI, float x, float y) {
-        super(5, "Tree", GameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public Tree(GameAPI gameAPI, float x, float y) {
+        super(5, "Tree", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         bounds.x = 10;
         bounds.y = (int) (height / 1.5f);
@@ -29,7 +29,7 @@ public class Tree extends StaticEntity {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.tree2, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.tree, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.tree2, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.tree, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) ((y - gameAPI.getGameCamera().getYOffset()) - height), width, height, null);
     }
 }

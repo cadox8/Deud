@@ -15,7 +15,7 @@ import java.util.Iterator;
 
 public class EntityManager {
 
-    @Getter @Setter private static GameAPI GameAPI;
+    @Getter @Setter private static GameAPI gameAPI;
     @Getter @Setter private Player player;
 
     @Getter @Setter private ArrayList<Entity> entities;
@@ -25,8 +25,8 @@ public class EntityManager {
         return 1;
     };
 
-    public EntityManager(GameAPI GameAPI, Player player) {
-        EntityManager.GameAPI = GameAPI;
+    public EntityManager(GameAPI gameAPI, Player player) {
+        EntityManager.gameAPI = gameAPI;
         this.player = player;
         entities = new ArrayList<>();
         addEntity(player);
@@ -84,11 +84,11 @@ public class EntityManager {
         attacker.attackTimer += System.currentTimeMillis() - attacker.lastAttackTimer;
         attacker.lastAttackTimer = System.currentTimeMillis();
         if (attacker.attackTimer < attacker.attackCooldown) {
-            if (GameAPI.isDebug()) Log.log("Attack in cooldown: " + attacker.attackTimer + "/" + attacker.attackCooldown);
+            if (gameAPI.isDebug()) Log.log("Attack in cooldown: " + attacker.attackTimer + "/" + attacker.attackCooldown);
             return;
         }
         if (attacker instanceof Player && ((Player) attacker).getInventory().isActive()) return;
-        if (attacker instanceof Player && !GameAPI.getMouseManager().isLeftPressed()) return;
+        if (attacker instanceof Player && !gameAPI.getMouseManager().isLeftPressed()) return;
         attacker.attackTimer = 0;
 
         final Entity en = getEntity(attacker, xMove, yMove);
@@ -124,7 +124,7 @@ public class EntityManager {
                 break;
         }
 
-        for (Entity e : GameAPI.getWorld().getEntityManager().getEntities()) {
+        for (Entity e : gameAPI.getWorld().getEntityManager().getEntities()) {
             if (e.equals(speaker)) continue;
             if (e.getCollisionBounds(xMove, yMove).intersects(ar)) finalEntity = e;
         }

@@ -11,11 +11,11 @@ import java.awt.*;
 
 public class Chest extends StaticEntity {
 
-    public Chest(GameAPI GameAPI, float x, float y) {
-        this(GameAPI,x, y, true);
+    public Chest(GameAPI gameAPI, float x, float y) {
+        this(gameAPI,x, y, true);
     }
-    public Chest(GameAPI GameAPI, float x, float y, boolean explosive) {
-        super(8, "Chest", GameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public Chest(GameAPI gameAPI, float x, float y, boolean explosive) {
+        super(8, "Chest", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
         setExplosive(explosive);
@@ -41,6 +41,6 @@ public class Chest extends StaticEntity {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.chest, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.chest, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
     }
 }

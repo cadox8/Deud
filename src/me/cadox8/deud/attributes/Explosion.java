@@ -9,8 +9,8 @@ public class Explosion extends Attribute {
     private final int radius;
     private final int power;
 
-    public Explosion(GameAPI GameAPI, int radius, int power) {
-        super(GameAPI, 1, "Explosion");
+    public Explosion(GameAPI gameAPI, int radius, int power) {
+        super(gameAPI, 1, "Explosion");
 
         this.radius = radius;
         this.power = power;

@@ -9,11 +9,11 @@ import java.util.Iterator;
 
 public class ItemManager {
 
-    @Getter private final GameAPI GameAPI;
+    @Getter private final GameAPI gameAPI;
     public final ArrayList<Item> items;
 
-    public ItemManager(GameAPI GameAPI) {
-        this.GameAPI = GameAPI;
+    public ItemManager(GameAPI gameAPI) {
+        this.gameAPI = gameAPI;
         items = new ArrayList<>();
     }
 
@@ -32,7 +32,7 @@ public class ItemManager {
 
     public void addItem(Item i) {
         if(i.isPickedUp()) i.setPickedUp(false);
-        i.setGameAPI(GameAPI);
+        i.setGameAPI(gameAPI);
         items.add(i);
     }
 }

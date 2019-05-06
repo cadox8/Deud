@@ -18,8 +18,8 @@ public class Door extends StaticEntity {
 
     @Getter private final String map;
 
-    public Door(GameAPI GameAPI, float x, float y, String map) {
-        super(9, "Door", GameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public Door(GameAPI gameAPI, float x, float y, String map) {
+        super(9, "Door", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         this.map = map;
 
@@ -37,18 +37,18 @@ public class Door extends StaticEntity {
             return;
         }
         Log.log("Teleporting to " + map);
-        FileUtils.save(GameAPI.getWorld().getEntityManager().getPlayer());
-        GameAPI.getWorld().getEntityManager().getEntities().forEach(GameAPI.getWorld().getEntityManager()::removeEntity);
+        FileUtils.save(gameAPI.getWorld().getEntityManager().getPlayer());
+        gameAPI.getWorld().getEntityManager().getEntities().forEach(gameAPI.getWorld().getEntityManager()::removeEntity);
 
-        final GameState gameState = new GameState(GameAPI, getMap(), true);
+        final GameState gameState = new GameState(gameAPI, getMap(), true);
 
-        GameAPI.getGame().setGameState(gameState);
+        gameAPI.getGame().setGameState(gameState);
         State.setState(gameState);
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.door2, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
-        g.drawImage(Assets.door, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) ((y - GameAPI.getGameCamera().getYOffset()) - height), width, height, null);
+        g.drawImage(Assets.door2, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(Assets.door, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) ((y - gameAPI.getGameCamera().getYOffset()) - height), width, height, null);
     }
 }

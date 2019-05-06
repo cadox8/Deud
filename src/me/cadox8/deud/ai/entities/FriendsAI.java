@@ -12,8 +12,8 @@ public class FriendsAI extends AI {
 
     @Setter @Getter private boolean angry;
 
-    public FriendsAI(GameAPI GameAPI, Creature creature, float speed, int delay) {
-        super(GameAPI, creature, speed, delay);
+    public FriendsAI(GameAPI gameAPI, Creature creature, float speed, int delay) {
+        super(gameAPI, creature, speed, delay);
         this.creature = creature;
     }
 

@@ -10,8 +10,8 @@ public class MonstersAI extends AI {
 
     private Creature creature;
 
-    public MonstersAI(GameAPI GameAPI, Creature creature, float speed, int delay, int width, int height) {
-        super(GameAPI, creature, speed, delay, new Rectangle(0, 0, width, height));
+    public MonstersAI(GameAPI gameAPI, Creature creature, float speed, int delay, int width, int height) {
+        super(gameAPI, creature, speed, delay, new Rectangle(0, 0, width, height));
         this.creature = creature;
     }
 

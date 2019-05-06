@@ -9,26 +9,26 @@ import me.cadox8.deud.tiles.Tile;
 @AllArgsConstructor
 public class GameCamera {
 
-    private GameAPI GameAPI;
+    private GameAPI gameAPI;
     @Getter private float xOffset, yOffset;
 
     private void checkBlankSpace() {
         if (xOffset < 0) {
             xOffset = 0;
-        } else if (xOffset > GameAPI.getWorld().getWidth() * Tile.TILEWIDTH - GameAPI.getWidth()) {
-            xOffset = GameAPI.getWorld().getWidth() * Tile.TILEWIDTH - GameAPI.getWidth();
+        } else if (xOffset > gameAPI.getWorld().getWidth() * Tile.TILEWIDTH - gameAPI.getWidth()) {
+            xOffset = gameAPI.getWorld().getWidth() * Tile.TILEWIDTH - gameAPI.getWidth();
         }
 
         if (yOffset < 0) {
             yOffset = 0;
-        } else if (yOffset > GameAPI.getWorld().getHeight() * Tile.TILEHEIGHT - GameAPI.getHeight()) {
-            yOffset = GameAPI.getWorld().getHeight() * Tile.TILEHEIGHT - GameAPI.getHeight();
+        } else if (yOffset > gameAPI.getWorld().getHeight() * Tile.TILEHEIGHT - gameAPI.getHeight()) {
+            yOffset = gameAPI.getWorld().getHeight() * Tile.TILEHEIGHT - gameAPI.getHeight();
         }
     }
 
     public void centerOnEntity(Entity e) {
-        xOffset = e.getX() - GameAPI.getWidth() / 2 + e.getWidth() / 2;
-        yOffset = e.getY() - GameAPI.getHeight() / 2 + e.getHeight() / 2;
+        xOffset = e.getX() - gameAPI.getWidth() / 2 + e.getWidth() / 2;
+        yOffset = e.getY() - gameAPI.getHeight() / 2 + e.getHeight() / 2;
         checkBlankSpace();
     }
 

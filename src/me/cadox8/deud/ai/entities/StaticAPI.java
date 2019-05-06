@@ -11,8 +11,8 @@ public class StaticAPI extends AI {
     private int tempDelay;
     private int direction = 0;
 
-    public StaticAPI(GameAPI GameAPI, StaticEntity staticEntity, float speed, int delay) {
-        super(GameAPI, staticEntity, speed, delay);
+    public StaticAPI(GameAPI gameAPI, StaticEntity staticEntity, float speed, int delay) {
+        super(gameAPI, staticEntity, speed, delay);
         this.staticEntity = staticEntity;
         tempDelay = delay;
     }

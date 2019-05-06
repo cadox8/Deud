@@ -45,7 +45,7 @@ public abstract class Item {
     // Class
     public static final int ITEMWIDTH = 32, ITEMHEIGHT = 32;
 
-    @Getter @Setter protected GameAPI GameAPI;
+    @Getter @Setter protected GameAPI gameAPI;
     @Getter protected final BufferedImage texture;
     @Getter protected final int id;
     @Getter @Setter protected String name;
@@ -91,15 +91,15 @@ public abstract class Item {
 
 
     public void tick(){
-        if(GameAPI.getWorld().getEntityManager().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)){
+        if(gameAPI.getWorld().getEntityManager().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)){
             pickedUp = true;
-            GameAPI.getWorld().getEntityManager().getPlayer().getInventory().addItem(this);
+            gameAPI.getWorld().getEntityManager().getPlayer().getInventory().addItem(this);
         }
     }
 
     public void render(Graphics g){
-        if(GameAPI == null) return;
-        render(g, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()));
+        if(gameAPI == null) return;
+        render(g, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()));
     }
 
     public void render(Graphics g, int x, int y){

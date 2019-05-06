@@ -47,8 +47,8 @@ public class Player extends Creature {
     private float old_speed = -1;
     private Minimap map;
 
-    public Player(GameAPI GameAPI, float x, float y) {
-        super(1, "Player", GameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+    public Player(GameAPI gameAPI, float x, float y) {
+        super(1, "Player", gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         bounds.x = 20;
         bounds.y = 44;
@@ -61,7 +61,7 @@ public class Player extends Creature {
         animLeft = new Animation((int)(speed * 600), Models.player_left);
         animRight = new Animation((int)(speed * 600), Models.player_right);
 
-        inventory = new Inventory(GameAPI, this);
+        inventory = new Inventory(gameAPI, this);
         inventory.setUsableItem(Item.hand);
 
         setMaxHunger(10);
@@ -112,7 +112,7 @@ public class Player extends Creature {
         //Movement
         getInput();
         move();
-        GameAPI.getGameCamera().centerOnEntity(this);
+        gameAPI.getGameCamera().centerOnEntity(this);
 
         // Attack
         EntityManager.checkAttacks(this);
@@ -130,14 +130,14 @@ public class Player extends Creature {
     @Override
     public void die() {
         Log.log(Log.LogType.DANGER, "You lose");
-        GameAPI.getWorld().getEntityManager().freezeAll();
+        gameAPI.getWorld().getEntityManager().freezeAll();
         //System.exit(0);
     }
 
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getCurrentAnimationFrame(), (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(getCurrentAnimationFrame(), (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
 
         inventory.render(g);
 
@@ -203,57 +203,57 @@ public class Player extends Creature {
         xMove = 0;
         yMove = 0;
 
-        if (GameAPI.getKeyManager().tests) {
+        if (gameAPI.getKeyManager().tests) {
             Utils.getNearbyEntities(getLocation(), 5, 5);
             //new Door(GameAPI, 0, 0, "main").changeWorld();
             setHunger(getMaxHunger());
             addExp(20);
             setHealth(getMaxHealth());
-            GameAPI.getWorld().getEntityManager().freezeCreatures();
+            gameAPI.getWorld().getEntityManager().freezeCreatures();
         }
 
-        if (GameAPI.getKeyManager().esc) {
+        if (gameAPI.getKeyManager().esc) {
             FileUtils.save(this);
             System.exit(0);
         }
 
-        if (GameAPI.getKeyManager().debug) {
+        if (gameAPI.getKeyManager().debug) {
             Sound.ENTITY_WALK_GRASS.playSound();
-            GameAPI.setDebug(!GameAPI.isDebug());
+            gameAPI.setDebug(!gameAPI.isDebug());
         }
 
         if (isFreeze()) return;
 
-        if (GameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
             final Entity en = EntityManager.getEntity(this, 0, 0);
             if (en != null && en instanceof Npc) {
                 final Npc npc = (Npc) en;
                 if (npc.getText().isEmpty()) return;
-                final Dialog dialog = new Dialog(GameAPI, this, npc);
-                ((GameState) GameAPI.getGame().getGameState()).setDialog(dialog);
+                final Dialog dialog = new Dialog(gameAPI, this, npc);
+                ((GameState) gameAPI.getGame().getGameState()).setDialog(dialog);
             }
         }
 
-        if (GameAPI.getKeyManager().up) {
+        if (gameAPI.getKeyManager().up) {
             yMove = -speed;
             setDirection(1);
         }
-        if (GameAPI.getKeyManager().down) {
+        if (gameAPI.getKeyManager().down) {
             yMove = speed;
             setDirection(0);
         }
-        if (GameAPI.getKeyManager().left) {
+        if (gameAPI.getKeyManager().left) {
             xMove = -speed;
             setDirection(3);
         }
-        if (GameAPI.getKeyManager().right) {
+        if (gameAPI.getKeyManager().right) {
             xMove = speed;
             setDirection(2);
         }
 
-        if (GameAPI.getMouseManager().isRightPressed()) inventory.getUsableItem().use(this);
+        if (gameAPI.getMouseManager().isRightPressed()) inventory.getUsableItem().use(this);
 
-        if (GameAPI.getKeyManager().shift) {
+        if (gameAPI.getKeyManager().shift) {
             if (hunger <= 0.0) {
                 hunger = 0;
                 if (old_speed != -1) setSpeed(old_speed);
@@ -300,6 +300,6 @@ public class Player extends Creature {
     }
 
     public void loadMiniMap(){
-        map = new Minimap(GameAPI.getWorld(), this);
+        map = new Minimap(gameAPI.getWorld(), this);
     }
 }

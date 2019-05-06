@@ -34,7 +34,7 @@ public abstract class Entity {
     private static final double HEALTH_UP_PER_LVL = 0.13;
     private static final double ARMOR_UP_PER_LVL = 0.086;
 
-    @Getter @Setter protected GameAPI GameAPI;
+    @Getter @Setter protected GameAPI gameAPI;
 
     @Getter @Setter protected AI ai;
 
@@ -70,10 +70,10 @@ public abstract class Entity {
     @Getter @Setter protected Animation animDown, animUp, animLeft, animRight;
     @Getter @Setter protected Animation[] animations = new Animation[4];
 
-    public Entity(int id, String name, GameAPI GameAPI, float x, float y, int width, int height, int level) {
+    public Entity(int id, String name, GameAPI gameAPI, float x, float y, int width, int height, int level) {
         INTERNAL_ID = id;
         INTERNAL_NAME = name;
-        this.GameAPI = GameAPI;
+        this.gameAPI = gameAPI;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -123,7 +123,7 @@ public abstract class Entity {
     }
 
     public boolean checkEntityCollisions(float xOffset, float yOffset) {
-        for (Entity e : GameAPI.getWorld().getEntityManager().getEntities()) {
+        for (Entity e : gameAPI.getWorld().getEntityManager().getEntities()) {
             if (e.equals(this)) continue;
 
             if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) {
@@ -135,7 +135,7 @@ public abstract class Entity {
     }
 
     public Entity getEntityCollision(float xOffset, float yOffset) {
-        return GameAPI.getWorld().getEntityManager().getEntities().stream().filter(e -> !e.equals(this)).filter(e -> e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))).findFirst().orElse(null);
+        return gameAPI.getWorld().getEntityManager().getEntities().stream().filter(e -> !e.equals(this)).filter(e -> e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))).findFirst().orElse(null);
     }
 
     public Rectangle getCollisionBounds(float xOffset, float yOffset) {
@@ -184,8 +184,6 @@ public abstract class Entity {
 
     protected BufferedImage getCurrentAnimationFrame() {
         switch (direction) {
-            case 0:
-                return animDown.getCurrentFrame();
             case 1:
                 return animUp.getCurrentFrame();
             case 2:
@@ -202,7 +200,7 @@ public abstract class Entity {
     }
     public void dropItem(Item item, float percent){
         if (item == null) return;
-        if (percent >= new Random().nextFloat()) GameAPI.getWorld().getItemManager().addItem(item.createNew((int) x, (int) y, item.getCount()));
+        if (percent >= new Random().nextFloat()) gameAPI.getWorld().getItemManager().addItem(item.createNew((int) x, (int) y, item.getCount()));
     }
 
 

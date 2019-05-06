@@ -11,8 +11,8 @@ public abstract class StaticEntity extends Entity {
 
     @Getter @Setter protected boolean explosive = false;
 
-    public StaticEntity(int id, String name, GameAPI GameAPI, float x, float y, int width, int height) {
-        super(id, name, GameAPI, x, y, width, height, 0);
+    public StaticEntity(int id, String name, GameAPI gameAPI, float x, float y, int width, int height) {
+        super(id, name, gameAPI, x, y, width, height, 0);
     }
 
     @Override

@@ -38,7 +38,7 @@ public abstract class Projectile extends Creature {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(texture, (int) (x - GameAPI.getGameCamera().getXOffset()), (int) (y - GameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(texture, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
     }
 
     @Override
