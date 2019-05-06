@@ -7,9 +7,11 @@ import me.cadox8.deud.utils.Utils;
 public class Explosion extends Attribute {
 
     private final int radius;
-    private final int power;
+    private final double power;
 
-    public Explosion(GameAPI gameAPI, int radius, int power) {
+    private Entity damager;
+
+    public Explosion(GameAPI gameAPI, int radius, double power) {
         super(gameAPI, 1, "Explosion");
 
         this.radius = radius;
@@ -18,6 +20,13 @@ public class Explosion extends Attribute {
 
     @Override
     public void perform(Entity damager, Entity damaged) {
-        Utils.getNearbyEntities(damager.getLocation(), 5, 30).forEach(e -> e.hurt(damager));
+        this.damager = damaged;
+        damager.setDamage(damager.getDamage() + (int)(damager.getDamage() * power));
+        scheduleDelayed(2);
+    }
+
+    @Override
+    public void run() {
+        Utils.getNearbyEntities(damager.getLocation(), radius, 30).forEach(e -> e.hurt(damager));
     }
 }

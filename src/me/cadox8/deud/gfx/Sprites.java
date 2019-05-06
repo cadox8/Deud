@@ -56,17 +56,4 @@ public class Sprites {
         }
         return img;
     }
-
-    public BufferedImage resizeImage(BufferedImage imgOrigin, int width, int height) {
-        Image image = imgOrigin.getScaledInstance(width, height, Image.SCALE_DEFAULT);
-
-        if (image instanceof BufferedImage) return (BufferedImage) image;
-
-        BufferedImage img = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D bGr = img.createGraphics();
-        bGr.drawImage(img, 0, 0, null);
-        bGr.dispose();
-        return img;
-    }
 }

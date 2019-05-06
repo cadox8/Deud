@@ -17,12 +17,12 @@ public abstract class DeudTask extends TimerTask implements Runnable {
     public abstract void run();
 
     public DeudTask scheduleDelayed(int delay) {
-        timer.schedule(this, delay);
+        timer.schedule(this, delay * 1000);
         stop();
         return this;
     }
     public DeudTask schedule(int initialDelay, int period) {
-        timer.scheduleAtFixedRate(this, initialDelay, period);
+        timer.scheduleAtFixedRate(this, initialDelay * 1000, period * 1000);
         return this;
     }
 
