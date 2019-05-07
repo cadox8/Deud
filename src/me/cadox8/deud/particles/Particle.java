@@ -1,7 +1,7 @@
 package me.cadox8.deud.particles;
 
 import lombok.Getter;
-import me.cadox8.deud.gfx.Animation;
+import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.gfx.textures.Assets;
 
 import java.awt.*;

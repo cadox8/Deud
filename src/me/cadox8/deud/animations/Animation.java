@@ -1,4 +1,4 @@
-package me.cadox8.deud.gfx;
+package me.cadox8.deud.animations;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,12 +7,12 @@ import java.awt.image.BufferedImage;
 
 public class Animation {
 
-    @Getter @Setter private int speed, index;
-    private long lastTime, timer;
-    private BufferedImage[] frames;
+    @Getter @Setter protected int speed, index;
+    protected long lastTime, timer;
+    protected BufferedImage[] frames;
 
-    private boolean withEnd;
-    @Getter private boolean end;
+    protected boolean withEnd;
+    @Getter protected boolean end;
 
     public Animation(int speed, BufferedImage[] frames) {
         this.speed = speed;

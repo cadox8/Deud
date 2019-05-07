@@ -2,15 +2,14 @@ package me.cadox8.deud.entities.creatures.player;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.audio.Sound;
-import me.cadox8.deud.dialog.Dialog;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
-import me.cadox8.deud.gfx.Animation;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.gfx.textures.Models;
@@ -22,7 +21,7 @@ import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
-import me.cadox8.deud.worlds.Minimap;
+import me.cadox8.deud.ux.dialog.Dialog;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -45,7 +44,6 @@ public class Player extends Creature {
 
     //Utils
     private float old_speed = -1;
-    private Minimap map;
 
     public Player(GameAPI gameAPI, float x, float y) {
         super(1, "Player", gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
@@ -87,7 +85,6 @@ public class Player extends Creature {
             setNick(pd.getNick());
             setHealth(pd.getHealth());
             setMoney(pd.getMoney());
-            setLocation(loc);
 
             setX(loc.getX());
             setY(loc.getY());
@@ -149,7 +146,7 @@ public class Player extends Creature {
 
     public void postRender(Graphics g) {
         renderInfo(g);
-        map.paintMap(g);
+        //map.paintMap(g);
         inventory.render(g);
     }
 
@@ -170,8 +167,8 @@ public class Player extends Creature {
         }
 
         //Cooldown
-        g.drawImage(Assets.xp, 10, (Assets.HEIGHT * 2) + 8, 32, 32, null);
-        Text.drawString(g, attackTimer >= 300 ? "Attack" : attackTimer + "ms", 35, (Assets.HEIGHT * 3) - 3, 2);
+/*        g.drawImage(Assets.xp, 10, (Assets.HEIGHT * 2) + 8, 32, 32, null);
+        Text.drawString(g, attackTimer >= 300 ? "Attack" : attackTimer + "ms", 35, (Assets.HEIGHT * 3) - 3, 2);*/
 
         //Damage
         drawImage(g, Assets.sword, 0);
@@ -190,8 +187,8 @@ public class Player extends Creature {
         drawString(g, getArmor(),  3);
 
         //Item
-        g.drawImage(inventory.getUsableItem().getTexture(), 1152, 670, null);
-        Text.drawString(g, inventory.getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, 2);
+        g.drawImage(inventory.getUsableItem().getTexture(), 1160, 670, null);
+        Text.drawString(g, inventory.getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, false, Color.BLACK, 2);
 
         if (getHealth() <= 0) {
             Text.drawString(g, "You lose", 125, 530, Color.BLACK, 3);
@@ -274,7 +271,7 @@ public class Player extends Creature {
 
     //
     private void drawImage(Graphics g, BufferedImage image, int pos){
-        int infoY = 600;
+        int infoY = 644;
         int infoX = 10;
         int y = infoY;
 
@@ -288,7 +285,7 @@ public class Player extends Creature {
         drawString(g, value + "", pos);
     }
     private void drawString(Graphics g, String text, int pos){
-        int infoY = 621;
+        int infoY = 665;
         int infoX = 45;
         int y = infoY;
 
@@ -296,10 +293,6 @@ public class Player extends Creature {
         if (pos == 4) y -= 6;
         if (pos == 5) y = infoY + (Assets.HEIGHT * (pos - 1)) + 9;
 
-        Text.drawString(g, text, infoX, y, 2);
-    }
-
-    public void loadMiniMap(){
-        map = new Minimap(gameAPI.getWorld(), this);
+        Text.drawString(g, text, infoX, y, false, Color.BLACK, 2);
     }
 }

@@ -22,7 +22,7 @@ import java.util.Random;
 
 public abstract class Item {
 
-    public static Item[] items = new Item[7]; //All items
+    public static Item[] items = new Item[8]; //All items
 
     //Bug
     public static final ObjectItem bugItem = new BugItem(Assets.bug, 5, "3RR0R");
@@ -31,6 +31,7 @@ public abstract class Item {
     public static final ObjectItem woodItem = new WoodItem(Assets.wood, 0, "Wood");
     public static final ObjectItem rockItem = new RockItem(Assets.stone, 1, "Rock");
     public static final ObjectItem keyItem = new KeyItem(Assets.key, 2, "Key");
+    public static final ObjectItem mapItem = new MapItem(null, 7, "Map");
 
     //Food
     public static final ChickenItem chickenItem = new ChickenItem(Assets.food, 3, "Chicken", 3);

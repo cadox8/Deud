@@ -61,7 +61,7 @@ public abstract class AI {
         if (creature.isFreeze()) return;
 
         tempDelay = delay;
-        direction = new Random().nextInt(6);
+        direction = new Random().nextInt(9);
 
         switch (direction) {
             case 0:
@@ -134,21 +134,6 @@ public abstract class AI {
 
     private void attack(Entity attacker, float xMove, float yMove) {
         EntityManager.checkAttacks(attacker, xMove, yMove);
-/*
-        entity.setAttackTimer(entity.getAttackTimer() + System.currentTimeMillis() - entity.getLastAttackTimer());
-        entity.setLastAttackTimer(System.currentTimeMillis());
-        if (entity.getAttackTimer() < entity.getAttackCooldown()) return;
-
-        for (Entity e : gameAPI.getWorld().getEntityManager().getEntities()) {
-            if (e instanceof Player) {
-                if (e.getCollisionBounds(xMove, yMove).intersects(player.getCollisionBounds(0, 0))) {
-                    isAttacking = true;
-                    if (!isAttacking) return;
-                    entity.setAttackTimer(0);
-                    player.hurt(entity);
-                }
-            }
-        }*/
     }
 
     //TODO: Change

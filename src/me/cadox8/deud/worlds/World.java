@@ -58,7 +58,10 @@ public class World {
         addEntities();
 
         particles = new ArrayList<>();
-        particles.add(Particle.EXPLOSION);
+    }
+
+    public void addParticles(Particle particle) {
+        particles.add(particle);
     }
 
     private void addEntities() {

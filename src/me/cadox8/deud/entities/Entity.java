@@ -3,6 +3,7 @@ package me.cadox8.deud.entities;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.ai.AI;
+import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.monsters.Monster;
@@ -10,7 +11,6 @@ import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.creatures.projectiles.Projectile;
 import me.cadox8.deud.events.projectiles.ProjectileHitEvent;
-import me.cadox8.deud.gfx.Animation;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.utils.Log;
 

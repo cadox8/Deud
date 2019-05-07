@@ -3,7 +3,6 @@ package me.cadox8.deud.entities.statics;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.dialog.Dialog;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.items.Item;
@@ -12,6 +11,7 @@ import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.State;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.utils.Log;
+import me.cadox8.deud.ux.dialog.Dialog;
 
 import java.awt.*;
 import java.io.File;

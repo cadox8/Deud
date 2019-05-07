@@ -1,4 +1,4 @@
-package me.cadox8.deud.dialog;
+package me.cadox8.deud.ux.dialog;
 
 import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;

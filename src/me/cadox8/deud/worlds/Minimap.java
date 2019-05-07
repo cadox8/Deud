@@ -1,6 +1,5 @@
 package me.cadox8.deud.worlds;
 
-import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.tiles.TileData;
 
@@ -12,15 +11,13 @@ import java.util.List;
 public class Minimap {
 
     private World world;
-    private Player player;
 
     private int imgSize = 8;
 
     private List<TileData> tiles;
 
-    public Minimap(World world, Player player){
+    public Minimap(World world){
         this.world = world;
-        this.player = player;
         tiles = loadMap();
     }
 

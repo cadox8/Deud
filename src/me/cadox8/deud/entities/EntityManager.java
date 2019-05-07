@@ -71,7 +71,6 @@ public class EntityManager {
     public void removeEntity(Entity en) {
         en.setActive(false);
     }
-
     public void killAll() {
         entities.forEach(Entity::kill);
     }
