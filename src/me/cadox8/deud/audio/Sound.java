@@ -3,6 +3,7 @@ package me.cadox8.deud.audio;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+@Deprecated
 @AllArgsConstructor
 public enum Sound {
 

@@ -80,7 +80,6 @@ public class Utils {
         return new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR).filter(texture, new BufferedImage(texture.getHeight(), texture.getWidth(), texture.getType()));
     }
 
-    // ToDo: Fix this
     public static ArrayList<Entity> getNearbyEntities(Location center, double radius, int amount) {
         World world = center.getWorld();
         double increment = (2 * Math.PI) / amount;
@@ -91,9 +90,7 @@ public class Utils {
             double x = center.getX() + (radius * Math.cos(angle));
             double y = center.getY() + (radius * Math.sin(angle));
 
-            if (world.getEntityManager().getEntities().stream().anyMatch(e -> e.getLocation().equals(new Location(world, (float) x, (float) y, 0)))) {
-                entities.add(world.getEntityManager().getEntities().stream().filter(e -> e.getLocation().equals(new Location(world, (float) x, (float) y, 0))).findFirst().get());
-            }
+            world.getEntityManager().getEntities().stream().filter(e -> e.getBounds().contains(x, y)).findFirst().ifPresent(entities::add);
         }
         return entities;
     }

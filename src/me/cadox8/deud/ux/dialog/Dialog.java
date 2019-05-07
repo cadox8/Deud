@@ -57,12 +57,12 @@ public class Dialog {
 
     public void render(Graphics g) {
         g.setColor(Color.BLACK);
-        g.drawImage(GUI.dialog, 0, gameApi.getHeight() - 100, gameApi.getWidth(), 100, null);
+        g.drawImage(GUI.dialog, 70, gameApi.getHeight() - 125, gameApi.getWidth() - 120, 100, null);
 
         int p = 1;
         for (String s : renderText()) {
             s = s.replaceAll("%npc%", npc == null ? "" : npc.getDisplayName()).replaceAll("%player%", player.getNick());
-            Text.drawString(g, s, 80, gameApi.getHeight() - 97 + (p * 20), Color.WHITE, 2);
+            Text.drawString(g, s, 150, gameApi.getHeight() - 122 + (p * 20), Color.WHITE, 2);
             p++;
         }
     }

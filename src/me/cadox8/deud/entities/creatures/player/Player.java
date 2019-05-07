@@ -61,6 +61,7 @@ public class Player extends Creature {
 
         inventory = new Inventory(gameAPI, this);
         inventory.setUsableItem(Item.hand);
+        inventory.addItem(Item.keyItem.setCount(5));
 
         setMaxHunger(10);
         setHunger(getMaxHunger());

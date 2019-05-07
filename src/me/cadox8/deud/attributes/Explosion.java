@@ -20,9 +20,9 @@ public class Explosion extends Attribute {
 
     @Override
     public void perform(Entity damager, Entity damaged) {
-        this.damager = damaged;
+        this.damager = damager;
         damager.setDamage(damager.getDamage() + (int)(damager.getDamage() * power));
-        scheduleDelayed(2);
+        scheduleDelayed(2).run();
     }
 
     @Override

@@ -13,7 +13,7 @@ public class MapItem extends ObjectItem {
     public MapItem(BufferedImage texture, int id, String name) {
         super(texture, id, name);
 
-        map = new Minimap(gameAPI.getWorld());
+        //map = new Minimap(gameAPI.getWorld());
     }
 
     @Override

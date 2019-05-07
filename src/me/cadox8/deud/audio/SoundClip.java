@@ -4,6 +4,7 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
+@Deprecated
 public class SoundClip {
 
     private final String PATH = "/sounds/";

@@ -32,7 +32,6 @@ public class Chest extends StaticEntity {
     public void open(Player p) {
         if (p.getInventory().keyCount() == 0) return;
         p.getInventory().removeItem(Item.keyItem);
-        //p.getInventory().getInventoryItems().stream().filter(i -> i.getId() == Item.keyItem.getId()).findFirst().get().removeItem(p);
 
         p.getInventory().addItem(Item.getRandom(Item.hand, Item.keyItem));
 

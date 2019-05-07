@@ -12,7 +12,7 @@ import java.io.File;
 
 public class Launcher {
 
-    public static final String VERSION = "Alpha v0.8.3";
+    public static final String VERSION = "Alpha v0.8.4";
     public static final String GAME_FILE = "C:" + File.separator + "Deud" + File.separator;
 
     @Getter private static Discord discord;
