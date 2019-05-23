@@ -16,6 +16,7 @@ import me.cadox8.deud.gfx.textures.Models;
 import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
+import me.cadox8.deud.quests.Quest;
 import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.states.GameState;
@@ -44,6 +45,8 @@ public class Player extends Creature {
 
     //Utils
     private float old_speed = -1;
+
+    @Getter @Setter private Quest assignedQuest;
 
     public Player(GameAPI gameAPI, float x, float y) {
         super(1, "Player", gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
