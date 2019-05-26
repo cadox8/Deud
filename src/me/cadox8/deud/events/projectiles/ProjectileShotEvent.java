@@ -3,8 +3,8 @@ package me.cadox8.deud.events.projectiles;
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
-import me.cadox8.deud.entities.creatures.projectiles.Arrow;
 import me.cadox8.deud.entities.creatures.projectiles.Projectile;
+import me.cadox8.deud.entities.projectile.Arrow;
 import me.cadox8.deud.items.Item;
 
 public class ProjectileShotEvent extends ProjectileEvent {

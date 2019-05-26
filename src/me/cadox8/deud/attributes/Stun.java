@@ -17,6 +17,7 @@ public class Stun extends Attribute {
         if (!(dam instanceof Creature)) return;
         this.damaged = (Creature)dam;
         damaged.setFreeze(true);
+        scheduleDelayed(2).run();
     }
 
     @Override

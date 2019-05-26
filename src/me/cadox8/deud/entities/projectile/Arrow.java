@@ -1,4 +1,4 @@
-package me.cadox8.deud.entities.creatures.projectiles;
+package me.cadox8.deud.entities.projectile;
 
 
 import me.cadox8.deud.api.GameAPI;
@@ -15,5 +15,7 @@ public class Arrow extends Projectile {
 
         setDamageable(false);
         setSpeed(10.0f);
+
+        setTexture(null);
     }
 }

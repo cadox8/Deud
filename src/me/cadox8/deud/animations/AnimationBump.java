@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 
 public class AnimationBump extends Animation {
 
-    private final Entity entity;
     private final float x, y;
     @Getter private float newX, newY;
 
@@ -17,7 +16,6 @@ public class AnimationBump extends Animation {
     public AnimationBump(int speed, BufferedImage[] frames, Entity entity) {
         super(speed, frames);
 
-        this.entity = entity;
         this.x = entity.getX();
         this.y = entity.getY() - (float)entity.getBounds().getHeight();
     }
