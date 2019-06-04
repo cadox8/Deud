@@ -9,7 +9,7 @@ import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.monsters.Monster;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
-import me.cadox8.deud.entities.creatures.projectiles.Projectile;
+import me.cadox8.deud.entities.projectile.Projectile;
 import me.cadox8.deud.events.projectiles.ProjectileHitEvent;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.utils.Log;

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.audio.Sound;
+import me.cadox8.deud.audio.Sounds;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
@@ -219,7 +219,7 @@ public class Player extends Creature {
         }
 
         if (gameAPI.getKeyManager().debug) {
-            Sound.ENTITY_WALK_GRASS.playSound();
+            Sounds.ENTITY_WALK_GRASS.playSound();
             gameAPI.setDebug(!gameAPI.isDebug());
         }
 

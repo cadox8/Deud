@@ -3,7 +3,7 @@ package me.cadox8.deud.events.projectiles;
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
-import me.cadox8.deud.entities.creatures.projectiles.Projectile;
+import me.cadox8.deud.entities.projectile.Projectile;
 
 public class ProjectileHitEvent extends ProjectileEvent {
 
