@@ -3,14 +3,12 @@ package me.cadox8.deud.entities;
 import jdk.jfr.Experimental;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.worlds.World;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@ToString
 @Experimental
 public class Location {
 
@@ -60,9 +58,17 @@ public class Location {
         return (int) (getY() - location.getY());
     }
 
+    public boolean equals(double x, double y) {
+        return getX() == x && getY() == y;
+    }
 
     public boolean equals(Location checkLoc) {
         return checkLoc.getWorld().worldName().equalsIgnoreCase(getWorld().worldName()) && checkLoc.getX() == getX() && checkLoc.getY() == getY();
+    }
+
+    @Override
+    public String toString() {
+        return "Location{World: " + world.worldName() + ", X: " + getX() + ", Y: " + getY() + ", Direction: " + getDirection() + "}";
     }
 
     // Save Utils

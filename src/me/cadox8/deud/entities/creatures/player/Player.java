@@ -64,7 +64,7 @@ public class Player extends Creature {
 
         inventory = new Inventory(gameAPI, this);
         inventory.setUsableItem(Item.hand);
-        inventory.addItem(Item.keyItem.setCount(5));
+        inventory.addItem(Item.keyItem);
 
         setMaxHunger(10);
         setHunger(getMaxHunger());
@@ -205,7 +205,7 @@ public class Player extends Creature {
         yMove = 0;
 
         if (gameAPI.getKeyManager().tests) {
-            Utils.getNearbyEntities(getLocation(), 5, 5);
+            Log.log("\n\n" + Utils.getNearbyEntities(getLocation(), 0.5).toString());
             //new Door(GameAPI, 0, 0, "main").changeWorld();
             setHunger(getMaxHunger());
             addExp(20);

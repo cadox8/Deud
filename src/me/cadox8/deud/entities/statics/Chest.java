@@ -11,6 +11,8 @@ import java.awt.*;
 
 public class Chest extends StaticEntity {
 
+    private boolean open = false;
+
     public Chest(GameAPI gameAPI, float x, float y) {
         this(gameAPI,x, y, true);
     }
@@ -20,7 +22,7 @@ public class Chest extends StaticEntity {
         setDamageable(false);
         setExplosive(explosive);
 
-        setDamage(5);
+        setDamage(3);
         setLevel(0);
 
         bounds.x = 2;
@@ -30,12 +32,13 @@ public class Chest extends StaticEntity {
     }
 
     public void open(Player p) {
-        if (p.getInventory().keyCount() == 0) return;
-        p.getInventory().removeItem(Item.keyItem);
+        if (p.getInventory().keyCount() == 0 || open) return;
+        open = true;
+        p.getInventory().removeItem(Item.keyItem.setCount(1));
 
         p.getInventory().addItem(Item.getRandom(Item.hand, Item.keyItem));
 
-        if (isExplosive()) new Explosion(this.getGameAPI(),5, 3).perform(this, null);
+        if (isExplosive()) new Explosion(this.getGameAPI(),5, 0.3).perform(this, null);
     }
 
     @Override

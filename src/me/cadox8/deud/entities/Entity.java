@@ -94,7 +94,7 @@ public abstract class Entity {
     public abstract void die();
 
     public void hurt(Entity attacker) {
-        Log.log("Health: " + getHealth());
+        Log.log(getINTERNAL_NAME() + " Health: " + getHealth());
         getHurt();
         if (!isDamageable()) return;
 

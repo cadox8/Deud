@@ -1,5 +1,6 @@
 package me.cadox8.deud.utils;
 
+import lombok.NonNull;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.worlds.World;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Utils {
 
@@ -80,18 +82,15 @@ public class Utils {
         return new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR).filter(texture, new BufferedImage(texture.getHeight(), texture.getWidth(), texture.getType()));
     }
 
-    public static ArrayList<Entity> getNearbyEntities(Location center, double radius, int amount) {
-        World world = center.getWorld();
-        double increment = (2 * Math.PI) / amount;
-        ArrayList<Entity> entities = new ArrayList<>();
+    public static ArrayList<Entity> getNearbyEntities(Location center, double radius) {
+        final World world = center.getWorld();
+        final Circle2D circle = new Circle2D(center.getX(), center.getY(), radius);
+        return world.getEntityManager().getEntities().stream().filter(e -> circle.contains(e.getX(), e.getY())).collect(Collectors.toCollection(ArrayList::new));
+    }
 
-        for (int i = 0; i < amount; i++) {
-            double angle = i * increment;
-            double x = center.getX() + (radius * Math.cos(angle));
-            double y = center.getY() + (radius * Math.sin(angle));
-
-            world.getEntityManager().getEntities().stream().filter(e -> e.getBounds().contains(x, y)).findFirst().ifPresent(entities::add);
-        }
-        return entities;
+    public static ArrayList<Entity> getNearbyEntities(Location center, double radius, @NonNull Entity excepts) {
+        final World world = center.getWorld();
+        final Circle2D circle = new Circle2D(center.getX(), center.getY(), radius);
+        return world.getEntityManager().getEntities().stream().filter(e -> !e.equals(excepts)).filter(e -> circle.contains(e.getX(), e.getY())).collect(Collectors.toCollection(ArrayList::new));
     }
 }
