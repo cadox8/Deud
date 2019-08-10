@@ -10,6 +10,7 @@ import me.cadox8.deud.entities.creatures.monsters.Zombie;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.projectile.Arrow;
 import me.cadox8.deud.entities.statics.*;
+import me.cadox8.deud.entities.statics.houses.House;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.saves.PlayerData;
@@ -38,6 +39,7 @@ public class EntityData {
 
         private int signType = 0;
 
+        private int houseType = 1;
         private String map = "";
         private int neededItem = -1;
 
@@ -45,7 +47,6 @@ public class EntityData {
         private ItemHelper[] items = new ItemHelper[0];
 
         private String displayName = "";
-
 
         public String[] getTextArray() {
             return text;
@@ -83,7 +84,8 @@ public class EntityData {
         DOOR(Door.class),
         SHOP(Shop.class),
         NPC(Npc.class),
-        ARROW(Arrow.class);
+        ARROW(Arrow.class),
+        HOUSE(House.class);
 
         private Class<? extends Entity> supClass;
 

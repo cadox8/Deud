@@ -8,6 +8,7 @@ import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.Shop;
+import me.cadox8.deud.entities.statics.houses.House;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.gfx.textures.Models;
@@ -52,6 +53,9 @@ public class WorldEntities {
                         en = new Npc(gameAPI, l.getX(), l.getY(), e.getDisplayName(), Models.npc_down, Models.npc_up, Models.npc_left, Models.npc_right);
                         ((Npc) en).addTexts(e.getTextArray());
                         ((Npc) en).addItems(e.getItems());
+                        break;
+                    case HOUSE:
+                        en = new House(gameAPI, l.getX(), l.getY(), e.getMap(), e.getHouseType());
                         break;
 
                     default:

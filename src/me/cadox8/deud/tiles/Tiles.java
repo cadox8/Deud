@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
 public enum Tiles {
+
     GRASS(0, Assets.grass),
     DIRT(1, Assets.dirt),
     BRICK(2, Assets.brick, true),
@@ -22,17 +23,6 @@ public enum Tiles {
     SAND(6, Assets.sand),
     BUG(7, Assets.bug, true),
     VOID(8, Assets.voidImg, true),
-
-    // House 1
-    HOUSE1_R1(10, Assets.house1[0], true),
-    HOUSE1_R2(11, Assets.house1[3], true),
-    HOUSE1_R3(12, Assets.house1[6], true),
-    HOUSE1_R4(13, Assets.house1[1], true),
-    HOUSE1_W1(14, Assets.house1[7], true),
-    HOUSE1_R5(15, Assets.house1[2], true),
-    HOUSE1_R6(16, Assets.house1[5], true),
-    HOUSE1_R7(17, Assets.house1[8], true),
-    HOUSE1_JOIN(18, Assets.house1[4], true),
 
     // House 2
     HOUSE2_R1(19, Assets.house2[0], true),

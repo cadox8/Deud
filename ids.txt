@@ -10,3 +10,4 @@ Door -> 9
 NPC -> 10
 Shop -> 11
 Arrow -> 12
+House -> 13
