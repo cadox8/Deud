@@ -10,7 +10,6 @@ import me.cadox8.deud.entities.creatures.monsters.Zombie;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.projectile.Arrow;
 import me.cadox8.deud.entities.statics.*;
-import me.cadox8.deud.entities.statics.houses.House;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.saves.PlayerData;

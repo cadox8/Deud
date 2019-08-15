@@ -11,6 +11,7 @@ import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Door;
+import me.cadox8.deud.entities.statics.House;
 import me.cadox8.deud.entities.statics.Shop;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.game.Game;
@@ -140,6 +141,9 @@ public class FileUtils {
                 en.addProperty("displayName", ((Npc)e).getDisplayName());
                 en.add("text", text);
                 en.add("items", items);
+            }
+            if (e instanceof House) {
+                en.addProperty("houseType", ((House)e).getHouseType());
             }
             ent.add(en);
         });

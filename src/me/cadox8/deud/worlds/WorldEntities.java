@@ -7,8 +7,8 @@ import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.statics.Door;
+import me.cadox8.deud.entities.statics.House;
 import me.cadox8.deud.entities.statics.Shop;
-import me.cadox8.deud.entities.statics.houses.House;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.gfx.textures.Models;
@@ -55,7 +55,7 @@ public class WorldEntities {
                         ((Npc) en).addItems(e.getItems());
                         break;
                     case HOUSE:
-                        en = new House(gameAPI, l.getX(), l.getY(), e.getMap(), e.getHouseType());
+                        en = new House(gameAPI, l.getX(), l.getY(), e.getHouseType());
                         break;
 
                     default:

@@ -1,7 +1,7 @@
-package me.cadox8.deud.entities.statics.houses;
+package me.cadox8.deud.entities.statics;
 
+import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.statics.StaticEntity;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.tiles.Tile;
 
@@ -10,21 +10,19 @@ import java.awt.image.BufferedImage;
 
 public class House extends StaticEntity {
 
-    private final String map;
-    private final int houseType;
+    @Getter private final int houseType;
 
-    public House(GameAPI gameAPI, float x, float y, String map, int houseType) {
+    public House(GameAPI gameAPI, float x, float y, int houseType) {
         super(13, "House", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         this.houseType = houseType;
-        this.map = map;
 
         setDamageable(false);
 
-        bounds.x = 32;
-        bounds.y = height - 100;
-        bounds.width = width * 3 + 33;
-        bounds.height = height * 2 - 30;
+        bounds.x = -70;
+        bounds.y = height - (height * 4) - 10;
+        bounds.width = width * 3 + 15;
+        bounds.height = height * 5 - 45;
     }
 
     @Override

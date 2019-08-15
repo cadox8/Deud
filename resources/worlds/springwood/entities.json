@@ -19,14 +19,53 @@
       }
     },
     {
-      "type": "Door",
-      "map": "test",
+      "type": "House",
+      "health": 0,
+      "maxHealth": 0,
       "location": {
         "world": "springwood",
         "x": 769.0,
         "y": 520.0,
         "direction": 0
       }
+    },
+    {
+      "type": "Door",
+      "health": 0,
+      "maxHealth": 0,
+      "location": {
+        "world": "springwood",
+        "x": 769.0,
+        "y": 550.0,
+        "direction": 0
+      },
+      "map": "test",
+      "neededItem": -1
+    },
+    {
+      "type": "House",
+      "health": 0,
+      "maxHealth": 0,
+      "houseType": 2,
+      "location": {
+        "world": "springwood",
+        "x": 769.0,
+        "y": 1020.0,
+        "direction": 0
+      }
+    },
+    {
+      "type": "Door",
+      "health": 0,
+      "maxHealth": 0,
+      "location": {
+        "world": "springwood",
+        "x": 769.0,
+        "y": 1050.0,
+        "direction": 0
+      },
+      "map": "test",
+      "neededItem": -1
     },
     {
       "type": "Shop",
