@@ -11,7 +11,7 @@ import java.awt.*;
 public class Rock extends StaticEntity {
 
     public Rock(@NonNull GameAPI gameAPI, float x, float y) {
-        super(6, "Rock", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(200, "Rock", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         bounds.x = 2;
         bounds.y = (int) (height / 2f);

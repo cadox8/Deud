@@ -16,14 +16,14 @@ import java.util.List;
 import java.util.Random;
 
 
-public class NPC extends Creature {
+public class Npc extends Creature {
 
     @Getter private final String displayName;
     @Getter private final List<String> text;
     @Getter private final List<Item> items;
 
-    public NPC(@NonNull GameAPI gameAPI, float x, float y, String displayName, BufferedImage[]... textures) {
-        super(10, "NPC", gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+    public Npc(@NonNull GameAPI gameAPI, float x, float y, String displayName, BufferedImage[]... textures) {
+        super(5, "NPC", gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         this.displayName = displayName;
         this.text = new ArrayList<>();
@@ -75,11 +75,11 @@ public class NPC extends Creature {
         items.forEach(i -> dropItem(i, new Random().nextFloat()));
     }
 
-    public NPC addTexts(String... texts) {
+    public Npc addTexts(String... texts) {
         this.text.addAll(Arrays.asList(texts));
         return this;
     }
-    public NPC addItems(Item... items) {
+    public Npc addItems(Item... items) {
         this.items.addAll(Arrays.asList(items));
         return this;
     }

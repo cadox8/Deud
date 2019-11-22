@@ -13,7 +13,7 @@ public class RewardChest extends Chest {
     @Getter @Setter private boolean open = false;
 
     public RewardChest(@NonNull GameAPI gameAPI, float x, float y) {
-        super(14, "RewardChest", gameAPI, x, y);
+        super(502, "RewardChest", gameAPI, x, y);
     }
 
     public void open(Player p) {

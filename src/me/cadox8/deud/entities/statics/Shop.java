@@ -16,7 +16,7 @@ public class Shop extends StaticEntity {
     @Getter private final Item[] drops;
 
     public Shop(@NonNull GameAPI gameAPI, float x, float y, Item... drops) {
-        super(11, "Shop", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(252, "Shop", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         this.drops = drops;
 

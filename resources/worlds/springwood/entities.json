@@ -11,6 +11,16 @@
       "items": []
     },
     {
+      "type": "DeadTree",
+      "treeType": 0,
+      "location": {
+        "world": "springwood",
+        "x": 350.0,
+        "y": 150.0,
+        "direction": 0
+      }
+    },
+    {
       "type": "Fairy",
       "location": {
         "world": "springwood",

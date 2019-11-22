@@ -24,7 +24,7 @@ public class Door extends StaticEntity {
     @Getter @Setter private int neededItem = -1;
 
     public Door(@NonNull GameAPI gameAPI, float x, float y, String map) {
-        super(9, "Door", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(250, "Door", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         this.map = map;
 

@@ -22,7 +22,7 @@ public class SignEntity extends StaticEntity {
     @Getter private final int type;
 
     public SignEntity(@NonNull GameAPI gameAPI, float x, float y, int type, List<String> text) {
-        super(7, "Sign", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(500, "Sign", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
 

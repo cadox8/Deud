@@ -7,7 +7,7 @@ import me.cadox8.deud.api.GameAPI;
 public class Arrow extends Projectile {
 
     public Arrow(@NonNull GameAPI gameAPI, float x, float y) {
-        super(12, "Arrow", gameAPI, null, x, y, 42, 42);
+        super(900, "Arrow", gameAPI, null, x, y, 42, 42);
 
         bounds.x = 12;
         bounds.y = 23;

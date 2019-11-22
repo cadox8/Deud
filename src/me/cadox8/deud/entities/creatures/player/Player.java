@@ -9,7 +9,7 @@ import me.cadox8.deud.audio.Sounds;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
-import me.cadox8.deud.entities.creatures.npcs.NPC;
+import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.gfx.textures.Models;
@@ -229,8 +229,8 @@ public class Player extends Creature {
 
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
             final Entity en = EntityManager.getEntity(this, 0, 0);
-            if (en != null && en instanceof NPC) {
-                final NPC npc = (NPC) en;
+            if (en != null && en instanceof Npc) {
+                final Npc npc = (Npc) en;
                 if (npc.getText().isEmpty()) return;
                 final Dialog dialog = new Dialog(gameAPI, this, npc);
                 ((GameState) gameAPI.getGame().getGameState()).setDialog(dialog);

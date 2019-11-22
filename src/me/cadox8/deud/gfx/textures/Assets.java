@@ -16,7 +16,10 @@ public class Assets {
     public static BufferedImage wooden_path;
 
     //Static Entities
-    public static BufferedImage stone, tree, tree2;
+    public static BufferedImage stone;
+
+    public static BufferedImage tree, tree2;
+    public static BufferedImage[] deadTree;
 
     //Items
     public static BufferedImage bug, voidImg;
@@ -51,6 +54,20 @@ public class Assets {
                 y_shop += 1;
             }
         }
+
+        sprites = new Sprites(Utils.loadImage("/textures/sprites/objects.png"));
+        deadTree = new BufferedImage[10];
+        int y_Tree = 0;
+        int x_Tree = 16;
+        for (int i = 0; i < deadTree.length - 1; i++) {
+            deadTree[i] = getImage(x_Tree, y_Tree);
+            x_Tree += 1;
+            if (i == 2 || i == 5) {
+                x_Tree = 16;
+                y_Tree += 1;
+            }
+        }
+        deadTree[9] = getImage(16, 3);
 
         sprites = new Sprites(Utils.loadImage("/textures/sprites/buildings.png"));
 

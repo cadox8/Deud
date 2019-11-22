@@ -8,10 +8,11 @@ import com.google.gson.stream.JsonReader;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
-import me.cadox8.deud.entities.creatures.npcs.NPC;
+import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.*;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
+import me.cadox8.deud.entities.statics.trees.Tree;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.utils.Log;
@@ -102,10 +103,13 @@ public class FileUtils {
 
         entities.stream().filter(e -> !(e instanceof Player)).forEach(e -> {
             final JsonObject en = new JsonObject();
+
             en.addProperty("type", e.getINTERNAL_NAME());
             en.addProperty("health", e.getHealth());
             en.addProperty("maxHealth", e.getMaxHealth());
             en.add("location", gson.toJsonTree(e.getLocation().serializeLocation()).getAsJsonObject());
+
+            if (e instanceof Tree) en.addProperty("treeType", ((Tree) e).getTreeType());
             if (e instanceof Chest) {
                 final JsonArray items = new JsonArray();
                 ((Chest) e).getInventoryItems().forEach(i -> {
@@ -139,17 +143,17 @@ public class FileUtils {
                 });
                 en.add("items", items);
             }
-            if (e instanceof NPC) {
+            if (e instanceof Npc) {
                 final JsonArray text = new JsonArray();
                 final JsonArray items = new JsonArray();
-                ((NPC)e).getText().forEach(text::add);
-                ((NPC)e).getItems().forEach(i -> {
+                ((Npc)e).getText().forEach(text::add);
+                ((Npc)e).getItems().forEach(i -> {
                     final JsonObject item = new JsonObject();
                     item.addProperty("id", i.getId());
                     item.addProperty("count", i.getCount());
                     items.add(item);
                 });
-                en.addProperty("displayName", ((NPC)e).getDisplayName());
+                en.addProperty("displayName", ((Npc)e).getDisplayName());
                 en.add("text", text);
                 en.add("items", items);
             }

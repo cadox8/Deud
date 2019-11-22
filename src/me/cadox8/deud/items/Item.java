@@ -47,7 +47,7 @@ public abstract class Item {
 
 
     // Class
-    public static final int ITEMWIDTH = 32, ITEMHEIGHT = 32;
+    public static final int ITEMWIDTH = 64, ITEMHEIGHT = 64;
 
     @Getter @Setter protected GameAPI gameAPI;
     @Getter protected final BufferedImage texture;

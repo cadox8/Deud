@@ -5,9 +5,11 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
-import me.cadox8.deud.entities.creatures.npcs.NPC;
+import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.statics.*;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
+import me.cadox8.deud.entities.statics.trees.DeadTree;
+import me.cadox8.deud.entities.statics.trees.NormalTree;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.gfx.textures.Models;
 import me.cadox8.deud.managers.EntityManager;
@@ -58,12 +60,20 @@ public class WorldEntities {
                         en = new Shop(gameAPI, l.getX(), l.getY(), e.getItems());
                         break;
                     case NPC:
-                        en = new NPC(gameAPI, l.getX(), l.getY(), e.getDisplayName(), Models.npc_down, Models.npc_up, Models.npc_left, Models.npc_right);
-                        ((NPC) en).addTexts(e.getTextArray());
-                        ((NPC) en).addItems(e.getItems());
+                        en = new Npc(gameAPI, l.getX(), l.getY(), e.getDisplayName(), Models.npc_down, Models.npc_up, Models.npc_left, Models.npc_right);
+                        ((Npc) en).addTexts(e.getTextArray());
+                        ((Npc) en).addItems(e.getItems());
                         break;
                     case HOUSE:
                         en = new House(gameAPI, l.getX(), l.getY(), e.getHouseType());
+                        break;
+                    case NORMALTREE:
+                        en = new NormalTree(gameAPI, l.getX(), l.getY());
+                        ((NormalTree)en).setTreeType(e.getTreeType());
+                        break;
+                    case DEADTREE:
+                        en = new DeadTree(gameAPI, l.getX(), l.getY());
+                        ((DeadTree)en).setTreeType(e.getTreeType());
                         break;
 
                     default:

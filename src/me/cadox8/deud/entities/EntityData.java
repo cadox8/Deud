@@ -7,9 +7,12 @@ import lombok.Setter;
 import me.cadox8.deud.entities.creatures.friends.Fairy;
 import me.cadox8.deud.entities.creatures.monsters.Ghost;
 import me.cadox8.deud.entities.creatures.monsters.Zombie;
+import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.projectile.Arrow;
 import me.cadox8.deud.entities.statics.*;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
+import me.cadox8.deud.entities.statics.trees.DeadTree;
+import me.cadox8.deud.entities.statics.trees.NormalTree;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.saves.PlayerData;
 
@@ -37,6 +40,7 @@ public class EntityData {
 
         private int signType = 0;
 
+        private int treeType = 0;
         private int houseType = 1;
         private String map = "";
         private int neededItem = -1;
@@ -81,10 +85,11 @@ public class EntityData {
         REWARDCHEST(RewardChest.class),
         ROCK(Rock.class),
         SIGN(SignEntity.class),
-        TREE(Tree.class),
+        NORMALTREE(NormalTree.class),
+        DEADTREE(DeadTree.class),
         DOOR(Door.class),
         SHOP(Shop.class),
-        NPC(me.cadox8.deud.entities.creatures.npcs.NPC.class),
+        NPC(Npc.class),
         ARROW(Arrow.class),
         HOUSE(House.class);
 

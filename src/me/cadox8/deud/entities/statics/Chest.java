@@ -25,7 +25,7 @@ public class Chest extends StaticEntity {
         this(gameAPI,x, y, false);
     }
     public Chest(@NonNull GameAPI gameAPI, float x, float y, boolean explosive) {
-        super(8, "Chest", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(501, "Chest", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
         setExplosive(explosive);

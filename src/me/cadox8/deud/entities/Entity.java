@@ -8,7 +8,7 @@ import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.monsters.Monster;
-import me.cadox8.deud.entities.creatures.npcs.NPC;
+import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.projectile.Projectile;
 import me.cadox8.deud.events.projectiles.ProjectileHitEvent;
@@ -106,7 +106,7 @@ public abstract class Entity {
 
         if (this instanceof Creature) {
             if (attacker instanceof Monster) ((Monster)attacker).getItemInHand().getAttributes().forEach(a -> a.perform(attacker, this));
-            if (attacker instanceof NPC) ((NPC)attacker).getItems().get(0).getAttributes().forEach(a -> a.perform(attacker, this));
+            if (attacker instanceof Npc) ((Npc)attacker).getItems().get(0).getAttributes().forEach(a -> a.perform(attacker, this));
             if (attacker instanceof Player) ((Player) attacker).getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
         }
 

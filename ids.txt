@@ -1,14 +1,31 @@
-Player -> 1
+** ID Range Per Entity **
+
+* Player (0)
+Player -> 0
+
+* Creatures (1-100)
 Zombie -> 2
 Ghost -> 3
 Fairy -> 4
-Tree -> 5
-Rock -> 6
-Sign -> 7
-Chest -> 8
-Door -> 9
-NPC -> 10
-Shop -> 11
-Arrow -> 12
-House -> 13
-RewardChest - 14
+NPC -> 5
+
+* Static Entities (100-900)
+ - * Trees (100-200)
+    NormalTree -> 100
+    DeadTree -> 101
+
+ - * Rocks (200-250)
+    Rock -> 200
+
+ - * Buildings (250-500)
+    Door -> 250
+    Shop -> 251
+    House -> 252
+
+ -* Others (500-900)
+    Sign -> 500
+    Chest -> 501
+    RewardChest -> 502
+
+* Projectiles (900-1000)
+Arrow -> 900
