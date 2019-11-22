@@ -1,17 +1,19 @@
 package me.cadox8.deud.entities;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.ai.AI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.monsters.Monster;
-import me.cadox8.deud.entities.creatures.npcs.Npc;
+import me.cadox8.deud.entities.creatures.npcs.NPC;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.projectile.Projectile;
 import me.cadox8.deud.events.projectiles.ProjectileHitEvent;
 import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
@@ -68,7 +70,7 @@ public abstract class Entity {
     @Getter @Setter protected Animation animDown, animUp, animLeft, animRight;
     @Getter @Setter protected Animation[] animations = new Animation[4];
 
-    public Entity(int id, String name, GameAPI gameAPI, float x, float y, int width, int height, int level) {
+    public Entity(int id, String name, @NonNull GameAPI gameAPI, float x, float y, int width, int height, int level) {
         INTERNAL_ID = id;
         INTERNAL_NAME = name;
         this.gameAPI = gameAPI;
@@ -99,11 +101,12 @@ public abstract class Entity {
         if (!isDamageable()) return;
 
         int amt = attacker.getDamage() + (int) (DMG_UP_PER_LVL * attacker.getLevel());
+        if (attacker instanceof Monster && ((Monster)attacker).getItemInHand() instanceof WeaponItem) amt += ((WeaponItem) ((Monster) attacker).getItemInHand()).getDamage();
         health -= amt;
 
         if (this instanceof Creature) {
             if (attacker instanceof Monster) ((Monster)attacker).getItemInHand().getAttributes().forEach(a -> a.perform(attacker, this));
-            if (attacker instanceof Npc) ((Npc)attacker).getItems().get(0).getAttributes().forEach(a -> a.perform(attacker, this));
+            if (attacker instanceof NPC) ((NPC)attacker).getItems().get(0).getAttributes().forEach(a -> a.perform(attacker, this));
             if (attacker instanceof Player) ((Player) attacker).getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
         }
 
@@ -213,7 +216,7 @@ public abstract class Entity {
             this.xp = 0;
             return;
         }
-        this.xp = Double.valueOf(new DecimalFormat("#.##").format(xp).replaceAll(",", "."));
+        this.xp = Double.parseDouble(new DecimalFormat("#.##").format(xp).replaceAll(",", "."));
     }
 
 

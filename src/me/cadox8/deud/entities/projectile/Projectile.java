@@ -1,6 +1,7 @@
 package me.cadox8.deud.entities.projectile;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.attributes.Attribute;
@@ -18,7 +19,7 @@ public abstract class Projectile extends Creature {
     @Setter protected BufferedImage texture;
     @Getter @Setter private List<Attribute> attributes;
 
-    public Projectile(int id, String name, GameAPI gameAPI, BufferedImage texture, float x, float y, int width, int height) {
+    public Projectile(int id, String name, @NonNull GameAPI gameAPI, BufferedImage texture, float x, float y, int width, int height) {
         super(id, name, gameAPI, x, y, width, height, 0);
         this.texture = texture;
 

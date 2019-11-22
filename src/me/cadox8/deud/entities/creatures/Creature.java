@@ -1,6 +1,7 @@
 package me.cadox8.deud.entities.creatures;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
@@ -26,11 +27,11 @@ public abstract class Creature extends Entity {
 
     @Getter @Setter protected boolean freeze = false;
 
-    public Creature(int id, String name, GameAPI gameAPI, float x, float y, int width, int height) {
+    public Creature(int id, String name, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
         this(id, name, gameAPI, x, y, width, height, 0);
     }
 
-    public Creature(int id, String name, GameAPI gameAPI, float x, float y, int width, int height, int level) {
+    public Creature(int id, String name, @NonNull GameAPI gameAPI, float x, float y, int width, int height, int level) {
         super(id, name, gameAPI, x, y, width, height, level);
         speed = DEFAULT_SPEED;
         xMove = 0;

@@ -15,10 +15,7 @@ public class TileData {
     @Getter private final Tile tile;
     @Getter private final Color color;
 
-    @Deprecated
     @Getter @Setter private BufferedImage bi;
-    @Deprecated
     @Getter @Setter private int x;
-    @Deprecated
     @Getter @Setter private int y;
 }

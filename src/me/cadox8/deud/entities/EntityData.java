@@ -7,7 +7,6 @@ import lombok.Setter;
 import me.cadox8.deud.entities.creatures.friends.Fairy;
 import me.cadox8.deud.entities.creatures.monsters.Ghost;
 import me.cadox8.deud.entities.creatures.monsters.Zombie;
-import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.projectile.Arrow;
 import me.cadox8.deud.entities.statics.*;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
@@ -55,6 +54,8 @@ public class EntityData {
             return new Location(location.getX(), location.getY(),location.getDirection());
         }
 
+        public boolean open;
+
         public Item[] getItems() {
             final Item[] it = new Item[items.length];
             for (int x = 0; x < it.length; x++) it[x] = Item.items[items[x].getId()].setCount(items[x].getCount());
@@ -77,12 +78,13 @@ public class EntityData {
         GHOST(Ghost.class),
         FAIRY(Fairy.class),
         CHEST(Chest.class),
+        REWARDCHEST(RewardChest.class),
         ROCK(Rock.class),
         SIGN(SignEntity.class),
         TREE(Tree.class),
         DOOR(Door.class),
         SHOP(Shop.class),
-        NPC(Npc.class),
+        NPC(me.cadox8.deud.entities.creatures.npcs.NPC.class),
         ARROW(Arrow.class),
         HOUSE(House.class);
 

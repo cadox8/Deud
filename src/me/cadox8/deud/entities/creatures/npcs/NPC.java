@@ -1,6 +1,7 @@
 package me.cadox8.deud.entities.creatures.npcs;
 
 import lombok.Getter;
+import lombok.NonNull;
 import me.cadox8.deud.ai.entities.FriendsAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
@@ -15,13 +16,13 @@ import java.util.List;
 import java.util.Random;
 
 
-public class Npc extends Creature {
+public class NPC extends Creature {
 
     @Getter private final String displayName;
     @Getter private final List<String> text;
     @Getter private final List<Item> items;
 
-    public Npc(GameAPI gameAPI, float x, float y, String displayName, BufferedImage[]... textures) {
+    public NPC(@NonNull GameAPI gameAPI, float x, float y, String displayName, BufferedImage[]... textures) {
         super(10, "NPC", gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         this.displayName = displayName;
@@ -74,11 +75,11 @@ public class Npc extends Creature {
         items.forEach(i -> dropItem(i, new Random().nextFloat()));
     }
 
-    public Npc addTexts(String... texts) {
+    public NPC addTexts(String... texts) {
         this.text.addAll(Arrays.asList(texts));
         return this;
     }
-    public Npc addItems(Item... items) {
+    public NPC addItems(Item... items) {
         this.items.addAll(Arrays.asList(items));
         return this;
     }

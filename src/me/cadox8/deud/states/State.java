@@ -1,6 +1,7 @@
 package me.cadox8.deud.states;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 
@@ -12,7 +13,7 @@ public abstract class State {
 
     @Getter @Setter private static State state = null;
 
-    public State(GameAPI gameAPI) {
+    public State(@NonNull GameAPI gameAPI) {
         this.gameAPI = gameAPI;
     }
 

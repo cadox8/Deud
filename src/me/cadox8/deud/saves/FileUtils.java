@@ -8,11 +8,9 @@ import com.google.gson.stream.JsonReader;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
-import me.cadox8.deud.entities.creatures.npcs.Npc;
+import me.cadox8.deud.entities.creatures.npcs.NPC;
 import me.cadox8.deud.entities.creatures.player.Player;
-import me.cadox8.deud.entities.statics.Door;
-import me.cadox8.deud.entities.statics.House;
-import me.cadox8.deud.entities.statics.Shop;
+import me.cadox8.deud.entities.statics.*;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.inventory.Inventory;
@@ -108,6 +106,19 @@ public class FileUtils {
             en.addProperty("health", e.getHealth());
             en.addProperty("maxHealth", e.getMaxHealth());
             en.add("location", gson.toJsonTree(e.getLocation().serializeLocation()).getAsJsonObject());
+            if (e instanceof Chest) {
+                final JsonArray items = new JsonArray();
+                ((Chest) e).getInventoryItems().forEach(i -> {
+                    final JsonObject item = new JsonObject();
+                    item.addProperty("id", i.getId());
+                    item.addProperty("count", i.getCount());
+                    items.add(item);
+                });
+                en.add("items", items);
+            }
+            if (e instanceof RewardChest) {
+                en.addProperty("open", ((RewardChest)e).isOpen());
+            }
             if (e instanceof SignEntity) {
                 final JsonArray text = new JsonArray();
                 ((SignEntity) e).getText().forEach(text::add);
@@ -128,17 +139,17 @@ public class FileUtils {
                 });
                 en.add("items", items);
             }
-            if (e instanceof Npc) {
+            if (e instanceof NPC) {
                 final JsonArray text = new JsonArray();
                 final JsonArray items = new JsonArray();
-                ((Npc)e).getText().forEach(text::add);
-                ((Npc)e).getItems().forEach(i -> {
+                ((NPC)e).getText().forEach(text::add);
+                ((NPC)e).getItems().forEach(i -> {
                     final JsonObject item = new JsonObject();
                     item.addProperty("id", i.getId());
                     item.addProperty("count", i.getCount());
                     items.add(item);
                 });
-                en.addProperty("displayName", ((Npc)e).getDisplayName());
+                en.addProperty("displayName", ((NPC)e).getDisplayName());
                 en.add("text", text);
                 en.add("items", items);
             }

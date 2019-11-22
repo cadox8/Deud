@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 public enum Tiles {
 
+    // Void Tile to represent background and fill non-existing Tiles
+    VOID(-1, Assets.voidImg, true),
     GRASS(0, Assets.grass),
     DIRT(1, Assets.dirt),
     BRICK(2, Assets.brick, true),
@@ -22,7 +24,6 @@ public enum Tiles {
     GRASS_DIRT_SQUARE_4(5, 3, Assets.grass_dirt2),
     SAND(6, Assets.sand),
     BUG(7, Assets.bug, true),
-    VOID(8, Assets.voidImg, true),
 
     // House 2
     HOUSE2_R1(19, Assets.house2[0], true),

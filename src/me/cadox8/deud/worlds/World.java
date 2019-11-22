@@ -3,14 +3,15 @@ package me.cadox8.deud.worlds;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
-import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.game.Game;
-import me.cadox8.deud.items.ItemManager;
+import me.cadox8.deud.managers.EntityManager;
+import me.cadox8.deud.managers.ItemManager;
 import me.cadox8.deud.particles.Particle;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.tiles.Tiles;
@@ -39,7 +40,7 @@ public class World {
 
     private ArrayList<Particle> particles;
 
-    public World(GameAPI gameAPI, String path) {
+    public World(@NonNull GameAPI gameAPI, String path) {
         this.gameAPI = gameAPI;
         this.path = path;
         Location loc;
@@ -60,7 +61,7 @@ public class World {
         particles = new ArrayList<>();
     }
 
-    public void addParticles(Particle particle) {
+    public void addParticles(@NonNull Particle particle) {
         particles.add(particle);
     }
 

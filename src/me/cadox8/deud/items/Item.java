@@ -1,6 +1,7 @@
 package me.cadox8.deud.items;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.attributes.Attribute;
@@ -11,6 +12,7 @@ import me.cadox8.deud.items.objects.*;
 import me.cadox8.deud.items.potions.HealthPotion;
 import me.cadox8.deud.items.potions.PotionItem;
 import me.cadox8.deud.items.weapons.HandItem;
+import me.cadox8.deud.items.weapons.SwordItem;
 import me.cadox8.deud.items.weapons.WeaponItem;
 
 import java.awt.*;
@@ -22,7 +24,7 @@ import java.util.Random;
 
 public abstract class Item {
 
-    public static Item[] items = new Item[8]; //All items
+    public static Item[] items = new Item[9]; //All items
 
     //Bug
     public static final ObjectItem bugItem = new BugItem(Assets.bug, 5, "3RR0R");
@@ -37,7 +39,8 @@ public abstract class Item {
     public static final ChickenItem chickenItem = new ChickenItem(Assets.food, 3, "Chicken", 3);
 
     //Weapons
-    public static final WeaponItem hand = new HandItem(Assets.hand, 4, "Hand", 0);
+    public static final WeaponItem hand = new HandItem(Assets.hand, 4, "Hand", 1);
+    public static final WeaponItem sword = new SwordItem(Assets.sword, 8, "Sword", 5);
 
     // Potions
     public static final PotionItem healthPotion = new HealthPotion(6, 1);
@@ -60,8 +63,8 @@ public abstract class Item {
 
     @Getter @Setter protected boolean infinity = false;
 
-    public Item(BufferedImage texture, int id, String name){
-        this.texture = texture;
+    public Item(BufferedImage texture, int id, String name) {
+        this.texture = texture == null ? Assets.bug : texture;
         this.id = id;
         this.name = name;
         this.count = 1;
@@ -69,14 +72,19 @@ public abstract class Item {
 
         bounds = new Rectangle(x, y, ITEMWIDTH, ITEMHEIGHT);
 
+        try {
+            if (items[id] != null) throw new IllegalAccessException("There is an item registered with the same id (" + id + ")");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         items[id] = this;
     }
 
 
-    public abstract void use(Player p);
+    public abstract void use(@NonNull Player p);
     public abstract Item createNew(int x, int y, int count);
 
-    public void removeItem(Player p) {
+    public void removeItem(@NonNull Player p) {
         if (getCount() == 1) {
             p.getInventory().removeItem(this);
             p.getInventory().setUsableItem(Item.hand);
@@ -85,7 +93,7 @@ public abstract class Item {
         count--;
     }
 
-    public Item addAttributes(Attribute... attributes) {
+    public Item addAttributes(@NonNull Attribute... attributes) {
         this.attributes.addAll(Arrays.asList(attributes));
         return this;
     }

@@ -1,5 +1,6 @@
 package me.cadox8.deud.entities.statics;
 
+import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.items.Item;
@@ -9,7 +10,7 @@ import java.awt.*;
 
 public class Rock extends StaticEntity {
 
-    public Rock(GameAPI gameAPI, float x, float y) {
+    public Rock(@NonNull GameAPI gameAPI, float x, float y) {
         super(6, "Rock", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         bounds.x = 2;

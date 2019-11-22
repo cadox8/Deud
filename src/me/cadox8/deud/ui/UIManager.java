@@ -1,6 +1,7 @@
 package me.cadox8.deud.ui;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 
@@ -13,7 +14,7 @@ public class UIManager {
     private GameAPI gameAPI;
     @Getter @Setter private ArrayList<UIObject> objects;
 
-    public UIManager(GameAPI gameAPI) {
+    public UIManager(@NonNull GameAPI gameAPI) {
         this.gameAPI = gameAPI;
         objects = new ArrayList<>();
     }

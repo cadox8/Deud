@@ -12,7 +12,7 @@ public class ProjectileShotEvent extends ProjectileEvent {
     private Entity shooter;
     private Item item;
 
-    public ProjectileShotEvent(GameAPI gameAPI, @NonNull Item item, @NonNull Entity shooter) {
+    public ProjectileShotEvent(@NonNull GameAPI gameAPI, @NonNull Item item, @NonNull Entity shooter) {
         super(gameAPI, null);
         this.item = item;
         this.shooter = shooter;

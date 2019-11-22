@@ -1,6 +1,7 @@
 package me.cadox8.deud.states;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Location;
@@ -16,10 +17,10 @@ public class GameState extends State {
     private World world;
     @Getter @Setter private Dialog dialog;
 
-    public GameState(GameAPI gameAPI, String map) {
+    public GameState(@NonNull GameAPI gameAPI, String map) {
         this(gameAPI, map, false);
     }
-    public GameState(GameAPI gameAPI, String map, boolean change) {
+    public GameState(@NonNull GameAPI gameAPI, String map, boolean change) {
         super(gameAPI);
         Location.setGameAPI(gameAPI);
         if (!change) Game.getInstance().setPlayerData(FileUtils.load());

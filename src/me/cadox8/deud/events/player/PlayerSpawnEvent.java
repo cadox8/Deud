@@ -1,11 +1,12 @@
 package me.cadox8.deud.events.player;
 
+import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
 
 public class PlayerSpawnEvent extends PlayerEvent {
 
-    public PlayerSpawnEvent(GameAPI gameAPI, Player player) {
+    public PlayerSpawnEvent(@NonNull GameAPI gameAPI, Player player) {
         super(gameAPI, player);
     }
 

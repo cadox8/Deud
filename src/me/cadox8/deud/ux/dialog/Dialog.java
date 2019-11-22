@@ -2,7 +2,7 @@ package me.cadox8.deud.ux.dialog;
 
 import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.creatures.npcs.Npc;
+import me.cadox8.deud.entities.creatures.npcs.NPC;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
@@ -16,7 +16,7 @@ public class Dialog {
 
     private final GameAPI gameApi;
     private final Player player;
-    private final Npc npc;
+    private final NPC npc;
 
     private final List<String> text;
     private int page = 0;
@@ -26,7 +26,7 @@ public class Dialog {
     public Dialog(GameAPI gameApi, Player p) {
         this(gameApi, p, null);
     }
-    public Dialog(GameAPI gameApi, Player p, Npc npc) {
+    public Dialog(GameAPI gameApi, Player p, NPC npc) {
         this.gameApi = gameApi;
         this.player = p;
         this.npc = npc;

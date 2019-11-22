@@ -9,7 +9,7 @@ public class ProjectileHitEvent extends ProjectileEvent {
 
     private Entity damaged;
 
-    public ProjectileHitEvent(GameAPI gameAPI, @NonNull Projectile projectile, @NonNull Entity damaged) {
+    public ProjectileHitEvent(@NonNull GameAPI gameAPI, @NonNull Projectile projectile, @NonNull Entity damaged) {
         super(gameAPI, projectile);
         this.damaged = damaged;
     }

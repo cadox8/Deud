@@ -1,6 +1,7 @@
 package me.cadox8.deud.ui;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 
@@ -14,7 +15,7 @@ public class UIField extends UIObject {
 
     @Getter @Setter private Color baseColor = new Color(217, 217, 217);
 
-    public UIField(float x, float y, int width, int height, GameAPI gameAPI) {
+    public UIField(float x, float y, int width, int height, @NonNull GameAPI gameAPI) {
         super(x, y - height, width, height);
 
         this.clicker = () -> gameAPI.getKeyManager().setWritingTo(this);

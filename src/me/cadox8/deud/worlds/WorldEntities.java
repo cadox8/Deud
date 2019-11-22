@@ -1,17 +1,16 @@
 package me.cadox8.deud.worlds;
 
+import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
-import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
-import me.cadox8.deud.entities.creatures.npcs.Npc;
-import me.cadox8.deud.entities.statics.Door;
-import me.cadox8.deud.entities.statics.House;
-import me.cadox8.deud.entities.statics.Shop;
+import me.cadox8.deud.entities.creatures.npcs.NPC;
+import me.cadox8.deud.entities.statics.*;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.gfx.textures.Models;
+import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.utils.Log;
 
 import java.lang.reflect.InvocationTargetException;
@@ -22,7 +21,7 @@ public class WorldEntities {
     private final EntityManager entityManager;
     private final String world;
 
-    public WorldEntities(GameAPI gameAPI, EntityManager entityManager, String world) {
+    public WorldEntities(@NonNull GameAPI gameAPI, EntityManager entityManager, String world) {
         this.gameAPI = gameAPI;
         this.entityManager = entityManager;
         this.world = world;
@@ -39,6 +38,15 @@ public class WorldEntities {
                 final Entity en;
 
                 switch (type) {
+                    case CHEST:
+                        en = new Chest(gameAPI, l.getX(), l.getY());
+                        ((Chest)en).addItems(e.getItems());
+                        break;
+                    case REWARDCHEST:
+                        en = new RewardChest(gameAPI, l.getX(), l.getY());
+                        ((RewardChest)en).setOpen(e.isOpen());
+                        ((RewardChest)en).addItem(e.getItems()[0]);
+                        break;
                     case SIGN:
                         en = new SignEntity(gameAPI, l.getX(), l.getY(), e.getSignType(), e.getText());
                         break;
@@ -50,9 +58,9 @@ public class WorldEntities {
                         en = new Shop(gameAPI, l.getX(), l.getY(), e.getItems());
                         break;
                     case NPC:
-                        en = new Npc(gameAPI, l.getX(), l.getY(), e.getDisplayName(), Models.npc_down, Models.npc_up, Models.npc_left, Models.npc_right);
-                        ((Npc) en).addTexts(e.getTextArray());
-                        ((Npc) en).addItems(e.getItems());
+                        en = new NPC(gameAPI, l.getX(), l.getY(), e.getDisplayName(), Models.npc_down, Models.npc_up, Models.npc_left, Models.npc_right);
+                        ((NPC) en).addTexts(e.getTextArray());
+                        ((NPC) en).addItems(e.getItems());
                         break;
                     case HOUSE:
                         en = new House(gameAPI, l.getX(), l.getY(), e.getHouseType());

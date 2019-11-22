@@ -1,5 +1,6 @@
 package me.cadox8.deud.attributes;
 
+import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.utils.Utils;
@@ -11,7 +12,7 @@ public class Explosion extends Attribute {
 
     private Entity damager;
 
-    public Explosion(GameAPI gameAPI, double radius, double power) {
+    public Explosion(@NonNull GameAPI gameAPI, double radius, double power) {
         super(gameAPI, 1, "Explosion");
 
         this.radius = radius;

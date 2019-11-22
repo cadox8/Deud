@@ -1,8 +1,10 @@
-package me.cadox8.deud.entities;
+package me.cadox8.deud.managers;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
@@ -25,7 +27,7 @@ public class EntityManager {
         return 1;
     };
 
-    public EntityManager(GameAPI gameAPI, Player player) {
+    public EntityManager(@NonNull GameAPI gameAPI, Player player) {
         EntityManager.gameAPI = gameAPI;
         this.player = player;
         entities = new ArrayList<>();
@@ -80,15 +82,15 @@ public class EntityManager {
         checkAttacks(attacker, 0, 0);
     }
     public static void checkAttacks(Entity attacker, float xMove, float yMove) {
-        attacker.attackTimer += System.currentTimeMillis() - attacker.lastAttackTimer;
-        attacker.lastAttackTimer = System.currentTimeMillis();
-        if (attacker.attackTimer < attacker.attackCooldown) {
-            if (gameAPI.isDebug()) Log.log("Attack in cooldown: " + attacker.attackTimer + "/" + attacker.attackCooldown);
+        attacker.setAttackTimer(attacker.getAttackTimer() + System.currentTimeMillis() - attacker.getLastAttackTimer());
+        attacker.setLastAttackTimer(System.currentTimeMillis());
+        if (attacker.getAttackTimer() < attacker.getAttackCooldown()) {
+            if (gameAPI.isDebug()) Log.log("Attack in cooldown: " + attacker.getAttackTimer() + "/" + attacker.getAttackCooldown());
             return;
         }
         if (attacker instanceof Player && ((Player) attacker).getInventory().isActive()) return;
         if (attacker instanceof Player && !gameAPI.getMouseManager().isLeftPressed()) return;
-        attacker.attackTimer = 0;
+        attacker.setAttackTimer(0);
 
         final Entity en = getEntity(attacker, xMove, yMove);
         if (en == null) return;

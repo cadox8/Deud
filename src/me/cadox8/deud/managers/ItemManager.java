@@ -1,7 +1,9 @@
-package me.cadox8.deud.items;
+package me.cadox8.deud.managers;
 
 import lombok.Getter;
+import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.items.Item;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ public class ItemManager {
     @Getter private final GameAPI gameAPI;
     public final ArrayList<Item> items;
 
-    public ItemManager(GameAPI gameAPI) {
+    public ItemManager(@NonNull GameAPI gameAPI) {
         this.gameAPI = gameAPI;
         items = new ArrayList<>();
     }

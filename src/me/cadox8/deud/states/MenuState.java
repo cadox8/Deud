@@ -1,5 +1,6 @@
 package me.cadox8.deud.states;
 
+import lombok.NonNull;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.gfx.textures.GUI;
@@ -19,7 +20,7 @@ public class MenuState extends State {
 
     private UIManager uiManager;
 
-    public MenuState(GameAPI gameAPI) {
+    public MenuState(@NonNull GameAPI gameAPI) {
         super(gameAPI);
 
         uiManager = new UIManager(gameAPI);

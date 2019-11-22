@@ -12,7 +12,7 @@ import java.io.File;
 
 public class Launcher {
 
-    public static final String VERSION = "Alpha v0.8.4";
+    public static final String VERSION = "Release 1.0";
     public static final String GAME_FILE = "C:" + File.separator + "Deud" + File.separator;
 
     @Getter private static Discord discord;
@@ -24,12 +24,8 @@ public class Launcher {
             Log.log(Log.LogType.DANGER, e.getMessage());
             return;
         }
-
         FileUtils.checkFile();
-
         discord = new Discord();
-
-        final Game game = new Game("Deud" + " ~~ " + VERSION, 1250, 800);
-        game.start();
+        new Game("Deud" + " ~~ " + VERSION, 1250, 800).start();
     }
 }

@@ -1,21 +1,22 @@
 package me.cadox8.deud.entities.creatures.player;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.audio.Sounds;
 import me.cadox8.deud.entities.Entity;
-import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
-import me.cadox8.deud.entities.creatures.npcs.Npc;
+import me.cadox8.deud.entities.creatures.npcs.NPC;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.gfx.textures.Models;
 import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
+import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.quests.Quest;
 import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.saves.PlayerData;
@@ -48,7 +49,7 @@ public class Player extends Creature {
 
     @Getter @Setter private Quest assignedQuest;
 
-    public Player(GameAPI gameAPI, float x, float y) {
+    public Player(@NonNull GameAPI gameAPI, float x, float y) {
         super(1, "Player", gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         bounds.x = 20;
@@ -63,8 +64,9 @@ public class Player extends Creature {
         animRight = new Animation((int)(speed * 600), Models.player_right);
 
         inventory = new Inventory(gameAPI, this);
-        inventory.setUsableItem(Item.hand);
-        inventory.addItem(Item.keyItem);
+        inventory.addItem(Item.sword);
+        inventory.setUsableItem(inventory.getInventoryItems().get(0));
+        inventory.addItem(Item.hand);
 
         setMaxHunger(10);
         setHunger(getMaxHunger());
@@ -205,7 +207,7 @@ public class Player extends Creature {
         yMove = 0;
 
         if (gameAPI.getKeyManager().tests) {
-            Log.log("\n\n" + Utils.getNearbyEntities(getLocation(), 0.5).toString());
+            //Log.log("\n\n" + Utils.getNearbyEntities(getLocation(), 0.5).toString());
             //new Door(GameAPI, 0, 0, "main").changeWorld();
             setHunger(getMaxHunger());
             addExp(20);
@@ -227,8 +229,8 @@ public class Player extends Creature {
 
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
             final Entity en = EntityManager.getEntity(this, 0, 0);
-            if (en != null && en instanceof Npc) {
-                final Npc npc = (Npc) en;
+            if (en != null && en instanceof NPC) {
+                final NPC npc = (NPC) en;
                 if (npc.getText().isEmpty()) return;
                 final Dialog dialog = new Dialog(gameAPI, this, npc);
                 ((GameState) gameAPI.getGame().getGameState()).setDialog(dialog);

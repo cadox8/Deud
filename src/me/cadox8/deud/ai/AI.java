@@ -1,12 +1,13 @@
 package me.cadox8.deud.ai;
 
 import lombok.Getter;
+import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
-import me.cadox8.deud.entities.EntityManager;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.managers.EntityManager;
 
 import java.awt.*;
 import java.util.Random;
@@ -24,10 +25,10 @@ public abstract class AI {
     @Getter protected Rectangle bounds;
     private int tempDelay = 0;
 
-    public AI(GameAPI gameAPI, Entity entity, float speed, int delay) {
+    public AI(@NonNull GameAPI gameAPI, Entity entity, float speed, int delay) {
         this(gameAPI, entity, speed, delay, new Rectangle(0, 0, 250, 250));
     }
-    public AI(GameAPI gameAPI, Entity entity, float speed, int delay, Rectangle bounds) {
+    public AI(@NonNull GameAPI gameAPI, Entity entity, float speed, int delay, Rectangle bounds) {
         this.gameAPI = gameAPI;
         this.entity = entity;
         this.speed = speed;

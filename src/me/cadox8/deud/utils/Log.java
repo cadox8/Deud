@@ -21,11 +21,58 @@ public class Log {
         @Getter private String color;
     }
 
-
-    public static void log(Object text){
-        log(LogType.DEBUG, text);
+    /**
+     * Logs the info as Debug
+     *
+     * @param info The object to be logged
+     */
+    public static void log(Object info){
+        log(LogType.DEBUG, info);
     }
 
+    /**
+     * Logs the info as Danger
+     *
+     * @param info The object to be logged
+     */
+    public static void danger(Object info) {
+        log(LogType.DANGER, info);
+    }
+
+    /**
+     * Logs the info as Warning
+     *
+     * @param info The object to be logged
+     */
+    public static void warning(Object info) {
+        log(LogType.WARNING, info);
+    }
+
+    /**
+     * Logs the info as Normal
+     *
+     * @param info The object to be logged
+     */
+    public static void normal(Object info) {
+        log(LogType.NORMAL, info);
+    }
+
+    /**
+     * Logs the info as Success
+     *
+     * @param info The object to be logged
+     */
+    public static void success(Object info) {
+        log(LogType.SUCCESS, info);
+    }
+
+    /**
+     * Logs the info as the type you select
+     * @see LogType
+     *
+     * @param type The log type
+     * @param text The object to be logged
+     */
     public static void log(LogType type, Object text){
         String time = "[" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH)) + "]";
         String log;

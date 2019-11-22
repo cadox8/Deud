@@ -1,11 +1,12 @@
 package me.cadox8.deud.entities.projectile;
 
 
+import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 
 public class Arrow extends Projectile {
 
-    public Arrow(GameAPI gameAPI, float x, float y) {
+    public Arrow(@NonNull GameAPI gameAPI, float x, float y) {
         super(12, "Arrow", gameAPI, null, x, y, 42, 42);
 
         bounds.x = 12;
