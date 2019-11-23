@@ -40,6 +40,8 @@ public class WorldEntities {
                 if (type == null) return;
                 final Entity en;
 
+                if (type == EntityData.EntityType.PLAYER) return;
+
                 switch (type) {
                     case CHEST:
                         en = new Chest(gameAPI, l.getX(), l.getY());

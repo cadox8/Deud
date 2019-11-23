@@ -2,6 +2,7 @@ package me.cadox8.deud.entities.statics;
 
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.inventory.StaticInventory;
 import me.cadox8.deud.items.Item;
@@ -14,7 +15,7 @@ public class Shop extends StaticEntity {
     private boolean hasDropped = false;
 
     public Shop(@NonNull GameAPI gameAPI, float x, float y, Item... drops) {
-        super(252, "Shop", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(252, "Shop", EntityData.EntityType.SHOP, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         inventory = new StaticInventory(gameAPI);
 

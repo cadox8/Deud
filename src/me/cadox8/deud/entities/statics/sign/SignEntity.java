@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.statics.StaticEntity;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.tiles.Tile;
@@ -22,7 +23,7 @@ public class SignEntity extends StaticEntity {
     @Getter private final int type;
 
     public SignEntity(@NonNull GameAPI gameAPI, float x, float y, int type, List<String> text) {
-        super(500, "Sign", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(500, "Sign", EntityData.EntityType.SIGN, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
 
@@ -62,6 +63,6 @@ public class SignEntity extends StaticEntity {
 
     @Override
     public String toString() {
-        return "Entity: {ID: " + getINTERNAL_ID() + ", Name: " + getINTERNAL_NAME() + ", X: " + getX() + ", Y: " + getY() + ", Type: " + getType() + ", Text: " + getText().toString() + "}";
+        return "Entity: {ID: " + getINTERNAL_ID() + ", Name: " + getINTERNAL_NAME() + ", X: " + getX() + ", Y: " + getY() + ", Type: " + getENTITY_TYPE() + ", Text: " + getText().toString() + "}";
     }
 }

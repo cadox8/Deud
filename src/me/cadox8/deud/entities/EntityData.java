@@ -8,6 +8,7 @@ import me.cadox8.deud.entities.creatures.friends.Fairy;
 import me.cadox8.deud.entities.creatures.monsters.Ghost;
 import me.cadox8.deud.entities.creatures.monsters.Zombie;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
+import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.projectile.Arrow;
 import me.cadox8.deud.entities.statics.*;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
@@ -79,6 +80,7 @@ public class EntityData {
     @Getter
     public enum EntityType {
 
+        PLAYER(Player.class),
         ZOMBIE(Zombie.class),
         GHOST(Ghost.class),
         FAIRY(Fairy.class),

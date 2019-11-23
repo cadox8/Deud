@@ -3,6 +3,7 @@ package me.cadox8.deud.entities.creatures.monsters;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.items.Item;
 
@@ -10,12 +11,12 @@ import java.awt.*;
 
 public abstract class Monster extends Creature {
 
-    public Monster(int id, String name, GameAPI GameAPI, float x, float y, int width, int height) {
-        this(id, name, GameAPI, x, y, width, height, 0);
+    public Monster(int id, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y, int width, int height) {
+        this(id, name, type, gameAPI, x, y, width, height, 0);
     }
 
-    public Monster(int id, String name, GameAPI GameAPI, float x, float y, int width, int height, int level) {
-        super(id, name, GameAPI, x, y, width, height, level);
+    public Monster(int id, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y, int width, int height, int level) {
+        super(id, name, type, gameAPI, x, y, width, height, level);
     }
 
     @Override
@@ -31,10 +32,6 @@ public abstract class Monster extends Creature {
         move();
     }
 
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(getCurrentAnimationFrame(), (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
-    }
 
     //Utils
     private void getInput() {

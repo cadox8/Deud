@@ -3,13 +3,14 @@ package me.cadox8.deud.entities.creatures.friends;
 import me.cadox8.deud.ai.entities.FriendsAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.gfx.textures.Models;
 import me.cadox8.deud.items.Item;
 
 public class Fairy extends Friendly {
 
-    public Fairy(GameAPI GameAPI, float x, float y) {
-        super(4, "Fairy", GameAPI, x, y, 42, 42);
+    public Fairy(GameAPI gameAPI, float x, float y) {
+        super(4, "Fairy", EntityData.EntityType.FAIRY, gameAPI, x, y, 42, 42);
 
         bounds.x = 12;
         bounds.y = 23;
@@ -26,12 +27,12 @@ public class Fairy extends Friendly {
         setDamage(0);
         setSpeed(10.0f);
 
-        ai = new FriendsAI(GameAPI, this, getSpeed(), 50);
+        ai = new FriendsAI(gameAPI, this, getSpeed(), 50);
     }
 
     @Override
     public void die() {
-        ajustXP(0.13f);
+        adjustXP(0.13f);
         dropItem(Item.keyItem);
     }
 }

@@ -13,6 +13,7 @@ import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.gfx.textures.Models;
 import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
+import me.cadox8.deud.managers.DamageManager;
 import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.MenuState;
@@ -42,6 +43,9 @@ public class Game implements Runnable {
     //States
     @Getter @Setter public State gameState;
     public State menuState;
+
+    // DamageManager
+    @Getter private DamageManager damageManager;
 
     //Input
     @Getter private final KeyManager keyManager;
@@ -85,6 +89,8 @@ public class Game implements Runnable {
 
         gameState = new GameState(gameAPI, "springwood");
         menuState = new MenuState(gameAPI);
+
+        damageManager = new DamageManager();
 
         State.setState(menuState);
         Launcher.getDiscord().createNewPresence(gameAPI.getWorld().getEntityManager().getPlayer());

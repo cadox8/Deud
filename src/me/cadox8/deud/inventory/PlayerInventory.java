@@ -40,7 +40,6 @@ public class PlayerInventory extends CreatureInventory {
     public void render(Graphics g) {
         if (!active) return;
 
-
     }
 
     private void dropItem(Item item) {

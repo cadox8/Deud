@@ -5,6 +5,7 @@ import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.attributes.Attribute;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.utils.Utils;
 
@@ -19,8 +20,8 @@ public abstract class Projectile extends Creature {
     @Setter protected BufferedImage texture;
     @Getter @Setter private List<Attribute> attributes;
 
-    public Projectile(int id, String name, @NonNull GameAPI gameAPI, BufferedImage texture, float x, float y, int width, int height) {
-        super(id, name, gameAPI, x, y, width, height, 0);
+    public Projectile(int id, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, BufferedImage texture, float x, float y, int width, int height) {
+        super(id, name, type, gameAPI, x, y, width, height, 0);
         this.texture = texture;
 
         attributes = new ArrayList<>();

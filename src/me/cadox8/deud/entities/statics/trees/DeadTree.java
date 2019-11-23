@@ -2,6 +2,7 @@ package me.cadox8.deud.entities.statics.trees;
 
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.tiles.Tile;
 
@@ -10,7 +11,7 @@ import java.awt.*;
 public class DeadTree extends Tree {
 
     public DeadTree(@NonNull GameAPI gameAPI, float x, float y) {
-        super(101, "DeadTree", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(101, "DeadTree", EntityData.EntityType.DEADTREE, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         bounds.x = -5;
         bounds.y = (int) (height / 1.5f) - 17;

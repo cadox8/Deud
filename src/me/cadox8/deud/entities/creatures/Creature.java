@@ -5,6 +5,7 @@ import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Chest;
 import me.cadox8.deud.entities.statics.Door;
@@ -30,17 +31,21 @@ public abstract class Creature extends Entity {
 
     @Getter @Setter protected boolean freeze = false;
 
-    public Creature(int id, String name, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
-        this(id, name, gameAPI, x, y, width, height, 0);
+    public Creature(int id, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
+        this(id, name, type, gameAPI, x, y, width, height, 0);
     }
 
-    public Creature(int id, String name, @NonNull GameAPI gameAPI, float x, float y, int width, int height, int level) {
-        super(id, name, gameAPI, x, y, width, height, level);
+    public Creature(int id, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height, int level) {
+        super(id, name, type, gameAPI, x, y, width, height, level);
         speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
     }
 
+    @Override
+    public void render(Graphics g) {
+        g.drawImage(getCurrentAnimationFrame(), (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
+    }
 
     public void fixAnimations() {
         if (animations[0] != null) Arrays.asList(animations).forEach(a -> a.setSpeed((int)(speed * 166.66)));
@@ -140,12 +145,8 @@ public abstract class Creature extends Entity {
         return gameAPI.getWorld().getTile(x, y).isSolid();
     }
 
-    protected void ajustXP(float droppedXP){
-        if (getLevel() != 0) {
-            killer.addExp(getLevel() * droppedXP);
-        } else {
-            killer.addExp(new Random().nextFloat() * 10);
-        }
+    protected void adjustXP(float droppedXP){
+        killer.addExp(getLevel() != 0 ? getLevel() * droppedXP : new Random().nextFloat() * 10 + droppedXP);
     }
 
     @Override

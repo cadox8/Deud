@@ -29,6 +29,7 @@ public abstract class Entity {
     // Internal Data
     @Getter private final int INTERNAL_ID;
     @Getter private final String INTERNAL_NAME;
+    @Getter private final EntityData.EntityType ENTITY_TYPE;
     //
 
     protected static final int DEFAULT_HEALTH = 10;
@@ -75,9 +76,11 @@ public abstract class Entity {
     @Getter @Setter protected Animation animDown, animUp, animLeft, animRight;
     @Getter @Setter protected Animation[] animations = new Animation[4];
 
-    public Entity(int id, String name, @NonNull GameAPI gameAPI, float x, float y, int width, int height, int level) {
+    public Entity(int id, String name, EntityData.EntityType ENTITY_TYPE, @NonNull GameAPI gameAPI, float x, float y, int width, int height, int level) {
         INTERNAL_ID = id;
         INTERNAL_NAME = name;
+        this.ENTITY_TYPE = ENTITY_TYPE;
+
         this.gameAPI = gameAPI;
         this.x = x;
         this.y = y;
@@ -107,6 +110,7 @@ public abstract class Entity {
 
         int amt = attacker.getDamage() + (int) (DMG_UP_PER_LVL * attacker.getLevel());
         if (attacker instanceof Monster && ((CreatureInventory) attacker.getInventory()).getUsableItem() instanceof WeaponItem) amt += ((WeaponItem) ((CreatureInventory) attacker.getInventory()).getUsableItem()).getDamage();
+        setHealth(getHealth() - gameAPI.getDamageManager().effectiveDamage(amt, getENTITY_TYPE(), ((WeaponItem)((CreatureInventory) attacker.getInventory()).getUsableItem())));
         health -= amt;
 
         if (this instanceof Creature) {

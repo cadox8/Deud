@@ -5,6 +5,7 @@ import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.attributes.Explosion;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.items.Item;
 
@@ -13,7 +14,7 @@ public class RewardChest extends Chest {
     @Getter @Setter private boolean open = false;
 
     public RewardChest(@NonNull GameAPI gameAPI, float x, float y) {
-        super(502, "RewardChest", gameAPI, x, y);
+        super(502, "RewardChest", EntityData.EntityType.REWARDCHEST, gameAPI, x, y);
     }
 
     public void open(Player p) {

@@ -45,7 +45,7 @@ public class FileUtils {
 
     @SuppressWarnings("Unchecked")
     public static void save(Player p){
-        final PlayerInventory i = (PlayerInventory) p.getPlayerInventory();
+        final PlayerInventory i = p.getPlayerInventory();
         final Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Game.setFirst(false);
 
@@ -59,11 +59,16 @@ public class FileUtils {
                 inv.add(it);
             });
 
+            final JsonObject item = new JsonObject();
+            item.addProperty("id", i.getUsableItem().getId());
+            item.addProperty("count", i.getUsableItem().getCount());
+
             data.addProperty("nick", p.getNick());
             data.addProperty("health", p.getHealth());
             data.addProperty("money", p.getMoney());
             data.add("inventory", inv);
             data.add("location", gson.toJsonTree(p.getLocation().serializeLocation()).getAsJsonObject());
+            data.add("item", item);
 
             final BufferedWriter w = new BufferedWriter(new FileWriter(saves));
 

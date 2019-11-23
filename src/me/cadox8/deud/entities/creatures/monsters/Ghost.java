@@ -3,12 +3,13 @@ package me.cadox8.deud.entities.creatures.monsters;
 import me.cadox8.deud.ai.entities.MonstersAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.gfx.textures.Models;
 
 public class Ghost extends Monster {
 
-    public Ghost(GameAPI GameAPI, float x, float y) {
-        super(3, "Ghost", GameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+    public Ghost(GameAPI gameAPI, float x, float y) {
+        super(3, "Ghost", EntityData.EntityType.GHOST, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         bounds.x = 20;
         bounds.y = 44;
@@ -27,11 +28,11 @@ public class Ghost extends Monster {
 
         setAttackCooldown(800);
 
-        ai = new MonstersAI(GameAPI, this, getSpeed(), 5, 250, 250);
+        ai = new MonstersAI(gameAPI, this, getSpeed(), 5, 250, 250);
     }
 
     @Override
     public void die() {
-        ajustXP(0.13f);
+        adjustXP(0.13f);
     }
 }

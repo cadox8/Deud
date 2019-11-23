@@ -7,6 +7,7 @@ import me.cadox8.deud.game.Game;
 import me.cadox8.deud.gfx.GameCamera;
 import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
+import me.cadox8.deud.managers.DamageManager;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.worlds.World;
 
@@ -30,6 +31,10 @@ public class GameAPI {
     }
     public MouseManager getMouseManager() {
         return game.getMouseManager();
+    }
+
+    public DamageManager getDamageManager() {
+        return game.getDamageManager();
     }
 
     public EntityManager getEntityManager() {

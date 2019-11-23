@@ -3,6 +3,7 @@ package me.cadox8.deud.entities.statics;
 import lombok.Getter;
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.inventory.StaticInventory;
@@ -16,15 +17,15 @@ import java.util.Arrays;
 public class Chest extends StaticEntity {
 
     // Only for instances
-    protected Chest(int id, String name, @NonNull GameAPI gameAPI, float x, float y) {
-        super(id, name, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    protected Chest(int id, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y) {
+        super(id, name, type, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
     }
 
     public Chest(@NonNull GameAPI gameAPI, float x, float y) {
         this(gameAPI,x, y, false);
     }
     public Chest(@NonNull GameAPI gameAPI, float x, float y, boolean explosive) {
-        super(501, "Chest", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super(501, "Chest", EntityData.EntityType.CHEST, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
         setExplosive(explosive);

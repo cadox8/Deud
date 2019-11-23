@@ -7,6 +7,7 @@ import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.audio.Sounds;
 import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
@@ -47,7 +48,7 @@ public class Player extends Creature {
     @Getter @Setter private Quest assignedQuest;
 
     public Player(@NonNull GameAPI gameAPI, float x, float y) {
-        super(1, "Player", gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+        super(1, "Player", EntityData.EntityType.PLAYER, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         bounds.x = 20;
         bounds.y = 44;
@@ -61,7 +62,6 @@ public class Player extends Creature {
         animRight = new Animation((int)(speed * 600), Models.player_right);
 
         inventory = new PlayerInventory(gameAPI, this);
-        getPlayerInventory().setUsableItem(Item.hand);
 
         setMaxHunger(10);
         setHunger(getMaxHunger());
@@ -97,6 +97,12 @@ public class Player extends Creature {
                 inventory.addItem(i);
             }));
         }
+        getPlayerInventory().setUsableItem(gameAPI.getGame().getPlayerData().getItem());
+/*        if (inventory.getItems().size() == 0) {
+            getPlayerInventory().setUsableItem(Item.hand);
+        } else {
+            getPlayerInventory().setUsableItem(inventory.getItems().get(0));
+        }*/
     }
 
     @Override

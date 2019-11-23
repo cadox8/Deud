@@ -5,6 +5,7 @@ import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.inventory.CreatureInventory;
 import me.cadox8.deud.inventory.StaticInventory;
 
@@ -14,8 +15,8 @@ public abstract class StaticEntity extends Entity {
 
     @Getter @Setter protected boolean explosive = false;
 
-    public StaticEntity(int id, String name, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
-        super(id, name, gameAPI, x, y, width, height, 0);
+    public StaticEntity(int id, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
+        super(id, name, type, gameAPI, x, y, width, height, 0);
     }
 
     @Override

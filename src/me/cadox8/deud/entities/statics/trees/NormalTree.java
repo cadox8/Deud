@@ -2,6 +2,7 @@ package me.cadox8.deud.entities.statics.trees;
 
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.gfx.textures.Assets;
 
 import java.awt.*;
@@ -9,7 +10,7 @@ import java.awt.*;
 public class NormalTree extends Tree {
 
     public NormalTree(@NonNull GameAPI gameAPI, float x, float y) {
-        super(100, "Tree", gameAPI, x, y);
+        super(100, "NormalTree", EntityData.EntityType.NORMALTREE, gameAPI, x, y);
 
         bounds.x = 10;
         bounds.y = (int) (height / 1.5f);
