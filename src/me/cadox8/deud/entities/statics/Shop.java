@@ -1,24 +1,22 @@
 package me.cadox8.deud.entities.statics;
 
-import lombok.Getter;
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.gfx.textures.Assets;
+import me.cadox8.deud.inventory.StaticInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
-import java.util.Arrays;
 
 public class Shop extends StaticEntity {
 
     private boolean hasDropped = false;
-    @Getter private final Item[] drops;
 
     public Shop(@NonNull GameAPI gameAPI, float x, float y, Item... drops) {
         super(252, "Shop", gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
-        this.drops = drops;
+        inventory = new StaticInventory(gameAPI);
 
         setDamageable(false);
 
@@ -36,7 +34,7 @@ public class Shop extends StaticEntity {
 
     @Override
     public void getHurt() {
-        if (!hasDropped) Arrays.asList(drops).forEach(this::dropItem);
+        if (!hasDropped) inventory.getItems().forEach(this::dropItem);
         hasDropped = true;
     }
 

@@ -17,11 +17,11 @@ public class RewardChest extends Chest {
     }
 
     public void open(Player p) {
-        if (p.getInventory().keyCount() == 0 || open) return;
+        if (p.getPlayerInventory().keyCount() == 0 || open) return;
         open = true;
-        p.getInventory().removeItem(Item.keyItem.setCount(1));
+        p.getPlayerInventory().removeItem(Item.keyItem.setCount(1));
 
-        p.getInventory().addItem(Item.getRandom(Item.hand, Item.keyItem));
+        p.getPlayerInventory().addItem(Item.getRandom(Item.hand, Item.keyItem));
 
         if (isExplosive()) new Explosion(this.getGameAPI(),5, 0.3).perform(this, null);
     }

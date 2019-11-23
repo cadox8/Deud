@@ -8,7 +8,7 @@
         "y": 100.0,
         "direction": 2
       },
-      "items": []
+      "inventory": []
     },
     {
       "type": "DeadTree",
@@ -80,7 +80,7 @@
     },
     {
       "type": "Shop",
-      "items": [
+      "inventory": [
         {
           "id": 1,
           "count": 1

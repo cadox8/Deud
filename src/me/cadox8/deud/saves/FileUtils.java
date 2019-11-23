@@ -8,19 +8,19 @@ import com.google.gson.stream.JsonReader;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
+import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.*;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.entities.statics.trees.Tree;
 import me.cadox8.deud.game.Game;
-import me.cadox8.deud.inventory.Inventory;
+import me.cadox8.deud.inventory.PlayerInventory;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.worlds.World;
 import net.arikia.dev.drpc.DiscordRPC;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.List;
 
 public class FileUtils {
@@ -45,7 +45,7 @@ public class FileUtils {
 
     @SuppressWarnings("Unchecked")
     public static void save(Player p){
-        final Inventory i = p.getInventory();
+        final PlayerInventory i = (PlayerInventory) p.getPlayerInventory();
         final Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Game.setFirst(false);
 
@@ -53,7 +53,7 @@ public class FileUtils {
             final JsonObject data = new JsonObject();
 
             final JsonArray inv = new JsonArray();
-            i.getInventoryItems().forEach(item -> {
+            i.getItems().forEach(item -> {
                 JsonObject it = new JsonObject();
                 it.addProperty(item.getId() + "", item.getCount());
                 inv.add(it);
@@ -109,16 +109,30 @@ public class FileUtils {
             en.addProperty("maxHealth", e.getMaxHealth());
             en.add("location", gson.toJsonTree(e.getLocation().serializeLocation()).getAsJsonObject());
 
+            if (e instanceof Creature) {
+                if (e.getInventory() != null) {
+                    final JsonArray inv = new JsonArray();
+                    final JsonArray items = new JsonArray();
+                    e.getInventory().getItems().forEach(i -> {
+                        final JsonObject item = new JsonObject();
+                        item.addProperty("id", i.getId());
+                        item.addProperty("count", i.getCount());
+                        items.add(item);
+                    });
+                    en.add("inventory", inv);
+                }
+            }
+
             if (e instanceof Tree) en.addProperty("treeType", ((Tree) e).getTreeType());
             if (e instanceof Chest) {
                 final JsonArray items = new JsonArray();
-                ((Chest) e).getInventoryItems().forEach(i -> {
+                e.getInventory().getItems().forEach(i -> {
                     final JsonObject item = new JsonObject();
                     item.addProperty("id", i.getId());
                     item.addProperty("count", i.getCount());
                     items.add(item);
                 });
-                en.add("items", items);
+                en.add("inventory", items);
             }
             if (e instanceof RewardChest) {
                 en.addProperty("open", ((RewardChest)e).isOpen());
@@ -135,19 +149,19 @@ public class FileUtils {
             }
             if (e instanceof Shop) {
                 final JsonArray items = new JsonArray();
-                Arrays.asList(((Shop) e).getDrops()).forEach(i -> {
+                e.getInventory().getItems().forEach(i -> {
                     final JsonObject item = new JsonObject();
                     item.addProperty("id", i.getId());
                     item.addProperty("count", i.getCount());
                     items.add(item);
                 });
-                en.add("items", items);
+                en.add("inventory", items);
             }
             if (e instanceof Npc) {
                 final JsonArray text = new JsonArray();
                 final JsonArray items = new JsonArray();
                 ((Npc)e).getText().forEach(text::add);
-                ((Npc)e).getItems().forEach(i -> {
+                e.getInventory().getItems().forEach(i -> {
                     final JsonObject item = new JsonObject();
                     item.addProperty("id", i.getId());
                     item.addProperty("count", i.getCount());
@@ -155,7 +169,7 @@ public class FileUtils {
                 });
                 en.addProperty("displayName", ((Npc)e).getDisplayName());
                 en.add("text", text);
-                en.add("items", items);
+                en.add("inventory", items);
             }
             if (e instanceof House) {
                 en.addProperty("houseType", ((House)e).getHouseType());

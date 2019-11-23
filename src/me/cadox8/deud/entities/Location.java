@@ -1,6 +1,5 @@
 package me.cadox8.deud.entities;
 
-import jdk.jfr.Experimental;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
@@ -9,7 +8,6 @@ import me.cadox8.deud.worlds.World;
 import java.util.HashMap;
 import java.util.Map;
 
-@Experimental
 public class Location {
 
     @Setter @Getter private static GameAPI gameAPI;

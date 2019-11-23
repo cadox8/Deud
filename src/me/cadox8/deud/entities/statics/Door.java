@@ -64,6 +64,6 @@ public class Door extends StaticEntity {
 
     private boolean canOpen(Player p) {
         if (neededItem == -1) return true;
-        return p.getInventory().hasItem(neededItem);
+        return p.getPlayerInventory().hasItem(neededItem);
     }
 }

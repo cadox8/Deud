@@ -12,6 +12,7 @@ import me.cadox8.deud.entities.statics.trees.DeadTree;
 import me.cadox8.deud.entities.statics.trees.NormalTree;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.gfx.textures.Models;
+import me.cadox8.deud.inventory.StaticInventory;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.utils.Log;
 
@@ -42,12 +43,12 @@ public class WorldEntities {
                 switch (type) {
                     case CHEST:
                         en = new Chest(gameAPI, l.getX(), l.getY());
-                        ((Chest)en).addItems(e.getItems());
+                        en.getInventory().addItems(e.getInventory());
                         break;
                     case REWARDCHEST:
                         en = new RewardChest(gameAPI, l.getX(), l.getY());
                         ((RewardChest)en).setOpen(e.isOpen());
-                        ((RewardChest)en).addItem(e.getItems()[0]);
+                        en.getInventory().addItem(e.getInventory()[0]);
                         break;
                     case SIGN:
                         en = new SignEntity(gameAPI, l.getX(), l.getY(), e.getSignType(), e.getText());
@@ -57,12 +58,11 @@ public class WorldEntities {
                         ((Door)en).setNeededItem(e.getNeededItem());
                         break;
                     case SHOP:
-                        en = new Shop(gameAPI, l.getX(), l.getY(), e.getItems());
+                        en = new Shop(gameAPI, l.getX(), l.getY(), e.getInventory());
                         break;
                     case NPC:
                         en = new Npc(gameAPI, l.getX(), l.getY(), e.getDisplayName(), Models.npc_down, Models.npc_up, Models.npc_left, Models.npc_right);
                         ((Npc) en).addTexts(e.getTextArray());
-                        ((Npc) en).addItems(e.getItems());
                         break;
                     case HOUSE:
                         en = new House(gameAPI, l.getX(), l.getY(), e.getHouseType());
@@ -82,6 +82,13 @@ public class WorldEntities {
                 }
                 en.setMaxHealth(e.getMaxHealth());
                 en.setHealth(e.getHealth());
+
+                if (e.getInventory() != null) {
+                    final StaticInventory inv = new StaticInventory(gameAPI);
+                    inv.addItems(e.getInventory());
+                    en.setInventory(inv);
+                }
+
                 entityManager.addEntity(en);
             } catch (IllegalAccessException | InvocationTargetException | InstantiationException er) {
                 Log.log(Log.LogType.DANGER, "Error while loading entities. " + er.getMessage());

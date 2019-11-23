@@ -10,6 +10,9 @@ import me.cadox8.deud.entities.statics.Chest;
 import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
+import me.cadox8.deud.inventory.CreatureInventory;
+import me.cadox8.deud.inventory.PlayerInventory;
+import me.cadox8.deud.inventory.StaticInventory;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
@@ -144,7 +147,6 @@ public abstract class Creature extends Entity {
             killer.addExp(new Random().nextFloat() * 10);
         }
     }
-
 
     @Override
     public void preRender(Graphics g) {}

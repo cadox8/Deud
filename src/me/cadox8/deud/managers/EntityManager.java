@@ -88,7 +88,7 @@ public class EntityManager {
             if (gameAPI.isDebug()) Log.log("Attack in cooldown: " + attacker.getAttackTimer() + "/" + attacker.getAttackCooldown());
             return;
         }
-        if (attacker instanceof Player && ((Player) attacker).getInventory().isActive()) return;
+        if (attacker instanceof Player && ((Player) attacker).getPlayerInventory().isActive()) return;
         if (attacker instanceof Player && !gameAPI.getMouseManager().isLeftPressed()) return;
         attacker.setAttackTimer(0);
 

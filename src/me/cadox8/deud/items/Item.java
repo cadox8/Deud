@@ -72,11 +72,6 @@ public abstract class Item {
 
         bounds = new Rectangle(x, y, ITEMWIDTH, ITEMHEIGHT);
 
-        try {
-            if (items[id] != null) throw new IllegalAccessException("There is an item registered with the same id (" + id + ")");
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
         items[id] = this;
     }
 
@@ -86,8 +81,8 @@ public abstract class Item {
 
     public void removeItem(@NonNull Player p) {
         if (getCount() == 1) {
-            p.getInventory().removeItem(this);
-            p.getInventory().setUsableItem(Item.hand);
+            p.getPlayerInventory().removeItem(this);
+            p.getPlayerInventory().setUsableItem(Item.hand);
             return;
         }
         count--;
@@ -102,7 +97,7 @@ public abstract class Item {
     public void tick(){
         if(gameAPI.getWorld().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)){
             pickedUp = true;
-            gameAPI.getWorld().getPlayer().getInventory().addItem(this);
+            gameAPI.getWorld().getPlayer().getPlayerInventory().addItem(this);
         }
     }
 

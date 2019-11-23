@@ -12,6 +12,9 @@ import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.projectile.Projectile;
 import me.cadox8.deud.events.projectiles.ProjectileHitEvent;
+import me.cadox8.deud.inventory.CreatureInventory;
+import me.cadox8.deud.inventory.Inventory;
+import me.cadox8.deud.inventory.PlayerInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.utils.Log;
@@ -67,6 +70,8 @@ public abstract class Entity {
 
     @Getter @Setter protected Entity killer;
 
+    @Setter protected Inventory inventory;
+
     @Getter @Setter protected Animation animDown, animUp, animLeft, animRight;
     @Getter @Setter protected Animation[] animations = new Animation[4];
 
@@ -101,13 +106,13 @@ public abstract class Entity {
         if (!isDamageable()) return;
 
         int amt = attacker.getDamage() + (int) (DMG_UP_PER_LVL * attacker.getLevel());
-        if (attacker instanceof Monster && ((Monster)attacker).getItemInHand() instanceof WeaponItem) amt += ((WeaponItem) ((Monster) attacker).getItemInHand()).getDamage();
+        if (attacker instanceof Monster && ((CreatureInventory) attacker.getInventory()).getUsableItem() instanceof WeaponItem) amt += ((WeaponItem) ((CreatureInventory) attacker.getInventory()).getUsableItem()).getDamage();
         health -= amt;
 
         if (this instanceof Creature) {
-            if (attacker instanceof Monster) ((Monster)attacker).getItemInHand().getAttributes().forEach(a -> a.perform(attacker, this));
-            if (attacker instanceof Npc) ((Npc)attacker).getItems().get(0).getAttributes().forEach(a -> a.perform(attacker, this));
-            if (attacker instanceof Player) ((Player) attacker).getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
+            if (attacker instanceof Monster) ((CreatureInventory) attacker.getInventory()).getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
+            if (attacker instanceof Npc) ((CreatureInventory) attacker.getInventory()).getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
+            if (attacker instanceof Player) ((PlayerInventory) attacker.getInventory()).getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
         }
 
         if (attacker instanceof Projectile) {
@@ -145,7 +150,9 @@ public abstract class Entity {
         setHealth(0);
     }
 
-
+    public Inventory getInventory() {
+        return inventory;
+    }
 
     public void addExp(double xp) {
         if (getLevel() >= MAX_LEVEL) {

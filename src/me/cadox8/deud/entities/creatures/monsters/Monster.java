@@ -10,8 +10,6 @@ import java.awt.*;
 
 public abstract class Monster extends Creature {
 
-    @Getter @Setter private Item itemInHand = Item.hand;
-
     public Monster(int id, String name, GameAPI GameAPI, float x, float y, int width, int height) {
         this(id, name, GameAPI, x, y, width, height, 0);
     }

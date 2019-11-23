@@ -6,6 +6,7 @@ import me.cadox8.deud.ai.entities.FriendsAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.Creature;
+import me.cadox8.deud.inventory.CreatureInventory;
 import me.cadox8.deud.items.Item;
 
 import java.awt.*;
@@ -20,14 +21,14 @@ public class Npc extends Creature {
 
     @Getter private final String displayName;
     @Getter private final List<String> text;
-    @Getter private final List<Item> items;
 
     public Npc(@NonNull GameAPI gameAPI, float x, float y, String displayName, BufferedImage[]... textures) {
         super(5, "NPC", gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         this.displayName = displayName;
         this.text = new ArrayList<>();
-        this.items = new ArrayList<>();
+
+        inventory = new CreatureInventory(gameAPI);
 
         bounds.x = 20;
         bounds.y = 44;
@@ -70,17 +71,13 @@ public class Npc extends Creature {
 
     @Override
     public void die() {
-        dropItem(items.get(0));
-        items.remove(0);
-        items.forEach(i -> dropItem(i, new Random().nextFloat()));
+        dropItem(inventory.getItems().get(0));
+        inventory.getItems().remove(0);
+        inventory.getItems().forEach(i -> dropItem(i, new Random().nextFloat()));
     }
 
     public Npc addTexts(String... texts) {
         this.text.addAll(Arrays.asList(texts));
-        return this;
-    }
-    public Npc addItems(Item... items) {
-        this.items.addAll(Arrays.asList(items));
         return this;
     }
     public void setAngry(boolean angry) {

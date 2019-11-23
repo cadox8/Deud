@@ -46,7 +46,7 @@ public class EntityData {
         private int neededItem = -1;
 
         private String[] text = new String[0];
-        private ItemHelper[] items = new ItemHelper[0];
+        private ItemHelper[] inventory = new ItemHelper[0];
 
         private String displayName = "";
 
@@ -58,11 +58,12 @@ public class EntityData {
             return new Location(location.getX(), location.getY(),location.getDirection());
         }
 
-        public boolean open;
+        public boolean open = false;
 
-        public Item[] getItems() {
-            final Item[] it = new Item[items.length];
-            for (int x = 0; x < it.length; x++) it[x] = Item.items[items[x].getId()].setCount(items[x].getCount());
+        public Item[] getInventory() {
+            if (inventory == null) return new Item[0];
+            final Item[] it = new Item[inventory.length];
+            for (int x = 0; x < it.length; x++) it[x] = Item.items[inventory[x].getId()].setCount(inventory[x].getCount());
             return it;
         }
 

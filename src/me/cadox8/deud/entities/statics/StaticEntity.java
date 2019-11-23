@@ -5,6 +5,8 @@ import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.inventory.CreatureInventory;
+import me.cadox8.deud.inventory.StaticInventory;
 
 import java.awt.*;
 
@@ -29,4 +31,8 @@ public abstract class StaticEntity extends Entity {
     public void preRender(Graphics g) {}
 
     public void fixAnimations() {}
+
+    public StaticInventory getInventory() {
+        return (StaticInventory) inventory;
+    }
 }

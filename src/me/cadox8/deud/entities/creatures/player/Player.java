@@ -13,7 +13,7 @@ import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.gfx.textures.Models;
-import me.cadox8.deud.inventory.Inventory;
+import me.cadox8.deud.inventory.PlayerInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.managers.EntityManager;
@@ -33,9 +33,6 @@ import java.util.Arrays;
 public class Player extends Creature {
 
     @Getter @Setter private String nick;
-
-    // Inventory
-    @Getter @Setter private Inventory inventory;
 
     //Stamina
     @Getter @Setter private int maxHunger;
@@ -63,10 +60,8 @@ public class Player extends Creature {
         animLeft = new Animation((int)(speed * 600), Models.player_left);
         animRight = new Animation((int)(speed * 600), Models.player_right);
 
-        inventory = new Inventory(gameAPI, this);
-        inventory.addItem(Item.sword);
-        inventory.setUsableItem(inventory.getInventoryItems().get(0));
-        inventory.addItem(Item.hand);
+        inventory = new PlayerInventory(gameAPI, this);
+        getPlayerInventory().setUsableItem(Item.hand);
 
         setMaxHunger(10);
         setHunger(getMaxHunger());
@@ -123,10 +118,10 @@ public class Player extends Creature {
         // Inventory
         inventory.tick();
 
-        if (!(inventory.getUsableItem() instanceof WeaponItem)) {
+        if (!(((PlayerInventory)inventory).getUsableItem() instanceof WeaponItem)) {
             setDamage(DEFAULT_DAMAGE);
         } else {
-            setDamage(((WeaponItem) inventory.getUsableItem()).getDamage() + DEFAULT_DAMAGE);
+            setDamage(((WeaponItem) ((PlayerInventory)inventory).getUsableItem()).getDamage() + DEFAULT_DAMAGE);
         }
     }
 
@@ -157,7 +152,7 @@ public class Player extends Creature {
     }
 
     private void renderInfo(Graphics g) {
-        if (inventory.isActive()) {
+        if (((PlayerInventory)inventory).isActive()) {
             //Money
             g.drawImage(Assets.coin, 10, 5, 32, 32, null);
             Text.drawString(g, "x" + getMoney(), 35, Assets.HEIGHT - 3, 2);
@@ -193,8 +188,8 @@ public class Player extends Creature {
         drawString(g, getArmor(),  3);
 
         //Item
-        g.drawImage(inventory.getUsableItem().getTexture(), 1160, 670, null);
-        Text.drawString(g, inventory.getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, false, Color.BLACK, 2);
+        g.drawImage(((PlayerInventory)inventory).getUsableItem().getTexture(), 1160, 670, null);
+        Text.drawString(g, ((PlayerInventory)inventory).getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, false, Color.BLACK, 2);
 
         if (getHealth() <= 0) {
             Text.drawString(g, "You lose", 125, 530, Color.BLACK, 3);
@@ -254,7 +249,7 @@ public class Player extends Creature {
             setDirection(2);
         }
 
-        if (gameAPI.getMouseManager().isRightPressed()) inventory.getUsableItem().use(this);
+        if (gameAPI.getMouseManager().isRightPressed()) ((PlayerInventory)inventory).getUsableItem().use(this);
 
         if (gameAPI.getKeyManager().shift) {
             if (hunger <= 0.0) {
@@ -273,6 +268,9 @@ public class Player extends Creature {
         }
     }
 
+    public PlayerInventory getPlayerInventory() {
+        return (PlayerInventory) inventory;
+    }
 
 
     //
