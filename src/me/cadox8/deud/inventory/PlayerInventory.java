@@ -32,6 +32,7 @@ public class PlayerInventory extends CreatureInventory {
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_S)) selectedItem++;
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_Q)) dropItem(items.get(selectedItem));
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && items.get(selectedItem) != null) setUsableItem(items.get(selectedItem));
+        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_BACK_SPACE)) setUsableItem(Item.hand);
 
         if (selectedItem < 0) selectedItem = items.size() - 1;
         if (selectedItem >= items.size()) selectedItem = 0;

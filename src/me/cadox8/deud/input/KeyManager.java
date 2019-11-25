@@ -73,7 +73,7 @@ public class KeyManager implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         if (writingTo != null) {
-            if (e.getKeyChar() == 8) {
+            if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
                 if (writingTo.getText().toCharArray().length <= 0) return;
                 writingTo.setText(String.valueOf(Arrays.copyOfRange(writingTo.getText().toCharArray(), 0, writingTo.getText().toCharArray().length - 1)));
                 return;
