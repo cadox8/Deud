@@ -209,8 +209,11 @@ public abstract class Entity {
         dropItem(item, 1);
     }
     public void dropItem(Item item, float percent){
+        dropItem(item, percent, (int) x, (int) y);
+    }
+    public void dropItem(Item item, float percent, int xPos, int yPos){
         if (item == null) return;
-        if (percent >= new Random().nextFloat()) gameAPI.getWorld().getItemManager().addItem(item.createNew((int) x, (int) y, item.getCount()));
+        if (percent >= new Random().nextFloat()) gameAPI.getWorld().getItemManager().addItem(item.createNew(xPos, yPos, item.getCount()));
     }
 
     public Location getLocation() {

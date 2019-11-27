@@ -16,17 +16,11 @@ public class DamageManager {
         switch (damaged) {
             case DEADTREE:
             case NORMALTREE:
-                if (id == 5) {
-                    return initialDamage + (initialDamage * 0.84);
-                } else {
-                    return initialDamage - (initialDamage * 0.57);
-                }
+                if (id == 5) return initialDamage + (initialDamage * 0.84);
+                return initialDamage - (initialDamage * 0.57);
             case ROCK:
-                if (id == 5) {
-                    return initialDamage + (initialDamage * 0.97);
-                } else {
-                    return initialDamage - (initialDamage * 0.86);
-                }
+                if (id == 5)  return initialDamage + (initialDamage * 0.97);
+                return initialDamage - (initialDamage * 0.86);
 
             default:
                 return initialDamage;

@@ -16,7 +16,7 @@ public class GUI {
 
     public static BufferedImage dialog;
 
-    public static BufferedImage inventoryScreen;
+    public static BufferedImage inventory, invSelector;
 
     public static BufferedImage logo;
 
@@ -43,7 +43,8 @@ public class GUI {
         logo = Utils.loadImage("/utils/icon.png");
         dialog = Utils.loadImage("/textures/gui/dialog.png");
 
-        inventoryScreen = Utils.loadImage("/textures/gui/inventoryScreen.png");
+        inventory = Utils.loadImage("/textures/gui/inventory.png");
+        invSelector = Utils.loadImage("/textures/gui/invSelector.png");
 
         none = gui.coloredSprite(32, 32, new Color(0, 0, 0, 255));
     }
