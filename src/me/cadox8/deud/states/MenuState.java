@@ -12,6 +12,7 @@ import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Updater;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -34,6 +35,7 @@ public class MenuState extends State {
 
             if (gameAPI.getGame().getPlayerData() == null) gameAPI.getPlayer().setNick("Arya");
 
+            gameAPI.getGame().getDisplay().getFrame().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
             Log.log("Player nick: " + gameAPI.getPlayer().getNick());
         }));
 
