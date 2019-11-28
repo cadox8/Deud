@@ -5,11 +5,9 @@ import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.sign.SignEntity;
-import me.cadox8.deud.game.Game;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -63,7 +61,7 @@ public class PlayerInventory extends CreatureInventory {
             chest.selected = false;
         }
 
-        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {
             if (selected) {
                 if (chest == null) {
                     setUsableItem(getItem());

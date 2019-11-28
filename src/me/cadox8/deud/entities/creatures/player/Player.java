@@ -18,7 +18,6 @@ import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.gfx.textures.Models;
-import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.inventory.PlayerInventory;
 import me.cadox8.deud.inventory.StaticInventory;
 import me.cadox8.deud.items.Item;
@@ -233,7 +232,7 @@ public class Player extends Creature {
             gameAPI.setDebug(!gameAPI.isDebug());
         }
 
-        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {
             final Entity en = EntityManager.getEntity(this, 0, 0);
             if (en == null) return;
             if (en instanceof Chest) {

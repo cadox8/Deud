@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class KeyManager implements KeyListener {
 
     private boolean[] keys, justPressed, cantPress;
-    public boolean up, down, left, right, shift, enter, drop, esc;
+    public boolean up, down, left, right, shift, space, drop, esc;
     public boolean debug, tests;
 
     @Getter @Setter private UIField writingTo;
@@ -44,7 +44,7 @@ public class KeyManager implements KeyListener {
 
         shift = keys[KeyEvent.VK_SHIFT];
 
-        enter = keys[KeyEvent.VK_ENTER];
+        space = keys[KeyEvent.VK_SPACE];
         drop = keys[KeyEvent.VK_Q];
 
         debug = keys[KeyEvent.VK_F1];
