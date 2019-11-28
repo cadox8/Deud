@@ -51,50 +51,9 @@ public abstract class Creature extends Entity {
         if (animations[0] != null) Arrays.asList(animations).forEach(a -> a.setSpeed((int)(speed * 166.66)));
     }
 
-
-    private SignEntity se;
     public void move() {
         if (!checkEntityCollisions(xMove, 0f)) moveX();
         if (!checkEntityCollisions(0f, yMove)) moveY();
-
-        if (!(this instanceof Player)) return;
-
-        // Sign
-        if (getEntityCollision(xMove, 0f) instanceof SignEntity) {
-            se = (SignEntity) getEntityCollision(xMove, 0f);
-            se.setSign(new Sign(se.getText()));
-            return;
-        }
-        if (getEntityCollision(0f, yMove) instanceof SignEntity) {
-            se = (SignEntity) getEntityCollision(0f, yMove);
-            se.setSign(new Sign(se.getText()));
-            return;
-        }
-        if (se != null && se.getSign() != null) se.setSign(null);
-
-        // Chest
-        if (getEntityCollision(xMove, 0f) instanceof Chest) {
-            final Chest chest = (Chest) getEntityCollision(xMove, 0f);
-            chest.open((Player)this);
-            return;
-        }
-        if (getEntityCollision(0f, yMove) instanceof Chest) {
-            final Chest chest = (Chest) getEntityCollision(0f, yMove);
-            chest.open((Player)this);
-            return;
-        }
-
-        // Door
-        if (getEntityCollision(xMove, 0f) instanceof Door) {
-            final Door door = (Door) getEntityCollision(xMove, 0f);
-            door.changeWorld((Player) this);
-            return;
-        }
-        if (getEntityCollision(0f, yMove) instanceof Door) {
-            final Door door = (Door) getEntityCollision(0f, yMove);
-            door.changeWorld((Player) this);
-            return;
-        }
     }
 
     public void moveX() {

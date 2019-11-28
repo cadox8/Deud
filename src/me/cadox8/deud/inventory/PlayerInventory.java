@@ -28,6 +28,8 @@ public class PlayerInventory extends CreatureInventory {
     }
 
     public void tick() {
+        if (player.isFreeze()) return;
+
         final StaticInventory chest = player.getChest();
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_E)) {
             active = !active;

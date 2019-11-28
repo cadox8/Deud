@@ -20,6 +20,8 @@ public class SignEntity extends StaticEntity {
     @Setter @Getter private Sign sign;
     @Getter private List<String> text;
 
+    @Getter @Setter private boolean shown = false;
+
     @Getter private final int type;
 
     public SignEntity(@NonNull GameAPI gameAPI, float x, float y, int type, List<String> text) {

@@ -11,6 +11,10 @@ import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
+import me.cadox8.deud.entities.statics.Chest;
+import me.cadox8.deud.entities.statics.Door;
+import me.cadox8.deud.entities.statics.sign.Sign;
+import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.gfx.textures.Models;
@@ -138,7 +142,6 @@ public class Player extends Creature {
     public void die() {
         Log.log(Log.LogType.DANGER, "You lose");
         gameAPI.getWorld().getEntityManager().freezeAll();
-        //System.exit(0);
     }
 
 
@@ -228,17 +231,38 @@ public class Player extends Creature {
             gameAPI.setDebug(!gameAPI.isDebug());
         }
 
-        if (isFreeze()) return;
-
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
             final Entity en = EntityManager.getEntity(this, 0, 0);
-            if (en != null && en instanceof Npc) {
+            if (en == null) return;
+            if (en instanceof Chest) {
+                final Chest chest = (Chest) en;
+                chest.open(this);
+            }
+            if (en instanceof Door) {
+                final Door door = (Door) en;
+                door.changeWorld(this);
+            }
+            if (en instanceof SignEntity) {
+                final SignEntity sign = (SignEntity) en;
+                if (sign.isShown()) {
+                    setFreeze(false);
+                    sign.setSign(null);
+                    sign.setShown(false);
+                    return;
+                }
+                setFreeze(true);
+                sign.setSign(new Sign(sign.getText()));
+                sign.setShown(true);
+            }
+            if (en instanceof Npc) {
                 final Npc npc = (Npc) en;
                 if (npc.getText().isEmpty()) return;
                 final Dialog dialog = new Dialog(gameAPI, this, npc);
                 ((GameState) gameAPI.getGame().getGameState()).setDialog(dialog);
             }
         }
+
+        if (isFreeze()) return;
 
         if (gameAPI.getKeyManager().up) {
             yMove = -speed;
