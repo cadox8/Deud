@@ -18,6 +18,7 @@ import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.MenuState;
 import me.cadox8.deud.states.State;
+import me.cadox8.deud.utils.Log;
 import net.arikia.dev.drpc.DiscordRPC;
 
 import java.awt.*;
@@ -142,7 +143,7 @@ public class Game implements Runnable {
             }
 
             if (timer >= 1000000000) {
-                //Log.log("FPS: " + ticks);
+                Log.log("FPS: " + ticks);
                 ticks = 0;
                 timer = 0;
             }

@@ -3,6 +3,7 @@ package me.cadox8.deud.states;
 import lombok.NonNull;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.audio.Sound;
 import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.ui.UIImage;
 import me.cadox8.deud.ui.UIImageButton;
@@ -34,6 +35,8 @@ public class MenuState extends State {
             setState(gameAPI.getGame().gameState);
 
             if (gameAPI.getGame().getPlayerData() == null) gameAPI.getPlayer().setNick("Arya");
+
+            Sound.TOWN_MUSIC.playLoop();
 
             gameAPI.getGame().getDisplay().getFrame().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
             Log.log("Player nick: " + gameAPI.getPlayer().getNick());
