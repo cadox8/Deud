@@ -53,7 +53,7 @@ public class WorldEntities {
                         en.getInventory().addItem(e.getInventory()[0]);
                         break;
                     case SIGN:
-                        en = new SignEntity(gameAPI, l.getX(), l.getY(), e.getSignType(), e.getText());
+                        en = new SignEntity(gameAPI, l.getX(), l.getY(), e.getText());
                         break;
                     case DOOR:
                         en = new Door(gameAPI, l.getX(), l.getY(), e.getMap());

@@ -8,7 +8,6 @@ import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.statics.StaticEntity;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.tiles.Tile;
-import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,44 +21,27 @@ public class SignEntity extends StaticEntity {
 
     @Getter @Setter private boolean shown = false;
 
-    @Getter private final int type;
 
-    public SignEntity(@NonNull GameAPI gameAPI, float x, float y, int type, List<String> text) {
+    public SignEntity(@NonNull GameAPI gameAPI, float x, float y,List<String> text) {
         super(500, "Sign", EntityData.EntityType.SIGN, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
 
         this.text = text;
-        this.type = type;
 
-        switch (type) {
-            case 0:
-                img = Assets.sign2;
-                bounds.x = 22;
-                bounds.y = (int) (height / 2f) - 29;
-                bounds.width = (width / 4) - 1;
-                bounds.height = height - 7;
-                break;
-            case 1:
-                img = Utils.rotateImage(90, Assets.sign2);
-                bounds.x = 4;
-                bounds.y = 23;
-                bounds.width = width - 8;
-                bounds.height = 13;
-                break;
-        }
+        img = Assets.sign;
+        bounds.x = 4;
+        bounds.y = 23;
+        bounds.width = width;
+        bounds.height = 33;
     }
 
     @Override
     public void render(Graphics g) {
-    }
-
-    @Override
-    public void preRender(Graphics g) {
         g.drawImage(img, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
     }
 
-    public void signRender(Graphics g) {
+    public void postRender(Graphics g) {
         if (sign != null) sign.render(g);
     }
 

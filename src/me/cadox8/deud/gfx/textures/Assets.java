@@ -12,7 +12,7 @@ public class Assets {
     private static Sprites sprites;
 
     //Tiles
-    public static BufferedImage dirt, grass, grass_dirt1, grass_dirt2, sand, brick, door, door2, sign, sign2;
+    public static BufferedImage dirt, grass, grass_dirt1, grass_dirt2, sand, brick, door, door2, sign;
     public static BufferedImage wooden_path;
 
     //Static Entities
@@ -84,8 +84,7 @@ public class Assets {
         sprites = new Sprites(Utils.loadImage("/textures/sprites/basic.png"));
 
         sand = getImage(3, 0);
-        sign = getImage(0, 1);
-        sign2 = getImage(1, 1);
+        sign = sprites.crop(0, 32, 30, 42);
 
         tree = getImage(7, 0);
         tree2 = getImage(8, 0);

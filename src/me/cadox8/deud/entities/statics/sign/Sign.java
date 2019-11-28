@@ -9,9 +9,9 @@ import java.util.List;
 
 public class Sign {
 
-    private final int signX = 64, signY = 48, signWidth = 512, signHeight = 384;
+    private final int signX = 64, signY = 48, signWidth = 512, signHeight = 484;
 
-    private final int textX = signX + 45, textY = signY + 45;
+    private final int textX = signX + 33, textY = signY + 85;
 
     private final List<String> text;
 
@@ -19,13 +19,12 @@ public class Sign {
         this.text = text;
     }
 
-
     public void render(Graphics g) {
         g.drawImage(Assets.sign, signX, signY, signWidth, signHeight, null);
 
         int p = 0;
         for (String s : text) {
-            Text.drawString(g, s, textX, textY + (p * 20), 2);
+            Text.drawString(g, s, textX, textY + (p * 20), Color.BLACK, 2);
             p++;
         }
     }

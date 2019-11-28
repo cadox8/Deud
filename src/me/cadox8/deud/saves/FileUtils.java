@@ -145,7 +145,6 @@ public class FileUtils {
             if (e instanceof SignEntity) {
                 final JsonArray text = new JsonArray();
                 ((SignEntity) e).getText().forEach(text::add);
-                en.addProperty("signType", ((SignEntity) e).getType());
                 en.add("text", text);
             }
             if (e instanceof Door) {

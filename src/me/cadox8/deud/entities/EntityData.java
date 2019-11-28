@@ -39,8 +39,6 @@ public class EntityData {
         private int maxHealth = 0;
         private PlayerData.LocationUtils location = null;
 
-        private int signType = 0;
-
         private int treeType = 0;
         private int houseType = 1;
         private String map = "";
