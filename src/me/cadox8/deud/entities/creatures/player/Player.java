@@ -14,7 +14,9 @@ import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.gfx.textures.Models;
+import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.inventory.PlayerInventory;
+import me.cadox8.deud.inventory.StaticInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.managers.EntityManager;
@@ -46,6 +48,8 @@ public class Player extends Creature {
     private float old_speed = -1;
 
     @Getter @Setter private Quest assignedQuest;
+
+    @Getter @Setter private StaticInventory chest = null;
 
     public Player(@NonNull GameAPI gameAPI, float x, float y) {
         super(1, "Player", EntityData.EntityType.PLAYER, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
@@ -98,11 +102,6 @@ public class Player extends Creature {
             }));
         }
         getPlayerInventory().setUsableItem(gameAPI.getGame().getPlayerData().getItem());
-/*        if (inventory.getItems().size() == 0) {
-            getPlayerInventory().setUsableItem(Item.hand);
-        } else {
-            getPlayerInventory().setUsableItem(inventory.getItems().get(0));
-        }*/
     }
 
     @Override
@@ -123,6 +122,10 @@ public class Player extends Creature {
 
         // Inventory
         inventory.tick();
+        if (chest != null) {
+            chest.tick();
+            chest.checkKeys();
+        }
 
         if (!(((PlayerInventory)inventory).getUsableItem() instanceof WeaponItem)) {
             setDamage(DEFAULT_DAMAGE);
@@ -143,8 +146,6 @@ public class Player extends Creature {
     public void render(Graphics g) {
         g.drawImage(getCurrentAnimationFrame(), (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
 
-        inventory.render(g);
-
         //if (GameAPI.isDebug()) {
             g.setColor(Color.WHITE);
             g.drawString("X: " + x + " Y: " + y + " Dir: " + direction, 1105, 795);
@@ -155,6 +156,7 @@ public class Player extends Creature {
         renderInfo(g);
         //map.paintMap(g);
         inventory.render(g);
+        if (chest != null) chest.render(g);
     }
 
     private void renderInfo(Graphics g) {

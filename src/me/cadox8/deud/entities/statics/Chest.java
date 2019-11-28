@@ -42,7 +42,15 @@ public class Chest extends StaticEntity {
     }
 
     public void open(@NonNull Player p) {
+        getInventory().setActive(true);
+        p.setChest(getInventory());
+        p.getPlayerInventory().setActive(true);
+        p.getPlayerInventory().setSelected(true);
+        gameAPI.getEntityManager().freezePlayer();
+    }
 
+    public void tick() {
+        inventory.tick();
     }
 
     @Override

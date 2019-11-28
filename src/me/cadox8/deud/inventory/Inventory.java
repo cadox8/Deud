@@ -15,6 +15,8 @@ public abstract class Inventory {
 
     @Getter protected ArrayList<Item> items;
 
+    @Getter @Setter protected boolean selected = false;
+
     @Getter @Setter protected int size;
 
     public Inventory(GameAPI gameAPI) {
@@ -54,6 +56,9 @@ public abstract class Inventory {
         removeItem(item);
     }
 
+    public boolean hasItem(Item item) {
+        return hasItem(item.getId());
+    }
     public boolean hasItem(int item) {
         return items.stream().anyMatch(i -> i.getId() == item);
     }

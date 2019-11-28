@@ -16,7 +16,7 @@ public class GUI {
 
     public static BufferedImage dialog;
 
-    public static BufferedImage inventory, invSelector;
+    public static BufferedImage inventory, invSelector, chest;
 
     public static BufferedImage logo;
 
@@ -42,6 +42,8 @@ public class GUI {
 
         logo = Utils.loadImage("/utils/icon.png");
         dialog = Utils.loadImage("/textures/gui/dialog.png");
+
+        chest = Utils.loadImage("/textures/gui/chest.png");
 
         inventory = Utils.loadImage("/textures/gui/inventory.png");
         invSelector = Utils.loadImage("/textures/gui/invSelector.png");

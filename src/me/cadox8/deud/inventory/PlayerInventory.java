@@ -17,11 +17,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class PlayerInventory extends CreatureInventory {
 
     @Getter @Setter private Player player;
-    @Getter @Setter private boolean active = false;
 
     private int selectedItem = 0;
     private int selectY = 0;
-
     private int renderX = 76, renderY = 130;
 
     public PlayerInventory(GameAPI gameAPI, Player player) {
@@ -30,21 +28,59 @@ public class PlayerInventory extends CreatureInventory {
     }
 
     public void tick() {
+        final StaticInventory chest = player.getChest();
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_E)) {
             active = !active;
+            selected = active;
+            if (chest != null) {
+                chest.setActive(false);
+                chest.setSelected(false);
+                player.setChest(null);
+                selected = true;
+            }
             gameAPI.getWorld().getPlayer().setFreeze(active);
         }
-        if (!active) return;
+
+        if (!hasItem(getUsableItem())) setUsableItem(Item.hand);
+
+        if (!active) {
+            selectedItem = 0;
+            selectY = 0;
+            return;
+        }
+
+        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)) {
+            if (chest == null) return;
+            selected = false;
+            chest.selected = true;
+        }
+        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)) {
+            if (chest == null) return;
+            selected = true;
+            chest.selected = false;
+        }
+
+        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+            if (selected) {
+                if (chest == null) {
+                    setUsableItem(getItem());
+                } else {
+                    sendToInventory(this, chest, getItem());
+                }
+            } else {
+                sendToInventory(chest, this, chest.getItemStaticInv());
+            }
+        }
+
+        if (!selected) return;
+
+        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_Q)) dropItem(getItem());
+        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_BACK_SPACE)) setUsableItem(Item.hand);
 
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_A)) selectedItem--;
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_D)) selectedItem++;
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_W)) selectY--;
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_S)) selectY++;
-
-        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_Q)) dropItem(getItem());
-        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) setUsableItem(getItem());
-        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_BACK_SPACE)) setUsableItem(Item.hand);
-
 
         if (selectY < 0) selectY = 0;
         if (selectY > 5) selectY = 5;
@@ -60,6 +96,8 @@ public class PlayerInventory extends CreatureInventory {
 
         g.drawImage(GUI.inventory, 50, 50, null);
         //
+
+        // Render items
         final AtomicInteger xSlot = new AtomicInteger(0);
         final AtomicInteger ySlot = new AtomicInteger(0);
         final int xStart = 76, yStart = 130;
@@ -73,17 +111,31 @@ public class PlayerInventory extends CreatureInventory {
             }
         });
 
+        // Render Selected Items
+        g.drawImage(getUsableItem().getTexture(), xStart + 64, yStart + (64 * 6), 60, 60, null);
+
         // Draw item text
         String infoText;
         if (getItem() == null) {
-            infoText = "";
+            infoText = "---------";
         } else {
             infoText = getItem().getName() + " x" + getItem().getCount();
         }
         Text.drawString(g, infoText, 255, 646, false, 2);
 
         //
-        g.drawImage(GUI.invSelector, renderX, renderY, null);
+        if (selected) g.drawImage(GUI.invSelector, renderX, renderY, null);
+    }
+
+    private Item getItem() {
+        int slot;
+        if (selectY > 0) {
+            slot = ((6 * (selectY + 1)) + 1) - 6 + selectedItem;
+        } else {
+            slot = selectedItem;
+        }
+        if (slot > items.size() - 1) return null;
+        return items.get(slot);
     }
 
     private void dropItem(Item item) {
@@ -93,18 +145,6 @@ public class PlayerInventory extends CreatureInventory {
 
         player.dropItem(item, 1, (int)player.getX() + (r.nextBoolean() ? amount : -amount), (int)player.getY() + (r.nextBoolean() ? amount : -amount));
         removeItem(item);
-    }
-
-    private Item getItem() {
-        int slot;
-
-        if (selectY > 0) {
-           slot = ((6 * (selectY + 1)) + 1) - 6 + selectedItem;
-        } else {
-            slot = selectedItem;
-        }
-        if (slot > items.size() - 1) return null;
-        return items.get(slot);
     }
 
     public void setUsableItem(Item item) {
