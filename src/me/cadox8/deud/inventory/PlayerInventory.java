@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.entities.statics.sign.SignEntity;
+import me.cadox8.deud.game.Game;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.items.Item;
@@ -28,8 +30,6 @@ public class PlayerInventory extends CreatureInventory {
     }
 
     public void tick() {
-        if (player.isFreeze()) return;
-
         final StaticInventory chest = player.getChest();
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_E)) {
             active = !active;
@@ -41,6 +41,7 @@ public class PlayerInventory extends CreatureInventory {
                 selected = true;
             }
             gameAPI.getWorld().getPlayer().setFreeze(active);
+            gameAPI.getEntityManager().getEntities().stream().filter(e -> e instanceof SignEntity).forEach(e -> ((SignEntity) e).setSign(null));
         }
 
         if (!hasItem(getUsableItem())) setUsableItem(Item.hand);

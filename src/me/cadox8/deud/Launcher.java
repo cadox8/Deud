@@ -28,5 +28,4 @@ public class Launcher {
         discord = new Discord();
         new Game("Deud" + " ~~ " + VERSION, 1250, 800).start();
     }
-
 }

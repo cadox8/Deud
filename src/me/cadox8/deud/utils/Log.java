@@ -2,6 +2,7 @@ package me.cadox8.deud.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.fusesource.jansi.Ansi;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,14 +12,13 @@ public class Log {
 
     @AllArgsConstructor
     public enum LogType {
-        SUCCESS("[Success]", "\u001B[32m"),
-        NORMAL("", ""),
-        WARNING("[Warning]", "\u001B[33m"),
-        DANGER("[Danger]", "\u001B[31m"),
-        DEBUG("[Debug]", "\u001B[36m");
+        SUCCESS("[Success]"),
+        NORMAL(""),
+        WARNING("[Warning]"),
+        DANGER("[Danger]"),
+        DEBUG("[Debug]");
 
         @Getter private String prefix;
-        @Getter private String color;
     }
 
     /**
@@ -74,14 +74,8 @@ public class Log {
      * @param text The object to be logged
      */
     public static void log(LogType type, Object text){
-        String time = "[" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH)) + "]";
-        String log;
-
-        if (System.getProperty("os.name").contains("10")) {
-            log = time + type.getColor() + type.getPrefix() + " \u001B[0m" + text;
-        } else {
-            log = time + type.getPrefix() + " " + text;
-        }
+        final String time = "[" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH)) + "]";
+        final String log = time + type.getPrefix() + " " + text;
         System.out.println(log);
     }
 }
