@@ -5,7 +5,7 @@ import me.cadox8.deud.utils.Log;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
-import java.io.File;
+import java.io.BufferedInputStream;
 
 public class Sound {
 
@@ -17,9 +17,8 @@ public class Sound {
 
     public Sound(String sound, float value) {
         try {
-            final File file = new File(getClass().getResource("/sounds/" + sound + ".wav").toURI());
             clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(file));
+            clip.open(AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("/sounds/" + sound + ".wav"))));
             final FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(value);
         } catch (Exception e) {
