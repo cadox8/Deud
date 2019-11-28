@@ -104,8 +104,10 @@ public class Player extends Creature {
                 i.setCount(count);
                 inventory.addItem(i);
             }));
+            getPlayerInventory().setUsableItem(gameAPI.getGame().getPlayerData().getItem());
+        } else {
+            getPlayerInventory().setUsableItem(Item.hand);
         }
-        getPlayerInventory().setUsableItem(gameAPI.getGame().getPlayerData().getItem());
     }
 
     @Override
