@@ -2,7 +2,6 @@ package me.cadox8.deud.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.fusesource.jansi.Ansi;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
