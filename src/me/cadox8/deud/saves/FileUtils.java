@@ -12,7 +12,7 @@ import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.*;
-import me.cadox8.deud.entities.statics.sign.SignEntity;
+import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.trees.Tree;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.inventory.PlayerInventory;
@@ -142,9 +142,9 @@ public class FileUtils {
             if (e instanceof RewardChest) {
                 en.addProperty("open", ((RewardChest)e).isOpen());
             }
-            if (e instanceof SignEntity) {
+            if (e instanceof Sign) {
                 final JsonArray text = new JsonArray();
-                ((SignEntity) e).getText().forEach(text::add);
+                ((Sign) e).getText().forEach(text::add);
                 en.add("text", text);
             }
             if (e instanceof Door) {

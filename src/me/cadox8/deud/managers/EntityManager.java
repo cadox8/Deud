@@ -7,7 +7,7 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
-import me.cadox8.deud.entities.statics.sign.SignEntity;
+import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
@@ -51,7 +51,7 @@ public class EntityManager {
     public void render(Graphics g) {
         entities.forEach(e -> e.preRender(g));
         entities.forEach(e -> e.render(g));
-        entities.stream().filter(e -> e instanceof SignEntity).forEach(e -> ((SignEntity) e).postRender(g));
+        entities.stream().filter(e -> e instanceof Sign).forEach(e -> ((Sign) e).postRender(g));
         player.postRender(g);
         //entities.forEach(e -> g.drawRect((int)e.getBounds().getX() + (int)e.getX(), (int)e.getBounds().getY() + (int)e.getY(), (int)e.getBounds().getWidth(), (int)e.getBounds().getHeight()));
     }

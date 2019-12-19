@@ -8,9 +8,8 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.inventory.CreatureInventory;
-import me.cadox8.deud.items.Item;
+import me.cadox8.deud.quests.Quest;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +21,8 @@ public class Npc extends Creature {
 
     @Getter private final String displayName;
     @Getter private final List<String> text;
+
+    private Quest quest;
 
     public Npc(@NonNull GameAPI gameAPI, float x, float y, String displayName, BufferedImage[]... textures) {
         super(5, "NPC", EntityData.EntityType.NPC, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
@@ -78,5 +79,17 @@ public class Npc extends Creature {
     }
     public void setAngry(boolean angry) {
         ((FriendsAI)ai).setAngry(angry);
+    }
+
+    public void addQuest(Quest quest) {
+        this.quest = quest;
+    }
+
+    public Quest getQuest() {
+        return quest;
+    }
+
+    public void triggerQuest() {
+
     }
 }

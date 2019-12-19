@@ -14,7 +14,6 @@ import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.statics.Chest;
 import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.sign.Sign;
-import me.cadox8.deud.entities.statics.sign.SignEntity;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.gfx.textures.Models;
@@ -242,17 +241,10 @@ public class Player extends Creature {
                 final Door door = (Door) en;
                 door.changeWorld(this);
             }
-            if (en instanceof SignEntity) {
-                final SignEntity sign = (SignEntity) en;
-                if (sign.isShown()) {
-                    setFreeze(false);
-                    sign.setSign(null);
-                    sign.setShown(false);
-                    return;
-                }
-                setFreeze(true);
-                sign.setSign(new Sign(sign.getText()));
-                sign.setShown(true);
+            if (en instanceof Sign) {
+                final Sign sign = (Sign) en;
+                final Dialog dialog = new Dialog(gameAPI, this).addText(sign.getText());
+                ((GameState) gameAPI.getGame().getGameState()).setDialog(dialog);
             }
             if (en instanceof Npc) {
                 final Npc npc = (Npc) en;

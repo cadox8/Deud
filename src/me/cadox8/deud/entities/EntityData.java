@@ -11,7 +11,7 @@ import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.projectile.Arrow;
 import me.cadox8.deud.entities.statics.*;
-import me.cadox8.deud.entities.statics.sign.SignEntity;
+import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.trees.DeadTree;
 import me.cadox8.deud.entities.statics.trees.NormalTree;
 import me.cadox8.deud.items.Item;
@@ -85,7 +85,7 @@ public class EntityData {
         CHEST(Chest.class),
         REWARDCHEST(RewardChest.class),
         ROCK(Rock.class),
-        SIGN(SignEntity.class),
+        SIGN(Sign.class),
         NORMALTREE(NormalTree.class),
         DEADTREE(DeadTree.class),
         DOOR(Door.class),

@@ -7,7 +7,7 @@ import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.statics.*;
-import me.cadox8.deud.entities.statics.sign.SignEntity;
+import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.trees.DeadTree;
 import me.cadox8.deud.entities.statics.trees.NormalTree;
 import me.cadox8.deud.game.Game;
@@ -53,7 +53,7 @@ public class WorldEntities {
                         en.getInventory().addItem(e.getInventory()[0]);
                         break;
                     case SIGN:
-                        en = new SignEntity(gameAPI, l.getX(), l.getY(), e.getText());
+                        en = new Sign(gameAPI, l.getX(), l.getY(), e.getText());
                         break;
                     case DOOR:
                         en = new Door(gameAPI, l.getX(), l.getY(), e.getMap());

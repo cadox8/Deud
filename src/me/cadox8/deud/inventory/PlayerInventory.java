@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
-import me.cadox8.deud.entities.statics.sign.SignEntity;
+import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.items.Item;
@@ -39,7 +39,7 @@ public class PlayerInventory extends CreatureInventory {
                 selected = true;
             }
             gameAPI.getWorld().getPlayer().setFreeze(active);
-            gameAPI.getEntityManager().getEntities().stream().filter(e -> e instanceof SignEntity).forEach(e -> ((SignEntity) e).setSign(null));
+            gameAPI.getEntityManager().getEntities().stream().filter(e -> e instanceof Sign).forEach(e -> ((Sign) e).setSign(null));
         }
 
         if (!hasItem(getUsableItem())) setUsableItem(Item.hand);
