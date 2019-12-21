@@ -10,7 +10,7 @@ import me.cadox8.deud.nysvaui.helpers.UIDimension;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public abstract class Achievement {
+public class Achievement {
 
     @Getter private final int id;
     @Getter private final String name;
