@@ -11,6 +11,8 @@
 
 package me.cadox8.deud.nysvaui.components.images;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.nysvaui.NysvaUI;
@@ -20,6 +22,8 @@ import java.awt.*;
 public class UIImageAnimation extends NysvaUI {
 
     private Animation anim;
+
+    @Getter @Setter protected boolean resize = true;
 
     /**
      * Generates a Image Animation Object
@@ -41,7 +45,7 @@ public class UIImageAnimation extends NysvaUI {
 
     @Override
     public void render(Graphics g) {
-        drawImage(g, anim.getCurrentFrame());
+        drawImage(g, anim.getCurrentFrame(), resize);
     }
 
     @Override

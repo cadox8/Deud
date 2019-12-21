@@ -11,6 +11,8 @@
 
 package me.cadox8.deud.nysvaui.components.images;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.nysvaui.NysvaUI;
 
@@ -20,6 +22,8 @@ import java.awt.image.BufferedImage;
 public class UIImage extends NysvaUI {
 
     private BufferedImage image;
+
+    @Getter @Setter protected boolean resize = true;
 
     /**
      * Generates a Image Object
@@ -38,7 +42,7 @@ public class UIImage extends NysvaUI {
 
     @Override
     public void render(Graphics g) {
-        drawImage(g, image);
+        drawImage(g, image, resize);
     }
 
     @Override

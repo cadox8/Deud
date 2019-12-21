@@ -80,9 +80,13 @@ public abstract class NysvaUI {
         if (hovering) onClick();
     }
 
-    protected void drawImage(Graphics g, BufferedImage image) {
-        if (hovering) {
-            g.drawImage(image, getUIDimension().getX(), getUIDimension().getY(), getUIDimension().getWidth() + 5, getUIDimension().getHeight() + 5, null);
+    protected void drawImage(Graphics g, BufferedImage image, boolean resize) {
+        if (resize) {
+            if (hovering) {
+                g.drawImage(image, getUIDimension().getX(), getUIDimension().getY(), getUIDimension().getWidth() + 5, getUIDimension().getHeight() + 5, null);
+            } else {
+                g.drawImage(image, getUIDimension().getX(), getUIDimension().getY(), getUIDimension().getWidth(), getUIDimension().getHeight(),null);
+            }
         } else {
             g.drawImage(image, getUIDimension().getX(), getUIDimension().getY(), getUIDimension().getWidth(), getUIDimension().getHeight(),null);
         }

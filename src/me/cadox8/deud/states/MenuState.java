@@ -38,10 +38,17 @@ public class MenuState extends State {
             Sound.TOWN_MUSIC.playLoop();
 
             gameAPI.getGame().getDisplay().getFrame().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
-            Log.log("Player nick: " + gameAPI.getPlayer().getNick());
         });
         final UIImageButton exit = new UIImageButton(gameAPI, GUI.exit[0], () -> System.exit(0));
         final UIImage logo = new UIImage(gameAPI, GUI.logo);
+        final UITextButton update = new UITextButton(gameAPI, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
+            try {
+                Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
+            } catch (URISyntaxException | IOException e) {
+                Log.log(Log.LogType.DANGER, "Link doesn't exist");
+                e.printStackTrace();
+            }
+        });
 
 
         background.setUIDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
@@ -49,22 +56,15 @@ public class MenuState extends State {
         exit.setUIDimension(new UIDimension(900, 650, 200, 100));
         logo.setUIDimension(new UIDimension(gameAPI.getWidth() - 97, 0, 97, 151));
 
+        background.setResize(false);
+        logo.setResize(false);
+
+        if (Updater.timeToUpdate()) nysvaManager.addObject(update);
+
         nysvaManager.addObject(background);
         nysvaManager.addObject(start);
         nysvaManager.addObject(exit);
         nysvaManager.addObject(logo);
-
-
-        if (Updater.timeToUpdate()) {
-            final UITextButton update = new UITextButton(gameAPI, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
-                try {
-                    Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
-                } catch (URISyntaxException | IOException e) {
-                    Log.log(Log.LogType.DANGER, "Link doesn't exist");
-                    e.printStackTrace();
-                }
-            });
-        }
 
         gameAPI.getMouseManager().setNysvaUI(nysvaManager);
     }

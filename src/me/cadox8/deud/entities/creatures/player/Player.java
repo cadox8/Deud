@@ -97,6 +97,8 @@ public class Player extends Creature {
             setY(loc.getY());
             setDirection(loc.getDirection());
 
+            Log.log("Player nick: " + getNick());
+
             Arrays.asList(pd.getInventory()).forEach(items -> items.forEach((id, count) -> {
                 final Item i = Item.items[id];
                 i.setCount(count);
