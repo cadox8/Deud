@@ -1,7 +1,8 @@
 package me.cadox8.deud.input;
 
 import lombok.Getter;
-import me.cadox8.deud.ui.UIManager;
+import lombok.Setter;
+import me.cadox8.deud.nysvaui.NysvaManager;
 
 import java.awt.event.*;
 
@@ -9,7 +10,7 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 
     @Getter private boolean leftPressed, rightPressed;
     private int mouseX, mouseY, mouseXClick, mouseYClick;
-    private UIManager uiManager;
+    @Setter private NysvaManager nysvaUI;
 
     //Mouse
     @Override
@@ -26,7 +27,7 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
         if (e.getButton() == MouseEvent.BUTTON1) leftPressed = false;
         if (e.getButton() == MouseEvent.BUTTON3) rightPressed = false;
 
-        if (uiManager != null) uiManager.onMouseRelease(e);
+        if (nysvaUI != null) nysvaUI.onMouseClicked(e);
 
         mouseXClick = 0;
         mouseYClick = 0;
@@ -37,7 +38,7 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
         mouseX = e.getX();
         mouseY = e.getY();
 
-        if (uiManager != null) uiManager.onMouseMove(e);
+        if (nysvaUI != null) nysvaUI.onMouseMove(e);
     }
 
     @Override
@@ -58,9 +59,5 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 
     //Wheel
     public void mouseWheelMoved(MouseWheelEvent e) {
-    }
-
-    public void setUIManager(UIManager uiManager) {
-        this.uiManager = uiManager;
     }
 }

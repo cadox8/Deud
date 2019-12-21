@@ -11,12 +11,17 @@ import me.cadox8.deud.managers.DamageManager;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.worlds.World;
 
+import java.awt.*;
+
 public class GameAPI {
 
     @Getter private final Game game;
     @Getter @Setter private World world;
 
     @Getter @Setter private boolean debug = false;
+
+    @Getter @Setter private static Font gameFont = new Font("'Arial'", Font.PLAIN, 12);
+
 
     public GameAPI(Game game) {
         this.game = game;
