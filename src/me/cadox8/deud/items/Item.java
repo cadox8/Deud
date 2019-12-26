@@ -107,7 +107,7 @@ public abstract class Item {
     }
 
     public void render(Graphics g, int x, int y){
-        g.drawImage(texture, x, y, ITEMWIDTH, ITEMHEIGHT, null);
+        g.drawImage(texture, x, y, 32, 32, null);
     }
 
 
