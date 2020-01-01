@@ -31,7 +31,7 @@ public class MenuState extends State {
         final UIImage background = new UIImage(gameAPI, GUI.background);
         final UIImageButton start = new UIImageButton(gameAPI, GUI.play[0], () -> {
             gameAPI.getMouseManager().setNysvaUI(null);
-            setState(gameAPI.getGame().gameState);
+            setState(gameAPI.getGame().getGameState());
 
             if (gameAPI.getGame().getPlayerData() == null) gameAPI.getPlayer().setNick("Arya");
 

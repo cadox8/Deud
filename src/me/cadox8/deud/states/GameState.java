@@ -34,7 +34,7 @@ public class GameState extends State {
 
         Game.getInstance().setEntityData(FileUtils.loadEntities(map));
 
-        world = new World(gameAPI, "resources/worlds/" + map + "/world.txt");
+        world = new World(gameAPI, "resources/worlds/" + map + "/world.dworld");
 
         gameAPI.setWorld(world);
     }

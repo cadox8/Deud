@@ -25,7 +25,7 @@ import java.util.List;
 
 public class FileUtils {
 
-    private static File saves = new File(Launcher.GAME_FILE + "saves", "player.json");
+    private static File saves = new File(Launcher.GAME_FILE + "saves", "player.ddata");
     private static File config = new File(Launcher.GAME_FILE, "config.json");
 
     public static void checkFile() {
@@ -101,7 +101,7 @@ public class FileUtils {
     public static void saveEntities(World world) throws IOException {
         final Gson gson = new GsonBuilder().setPrettyPrinting().create();
         final List<Entity> entities = world.getEntityManager().getEntities();
-        final File saveEntities = new File(Launcher.GAME_FILE + "saves/entities", "ent_" + world.worldName() +".json");
+        final File saveEntities = new File(Launcher.GAME_FILE + "saves/entities", "ent_" + world.worldName() +".ddata");
 
         final JsonObject data = new JsonObject();
         final JsonArray ent = new JsonArray();
@@ -191,7 +191,7 @@ public class FileUtils {
     }
 
     public static EntityData loadEntities(String world) {
-        final File saveEntities = new File(Launcher.GAME_FILE + "saves/entities", "ent_" + world +".json");
+        final File saveEntities = new File(Launcher.GAME_FILE + "saves/entities", "ent_" + world +".ddata");
         if (!saveEntities.exists()) return null;
 
         try {

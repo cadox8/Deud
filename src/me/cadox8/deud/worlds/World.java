@@ -68,7 +68,7 @@ public class World {
     private void addEntities() {
         try {
             if (Game.getInstance().getEntityData() == null) {
-                final EntityData data = new GsonBuilder().create().fromJson(new JsonReader(new FileReader(new File("resources/worlds/" + worldName() + "/entities.json"))), EntityData.class);
+                final EntityData data = new GsonBuilder().create().fromJson(new JsonReader(new FileReader(new File("resources/worlds/" + worldName() + "/entities.ddata"))), EntityData.class);
                 Game.getInstance().setEntityData(data);
             }
             new WorldEntities(gameAPI, entityManager, worldName());
