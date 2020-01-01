@@ -89,7 +89,7 @@ public class EntityManager {
             return;
         }
         if (attacker instanceof Player && ((Player) attacker).getPlayerInventory().isActive()) return;
-        if (attacker instanceof Player && !gameAPI.getMouseManager().isLeftPressed()) return;
+        if (attacker instanceof Player && !gameAPI.getKeyManager().space) return; //gameAPI.getMouseManager().isLeftPressed()
         attacker.setAttackTimer(0);
 
         final Entity en = getEntity(attacker, xMove, yMove);
