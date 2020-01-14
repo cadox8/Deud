@@ -12,7 +12,7 @@ import java.util.Map;
 public class PlayerData {
 
     private String nick;
-    private int money = 0;
+    private double money = 0;
     private int health = 0;
     private LocationUtils location = new LocationUtils();
     @Getter private Map<Integer, Integer>[] inventory = null;

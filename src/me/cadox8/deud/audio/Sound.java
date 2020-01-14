@@ -9,7 +9,7 @@ import java.io.BufferedInputStream;
 
 public class Sound {
 
-    public static final Sound ENTITY_WALK_GRASS = new Sound("entity_walk_grass", -15f);
+    public static final Sound ENTITY_WALK_GRASS = new Sound("entity_walk_grass", -22f);
 
     public static final Sound TOWN_MUSIC = new Sound("town", -35f);
 

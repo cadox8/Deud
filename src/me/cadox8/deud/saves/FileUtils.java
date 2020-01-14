@@ -122,6 +122,8 @@ public class FileUtils {
                         final JsonObject item = new JsonObject();
                         item.addProperty("id", i.getId());
                         item.addProperty("count", i.getCount());
+                        item.addProperty("buy", i.getBuyAmount());
+                        item.addProperty("sell", i.getSellAmount());
                         items.add(item);
                     });
                     en.add("inventory", inv);

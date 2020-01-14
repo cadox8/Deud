@@ -3,12 +3,14 @@ package me.cadox8.deud.entities.statics;
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
+import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
-import me.cadox8.deud.inventory.StaticInventory;
+import me.cadox8.deud.inventory.ShopInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Shop extends StaticEntity {
 
@@ -17,7 +19,7 @@ public class Shop extends StaticEntity {
     public Shop(@NonNull GameAPI gameAPI, float x, float y, Item... drops) {
         super(252, "Shop", EntityData.EntityType.SHOP, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
-        inventory = new StaticInventory(gameAPI);
+        inventory = new ShopInventory(gameAPI);
 
         setDamageable(false);
 
@@ -35,7 +37,7 @@ public class Shop extends StaticEntity {
 
     @Override
     public void getHurt() {
-        if (!hasDropped) inventory.getItems().forEach(this::dropItem);
+        if (!hasDropped) dropItem(inventory.getItems().get(new Random().nextInt(inventory.getItems().size())));
         hasDropped = true;
     }
 
@@ -56,5 +58,18 @@ public class Shop extends StaticEntity {
         g.drawImage(Assets.post_Shop[11], (int) (x - gameAPI.getGameCamera().getXOffset() + (width * 3)), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
         g.drawImage(Assets.post_Shop[7], (int) (x - gameAPI.getGameCamera().getXOffset() + (width * 3)), (int) ((y - gameAPI.getGameCamera().getYOffset()) - height), width, height, null);
         g.drawImage(Assets.post_Shop[3], (int) (x - gameAPI.getGameCamera().getXOffset() + (width * 3)), (int) ((y - gameAPI.getGameCamera().getYOffset()) - (height * 2)), width, height, null);
+    }
+
+    public void open(@NonNull Player p) {
+        //if (hasDropped) return;
+        getInventory().setActive(true);
+        p.setChest(getInventory());
+        p.getPlayerInventory().setActive(true);
+        p.getPlayerInventory().setSelected(true);
+        gameAPI.getEntityManager().freezePlayer();
+    }
+
+    public boolean hasDropped() {
+        return hasDropped;
     }
 }

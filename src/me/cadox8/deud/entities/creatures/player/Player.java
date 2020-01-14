@@ -13,6 +13,7 @@ import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.statics.Chest;
 import me.cadox8.deud.entities.statics.Door;
+import me.cadox8.deud.entities.statics.Shop;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
@@ -44,7 +45,7 @@ public class Player extends Creature {
     @Getter @Setter private double hunger;
 
     //Money
-    @Getter @Setter private int money = 0;
+    @Getter @Setter private double money = 0;
 
     //Utils
     private float old_speed = -1;
@@ -239,6 +240,10 @@ public class Player extends Creature {
                 final Chest chest = (Chest) en;
                 chest.open(this);
             }
+            if (en instanceof Shop) {
+                final Shop shop = (Shop) en;
+                shop.open(this);
+            }
             if (en instanceof Door) {
                 final Door door = (Door) en;
                 door.changeWorld(this);
@@ -300,6 +305,10 @@ public class Player extends Creature {
 
     public PlayerInventory getPlayerInventory() {
         return (PlayerInventory) inventory;
+    }
+
+    public boolean hasMoney(double amount) {
+        return money >= amount;
     }
 
 

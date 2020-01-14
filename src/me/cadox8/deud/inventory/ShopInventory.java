@@ -1,56 +1,18 @@
 package me.cadox8.deud.inventory;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.items.Item;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class StaticInventory extends Inventory {
+public class ShopInventory extends StaticInventory {
 
-    @Getter @Setter public boolean active = false;
-
-    protected int selectX = 0;
-    protected int selectY = 0;
-
-    protected int renderX = 676, renderY = 130;
-
-    public StaticInventory(GameAPI gameAPI) {
+    public ShopInventory(GameAPI gameAPI) {
         super(gameAPI);
-    }
-
-    public void checkKeys() {
-        if (!selected) return;
-
-        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_A)) selectX--;
-        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_D)) selectX++;
-        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_W)) selectY--;
-        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_S)) selectY++;
-
-        if (selectY < 0) selectY = 0;
-        if (selectY > 5) selectY = 5;
-        if (selectX < 0) selectX = 0;
-        if (selectX > 6) selectX = 6;
-    }
-
-    public void tick() {
-        if (!active) {
-            selectX = 0;
-            selectY = 0;
-            return;
-        }
-
-        if (!selected) return;
-
-        renderY = 130 + (selectY * 64);
-        renderX = 676 + (selectX * 64);
     }
 
     public void render(Graphics g) {
@@ -78,7 +40,7 @@ public class StaticInventory extends Inventory {
         if (getItemStaticInv() == null) {
             infoText = "---------";
         } else {
-            infoText = getItemStaticInv().getName() + " x" + getItemStaticInv().getCount();
+            infoText = getItemStaticInv().getName() + " x" + getItemStaticInv().getCount() + "(" + getItemStaticInv().getBuyAmount() + "€)";
         }
         Text.drawString(g, infoText, 855, 646, false, 2);
 
@@ -93,13 +55,17 @@ public class StaticInventory extends Inventory {
         } else {
             slot = selectX;
         }
-        if (slot > items.size() - 1) return Item.bugItem;
+        if (slot > items.size() - 1) return null;
         return items.get(slot);
     }
 
-    private void dropItem(@NonNull Entity entity, @NonNull Item item) {
-        entity.dropItem(item);
-        removeItem(item);
+    public void buyItem(Player player) {
+        if (!player.hasMoney(getItemStaticInv().getBuyAmount())) return;
+        player.setMoney(player.getMoney() - getItemStaticInv().getBuyAmount());
+    }
+
+    public void sellItem(Player player) {
+        player.setMoney(player.getMoney() + getItemStaticInv().getSellAmount());
     }
 
     protected void sendToInventory(Inventory from, Inventory to, Item item) {

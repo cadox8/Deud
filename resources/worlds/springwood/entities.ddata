@@ -83,7 +83,9 @@
       "inventory": [
         {
           "id": 1,
-          "count": 1
+          "count": 1,
+          "buy": 0,
+          "sell": 0
         }
       ],
       "location": {

@@ -71,6 +71,8 @@ public class EntityData {
 
             private int id = 0;
             private int count = 0;
+            private double buy = 0;
+            private double sell = 0;
         }
     }
 

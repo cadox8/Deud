@@ -63,6 +63,9 @@ public abstract class Item {
 
     @Getter @Setter protected boolean infinity = false;
 
+    @Getter @Setter protected double sellAmount = 0;
+    @Getter @Setter protected double buyAmount = 0;
+
     public Item(BufferedImage texture, int id, String name) {
         this.texture = texture == null ? Assets.bug : texture;
         this.id = id;

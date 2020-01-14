@@ -67,9 +67,11 @@ public class PlayerInventory extends CreatureInventory {
                     setUsableItem(getItem());
                 } else {
                     sendToInventory(this, chest, getItem());
+                    if (chest instanceof ShopInventory) ((ShopInventory)chest).sellItem(getPlayer());
                 }
             } else {
                 sendToInventory(chest, this, chest.getItemStaticInv());
+                if (chest instanceof ShopInventory) ((ShopInventory)chest).buyItem(getPlayer());
             }
         }
 
