@@ -5,6 +5,7 @@ import com.google.gson.stream.JsonReader;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
@@ -115,6 +116,8 @@ public class World {
     }
 
     private void loadWorld(String path) {
+        final WorldTiles worldTiles = new GsonBuilder().setPrettyPrinting().create().fromJson(Utils.loadFileAsString("resources/worlds/springwood/world2.dworld"), WorldTiles.class);
+
         final String[] tokens = Utils.loadFileAsString(path).split("\\s+");
         width = Utils.parseInt(tokens[0]);
         height = Utils.parseInt(tokens[1]);
@@ -148,8 +151,20 @@ public class World {
     }
 
     @RequiredArgsConstructor
-    private class TileUtils {
+    private static class TileUtils {
         @Getter private final int id;
         @Getter private final int subID;
+    }
+
+    @RequiredArgsConstructor
+    @ToString
+    private static class WorldTiles {
+        @Getter private final int width;
+        @Getter private final int height;
+
+        @Getter private final int playerX;
+        @Getter private final int playerY;
+
+        @Getter private final String[] tiles;
     }
 }

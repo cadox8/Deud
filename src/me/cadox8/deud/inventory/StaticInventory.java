@@ -75,7 +75,7 @@ public class StaticInventory extends Inventory {
 
         // Draw item text
         String infoText;
-        if (getItemStaticInv() == null) {
+        if (getItemStaticInv().getId() == 5) {
             infoText = "---------";
         } else {
             infoText = getItemStaticInv().getName() + " x" + getItemStaticInv().getCount();

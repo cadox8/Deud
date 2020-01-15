@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 @RequiredArgsConstructor
+@Deprecated
 public class TileData {
 
     @Getter private final Tile tile;

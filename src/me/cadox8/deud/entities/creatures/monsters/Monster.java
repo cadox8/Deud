@@ -1,13 +1,9 @@
 package me.cadox8.deud.entities.creatures.monsters;
 
-import lombok.Getter;
-import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.Creature;
-import me.cadox8.deud.items.Item;
-
-import java.awt.*;
+import me.cadox8.deud.inventory.CreatureInventory;
 
 public abstract class Monster extends Creature {
 
@@ -39,5 +35,9 @@ public abstract class Monster extends Creature {
         yMove = 0;
 
         ai.getMove();
+    }
+
+    public CreatureInventory getCreatureInventory() {
+        return (CreatureInventory) inventory;
     }
 }
