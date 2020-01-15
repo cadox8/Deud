@@ -1,18 +1,14 @@
 package me.cadox8.deud.entities.statics;
 
-import lombok.Getter;
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.inventory.StaticInventory;
-import me.cadox8.deud.items.Item;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Chest extends StaticEntity {
 

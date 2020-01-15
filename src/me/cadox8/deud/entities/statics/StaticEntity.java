@@ -6,7 +6,6 @@ import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
-import me.cadox8.deud.inventory.CreatureInventory;
 import me.cadox8.deud.inventory.StaticInventory;
 
 import java.awt.*;
