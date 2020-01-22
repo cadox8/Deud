@@ -27,7 +27,7 @@ public abstract class NysvaUI {
 
     protected final GameAPI api;
 
-    protected UIDimension UIDimension;
+    protected UIDimension uiDimension;
 
     private boolean draggable = false;
     protected boolean hovering = false;
@@ -49,7 +49,7 @@ public abstract class NysvaUI {
         this.api = api;
 
         components = new ArrayList<>();
-        setUIDimension(new UIDimension());
+        setUiDimension(new UIDimension());
 
         marginX = 5;
         marginY = 10;
@@ -60,19 +60,19 @@ public abstract class NysvaUI {
     public abstract void onClick();
 
     public void onMouseMove(MouseEvent e) {
-        hovering = getUIDimension().getBounds().contains(e.getX(), e.getY());
+        hovering = getUiDimension().getBounds().contains(e.getX(), e.getY());
     }
 
     public void onMouseDragged(MouseEvent e) {
         if (hovering && isDraggable()) {
-            getUIDimension().setX(getUIDimension().getX() + (e.getX() - getUIDimension().getX()));
-            getUIDimension().setY(getUIDimension().getY() + (e.getY() - getUIDimension().getY()));
+            getUiDimension().setX(getUiDimension().getX() + (e.getX() - getUiDimension().getX()));
+            getUiDimension().setY(getUiDimension().getY() + (e.getY() - getUiDimension().getY()));
         }
 
         // Move all components inside
         if (!components.isEmpty()) components.forEach(c -> {
-            c.getUIDimension().setX(c.getParent().getUIDimension().getX() + c.getUIDimension().getRefX());
-            c.getUIDimension().setY(c.getParent().getUIDimension().getY() + c.getUIDimension().getRefY());
+            c.getUiDimension().setX(c.getParent().getUiDimension().getX() + c.getUiDimension().getRefX());
+            c.getUiDimension().setY(c.getParent().getUiDimension().getY() + c.getUiDimension().getRefY());
         });
     }
 
@@ -83,22 +83,22 @@ public abstract class NysvaUI {
     protected void drawImage(Graphics g, BufferedImage image, boolean resize) {
         if (resize) {
             if (hovering) {
-                g.drawImage(image, getUIDimension().getX(), getUIDimension().getY(), getUIDimension().getWidth() + 5, getUIDimension().getHeight() + 5, null);
+                g.drawImage(image, getUiDimension().getX(), getUiDimension().getY(), getUiDimension().getWidth() + 5, getUiDimension().getHeight() + 5, null);
             } else {
-                g.drawImage(image, getUIDimension().getX(), getUIDimension().getY(), getUIDimension().getWidth(), getUIDimension().getHeight(),null);
+                g.drawImage(image, getUiDimension().getX(), getUiDimension().getY(), getUiDimension().getWidth(), getUiDimension().getHeight(),null);
             }
         } else {
-            g.drawImage(image, getUIDimension().getX(), getUIDimension().getY(), getUIDimension().getWidth(), getUIDimension().getHeight(),null);
+            g.drawImage(image, getUiDimension().getX(), getUiDimension().getY(), getUiDimension().getWidth(), getUiDimension().getHeight(),null);
         }
     }
 
     //
-    public UIDimension getUIDimension() {
-        return UIDimension == null ? UIDimension = new UIDimension() : UIDimension;
+    public UIDimension getUiDimension() {
+        return uiDimension == null ? uiDimension = new UIDimension() : uiDimension;
     }
-    public void setUIDimension(UIDimension UIDimension) {
-        this.UIDimension = UIDimension;
-        setMaxWidth(UIDimension.getMaxWidth());
+    public void setUiDimension(UIDimension uiDimension) {
+        this.uiDimension = uiDimension;
+        setMaxWidth(uiDimension.getMaxWidth());
     }
 
     public void setMaxWidth(int maxWidth) {
@@ -135,6 +135,9 @@ public abstract class NysvaUI {
     }
     public void customizeFont(int style, int size) {
         setFont(getFont().deriveFont(style, size));
+    }
+    public void resizeFont(int size) {
+        customizeFont(0, size);
     }
 
     public NysvaUI getParent() {

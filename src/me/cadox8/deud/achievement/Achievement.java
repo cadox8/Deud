@@ -30,10 +30,10 @@ public class Achievement {
         final UIBlock block = new UIBlock(gameAPI);
         final UIImage image = new UIImage(gameAPI, getIcon());
 
-        block.setUIDimension(new UIDimension(5, 5, 350, 100));
+        block.setUiDimension(new UIDimension(5, 5, 350, 100));
         block.setRounded(true);
 
-        image.setUIDimension(new UIDimension(5, 18, 64, 64));
+        image.setUiDimension(new UIDimension(5, 18, 64, 64));
 
         block.addUIComponent(image);
         block.render(g);

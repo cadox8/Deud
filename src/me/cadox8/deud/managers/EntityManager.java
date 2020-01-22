@@ -61,7 +61,7 @@ public class EntityManager {
     }
 
     public void freezeAll() {
-        entities.stream().filter(e -> e instanceof Creature).findFirst().ifPresent(e -> ((Creature)e).setFreeze(!((Creature)e).isFreeze()));
+        freezeCreatures();
     }
     public void freezeCreatures() {
         entities.stream().filter(e -> e instanceof Creature).filter(e -> !(e instanceof Player)).forEach(e -> ((Creature)e).setFreeze(!((Creature)e).isFreeze()));

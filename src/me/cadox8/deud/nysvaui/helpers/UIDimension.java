@@ -65,6 +65,10 @@ public class UIDimension {
         return this;
     }
 
+    public static UIDimension fromUIDimension(UIDimension uiDimension) {
+        return new UIDimension(uiDimension.getX(), uiDimension.getY(), uiDimension.getWidth(), uiDimension.getHeight());
+    }
+
     //
     public int getX() {
         return x;

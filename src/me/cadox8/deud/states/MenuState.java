@@ -14,7 +14,6 @@ import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Updater;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -37,7 +36,7 @@ public class MenuState extends State {
 
             Sound.TOWN_MUSIC.playLoop();
 
-            gameAPI.getGame().getDisplay().getFrame().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
+            //gameAPI.getGame().getDisplay().getFrame().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
         });
         final UIImageButton exit = new UIImageButton(gameAPI, GUI.exit[0], () -> System.exit(0));
         final UIImage logo = new UIImage(gameAPI, GUI.logo);
@@ -51,10 +50,10 @@ public class MenuState extends State {
         });
 
 
-        background.setUIDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
-        start.setUIDimension(new UIDimension(150, 650, 200, 100));
-        exit.setUIDimension(new UIDimension(900, 650, 200, 100));
-        logo.setUIDimension(new UIDimension(gameAPI.getWidth() - 97, 0, 97, 151));
+        background.setUiDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
+        start.setUiDimension(new UIDimension(150, 650, 200, 100));
+        exit.setUiDimension(new UIDimension(900, 650, 200, 100));
+        logo.setUiDimension(new UIDimension(gameAPI.getWidth() - 97, 0, 97, 151));
 
         background.setResize(false);
         logo.setResize(false);

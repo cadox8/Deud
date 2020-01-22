@@ -23,8 +23,8 @@ import me.cadox8.deud.inventory.StaticInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.managers.EntityManager;
+import me.cadox8.deud.options.Options;
 import me.cadox8.deud.quests.Quest;
-import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.utils.Log;
@@ -51,6 +51,8 @@ public class Player extends Creature {
     private float old_speed = -1;
 
     @Getter @Setter private Quest assignedQuest;
+
+    @Getter @Setter private Options options;
 
     @Getter @Setter private StaticInventory chest = null;
 
@@ -109,6 +111,9 @@ public class Player extends Creature {
         } else {
             getPlayerInventory().setUsableItem(Item.hand);
         }
+
+
+        options = new Options(gameAPI, this);
     }
 
     @Override
@@ -139,6 +144,8 @@ public class Player extends Creature {
         } else {
             setDamage(((WeaponItem) ((PlayerInventory)inventory).getUsableItem()).getDamage() + DEFAULT_DAMAGE);
         }
+
+        if (options.isEnabled()) options.tick();
     }
 
     @Override
@@ -163,6 +170,8 @@ public class Player extends Creature {
         //map.paintMap(g);
         inventory.render(g);
         if (chest != null) chest.render(g);
+
+        if (options.isEnabled()) options.render(g);
     }
 
     private void renderInfo(Graphics g) {
@@ -224,9 +233,9 @@ public class Player extends Creature {
             gameAPI.getWorld().getEntityManager().freezeCreatures();
         }
 
-        if (gameAPI.getKeyManager().esc) {
-            FileUtils.save(this);
-            System.exit(0);
+        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+            gameAPI.getEntityManager().freezeAll();
+            options.setEnabled(!options.isEnabled());
         }
 
         if (gameAPI.getKeyManager().debug) {

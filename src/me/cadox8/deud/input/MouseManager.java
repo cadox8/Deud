@@ -10,7 +10,7 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 
     @Getter private boolean leftPressed, rightPressed;
     private int mouseX, mouseY, mouseXClick, mouseYClick;
-    @Setter private NysvaManager nysvaUI;
+    @Setter @Getter private NysvaManager nysvaUI;
 
     //Mouse
     @Override

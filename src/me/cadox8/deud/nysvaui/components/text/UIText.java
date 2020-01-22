@@ -42,10 +42,10 @@ public class UIText extends NysvaUI {
     @Override
     public void onClick() {}
 
-    private void drawString(Graphics g) {
+    protected void drawString(Graphics g) {
         g.setColor(textColor.getColor());
         g.setFont(getFont());
-        g.drawString(text, getUIDimension().getX() + 5, getUIDimension().getY() + g.getFont().getSize());
+        g.drawString(text, getUiDimension().getX() + 5, getUiDimension().getY() + g.getFont().getSize());
     }
 
     //
