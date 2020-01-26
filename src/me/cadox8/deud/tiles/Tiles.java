@@ -1,5 +1,6 @@
 package me.cadox8.deud.tiles;
 
+import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.gfx.textures.Assets;
 
 import java.awt.image.BufferedImage;
@@ -37,9 +38,11 @@ public enum Tiles {
     HOUSE2_JOIN(27, Assets.house2[4], true);
 
     private final int id;
-    private int subID;
-    private final BufferedImage texture;
-    private boolean solid;
+    private final int subID;
+    private final boolean solid;
+
+    private BufferedImage texture;
+    private Animation animation;
 
     Tiles(int id, BufferedImage texture) {
         this(id, texture, false);
@@ -57,13 +60,28 @@ public enum Tiles {
         this.solid = solid;
     }
 
+    Tiles(int id, Animation animation) {
+        this(id, animation, false);
+    }
+    Tiles(int id, Animation animation, boolean solid) {
+        this.id = id;
+        this.subID = 0;
+        this.animation = animation;
+        this.solid = solid;
+    }
+
     public static Tile getTile(int id, int subID) {
         return Arrays.stream(values()).filter(t -> t.id == id && t.subID == subID).findFirst().orElse(VOID).build();
     }
 
     public Tile build() {
-        final Tile tile = new Tile(id, texture, subID, solid);
-        if (subID != 0) return tile.createNewRotated(parseDegrees());
+        final Tile tile;
+        if (animation == null) {
+            tile = new Tile(id, subID, texture, solid);
+            if (subID != 0) return tile.createNewRotated(parseDegrees());
+        } else {
+            tile = new Tile(id, subID, animation, solid);
+        }
         return tile;
     }
 
