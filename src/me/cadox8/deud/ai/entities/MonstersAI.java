@@ -22,8 +22,8 @@ public class MonstersAI extends AI {
 
         if (isTracking()) {
             trackPlayer(creature);
-            return;
+        } else {
+            randomMove(creature);
         }
-        randomMove(creature);
     }
 }

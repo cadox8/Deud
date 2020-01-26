@@ -139,10 +139,10 @@ public class Player extends Creature {
             entityInventory.getInventory().checkKeys();
         }
 
-        if (!(((PlayerInventory)inventory).getUsableItem() instanceof WeaponItem)) {
+        if (!(getPlayerInventory().getUsableItem() instanceof WeaponItem)) {
             setDamage(DEFAULT_DAMAGE);
         } else {
-            setDamage(((WeaponItem) ((PlayerInventory)inventory).getUsableItem()).getDamage() + DEFAULT_DAMAGE);
+            setDamage(((WeaponItem) getPlayerInventory().getUsableItem()).getDamage() + DEFAULT_DAMAGE);
         }
 
         if (options.isEnabled()) options.tick();
@@ -175,7 +175,7 @@ public class Player extends Creature {
     }
 
     private void renderInfo(Graphics g) {
-        if (((PlayerInventory)inventory).isActive()) {
+        if (inventory.isActive()) {
             //Money
             g.drawImage(Assets.coin, 10, 5, 32, 32, null);
             Text.drawString(g, "x" + getMoney(), 35, Assets.HEIGHT - 3, 2);
@@ -211,8 +211,8 @@ public class Player extends Creature {
         drawString(g, getArmor(),  3);
 
         //Item
-        g.drawImage(((PlayerInventory)inventory).getUsableItem().getTexture(), 1160, 670, null);
-        Text.drawString(g, ((PlayerInventory)inventory).getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, false, Color.BLACK, 2);
+        g.drawImage(getPlayerInventory().getUsableItem().getTexture(), 1160, 670, null);
+        Text.drawString(g, getPlayerInventory().getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, false, Color.BLACK, 2);
 
         if (getHealth() <= 0) {
             Text.drawString(g, "You lose", 125, 530, Color.BLACK, 3);
@@ -293,7 +293,7 @@ public class Player extends Creature {
             Sound.ENTITY_WALK_GRASS.play();
         }
 
-        if (gameAPI.getMouseManager().isRightPressed()) ((PlayerInventory)inventory).getUsableItem().use(this);
+        if (gameAPI.getMouseManager().isRightPressed()) getPlayerInventory().getUsableItem().use(this);
 
         if (gameAPI.getKeyManager().shift) {
             if (hunger <= 0.0) {

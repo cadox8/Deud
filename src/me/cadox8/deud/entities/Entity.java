@@ -109,9 +109,15 @@ public abstract class Entity {
         if (!isDamageable()) return;
 
         int amt = attacker.getDamage() + (int) (DMG_UP_PER_LVL * attacker.getLevel());
-        if (attacker instanceof Monster && ((Monster) attacker).getCreatureInventory().getUsableItem() instanceof WeaponItem) amt += ((WeaponItem) ((Monster) attacker).getCreatureInventory().getUsableItem()).getDamage();
-        setHealth(getHealth() - gameAPI.getDamageManager().effectiveDamage(amt, getENTITY_TYPE(), (((CreatureInventory) attacker.getInventory()).getUsableItem())));
-        health -= amt;
+
+        if (attacker instanceof Monster) {
+            final Monster monster = (Monster) attacker;
+            if (monster.getCreatureInventory().getUsableItem() instanceof WeaponItem) {
+                final WeaponItem item = (WeaponItem) monster.getCreatureInventory().getUsableItem();
+                amt += item.getDamage();
+                setHealth(getHealth() - gameAPI.getDamageManager().effectiveDamage(amt, getENTITY_TYPE(), item));
+            }
+        }
 
         if (this instanceof Creature) {
             if (attacker instanceof Monster) ((CreatureInventory) attacker.getInventory()).getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
