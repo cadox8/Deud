@@ -14,6 +14,8 @@ public class Area {
     private final GameAPI gameAPI;
     private final Point point1, point2;
 
+
+
     public List<Entity> getEntities() {
         final List<Entity> entities = new ArrayList<>();
 

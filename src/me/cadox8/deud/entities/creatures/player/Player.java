@@ -182,7 +182,7 @@ public class Player extends Creature {
 
             //Keys (?)
             g.drawImage(Assets.key, 10, Assets.HEIGHT + 8, 32, 32, null);
-            Text.drawString(g, "x" + inventory.keyCount(), 35, (Assets.HEIGHT * 2) - 3, 2);
+            Text.drawString(g, "x" + inventory.itemCount(Item.keyItem), 35, (Assets.HEIGHT * 2) - 3, 2);
 
             //XP
             drawImage(g, Assets.xp, 4);
@@ -244,7 +244,7 @@ public class Player extends Creature {
 
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {
             final Entity en = EntityManager.getEntity(this, 0, 0);
-            if (en == null) return;
+            if (en == null || getEntityInventory() != null) return;
             if (en instanceof Chest) {
                 final Chest chest = (Chest) en;
                 chest.open(this);

@@ -16,6 +16,7 @@ public abstract class Inventory {
     @Getter protected ArrayList<Item> items;
 
     @Getter @Setter protected boolean selected = false;
+    @Getter @Setter protected boolean active = false;
 
     @Getter @Setter protected int size;
 
@@ -27,8 +28,8 @@ public abstract class Inventory {
     }
 
     public void tick() {}
-
     public void render(Graphics g) {}
+
 
     // Inventory methods
     public void addItems(Item... items) {
@@ -63,7 +64,7 @@ public abstract class Inventory {
         return items.stream().anyMatch(i -> i.getId() == item);
     }
 
-    public int keyCount() {
-        return (int) items.stream().filter(i -> i.getId() == 2).count();
+    public int itemCount(Item item) {
+        return (int) items.stream().filter(i -> i.getId() == item.getId()).count();
     }
 }

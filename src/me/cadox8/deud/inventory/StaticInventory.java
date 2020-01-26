@@ -1,21 +1,19 @@
 package me.cadox8.deud.inventory;
 
-import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.items.Item;
+import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class StaticInventory extends Inventory {
-
-    @Getter @Setter public boolean active = false;
 
     protected int selectX = 0;
     protected int selectY = 0;
@@ -27,7 +25,7 @@ public class StaticInventory extends Inventory {
     }
 
     public void checkKeys() {
-        if (!selected) return;
+        if (!selected || !active) return;
 
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_A)) selectX--;
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_D)) selectX++;
@@ -60,33 +58,14 @@ public class StaticInventory extends Inventory {
         //
 
         // Render items
-        final AtomicInteger xSlot = new AtomicInteger(0);
-        final AtomicInteger ySlot = new AtomicInteger(0);
-        final int xStart = 676, yStart = 130;
-        items.forEach(i -> {
-            if (ySlot.get() > 6) return;
-            g.drawImage(i.getTexture(), xStart + (xSlot.get() * 64), yStart + (ySlot.get() * 64), 60, 60, null);
-            xSlot.incrementAndGet();
-            if (xSlot.get() > 6) {
-                xSlot.set(0);
-                ySlot.incrementAndGet();
-            }
-        });
-
-        // Draw item text
-        String infoText;
-        if (getItemStaticInv().getId() == 5) {
-            infoText = "---------";
-        } else {
-            infoText = getItemStaticInv().getName() + " x" + getItemStaticInv().getCount();
-        }
-        Text.drawString(g, infoText, 855, 646, false, 2);
+        renderItems(g, getItems(), 676, 130, 855, 646);
 
         //
         if (selected) g.drawImage(GUI.invSelector, renderX, renderY, null);
     }
 
-    public Item getItemStaticInv() {
+    public Item getItem() {
+        if (!selected) return Item.bugItem;
         int slot;
         if (selectY > 0) {
             slot = ((6 * (selectY + 1)) + 1) - 6 + selectX;
@@ -97,14 +76,37 @@ public class StaticInventory extends Inventory {
         return items.get(slot);
     }
 
-    private void dropItem(@NonNull Entity entity, @NonNull Item item) {
+    protected void dropItem(@NonNull Entity entity, @NonNull Item item) {
         entity.dropItem(item);
         removeItem(item);
     }
 
     protected void sendToInventory(Inventory from, Inventory to, Item item) {
-        if (item == null || to == null || from == null) return;
+        if (item == null || to == null || from == null || item.getId() == 5) return;
         from.removeItem(item);
         to.addItem(item);
+    }
+
+    protected void renderItems(Graphics g, ArrayList<Item> items, int xPos, int yPos, int xPosText, int yPosText) {
+        final AtomicInteger xSlot = new AtomicInteger(0);
+        final AtomicInteger ySlot = new AtomicInteger(0);
+        items.forEach(i -> {
+            if (ySlot.get() > 6) return;
+            g.drawImage(i.getTexture(), xPos + (xSlot.get() * 64), yPos + (ySlot.get() * 64), 60, 60, null);
+            xSlot.incrementAndGet();
+            if (xSlot.get() > 6) {
+                xSlot.set(0);
+                ySlot.incrementAndGet();
+            }
+        });
+
+        // Draw item text
+        String infoText;
+        if (getItem().getId() == 5) {
+            infoText = "---------";
+        } else {
+            infoText = getItem().getName() + " x" + getItem().getCount();
+        }
+        Text.drawString(g, infoText, xPosText, yPosText, false, 2);
     }
 }

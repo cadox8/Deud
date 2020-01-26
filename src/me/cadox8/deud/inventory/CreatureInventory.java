@@ -13,12 +13,6 @@ public class CreatureInventory extends StaticInventory {
 
     public CreatureInventory(GameAPI gameAPI) {
         super(gameAPI);
-
         setSize(20);
-    }
-
-    private void dropItem(@NonNull Entity entity, @NonNull Item item) {
-        entity.dropItem(item);
-        removeItem(item);
     }
 }

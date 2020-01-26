@@ -13,9 +13,9 @@ public class DeadTree extends Tree {
     public DeadTree(@NonNull GameAPI gameAPI, float x, float y) {
         super(101, "DeadTree", EntityData.EntityType.DEADTREE, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
-        bounds.x = -5;
+        bounds.x = 0;
         bounds.y = (int) (height / 1.5f) - 17;
-        bounds.width = width + 8;
+        bounds.width = width - 10;
         bounds.height = (int) (height - height / 1.5f);
     }
 

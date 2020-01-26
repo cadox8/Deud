@@ -213,7 +213,12 @@ public abstract class Entity {
     }
     public void dropItem(Item item, float percent, int xPos, int yPos){
         if (item == null) return;
-        if (percent >= new Random().nextFloat()) gameAPI.getWorld().getItemManager().addItem(item.createNew(xPos, yPos, item.getCount()));
+        if (percent >= new Random().nextFloat()) {
+            final Random r = new Random();
+            final int amount = r.nextInt(15) + 45;
+
+            gameAPI.getWorld().getItemManager().addItem(item.createNew(xPos + (r.nextBoolean() ? amount : -amount), yPos + (r.nextBoolean() ? amount : -amount), item.getCount()));
+        }
     }
 
     public Location getLocation() {
