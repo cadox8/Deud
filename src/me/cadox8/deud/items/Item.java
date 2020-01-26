@@ -78,7 +78,6 @@ public abstract class Item {
         items[id] = this;
     }
 
-
     public abstract void use(@NonNull Player p);
     public abstract Item createNew(int x, int y, int count);
 
@@ -113,7 +112,6 @@ public abstract class Item {
         g.drawImage(texture, x, y, 32, 32, null);
     }
 
-
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
@@ -122,7 +120,7 @@ public abstract class Item {
     }
 
     public static Item getRandom() {
-        return getRandom(-5);
+        return getRandom(5);
     }
     public static Item getRandom(Item... banedIDs) {
         final Integer[] ids = new Integer[banedIDs.length];
