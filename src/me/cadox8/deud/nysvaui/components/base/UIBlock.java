@@ -15,6 +15,7 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.nysvaui.NysvaUI;
 import me.cadox8.deud.nysvaui.helpers.NysvaColor;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
+import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
@@ -92,8 +93,9 @@ public class UIBlock extends NysvaUI {
         return rounded;
     }
 
-    public void setRounded(boolean rounded) {
+    public UIBlock setRounded(boolean rounded) {
         this.rounded = rounded;
+        return this;
     }
 
     public int getRoundRadius() {
@@ -102,6 +104,7 @@ public class UIBlock extends NysvaUI {
 
     public void setRoundRadius(int roundRadius) {
         if (roundRadius < 0 || roundRadius > 100) throw new IllegalArgumentException("The round radius must be between 0 and 100 (" + roundRadius + ")");
+        setRounded(true);
         this.roundRadius = roundRadius;
     }
 }

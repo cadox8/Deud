@@ -1,4 +1,4 @@
-package me.cadox8.deud.options;
+package me.cadox8.deud.ux.options;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -40,6 +40,9 @@ public class Options {
 
         resume.setUiDimension(new UIDimension(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 - 35, 220, 35));
         exit.setUiDimension(new UIDimension(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 + 35, 150, 35));
+
+        resume.getBaseBlock().setRoundRadius(15);
+        exit.getBaseBlock().setRoundRadius(15);
 
         nysvaManager.addObject(base);
         nysvaManager.addObject(resume);

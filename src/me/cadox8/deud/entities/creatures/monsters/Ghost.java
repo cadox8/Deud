@@ -13,7 +13,7 @@ public class Ghost extends Monster {
 
         bounds.x = 20;
         bounds.y = 44;
-        bounds.width = 25;
+        bounds.width = 28;
         bounds.height = 19;
 
         //Animations

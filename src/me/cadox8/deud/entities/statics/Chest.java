@@ -5,6 +5,7 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
+import me.cadox8.deud.inventory.InventoryData;
 import me.cadox8.deud.inventory.StaticInventory;
 import me.cadox8.deud.tiles.Tile;
 
@@ -33,13 +34,13 @@ public class Chest extends StaticEntity {
 
         bounds.x = 2;
         bounds.y = (int) (height / 2f) - 5;
-        bounds.width = width - 6;
+        bounds.width = width - 3;
         bounds.height = (int) (height - height / 2f);
     }
 
     public void open(@NonNull Player p) {
         getInventory().setActive(true);
-        p.setChest(getInventory());
+        p.setEntityInventory(new InventoryData(InventoryData.InventoryType.CHEST, getInventory()));
         p.getPlayerInventory().setActive(true);
         p.getPlayerInventory().setSelected(true);
         gameAPI.getEntityManager().freezePlayer();

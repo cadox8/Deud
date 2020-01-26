@@ -21,7 +21,6 @@ public class Sign extends StaticEntity {
 
     @Getter @Setter private boolean shown = false;
 
-
     public Sign(@NonNull GameAPI gameAPI, float x, float y, List<String> text) {
         super(500, "Sign", EntityData.EntityType.SIGN, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
@@ -32,7 +31,7 @@ public class Sign extends StaticEntity {
         img = Assets.sign;
         bounds.x = 4;
         bounds.y = 23;
-        bounds.width = width;
+        bounds.width = width + 3;
         bounds.height = 33;
     }
 

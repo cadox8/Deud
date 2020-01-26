@@ -18,12 +18,12 @@ import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.gfx.textures.Models;
+import me.cadox8.deud.inventory.InventoryData;
 import me.cadox8.deud.inventory.PlayerInventory;
-import me.cadox8.deud.inventory.StaticInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.managers.EntityManager;
-import me.cadox8.deud.options.Options;
+import me.cadox8.deud.ux.options.Options;
 import me.cadox8.deud.quests.Quest;
 import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.states.GameState;
@@ -54,15 +54,15 @@ public class Player extends Creature {
 
     @Getter @Setter private Options options;
 
-    @Getter @Setter private StaticInventory chest = null;
+    @Getter @Setter private InventoryData entityInventory = null;
 
     public Player(@NonNull GameAPI gameAPI, float x, float y) {
         super(1, "Player", EntityData.EntityType.PLAYER, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
-        bounds.x = 20;
+        bounds.x = 11;
         bounds.y = 44;
-        bounds.width = 30;
-        bounds.height = 24;
+        bounds.width = 43;
+        bounds.height = 21;
 
         // Animations
         animDown = new Animation((int)(speed * 600), Models.player_down);
@@ -134,9 +134,9 @@ public class Player extends Creature {
 
         // Inventory
         inventory.tick();
-        if (chest != null) {
-            chest.tick();
-            chest.checkKeys();
+        if (entityInventory != null) {
+            entityInventory.getInventory().tick();
+            entityInventory.getInventory().checkKeys();
         }
 
         if (!(((PlayerInventory)inventory).getUsableItem() instanceof WeaponItem)) {
@@ -169,7 +169,7 @@ public class Player extends Creature {
         renderInfo(g);
         //map.paintMap(g);
         inventory.render(g);
-        if (chest != null) chest.render(g);
+        if (entityInventory != null) entityInventory.getInventory().render(g);
 
         if (options.isEnabled()) options.render(g);
     }
