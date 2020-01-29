@@ -66,7 +66,9 @@ public class FileUtils {
 
             final JsonObject data = new JsonObject();
 
-            data.addProperty("volume", cfn.getVolume());
+            data.addProperty("masterVolume", cfn.getSounds().getMasterVolume());
+            data.addProperty("musicVolume", cfn.getSounds().getMusicVolume());
+            data.addProperty("entitiesVolume", cfn.getSounds().getEntitiesVolume());
 
             if (config.exists()) config.delete(); config.mkdirs();
 

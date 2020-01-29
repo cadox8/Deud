@@ -21,7 +21,7 @@ public class Sound {
             clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("/sounds/" + sound + ".wav"))));
             final FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(value - (value * (1 - GameAPI.getInstance().getConfig().getVolume())));
+            gainControl.setValue(value - (value * (1 - GameAPI.getInstance().getConfig().getSounds().getMasterVolume())));
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
