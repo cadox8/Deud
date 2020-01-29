@@ -12,6 +12,7 @@
 package me.cadox8.deud.nysvaui.components.text;
 
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.gfx.fonts.Fonts;
 import me.cadox8.deud.nysvaui.NysvaUI;
 import me.cadox8.deud.nysvaui.helpers.NysvaColor;
 
@@ -25,10 +26,11 @@ public class UIText extends NysvaUI {
     /**
      * Generates a Text Object
      */
-    public UIText(GameAPI api, String text) {
-        super(api);
+    public UIText(GameAPI gameAPI, String text) {
+        super(gameAPI);
 
         this.text = text;
+        setFont(Fonts.getFont(1));
     }
 
     @Override

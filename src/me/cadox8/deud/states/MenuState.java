@@ -39,7 +39,12 @@ public class MenuState extends State {
             //gameAPI.getGame().getDisplay().getFrame().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
         });
         final UIImageButton exit = new UIImageButton(gameAPI, GUI.exit[0], () -> System.exit(0));
-        final UIImage logo = new UIImage(gameAPI, GUI.logo);
+
+        final UIImageButton logo = new UIImageButton(gameAPI, GUI.logo, () -> {
+            gameAPI.getMouseManager().setNysvaUI(null);
+            setState(gameAPI.getGame().getEditorState());
+        });
+
         final UITextButton update = new UITextButton(gameAPI, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
             try {
                 Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
@@ -48,7 +53,6 @@ public class MenuState extends State {
                 e.printStackTrace();
             }
         });
-
 
         background.setUiDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
         start.setUiDimension(new UIDimension(150, 650, 200, 100));

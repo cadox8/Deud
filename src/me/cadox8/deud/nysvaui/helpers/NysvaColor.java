@@ -26,6 +26,7 @@ public class NysvaColor {
     public static NysvaColor GREEN = new NysvaColor(39, 174, 96);
     public static NysvaColor TURQUOISE = new NysvaColor(22, 160, 133);
     public static NysvaColor WHITE = new NysvaColor(236, 240, 241);
+    public static NysvaColor BLACK = new NysvaColor(0, 0, 0);
     public static NysvaColor RED = new NysvaColor(192, 57, 43);
     public static NysvaColor ORANGE = new NysvaColor(211, 84, 0);
     public static NysvaColor YELLOW = new NysvaColor(241, 196, 15);
