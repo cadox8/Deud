@@ -1,5 +1,6 @@
 package me.cadox8.deud.audio;
 
+import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.utils.Log;
 
 import javax.sound.sampled.AudioSystem;
@@ -20,7 +21,7 @@ public class Sound {
             clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("/sounds/" + sound + ".wav"))));
             final FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(value);
+            gainControl.setValue(value - (value * (1 - GameAPI.getInstance().getConfig().getVolume())));
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);

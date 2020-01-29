@@ -39,7 +39,7 @@ public class Sprites {
         return img;
     }
 
-    public BufferedImage randomImage(int width, int height) {
+    public static BufferedImage randomImage(int width, int height) {
         BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
         for (int y = 0; y < height; y++) {

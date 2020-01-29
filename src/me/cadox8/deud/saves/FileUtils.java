@@ -6,6 +6,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import me.cadox8.deud.Launcher;
+import me.cadox8.deud.config.Config;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.Creature;
@@ -17,6 +18,7 @@ import me.cadox8.deud.entities.statics.trees.Tree;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.inventory.PlayerInventory;
 import me.cadox8.deud.utils.Log;
+import me.cadox8.deud.ux.options.Options;
 import me.cadox8.deud.worlds.World;
 import net.arikia.dev.drpc.DiscordRPC;
 
@@ -25,8 +27,8 @@ import java.util.List;
 
 public class FileUtils {
 
-    private static File saves = new File(Launcher.GAME_FILE + "saves", "player.ddata");
-    private static File config = new File(Launcher.GAME_FILE, "config.json");
+    private static final File saves = new File(Launcher.GAME_FILE + "saves", "player.ddata");
+    private static final File config = new File(Launcher.GAME_FILE, "config.json");
 
     public static void checkFile() {
         final File file = new File(Launcher.GAME_FILE + "saves/entities");
@@ -38,10 +40,46 @@ public class FileUtils {
             if (!file.exists()) file.mkdirs();
             if (!config.exists()) {
                 config.createNewFile();
+                saveConfig(new Config());
             }
         } catch (IOException e) { }
     }
 
+    // Config
+    public static Config loadConfig() {
+        if (!config.exists()) {
+            checkFile();
+            return loadConfig();
+        }
+
+        try {
+            return new GsonBuilder().create().fromJson(new JsonReader(new FileReader(config)), Config.class);
+        } catch (IOException e) {
+            return new Config();
+        }
+    }
+
+    public static void saveConfig(Config cfn) {
+        try {
+            final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            final BufferedWriter w = new BufferedWriter(new FileWriter(config));
+
+            final JsonObject data = new JsonObject();
+
+            data.addProperty("volume", cfn.getVolume());
+
+            if (config.exists()) config.delete(); config.mkdirs();
+
+            w.write(gson.toJson(data));
+            w.close();
+
+            Log.log(Log.LogType.SUCCESS, "Config saved successfully");
+        } catch (IOException e) {
+            Log.log(Log.LogType.DANGER, "Error while saving data. Does 'C:/Deud/config.json' exist?");
+        }
+    }
+
+    // Player Data
 
     @SuppressWarnings("Unchecked")
     public static void save(Player p){
@@ -96,6 +134,8 @@ public class FileUtils {
             return null;
         }
     }
+
+    // Entity Data
 
     @SuppressWarnings("Unchecked")
     public static void saveEntities(World world) throws IOException {
