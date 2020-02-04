@@ -17,8 +17,10 @@ import me.cadox8.deud.nysvaui.ClickListener;
 import me.cadox8.deud.nysvaui.NysvaUI;
 import me.cadox8.deud.nysvaui.components.base.UIBlock;
 import me.cadox8.deud.nysvaui.helpers.NysvaColor;
+import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class UIField extends NysvaUI {
 
