@@ -5,7 +5,7 @@ import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.gfx.textures.Models;
-import me.cadox8.deud.inventory.CreatureInventory;
+import me.cadox8.deud.inventory_old.CreatureInventory;
 import me.cadox8.deud.items.Item;
 
 public class Zombie extends Monster {

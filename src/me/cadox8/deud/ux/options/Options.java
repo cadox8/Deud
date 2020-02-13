@@ -19,7 +19,7 @@ public class Options {
 
     private NysvaManager nysvaManager;
 
-    @Getter @Setter private boolean enabled = false;
+    @Getter private boolean enabled = false;
 
     public Options(GameAPI gameAPI, Player player) {
         nysvaManager = new NysvaManager();
@@ -58,5 +58,10 @@ public class Options {
 
     public void render(Graphics g) {
         nysvaManager.render(g);
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        gameAPI.getMouseManager().setNysvaUI(nysvaManager);
     }
 }

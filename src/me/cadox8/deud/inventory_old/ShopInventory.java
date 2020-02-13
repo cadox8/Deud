@@ -1,4 +1,4 @@
-package me.cadox8.deud.inventory;
+package me.cadox8.deud.inventory_old;
 
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
@@ -7,6 +7,7 @@ import me.cadox8.deud.gfx.textures.Assets;
 
 import java.awt.*;
 
+@Deprecated
 public class ShopInventory extends StaticInventory {
 
     public ShopInventory(GameAPI gameAPI) {

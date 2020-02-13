@@ -5,8 +5,8 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
-import me.cadox8.deud.inventory.InventoryData;
-import me.cadox8.deud.inventory.ShopInventory;
+import me.cadox8.deud.inventory_old.InventoryData;
+import me.cadox8.deud.inventory_old.ShopInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.tiles.Tile;
 

@@ -1,4 +1,4 @@
-package me.cadox8.deud.inventory;
+package me.cadox8.deud.inventory_old;
 
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
@@ -6,13 +6,13 @@ import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Deprecated
 public class StaticInventory extends Inventory {
 
     protected int selectX = 0;

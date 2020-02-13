@@ -12,7 +12,7 @@ import me.cadox8.deud.entities.statics.trees.DeadTree;
 import me.cadox8.deud.entities.statics.trees.NormalTree;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.gfx.textures.Models;
-import me.cadox8.deud.inventory.StaticInventory;
+import me.cadox8.deud.inventory_old.StaticInventory;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.utils.Log;
 

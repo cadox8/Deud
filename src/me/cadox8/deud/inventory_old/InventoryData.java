@@ -1,8 +1,9 @@
-package me.cadox8.deud.inventory;
+package me.cadox8.deud.inventory_old;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+@Deprecated
 @RequiredArgsConstructor
 @Data
 public class InventoryData {

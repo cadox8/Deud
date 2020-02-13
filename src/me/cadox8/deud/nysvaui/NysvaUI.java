@@ -11,6 +11,8 @@
 
 package me.cadox8.deud.nysvaui;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
 
@@ -40,6 +42,8 @@ public abstract class NysvaUI {
     private NysvaUI parent;
     protected List<NysvaUI> components;
     protected int marginX, marginY;
+
+    @Getter @Setter protected Object extraData = null;
 
     /**
      * Default NysvaUI constructor

@@ -16,9 +16,8 @@ import me.cadox8.deud.entities.statics.*;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.trees.Tree;
 import me.cadox8.deud.game.Game;
-import me.cadox8.deud.inventory.PlayerInventory;
+import me.cadox8.deud.inventory_old.PlayerInventory;
 import me.cadox8.deud.utils.Log;
-import me.cadox8.deud.ux.options.Options;
 import me.cadox8.deud.worlds.World;
 import net.arikia.dev.drpc.DiscordRPC;
 
