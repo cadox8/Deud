@@ -12,7 +12,7 @@ public class ChestInventory extends Inventory {
 
         setSize(size);
 
-        addItem(Item.sword);
+        addItems(Item.sword, Item.keyItem, Item.chickenItem);
 
         loadItems(676, 130);
 

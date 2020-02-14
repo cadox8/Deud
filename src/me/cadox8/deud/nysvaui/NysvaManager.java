@@ -40,6 +40,12 @@ public class NysvaManager {
         }
     }
 
+    public void setObject(int slot, NysvaUI object) {
+        synchronized (objects) {
+            objects.set(slot, object);
+        }
+    }
+
     /**
      * Removes an NysvaUI
      * @see NysvaUI

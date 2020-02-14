@@ -60,12 +60,23 @@ public abstract class Inventory {
             if (ySlot.get() > 6) return;
 
             final UIImageButton image = new UIImageButton(gameAPI, i.getTexture(), () -> {
-                selectedSlot = xSlot.get() + (ySlot.get() * 6);
-            });
+                if (selectedSlot != -1) {
+                    final int tempSlot = items.indexOf(i);
+                    final Item selectedItem = items.get(selectedSlot);
 
+                    items.set(tempSlot, selectedItem);
+                    items.set(selectedSlot, i);
+
+                    selectedSlot = -1;
+
+                    loadItems(xPos, yPos);
+                } else {
+                    selectedSlot = items.indexOf(i);
+                }
+                Log.log("Selected " + selectedSlot);
+            });
             image.setUiDimension(new UIDimension(xPos + (xSlot.get() * 64), yPos + (ySlot.get() * 64), 60, 60));
             image.setExtraData(i);
-
 
             getNysvaManager().addObject(image);
 
