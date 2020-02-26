@@ -49,7 +49,7 @@ public class MenuState extends State {
             try {
                 Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
             } catch (URISyntaxException | IOException e) {
-                Log.log(Log.LogType.DANGER, "Link doesn't exist");
+                Log.danger("Link doesn't exist");
                 e.printStackTrace();
             }
         });

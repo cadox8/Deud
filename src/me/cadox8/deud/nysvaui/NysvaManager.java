@@ -72,6 +72,7 @@ public class NysvaManager {
      * Removes all the objects
      */
     public void removeAllObjects() {
+        if (objects.isEmpty()) return;
         synchronized (objects) {
             final Iterator<NysvaUI> it = objects.iterator();
             while (it.hasNext()) it.remove();

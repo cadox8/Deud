@@ -1,6 +1,7 @@
 package me.cadox8.deud.inventory;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.gfx.fonts.Text;
@@ -11,11 +12,13 @@ import me.cadox8.deud.nysvaui.NysvaUI;
 import me.cadox8.deud.nysvaui.components.images.UIImage;
 import me.cadox8.deud.nysvaui.components.images.UIImageButton;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
+import me.cadox8.deud.runnable.DeudTask;
 import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -27,7 +30,7 @@ public abstract class Inventory {
 
     @Getter @Setter private int size;
 
-    @Getter @Setter private boolean active;
+    @Getter protected boolean active;
 
     @Getter @Setter private int selectedSlot;
 
@@ -45,16 +48,27 @@ public abstract class Inventory {
     public abstract void tick();
     public abstract void render(Graphics g);
 
-    //
-    protected void loadItems(int xPos, int yPos) {
-        final AtomicInteger xSlot = new AtomicInteger(0);
-        final AtomicInteger ySlot = new AtomicInteger(0);
+    private void checkUI() {
+        getNysvaManager().getObjects().stream().filter(o -> o instanceof UIImageButton).forEach(o -> {
+
+        });
+    }
+
+    protected void loadBaseInventory(int xPos, int yPos) {
+        getNysvaManager().removeAllObjects();
 
         final UIImage gui = new UIImage(gameAPI, GUI.chest);
         gui.setUiDimension(new UIDimension(650, 50, GUI.chest.getWidth(), GUI.chest.getHeight()));
         gui.setResize(false);
 
         getNysvaManager().addObject(gui);
+
+        loadItems(xPos, yPos);
+    }
+
+    private void loadItems(int xPos, int yPos) {
+        final AtomicInteger xSlot = new AtomicInteger(0);
+        final AtomicInteger ySlot = new AtomicInteger(0);
 
         items.forEach(i -> {
             if (ySlot.get() > 6) return;
@@ -68,12 +82,9 @@ public abstract class Inventory {
                     items.set(selectedSlot, i);
 
                     selectedSlot = -1;
-
-                    loadItems(xPos, yPos);
                 } else {
                     selectedSlot = items.indexOf(i);
                 }
-                Log.log("Selected " + selectedSlot);
             });
             image.setUiDimension(new UIDimension(xPos + (xSlot.get() * 64), yPos + (ySlot.get() * 64), 60, 60));
             image.setExtraData(i);
@@ -103,6 +114,10 @@ public abstract class Inventory {
         }, () -> drawItemInfo(g, null, xPosText, yPosText));
     }
 
+    public void setActive(boolean active) {
+        loadBaseInventory(676, 130);
+        this.active = active;
+    }
 
     // Inventory methods
     public void addItems(Item... items) {

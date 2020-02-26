@@ -1,13 +1,13 @@
 package me.cadox8.deud.inventory;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.items.Item;
 
-import java.awt.*;
+public class ShopInventory extends StaticInventory {
 
-public class ChestInventory extends StaticInventory {
-
-    public ChestInventory(GameAPI gameAPI, int size) {
+    public ShopInventory(GameAPI gameAPI, int size) {
         super(gameAPI);
 
         setSize(size);
@@ -31,4 +31,13 @@ public class ChestInventory extends StaticInventory {
         getNysvaManager().render(g);
         hoverSelector(g, 855, 646);
     }*/
+
+
+    @RequiredArgsConstructor
+    @Data
+    public static class ShopItem {
+
+        private final Item item;
+        private final double price;
+    }
 }

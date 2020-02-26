@@ -16,7 +16,7 @@ import me.cadox8.deud.entities.statics.*;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.trees.Tree;
 import me.cadox8.deud.game.Game;
-import me.cadox8.deud.inventory_old.PlayerInventory;
+import me.cadox8.deud.inventory.PlayerInventory;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.worlds.World;
 import net.arikia.dev.drpc.DiscordRPC;
@@ -74,9 +74,9 @@ public class FileUtils {
             w.write(gson.toJson(data));
             w.close();
 
-            Log.log(Log.LogType.SUCCESS, "Config saved successfully");
+            Log.success("Config saved successfully");
         } catch (IOException e) {
-            Log.log(Log.LogType.DANGER, "Error while saving data. Does 'C:/Deud/config.json' exist?");
+            Log.danger("Error while saving data. Does 'C:/Deud/config.json' exist?");
         }
     }
 
@@ -118,9 +118,9 @@ public class FileUtils {
 
             saveEntities(p.getGameAPI().getWorld());
 
-            Log.log(Log.LogType.SUCCESS, "Data saved successfully");
+            Log.success("Data saved successfully");
         } catch (IOException e){
-            Log.log(Log.LogType.DANGER, "Error while saving data. Does 'C:/Deud/saves' exist?");
+            Log.danger("Error while saving data. Does 'C:/Deud/saves' exist?");
         }
 
         DiscordRPC.discordShutdown();
@@ -230,7 +230,7 @@ public class FileUtils {
         if (saveEntities.exists()) saveEntities.delete(); saveEntities.mkdirs();
         w.write(gson.toJson(data));
         w.close();
-        Log.log(Log.LogType.SUCCESS, "Entity Data saved successfully");
+        Log.success("Entity Data saved successfully");
     }
 
     public static EntityData loadEntities(String world) {

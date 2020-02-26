@@ -16,8 +16,6 @@ public class PlayerInventory extends CreatureInventory {
         super(gameAPI);
         this.player = player;
 
-        loadItems(76, 130);
-
         gameAPI.getMouseManager().setNysvaUI(getNysvaManager());
     }
 

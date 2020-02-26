@@ -21,7 +21,7 @@ public class Launcher {
         try {
             if (!new JavaCheck().hasJavaVersion()) throw new JavaVersionException("Deud needs Java 1.9 or above to run");
         } catch (JavaVersionException e) {
-            Log.log(Log.LogType.DANGER, e.getMessage());
+            Log.danger(e.getMessage());
             return;
         }
         FileUtils.checkFile();

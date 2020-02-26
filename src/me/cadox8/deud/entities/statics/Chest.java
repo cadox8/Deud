@@ -5,8 +5,8 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
-import me.cadox8.deud.inventory_old.InventoryData;
-import me.cadox8.deud.inventory_old.StaticInventory;
+import me.cadox8.deud.inventory.ChestInventory;
+import me.cadox8.deud.inventory.StaticInventory;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
@@ -30,7 +30,7 @@ public class Chest extends StaticEntity {
         setDamage(3);
         setLevel(0);
 
-        inventory = new StaticInventory(gameAPI);
+        inventory = new ChestInventory(gameAPI, 20);
 
         bounds.x = 2;
         bounds.y = (int) (height / 2f) - 5;
@@ -40,9 +40,7 @@ public class Chest extends StaticEntity {
 
     public void open(@NonNull Player p) {
         getInventory().setActive(true);
-        p.setEntityInventory(new InventoryData(InventoryData.InventoryType.CHEST, getInventory()));
         p.getPlayerInventory().setActive(true);
-        p.getPlayerInventory().setSelected(true);
         gameAPI.getEntityManager().freezePlayer();
     }
 
