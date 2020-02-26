@@ -93,7 +93,7 @@ public class WorldEntities {
 
                 entityManager.addEntity(en);
             } catch (IllegalAccessException | InvocationTargetException | InstantiationException er) {
-                Log.log(Log.LogType.DANGER, "Error while loading entities. " + er.getMessage());
+                Log.danger("Error while loading entities. " + er.getMessage());
                 er.printStackTrace();
                 System.exit(5);
             }

@@ -18,7 +18,6 @@ import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.gfx.textures.Models;
-import me.cadox8.deud.inventory.InventoryData;
 import me.cadox8.deud.inventory.PlayerInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
@@ -53,8 +52,6 @@ public class Player extends Creature {
     @Getter @Setter private Quest assignedQuest;
 
     @Getter @Setter private Options options;
-
-    @Getter @Setter private InventoryData entityInventory = null;
 
     public Player(@NonNull GameAPI gameAPI, float x, float y) {
         super(1, "Player", EntityData.EntityType.PLAYER, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
@@ -134,10 +131,6 @@ public class Player extends Creature {
 
         // Inventory
         inventory.tick();
-        if (entityInventory != null) {
-            entityInventory.getInventory().tick();
-            entityInventory.getInventory().checkKeys();
-        }
 
         if (!(getPlayerInventory().getUsableItem() instanceof WeaponItem)) {
             setDamage(DEFAULT_DAMAGE);
@@ -150,7 +143,7 @@ public class Player extends Creature {
 
     @Override
     public void die() {
-        Log.log(Log.LogType.DANGER, "You lose");
+        Log.danger("You lose");
         gameAPI.getWorld().getEntityManager().freezeAll();
     }
 
@@ -169,7 +162,6 @@ public class Player extends Creature {
         renderInfo(g);
         //map.paintMap(g);
         inventory.render(g);
-        if (entityInventory != null) entityInventory.getInventory().render(g);
 
         if (options.isEnabled()) options.render(g);
     }
@@ -224,13 +216,14 @@ public class Player extends Creature {
         xMove = 0;
         yMove = 0;
 
-        if (gameAPI.getKeyManager().tests) {
+        if (gameAPI.getKeyManager().test2) {
             //Log.log("\n\n" + Utils.getNearbyEntities(getLocation(), 0.5).toString());
             //new Door(GameAPI, 0, 0, "main").changeWorld();
             setHunger(getMaxHunger());
             addExp(20);
             setHealth(getMaxHealth());
-            gameAPI.getWorld().getEntityManager().freezeCreatures();
+            //gameAPI.getWorld().getEntityManager().freezeCreatures();
+            inventory.addItem(Item.sword);
         }
 
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
@@ -244,7 +237,7 @@ public class Player extends Creature {
 
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {
             final Entity en = EntityManager.getEntity(this, 0, 0);
-            if (en == null || getEntityInventory() != null) return;
+            if (en == null) return;
             if (en instanceof Chest) {
                 final Chest chest = (Chest) en;
                 chest.open(this);

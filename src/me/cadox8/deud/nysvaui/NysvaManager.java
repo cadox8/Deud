@@ -40,6 +40,12 @@ public class NysvaManager {
         }
     }
 
+    public void setObject(int slot, NysvaUI object) {
+        synchronized (objects) {
+            objects.set(slot, object);
+        }
+    }
+
     /**
      * Removes an NysvaUI
      * @see NysvaUI
@@ -66,6 +72,7 @@ public class NysvaManager {
      * Removes all the objects
      */
     public void removeAllObjects() {
+        if (objects.isEmpty()) return;
         synchronized (objects) {
             final Iterator<NysvaUI> it = objects.iterator();
             while (it.hasNext()) it.remove();
