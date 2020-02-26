@@ -45,15 +45,6 @@ public class MenuState extends State {
             setState(gameAPI.getGame().getEditorState());
         });
 
-        final UITextButton update = new UITextButton(gameAPI, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
-            try {
-                Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
-            } catch (URISyntaxException | IOException e) {
-                Log.danger("Link doesn't exist");
-                e.printStackTrace();
-            }
-        });
-
         background.setUiDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
         start.setUiDimension(new UIDimension(150, 650, 200, 100));
         exit.setUiDimension(new UIDimension(900, 650, 200, 100));
@@ -62,16 +53,27 @@ public class MenuState extends State {
         background.setResize(false);
         logo.setResize(false);
 
-        if (Updater.timeToUpdate()) nysvaManager.addObject(update);
-
         nysvaManager.addObject(background);
+
+        if (Updater.timeToUpdate()) {
+            final UITextButton update = new UITextButton(gameAPI, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
+                } catch (URISyntaxException | IOException e) {
+                    Log.danger("Link doesn't exist");
+                    e.printStackTrace();
+                }
+            });
+
+            nysvaManager.addObject(update);
+        }
+
         nysvaManager.addObject(start);
         nysvaManager.addObject(exit);
         nysvaManager.addObject(logo);
 
         gameAPI.getMouseManager().setNysvaUI(nysvaManager);
     }
-
 
 
     @Override
@@ -84,6 +86,6 @@ public class MenuState extends State {
         nysvaManager.render(g);
         g.setColor(Color.WHITE);
         g.drawString("Version: " + Launcher.VERSION, 5, 795);
-        g.drawString("© Deud 2016-2019 - The Game is property of Cadox8", 955, 795);
+        g.drawString("© Deud 2016-2019 - This Game is property of Cadox8", 795, 795);
     }
 }
