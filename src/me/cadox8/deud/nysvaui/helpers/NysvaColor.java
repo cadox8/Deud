@@ -9,7 +9,7 @@
  *
  */
 
-package me.cadox8.deud.ui.nysvaui.helpers;
+package me.cadox8.deud.nysvaui.helpers;
 
 import java.awt.*;
 import java.awt.image.ColorModel;

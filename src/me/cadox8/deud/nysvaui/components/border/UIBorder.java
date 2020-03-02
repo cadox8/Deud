@@ -9,11 +9,11 @@
  *
  */
 
-package me.cadox8.deud.ui.nysvaui.components.border;
+package me.cadox8.deud.nysvaui.components.border;
 
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.ui.nysvaui.NysvaUI;
-import me.cadox8.deud.ui.nysvaui.helpers.NysvaColor;
+import me.cadox8.deud.nysvaui.NysvaUI;
+import me.cadox8.deud.nysvaui.helpers.NysvaColor;
 
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
