@@ -9,11 +9,11 @@
  *
  */
 
-package me.cadox8.deud.nysvaui.components.images;
+package me.cadox8.deud.ui.nysvaui.components.images;
 
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.nysvaui.ClickListener;
+import me.cadox8.deud.ui.nysvaui.ClickListener;
 
 public class UIImageAnimationButton extends UIImageAnimation {
 

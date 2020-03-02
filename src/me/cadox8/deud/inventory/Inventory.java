@@ -1,24 +1,23 @@
 package me.cadox8.deud.inventory;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
+import me.cadox8.deud.inventory.utils.InventoryItem;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.nysvaui.NysvaManager;
 import me.cadox8.deud.nysvaui.NysvaUI;
 import me.cadox8.deud.nysvaui.components.images.UIImage;
 import me.cadox8.deud.nysvaui.components.images.UIImageButton;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
-import me.cadox8.deud.runnable.DeudTask;
-import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.ConcurrentModificationException;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -27,6 +26,14 @@ public abstract class Inventory {
     @Getter @Setter protected GameAPI gameAPI;
 
     @Getter protected ArrayList<Item> items;
+
+    @Getter protected ArrayList<InventoryItem> itemData;
+
+    @Getter protected Comparator<InventoryItem> itemDataComparator = (InventoryItem a, InventoryItem b) -> {
+        if (a.getId() < b.getId()) return -1;
+        return 1;
+    };
+
 
     @Getter @Setter private int size;
 
@@ -39,6 +46,7 @@ public abstract class Inventory {
     public Inventory(GameAPI gameAPI) {
         this.gameAPI = gameAPI;
         items = new ArrayList<>();
+        itemData = new ArrayList<>();
 
         size = 10;
         active = false;
@@ -48,15 +56,7 @@ public abstract class Inventory {
     public abstract void tick();
     public abstract void render(Graphics g);
 
-    private void checkUI() {
-        getNysvaManager().getObjects().stream().filter(o -> o instanceof UIImageButton).forEach(o -> {
-
-        });
-    }
-
     protected void loadBaseInventory(int xPos, int yPos) {
-        getNysvaManager().removeAllObjects();
-
         final UIImage gui = new UIImage(gameAPI, GUI.chest);
         gui.setUiDimension(new UIDimension(650, 50, GUI.chest.getWidth(), GUI.chest.getHeight()));
         gui.setResize(false);
@@ -73,23 +73,20 @@ public abstract class Inventory {
         items.forEach(i -> {
             if (ySlot.get() > 6) return;
 
-            final UIImageButton image = new UIImageButton(gameAPI, i.getTexture(), () -> {
+            itemData.add(new InventoryItem(gameAPI, items.indexOf(i), i, new UIDimension(xPos + (xSlot.get() * 64) + 1, yPos + (ySlot.get() * 64) + 1, 60, 60), () -> {
                 if (selectedSlot != -1) {
-                    final int tempSlot = items.indexOf(i);
-                    final Item selectedItem = items.get(selectedSlot);
-
-                    items.set(tempSlot, selectedItem);
-                    items.set(selectedSlot, i);
+                    itemData.get(selectedSlot).setId(items.indexOf(i));
+                    itemData.get(items.indexOf(i)).setId(selectedSlot);
 
                     selectedSlot = -1;
                 } else {
                     selectedSlot = items.indexOf(i);
                 }
-            });
-            image.setUiDimension(new UIDimension(xPos + (xSlot.get() * 64), yPos + (ySlot.get() * 64), 60, 60));
-            image.setExtraData(i);
+            }));
 
-            getNysvaManager().addObject(image);
+            getNysvaManager().addObject(itemData.get(items.indexOf(i)).generateUIComponent());
+
+            itemData.sort(itemDataComparator);
 
             xSlot.incrementAndGet();
             if (xSlot.get() > 6) {
@@ -97,6 +94,10 @@ public abstract class Inventory {
                 ySlot.incrementAndGet();
             }
         });
+    }
+
+    private void reorder() {
+
     }
 
     protected void drawItemInfo(Graphics g, Item item, int xPosText, int yPosText) {
@@ -115,7 +116,7 @@ public abstract class Inventory {
     }
 
     public void setActive(boolean active) {
-        loadBaseInventory(676, 130);
+        if (active) loadBaseInventory(676, 130);
         this.active = active;
     }
 

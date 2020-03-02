@@ -11,6 +11,8 @@
 
 package me.cadox8.deud.nysvaui;
 
+import me.cadox8.deud.utils.Log;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;

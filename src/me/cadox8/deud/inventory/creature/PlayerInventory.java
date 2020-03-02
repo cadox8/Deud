@@ -1,4 +1,4 @@
-package me.cadox8.deud.inventory;
+package me.cadox8.deud.inventory.creature;
 
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
@@ -37,8 +37,11 @@ public class PlayerInventory extends CreatureInventory {
     @Override
     public void render(Graphics g) {
         if (!isActive()) return;
+
         getNysvaManager().render(g);
         hoverSelector(g, 855, 646);
+
+        //getNysvaManager().getObjects().forEach(o -> o.renderUIDimension(g));
     }
 
     public void setUsableItem(Item item) {

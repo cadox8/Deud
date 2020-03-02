@@ -56,8 +56,6 @@ public class Game implements Runnable {
     //Camera
     @Getter private GameCamera gameCamera;
 
-    @Getter @Setter private static boolean first = true;
-
     //gameAPI
     @Getter private GameAPI gameAPI;
 

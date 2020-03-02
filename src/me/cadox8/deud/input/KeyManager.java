@@ -3,7 +3,6 @@ package me.cadox8.deud.input;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.nysvaui.components.field.UIField;
-import me.cadox8.deud.utils.Log;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

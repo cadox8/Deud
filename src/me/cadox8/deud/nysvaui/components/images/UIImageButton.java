@@ -9,13 +9,11 @@
  *
  */
 
-package me.cadox8.deud.nysvaui.components.images;
+package me.cadox8.deud.ui.nysvaui.components.images;
 
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.gfx.Sprites;
-import me.cadox8.deud.gfx.textures.Assets;
-import me.cadox8.deud.nysvaui.ClickListener;
+import me.cadox8.deud.ui.nysvaui.ClickListener;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

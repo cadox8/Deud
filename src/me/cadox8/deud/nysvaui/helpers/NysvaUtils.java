@@ -9,7 +9,7 @@
  *
  */
 
-package me.cadox8.deud.nysvaui.helpers;
+package me.cadox8.deud.ui.nysvaui.helpers;
 
 import java.util.Arrays;
 import java.util.List;

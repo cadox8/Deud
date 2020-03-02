@@ -9,12 +9,12 @@
  *
  */
 
-package me.cadox8.deud.nysvaui.components.images;
+package me.cadox8.deud.ui.nysvaui.components.images;
 
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.nysvaui.NysvaUI;
+import me.cadox8.deud.ui.nysvaui.NysvaUI;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

@@ -1,7 +1,6 @@
 package me.cadox8.deud.ux.options;
 
 import lombok.Getter;
-import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.nysvaui.NysvaManager;
@@ -31,7 +30,7 @@ public class Options {
         final UISelectedTextButton resume = new UISelectedTextButton(gameAPI, "Resume Game", () -> setEnabled(false));
 
         final UISelectedTextButton exit = new UISelectedTextButton(gameAPI, "Exit Game", () -> {
-            FileUtils.save(player);
+            FileUtils.save(player, gameAPI);
             System.exit(0);
         });
 

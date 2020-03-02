@@ -13,8 +13,10 @@ package me.cadox8.deud.nysvaui;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
+import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@ToString
 public abstract class NysvaUI {
 
     private final long componentID;
@@ -62,6 +65,11 @@ public abstract class NysvaUI {
     public abstract void tick();
     public abstract void render(Graphics g);
     public abstract void onClick();
+
+    public void renderUIDimension(Graphics g) {
+        g.setColor(Color.RED);
+        g.drawRect(uiDimension.getX(), uiDimension.getY(), uiDimension.getWidth(), uiDimension.getHeight());
+    }
 
     public void onMouseMove(MouseEvent e) {
         hovering = getUiDimension().getBounds().contains(e.getX(), e.getY());
