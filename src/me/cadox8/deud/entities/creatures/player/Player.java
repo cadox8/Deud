@@ -99,11 +99,11 @@ public class Player extends Creature {
 
             Log.log("Player nick: " + getNick());
 
-            Arrays.asList(pd.getInventory()).forEach(items -> items.forEach((id, count) -> {
-                final Item i = Item.items[id];
-                i.setCount(count);
+            Arrays.asList(pd.getInventory()).forEach(items -> {
+                final Item i = Item.items[items.getId()];
+                i.setCount(items.getCount());
                 inventory.addItem(i);
-            }));
+            });
             getPlayerInventory().setUsableItem(gameAPI.getGame().getPlayerData().getItem());
         } else {
             getPlayerInventory().setUsableItem(Item.hand);

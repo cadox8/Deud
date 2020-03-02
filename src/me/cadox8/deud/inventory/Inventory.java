@@ -6,15 +6,17 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
-import me.cadox8.deud.inventory.utils.InventoryItem;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.nysvaui.NysvaManager;
 import me.cadox8.deud.nysvaui.NysvaUI;
 import me.cadox8.deud.nysvaui.components.images.UIImage;
 import me.cadox8.deud.nysvaui.components.images.UIImageButton;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
+import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -27,30 +29,23 @@ public abstract class Inventory {
 
     @Getter protected ArrayList<Item> items;
 
-    @Getter protected ArrayList<InventoryItem> itemData;
-
-    @Getter protected Comparator<InventoryItem> itemDataComparator = (InventoryItem a, InventoryItem b) -> {
-        if (a.getId() < b.getId()) return -1;
-        return 1;
-    };
-
-
     @Getter @Setter private int size;
 
     @Getter protected boolean active;
 
     @Getter @Setter private int selectedSlot;
 
-    @Getter private final NysvaManager nysvaManager = new NysvaManager();
+    @Getter private final NysvaManager nysvaManager;
 
     public Inventory(GameAPI gameAPI) {
         this.gameAPI = gameAPI;
         items = new ArrayList<>();
-        itemData = new ArrayList<>();
 
         size = 10;
         active = false;
         selectedSlot = -1;
+
+        nysvaManager = new NysvaManager();
     }
 
     public abstract void tick();
@@ -64,6 +59,8 @@ public abstract class Inventory {
         getNysvaManager().addObject(gui);
 
         loadItems(xPos, yPos);
+
+        gameAPI.getMouseManager().setNysvaUI(nysvaManager);
     }
 
     private void loadItems(int xPos, int yPos) {
@@ -73,20 +70,23 @@ public abstract class Inventory {
         items.forEach(i -> {
             if (ySlot.get() > 6) return;
 
-            itemData.add(new InventoryItem(gameAPI, items.indexOf(i), i, new UIDimension(xPos + (xSlot.get() * 64) + 1, yPos + (ySlot.get() * 64) + 1, 60, 60), () -> {
-                if (selectedSlot != -1) {
-                    itemData.get(selectedSlot).setId(items.indexOf(i));
-                    itemData.get(items.indexOf(i)).setId(selectedSlot);
+            final UIImageButton item = new UIImageButton(gameAPI, i.getTexture(), () -> {
+                if (selectedSlot == -1) {
+                    selectedSlot = items.indexOf(i);
+                } else {
+                    final Item selectedItem = getItems().get(selectedSlot);
+                    final Item newItem = getItems().get(getItems().indexOf(i));
+                    getItems().set(getItems().indexOf(i), selectedItem);
+                    getItems().set(selectedSlot, newItem);
 
                     selectedSlot = -1;
-                } else {
-                    selectedSlot = items.indexOf(i);
                 }
-            }));
+            });
+            item.setUiDimension(new UIDimension(xPos + (xSlot.get() * 64) + 1, yPos + (ySlot.get() * 64) + 1, 60, 60));
+            item.setExtraData(items.indexOf(i));
+            item.setReorder(true);
 
-            getNysvaManager().addObject(itemData.get(items.indexOf(i)).generateUIComponent());
-
-            itemData.sort(itemDataComparator);
+            getNysvaManager().addObject(item);
 
             xSlot.incrementAndGet();
             if (xSlot.get() > 6) {
@@ -94,10 +94,6 @@ public abstract class Inventory {
                 ySlot.incrementAndGet();
             }
         });
-    }
-
-    private void reorder() {
-
     }
 
     protected void drawItemInfo(Graphics g, Item item, int xPosText, int yPosText) {
@@ -111,12 +107,12 @@ public abstract class Inventory {
         final Optional<NysvaUI> hover = getNysvaManager().getObjects().stream().filter(n -> n instanceof UIImageButton).filter(NysvaUI::isHovering).findAny();
         hover.ifPresentOrElse(nysvaUI -> {
             g.drawImage(GUI.invSelector, nysvaUI.getUiDimension().getX(), nysvaUI.getUiDimension().getY(), null);
-            drawItemInfo(g, (Item) hover.get().getExtraData(), 855, 646);
+            drawItemInfo(g, items.get((int)hover.get().getExtraData()), 855, 646);
         }, () -> drawItemInfo(g, null, xPosText, yPosText));
     }
 
     public void setActive(boolean active) {
-        if (active) loadBaseInventory(676, 130);
+        loadBaseInventory(676, 130);
         this.active = active;
     }
 

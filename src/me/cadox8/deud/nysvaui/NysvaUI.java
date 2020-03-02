@@ -47,6 +47,7 @@ public abstract class NysvaUI {
     protected int marginX, marginY;
 
     @Getter @Setter protected Object extraData = null;
+    @Getter @Setter protected boolean reorder = false;
 
     /**
      * Default NysvaUI constructor

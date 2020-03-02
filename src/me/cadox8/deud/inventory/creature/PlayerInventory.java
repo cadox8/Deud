@@ -25,13 +25,14 @@ public class PlayerInventory extends CreatureInventory {
             setActive(!isActive());
             gameAPI.getWorld().getPlayer().setFreeze(isActive());
             gameAPI.getEntityManager().getEntities().stream().filter(e -> e instanceof Sign).forEach(e -> ((Sign) e).setSign(null));
+            setSelectedSlot(-1);
         }
 
         if (!isActive()) return;
 
         if (!hasItem(getUsableItem())) setUsableItem(Item.hand);
 
-        getNysvaManager().tick();
+        getNysvaManager().tick(getItems());
     }
 
     @Override
