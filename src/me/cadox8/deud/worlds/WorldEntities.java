@@ -77,6 +77,9 @@ public class WorldEntities {
                         en = new DeadTree(gameAPI, l.getX(), l.getY());
                         ((DeadTree)en).setTreeType(e.getTreeType());
                         break;
+                    case LIGHT:
+                        en = new Light(gameAPI, (int)l.getX(), (int)l.getY(), e.getRadius(), e.getLuminosity());
+                        break;
 
                     default:
                         en = (Entity) type.getSupClass().getConstructors()[0].newInstance(gameAPI, l.getX(), l.getY());

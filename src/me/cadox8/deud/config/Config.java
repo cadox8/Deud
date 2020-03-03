@@ -1,6 +1,5 @@
 package me.cadox8.deud.config;
 
-import jdk.jfr.DataAmount;
 import lombok.Data;
 
 @Data

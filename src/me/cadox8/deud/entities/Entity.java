@@ -12,8 +12,8 @@ import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.projectile.Projectile;
 import me.cadox8.deud.events.projectiles.ProjectileHitEvent;
-import me.cadox8.deud.inventory.creature.CreatureInventory;
 import me.cadox8.deud.inventory.Inventory;
+import me.cadox8.deud.inventory.creature.CreatureInventory;
 import me.cadox8.deud.inventory.creature.PlayerInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
@@ -98,6 +98,7 @@ public abstract class Entity {
 
     public abstract void tick();
     public abstract void fixAnimations();
+    public abstract void postRender(Graphics g);
     public abstract void render(Graphics g);
     public abstract void preRender(Graphics g);
     public abstract void getHurt();
@@ -162,6 +163,10 @@ public abstract class Entity {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    protected Point entityCenter() {
+        return new Point((int) (getWidth()/2 + x - gameAPI.getGameCamera().getXOffset()), (int) (getHeight()/2 + y - gameAPI.getGameCamera().getYOffset()));
     }
 
     public void addExp(double xp) {

@@ -54,6 +54,7 @@ public class UIBlock extends NysvaUI {
             g2.draw(r);
             g2.fill(r);
         }
+
         if (!components.isEmpty()) components.forEach(c -> c.render(g));
     }
 

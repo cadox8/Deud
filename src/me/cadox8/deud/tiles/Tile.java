@@ -1,7 +1,6 @@
 package me.cadox8.deud.tiles;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.utils.Utils;

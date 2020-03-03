@@ -8,15 +8,15 @@ import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.config.Config;
 import me.cadox8.deud.entities.Entity;
-import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
-import me.cadox8.deud.entities.statics.*;
+import me.cadox8.deud.entities.statics.Door;
+import me.cadox8.deud.entities.statics.House;
+import me.cadox8.deud.entities.statics.Light;
+import me.cadox8.deud.entities.statics.RewardChest;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.trees.Tree;
-import me.cadox8.deud.game.Game;
 import me.cadox8.deud.inventory.creature.PlayerInventory;
-import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.utils.Log;
 import net.arikia.dev.drpc.DiscordRPC;
 
@@ -124,6 +124,13 @@ public class Save {
             if (e instanceof House) {
                 en.addProperty("houseType", ((House)e).getHouseType());
             }
+
+            if (e instanceof Light) {
+                if (!((Light)e).isStatic()) return;
+                en.addProperty("luminosity", ((Light)e).getLuminosity());
+                en.addProperty("radius", ((Light)e).getRadius());
+            }
+
             ent.add(en);
         });
 

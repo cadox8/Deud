@@ -1,29 +1,17 @@
 package me.cadox8.deud.saves;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.config.Config;
-import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
-import me.cadox8.deud.entities.creatures.Creature;
-import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
-import me.cadox8.deud.entities.statics.*;
-import me.cadox8.deud.entities.statics.sign.Sign;
-import me.cadox8.deud.entities.statics.trees.Tree;
-import me.cadox8.deud.game.Game;
-import me.cadox8.deud.inventory.creature.PlayerInventory;
 import me.cadox8.deud.utils.Log;
-import me.cadox8.deud.worlds.World;
-import net.arikia.dev.drpc.DiscordRPC;
 
-import java.io.*;
-import java.util.List;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class FileUtils {
 

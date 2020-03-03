@@ -49,6 +49,9 @@ public class EntityData {
 
         private String displayName = "";
 
+        private int radius = 100;
+        private float luminosity = 1.3F;
+
         public String[] getTextArray() {
             return text;
         }
@@ -83,6 +86,7 @@ public class EntityData {
         FAIRY(Fairy.class),
         CHEST(Chest.class),
         REWARDCHEST(RewardChest.class),
+        LIGHT(Light.class),
         ROCK(Rock.class),
         SIGN(Sign.class),
         NORMALTREE(NormalTree.class),

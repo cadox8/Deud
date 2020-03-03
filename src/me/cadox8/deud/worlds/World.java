@@ -16,7 +16,6 @@ import me.cadox8.deud.managers.ItemManager;
 import me.cadox8.deud.particles.Particle;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.tiles.Tiles;
-import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
@@ -43,7 +42,7 @@ public class World {
     // Item
     @Getter private final ItemManager itemManager;
 
-    private ArrayList<Particle> particles;
+    private final ArrayList<Particle> particles;
 
     public World(@NonNull GameAPI gameAPI, String path) {
         this.gameAPI = gameAPI;
@@ -108,7 +107,7 @@ public class World {
         // Items
         itemManager.render(g);
         //Entities
-        entityManager.render(g);
+        entityManager.render(g, true);
 
         particles.forEach(p -> p.render(g, 5, 5));
     }

@@ -8,7 +8,6 @@ import me.cadox8.deud.attributes.Explosion;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.items.objects.KeyItem;
 
 public class RewardChest extends Chest {
 

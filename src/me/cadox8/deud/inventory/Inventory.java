@@ -3,7 +3,6 @@ package me.cadox8.deud.inventory;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.items.Item;
@@ -12,14 +11,10 @@ import me.cadox8.deud.nysvaui.NysvaUI;
 import me.cadox8.deud.nysvaui.components.images.UIImage;
 import me.cadox8.deud.nysvaui.components.images.UIImageButton;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
-import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
-import java.lang.reflect.Array;
-import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -72,13 +67,12 @@ public abstract class Inventory {
 
             final UIImageButton item = new UIImageButton(gameAPI, i.getTexture(), () -> {
                 if (selectedSlot == -1) {
-                    selectedSlot = items.indexOf(i);
+                    selectedSlot = getItems().indexOf(i);
                 } else {
                     final Item selectedItem = getItems().get(selectedSlot);
                     final Item newItem = getItems().get(getItems().indexOf(i));
                     getItems().set(getItems().indexOf(i), selectedItem);
                     getItems().set(selectedSlot, newItem);
-
                     selectedSlot = -1;
                 }
             });

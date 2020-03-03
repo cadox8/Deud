@@ -16,7 +16,6 @@ import lombok.Setter;
 import lombok.ToString;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
-import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

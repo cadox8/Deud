@@ -22,13 +22,13 @@ import me.cadox8.deud.inventory.creature.PlayerInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.managers.EntityManager;
-import me.cadox8.deud.ux.options.Options;
 import me.cadox8.deud.quests.Quest;
 import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 import me.cadox8.deud.ux.dialog.Dialog;
+import me.cadox8.deud.ux.options.Options;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -109,7 +109,6 @@ public class Player extends Creature {
             getPlayerInventory().setUsableItem(Item.hand);
         }
 
-
         options = new Options(gameAPI, this);
     }
 
@@ -160,7 +159,6 @@ public class Player extends Creature {
 
     public void postRender(Graphics g) {
         renderInfo(g);
-        //map.paintMap(g);
         inventory.render(g);
 
         if (options.isEnabled()) options.render(g);

@@ -1,12 +1,8 @@
 package me.cadox8.deud.saves;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.items.Item;
-
-import java.util.Map;
 
 @Data
 public class PlayerData {

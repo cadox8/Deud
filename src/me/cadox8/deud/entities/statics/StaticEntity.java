@@ -30,6 +30,9 @@ public abstract class StaticEntity extends Entity {
     @Override
     public void preRender(Graphics g) {}
 
+    @Override
+    public void postRender(Graphics g) {}
+
     public void fixAnimations() {}
 
     public StaticInventory getInventory() {
