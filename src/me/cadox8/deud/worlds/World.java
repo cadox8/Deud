@@ -37,6 +37,8 @@ public class World {
 
     private String path;
 
+    private boolean dark;
+
     //Entities
     @Getter private final EntityManager entityManager;
     // Item
@@ -107,7 +109,7 @@ public class World {
         // Items
         itemManager.render(g);
         //Entities
-        entityManager.render(g, true);
+        entityManager.render(g, dark);
 
         particles.forEach(p -> p.render(g, 5, 5));
     }
@@ -119,18 +121,20 @@ public class World {
     }
 
     private void loadWorld(String path) {
-        final WorldTiles worldTiles = new GsonBuilder().setPrettyPrinting().create().fromJson(Utils.loadFileAsString(path), WorldTiles.class);
+        final WorldData worldData = new GsonBuilder().setPrettyPrinting().create().fromJson(Utils.loadFileAsString(path), WorldData.class);
 
-        width = worldTiles.getWidth();
-        height = worldTiles.getHeight();
-        spawnX = worldTiles.getPlayerX();
-        spawnY = worldTiles.getPlayerY();
+        width = worldData.getWidth();
+        height = worldData.getHeight();
+        spawnX = worldData.getPlayerX();
+        spawnY = worldData.getPlayerY();
+
+        dark = worldData.isDark();
 
         tiles = new TileUtils[width][height];
         final AtomicInteger x = new AtomicInteger(0);
         final AtomicInteger y = new AtomicInteger(0);
 
-        worldTiles.getTiles().forEach(t -> {
+        worldData.getTiles().forEach(t -> {
             if (t.contains(":")) {
                 final String[] parts = t.split(":");
                 tiles[x.get()][y.get()] = new TileUtils(Utils.parseInt(parts[0]), Utils.parseInt(parts[1]));
@@ -164,12 +168,14 @@ public class World {
 
     @RequiredArgsConstructor
     @ToString
-    private static class WorldTiles {
+    private static class WorldData {
         @Getter private final int width;
         @Getter private final int height;
 
         @Getter private final int playerX;
         @Getter private final int playerY;
+
+        @Getter private final boolean dark;
 
         private final String[] tiles;
 

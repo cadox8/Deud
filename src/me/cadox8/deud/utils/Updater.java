@@ -1,6 +1,8 @@
 package me.cadox8.deud.utils;
 
-import lombok.Getter;
+import com.google.gson.GsonBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import me.cadox8.deud.Launcher;
 
 import java.io.BufferedReader;
@@ -8,34 +10,52 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Arrays;
 
 public class Updater {
 
-    @Getter private static String webVersion;
-
-    public static boolean timeToUpdate(){
-        fetchWebVersion();
-        final String[] vParts = webVersion.split(" ");
-        final String[] vParts2 = Launcher.VERSION.split(" ");
-
-        if (vParts[0].equalsIgnoreCase(vParts2[0])) {
-            if (vParts[1].equalsIgnoreCase(vParts2[1])) {
-                return true;
-            }
-        }
-        return false;
+    public static boolean checkForUpdate() {
+        return webVersion().getLatest() > Launcher.VERSION_ID;
     }
 
-    private static void fetchWebVersion(){
+    public static Versions webVersion() {
         try {
-            URLConnection connection = new URL("https://cadox8.github.io/Deud/version.txt").openConnection();
+            URLConnection connection = new URL("https://cadox8.github.io/Deud/versions.json").openConnection();
             final String redirect = connection.getHeaderField("Location");
             if (redirect != null) connection = new URL(redirect).openConnection();
-            final String version = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
-            Log.log("Web Version: " + version + " || Game Version: " + Launcher.VERSION);
-            webVersion = version;
+            final BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            final StringBuilder sb = new StringBuilder();
+            String lines;
+            while ((lines = br.readLine()) != null) sb.append(lines);
+
+            return new GsonBuilder().setPrettyPrinting().create().fromJson(sb.toString(), Versions.class);
         } catch (IOException e) {
-            webVersion = Launcher.VERSION;
+            final Versions versions = new Versions();
+            versions.latest = Launcher.VERSION_ID;
+            versions.older = new Versions.VersionData[0];
+            return versions;
+        }
+    }
+
+    private static Versions.VersionData getVersion(int id) {
+        return Arrays.stream(webVersion().getOlder()).filter(v -> v.id == id).findAny().orElse(new Versions.VersionData(Launcher.VERSION_ID, Launcher.VERSION));
+    }
+
+    public static Versions.VersionData latestVersion() {
+        return getVersion(webVersion().getLatest());
+    }
+
+    @Data
+    public static class Versions {
+
+        private int latest;
+        private VersionData[] older;
+
+        @Data
+        @AllArgsConstructor
+        public static class VersionData {
+            private int id;
+            private String version;
         }
     }
 }

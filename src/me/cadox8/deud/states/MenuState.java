@@ -55,8 +55,8 @@ public class MenuState extends State {
 
         nysvaManager.addObject(background);
 
-        if (Updater.timeToUpdate()) {
-            final UITextButton update = new UITextButton(gameAPI, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
+        if (Updater.checkForUpdate()) {
+            final UITextButton update = new UITextButton(gameAPI, "New version available: " + Updater.latestVersion().getVersion() + " ⇩", () -> {
                 try {
                     Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
                 } catch (URISyntaxException | IOException e) {

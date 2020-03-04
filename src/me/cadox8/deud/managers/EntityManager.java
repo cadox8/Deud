@@ -7,6 +7,7 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.entities.statics.Light;
 import me.cadox8.deud.nysvaui.components.base.UIBlock;
 import me.cadox8.deud.nysvaui.helpers.NysvaColor;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
@@ -60,9 +61,9 @@ public class EntityManager {
         }
 
         entities.forEach(e -> e.render(g));
-        entities.stream().filter(e -> !(e instanceof Player)).forEach(e -> e.postRender(g));
+        entities.stream().filter(e -> !(e instanceof Player)).filter(e -> !(e instanceof Light)).forEach(e -> e.postRender(g));
+        if (isDark) entities.stream().filter(entity -> entity instanceof Light).forEach(e -> e.postRender(g));
         player.postRender(g);
-        //entities.forEach(e -> g.drawRect((int)e.getBounds().getX() + (int)e.getX(), (int)e.getBounds().getY() + (int)e.getY(), (int)e.getBounds().getWidth(), (int)e.getBounds().getHeight()));
     }
 
     public void addEntity(Entity e) {
