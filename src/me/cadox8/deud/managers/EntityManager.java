@@ -7,7 +7,10 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
-import me.cadox8.deud.entities.statics.sign.Sign;
+import me.cadox8.deud.entities.statics.Light;
+import me.cadox8.deud.nysvaui.components.base.UIBlock;
+import me.cadox8.deud.nysvaui.helpers.NysvaColor;
+import me.cadox8.deud.nysvaui.helpers.UIDimension;
 import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
@@ -35,9 +38,9 @@ public class EntityManager {
     }
 
     public void tick() {
-        Iterator<Entity> it = entities.iterator();
+        final Iterator<Entity> it = entities.iterator();
         while (it.hasNext()) {
-            Entity e = it.next();
+            final Entity e = it.next();
             e.tick();
             e.fixAnimations();
             if (!e.isActive()) {
@@ -48,20 +51,28 @@ public class EntityManager {
         entities.sort(renderSorter);
     }
 
-    public void render(Graphics g) {
+    public void render(Graphics g, boolean isDark) {
         entities.forEach(e -> e.preRender(g));
+
+        if (isDark) {
+            final UIBlock dark = new UIBlock(gameAPI, NysvaColor.BLACK.transparent(150));
+            dark.setUiDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
+            dark.render(g);
+        }
+
         entities.forEach(e -> e.render(g));
-        entities.stream().filter(e -> e instanceof Sign).forEach(e -> ((Sign) e).postRender(g));
+        entities.stream().filter(e -> !(e instanceof Player)).filter(e -> !(e instanceof Light)).forEach(e -> e.postRender(g));
+        if (isDark) entities.stream().filter(entity -> entity instanceof Light).forEach(e -> e.postRender(g));
         player.postRender(g);
-        //entities.forEach(e -> g.drawRect((int)e.getBounds().getX() + (int)e.getX(), (int)e.getBounds().getY() + (int)e.getY(), (int)e.getBounds().getWidth(), (int)e.getBounds().getHeight()));
     }
 
     public void addEntity(Entity e) {
         entities.add(e);
+        if (e instanceof Creature) entities.add(((Creature) e).getLight());
     }
 
     public void freezeAll() {
-        entities.stream().filter(e -> e instanceof Creature).findFirst().ifPresent(e -> ((Creature)e).setFreeze(!((Creature)e).isFreeze()));
+        freezeCreatures();
     }
     public void freezeCreatures() {
         entities.stream().filter(e -> e instanceof Creature).filter(e -> !(e instanceof Player)).forEach(e -> ((Creature)e).setFreeze(!((Creature)e).isFreeze()));

@@ -8,7 +8,7 @@ import me.cadox8.deud.items.weapons.WeaponItem;
 public class DamageManager {
 
     public int effectiveDamage(double initialDamage, @NonNull EntityData.EntityType damaged, Item weapon) {
-        return (int)effectiveDamageDouble(initialDamage, damaged, weapon);
+        return (int) effectiveDamageDouble(initialDamage, damaged, weapon);
     }
     private double effectiveDamageDouble(double initialDamage, @NonNull EntityData.EntityType damaged, Item weapon) {
         if (weapon == null) return initialDamage;

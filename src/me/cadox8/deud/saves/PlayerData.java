@@ -1,12 +1,8 @@
 package me.cadox8.deud.saves;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.items.Item;
-
-import java.util.Map;
 
 @Data
 public class PlayerData {
@@ -15,8 +11,8 @@ public class PlayerData {
     private double money = 0;
     private int health = 0;
     private LocationUtils location = new LocationUtils();
-    @Getter private Map<Integer, Integer>[] inventory = null;
-    private ItemUtils item = new ItemUtils(Item.hand.getId(), 1);
+    private ItemUtils[] inventory = new ItemUtils[0];
+    private ItemUtils item = new ItemUtils();
 
     public LocationUtils locUtils() {
         return location;
@@ -29,11 +25,17 @@ public class PlayerData {
         return Item.items[item.getId()].setCount(item.getCount());
     }
 
+    public Item[] getInventory() {
+        if (inventory == null) return new Item[0];
+        final Item[] it = new Item[inventory.length];
+        for (int x = 0; x < it.length; x++) it[x] = Item.items[inventory[x].getId()].setCount(inventory[x].getCount());
+        return it;
+    }
+
     @Data
-    @AllArgsConstructor
     public static class ItemUtils {
-        private int id;
-        private int count;
+        private int id = 0;
+        private int count = 0;
     }
 
     @Data

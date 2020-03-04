@@ -7,7 +7,7 @@ import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.Creature;
-import me.cadox8.deud.inventory.CreatureInventory;
+import me.cadox8.deud.inventory.creature.CreatureInventory;
 import me.cadox8.deud.quests.Quest;
 
 import java.awt.image.BufferedImage;
@@ -34,7 +34,7 @@ public class Npc extends Creature {
 
         bounds.x = 20;
         bounds.y = 44;
-        bounds.width = 25;
+        bounds.width = 28;
         bounds.height = 19;
 
         // Animations

@@ -23,6 +23,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class World {
 
@@ -34,12 +37,14 @@ public class World {
 
     private String path;
 
+    private boolean dark;
+
     //Entities
     @Getter private final EntityManager entityManager;
     // Item
     @Getter private final ItemManager itemManager;
 
-    private ArrayList<Particle> particles;
+    private final ArrayList<Particle> particles;
 
     public World(@NonNull GameAPI gameAPI, String path) {
         this.gameAPI = gameAPI;
@@ -104,7 +109,7 @@ public class World {
         // Items
         itemManager.render(g);
         //Entities
-        entityManager.render(g);
+        entityManager.render(g, dark);
 
         particles.forEach(p -> p.render(g, 5, 5));
     }
@@ -116,26 +121,31 @@ public class World {
     }
 
     private void loadWorld(String path) {
-        final WorldTiles worldTiles = new GsonBuilder().setPrettyPrinting().create().fromJson(Utils.loadFileAsString("resources/worlds/springwood/world2.dworld"), WorldTiles.class);
+        final WorldData worldData = new GsonBuilder().setPrettyPrinting().create().fromJson(Utils.loadFileAsString(path), WorldData.class);
 
-        final String[] tokens = Utils.loadFileAsString(path).split("\\s+");
-        width = Utils.parseInt(tokens[0]);
-        height = Utils.parseInt(tokens[1]);
-        spawnX = Utils.parseInt(tokens[2]);
-        spawnY = Utils.parseInt(tokens[3]);
+        width = worldData.getWidth();
+        height = worldData.getHeight();
+        spawnX = worldData.getPlayerX();
+        spawnY = worldData.getPlayerY();
+
+        dark = worldData.isDark();
 
         tiles = new TileUtils[width][height];
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                final String token = tokens[(x + y * width) + 4];
-                if (token.contains(":")) {
-                    final String[] parts = token.split(":");
-                    tiles[x][y] = new TileUtils(Utils.parseInt(parts[0]), Utils.parseInt(parts[1]));
-                } else {
-                    tiles[x][y] = new TileUtils(Utils.parseInt(token), 0);
-                }
+        final AtomicInteger x = new AtomicInteger(0);
+        final AtomicInteger y = new AtomicInteger(0);
+
+        worldData.getTiles().forEach(t -> {
+            if (t.contains(":")) {
+                final String[] parts = t.split(":");
+                tiles[x.get()][y.get()] = new TileUtils(Utils.parseInt(parts[0]), Utils.parseInt(parts[1]));
+            } else {
+                tiles[x.get()][y.get()] = new TileUtils(Utils.parseInt(t), 0);
             }
-        }
+            if (x.incrementAndGet() >= width) {
+                x.set(0);
+                y.incrementAndGet();
+            }
+        });
     }
 
     @Override
@@ -158,13 +168,19 @@ public class World {
 
     @RequiredArgsConstructor
     @ToString
-    private static class WorldTiles {
+    private static class WorldData {
         @Getter private final int width;
         @Getter private final int height;
 
         @Getter private final int playerX;
         @Getter private final int playerY;
 
-        @Getter private final String[] tiles;
+        @Getter private final boolean dark;
+
+        private final String[] tiles;
+
+        public List<String> getTiles() {
+            return Arrays.asList(tiles);
+        }
     }
 }

@@ -11,14 +11,21 @@
 
 package me.cadox8.deud.nysvaui.components.images;
 
+import lombok.Setter;
+import lombok.ToString;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.nysvaui.ClickListener;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
+@ToString
 public class UIImageButton extends UIImage {
 
     private ClickListener clicker;
+
+    @Setter private BufferedImage pressedImage;
+    private boolean pressed = false;
 
     public UIImageButton(GameAPI api, BufferedImage image, ClickListener clicker) {
         super(api, image);
@@ -29,5 +36,15 @@ public class UIImageButton extends UIImage {
     @Override
     public void onClick() {
         clicker.onClick();
+        if (pressedImage != null) pressed = true;
+    }
+
+    @Override
+    public void render(Graphics g) {
+        if (!pressed) {
+            drawImage(g, getImage(), resize);
+        } else {
+            drawImage(g, pressedImage, false);
+        }
     }
 }

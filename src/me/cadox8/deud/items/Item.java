@@ -14,6 +14,7 @@ import me.cadox8.deud.items.potions.PotionItem;
 import me.cadox8.deud.items.weapons.HandItem;
 import me.cadox8.deud.items.weapons.SwordItem;
 import me.cadox8.deud.items.weapons.WeaponItem;
+import me.cadox8.deud.utils.Metadata;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -56,6 +57,8 @@ public abstract class Item {
 
     @Getter @Setter private List<Attribute> attributes;
 
+    @Getter @Setter private List<Metadata> metadatas;
+
     @Getter @Setter protected Rectangle bounds;
 
     @Getter protected int x, y, count;
@@ -72,12 +75,12 @@ public abstract class Item {
         this.name = name;
         this.count = 1;
         this.attributes = new ArrayList<>();
+        this.metadatas = new ArrayList<>();
 
         bounds = new Rectangle(x, y, ITEMWIDTH, ITEMHEIGHT);
 
         items[id] = this;
     }
-
 
     public abstract void use(@NonNull Player p);
     public abstract Item createNew(int x, int y, int count);
@@ -96,6 +99,14 @@ public abstract class Item {
         return this;
     }
 
+    public Item addMetadatas(@NonNull Metadata... metadatas) {
+        this.metadatas.addAll(Arrays.asList(metadatas));
+        return this;
+    }
+
+    public Object getMetadataValue(String key) {
+        return metadatas.stream().filter(m -> m.getMetadataName().equalsIgnoreCase(key)).findAny().orElseGet(null);
+    }
 
     public void tick(){
         if(gameAPI.getWorld().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)){
@@ -113,7 +124,6 @@ public abstract class Item {
         g.drawImage(texture, x, y, 32, 32, null);
     }
 
-
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
@@ -122,7 +132,7 @@ public abstract class Item {
     }
 
     public static Item getRandom() {
-        return getRandom(-5);
+        return getRandom(5);
     }
     public static Item getRandom(Item... banedIDs) {
         final Integer[] ids = new Integer[banedIDs.length];

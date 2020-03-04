@@ -6,8 +6,7 @@ import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
-import me.cadox8.deud.inventory.CreatureInventory;
-import me.cadox8.deud.inventory.StaticInventory;
+import me.cadox8.deud.inventory.statics.StaticInventory;
 
 import java.awt.*;
 
@@ -30,6 +29,9 @@ public abstract class StaticEntity extends Entity {
 
     @Override
     public void preRender(Graphics g) {}
+
+    @Override
+    public void postRender(Graphics g) {}
 
     public void fixAnimations() {}
 

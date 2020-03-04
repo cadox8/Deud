@@ -1,18 +1,14 @@
 package me.cadox8.deud.entities.statics;
 
-import lombok.Getter;
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.gfx.textures.Assets;
-import me.cadox8.deud.inventory.StaticInventory;
-import me.cadox8.deud.items.Item;
+import me.cadox8.deud.inventory.statics.ChestInventory;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Chest extends StaticEntity {
 
@@ -33,19 +29,17 @@ public class Chest extends StaticEntity {
         setDamage(3);
         setLevel(0);
 
-        inventory = new StaticInventory(gameAPI);
+        inventory = new ChestInventory(gameAPI, 20);
 
         bounds.x = 2;
         bounds.y = (int) (height / 2f) - 5;
-        bounds.width = width - 6;
+        bounds.width = width - 3;
         bounds.height = (int) (height - height / 2f);
     }
 
     public void open(@NonNull Player p) {
         getInventory().setActive(true);
-        p.setChest(getInventory());
         p.getPlayerInventory().setActive(true);
-        p.getPlayerInventory().setSelected(true);
         gameAPI.getEntityManager().freezePlayer();
     }
 

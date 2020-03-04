@@ -84,7 +84,7 @@ public class Dialog {
         }
 
         try {
-            temp.addAll(text.subList(index, text.size() >= (index + 4) ? index + 4 : text.size()));
+            temp.addAll(text.subList(index, Math.min(text.size(), (index + 4))));
         } catch (IllegalArgumentException e) { // Problems? Nope
             end = true;
         }

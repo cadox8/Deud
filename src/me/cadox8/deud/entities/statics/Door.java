@@ -47,7 +47,7 @@ public class Door extends StaticEntity {
             return;
         }
         Log.log("Teleporting to " + map);
-        FileUtils.save(gameAPI.getWorld().getEntityManager().getPlayer());
+        FileUtils.save(p, gameAPI);
         gameAPI.getWorld().getEntityManager().getEntities().forEach(gameAPI.getWorld().getEntityManager()::removeEntity);
 
         final GameState gameState = new GameState(gameAPI, getMap(), true);

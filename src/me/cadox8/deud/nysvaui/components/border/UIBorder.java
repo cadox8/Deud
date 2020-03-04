@@ -47,7 +47,7 @@ public class UIBorder extends NysvaUI {
         final Graphics2D g2 = (Graphics2D) g;
         g2.setColor(background.getColor());
         g2.setStroke(new BasicStroke(borderSize));
-        final Rectangle r = getUIDimension().getBounds();
+        final Rectangle r = getUiDimension().getBounds();
 
         if (isRounded()) {
             g2.draw(new RoundRectangle2D.Double(r.getX(), r.getY(), r.getWidth(), r.getHeight(), borderRadius, borderRadius));

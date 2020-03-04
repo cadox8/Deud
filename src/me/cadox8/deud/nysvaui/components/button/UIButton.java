@@ -36,7 +36,7 @@ public class UIButton extends UIText {
 
     @Override
     public void tick() {
-        block.setUIDimension(getUIDimension());
+        block.setUiDimension(getUiDimension());
     }
 
     @Override

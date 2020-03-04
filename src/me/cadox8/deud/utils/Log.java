@@ -1,7 +1,9 @@
 package me.cadox8.deud.utils;
 
-import lombok.AllArgsConstructor;
+import com.diogonunes.jcdp.color.ColoredPrinter;
+import com.diogonunes.jcdp.color.api.Ansi;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +11,7 @@ import java.util.Locale;
 
 public class Log {
 
-    @AllArgsConstructor
+    @RequiredArgsConstructor
     public enum LogType {
         SUCCESS("[Success]"),
         NORMAL(""),
@@ -17,8 +19,14 @@ public class Log {
         DANGER("[Danger]"),
         DEBUG("[Debug]");
 
-        @Getter private String prefix;
+        @Getter private final String prefix;
     }
+
+    private static final ColoredPrinter debug = new ColoredPrinter.Builder(1, true).foreground(Ansi.FColor.MAGENTA).build();
+    private static final ColoredPrinter danger = new ColoredPrinter.Builder(1, true).foreground(Ansi.FColor.RED).build();
+    private static final ColoredPrinter warning = new ColoredPrinter.Builder(1, true).foreground(Ansi.FColor.YELLOW).build();
+    private static final ColoredPrinter normal = new ColoredPrinter.Builder(1, true).foreground(Ansi.FColor.WHITE).build();
+    private static final ColoredPrinter success = new ColoredPrinter.Builder(1, true).foreground(Ansi.FColor.GREEN).build();
 
     /**
      * Logs the info as Debug
@@ -26,7 +34,7 @@ public class Log {
      * @param info The object to be logged
      */
     public static void log(Object info){
-        log(LogType.DEBUG, info);
+        log(debug, LogType.DEBUG, info);
     }
 
     /**
@@ -35,7 +43,7 @@ public class Log {
      * @param info The object to be logged
      */
     public static void danger(Object info) {
-        log(LogType.DANGER, info);
+        log(danger, LogType.DANGER, info);
     }
 
     /**
@@ -44,7 +52,7 @@ public class Log {
      * @param info The object to be logged
      */
     public static void warning(Object info) {
-        log(LogType.WARNING, info);
+        log(warning, LogType.WARNING, info);
     }
 
     /**
@@ -53,7 +61,7 @@ public class Log {
      * @param info The object to be logged
      */
     public static void normal(Object info) {
-        log(LogType.NORMAL, info);
+        log(normal, LogType.NORMAL, info);
     }
 
     /**
@@ -62,7 +70,7 @@ public class Log {
      * @param info The object to be logged
      */
     public static void success(Object info) {
-        log(LogType.SUCCESS, info);
+        log(success, LogType.SUCCESS, info);
     }
 
     /**
@@ -72,9 +80,10 @@ public class Log {
      * @param type The log type
      * @param text The object to be logged
      */
-    public static void log(LogType type, Object text){
+    private static void log(ColoredPrinter printer, LogType type, Object text){
         final String time = "[" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH)) + "]";
         final String log = time + type.getPrefix() + " " + text;
-        System.out.println(log);
+        printer.setTimestamping(false);
+        printer.println(log);
     }
 }

@@ -5,6 +5,7 @@ import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.gfx.textures.Models;
+import me.cadox8.deud.inventory.creature.CreatureInventory;
 
 public class Ghost extends Monster {
 
@@ -13,7 +14,7 @@ public class Ghost extends Monster {
 
         bounds.x = 20;
         bounds.y = 44;
-        bounds.width = 25;
+        bounds.width = 28;
         bounds.height = 19;
 
         //Animations
@@ -29,6 +30,8 @@ public class Ghost extends Monster {
         setAttackCooldown(800);
 
         ai = new MonstersAI(gameAPI, this, getSpeed(), 5, 250, 250);
+
+        inventory = new CreatureInventory(gameAPI);
     }
 
     @Override

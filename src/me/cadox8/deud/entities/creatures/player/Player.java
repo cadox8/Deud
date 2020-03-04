@@ -18,18 +18,17 @@ import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.Assets;
 import me.cadox8.deud.gfx.textures.Models;
-import me.cadox8.deud.inventory.PlayerInventory;
-import me.cadox8.deud.inventory.StaticInventory;
+import me.cadox8.deud.inventory.creature.PlayerInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.quests.Quest;
-import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 import me.cadox8.deud.ux.dialog.Dialog;
+import me.cadox8.deud.ux.options.Options;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -52,15 +51,15 @@ public class Player extends Creature {
 
     @Getter @Setter private Quest assignedQuest;
 
-    @Getter @Setter private StaticInventory chest = null;
+    @Getter @Setter private Options options;
 
     public Player(@NonNull GameAPI gameAPI, float x, float y) {
         super(1, "Player", EntityData.EntityType.PLAYER, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
-        bounds.x = 20;
+        bounds.x = 11;
         bounds.y = 44;
-        bounds.width = 30;
-        bounds.height = 24;
+        bounds.width = 43;
+        bounds.height = 21;
 
         // Animations
         animDown = new Animation((int)(speed * 600), Models.player_down);
@@ -100,15 +99,17 @@ public class Player extends Creature {
 
             Log.log("Player nick: " + getNick());
 
-            Arrays.asList(pd.getInventory()).forEach(items -> items.forEach((id, count) -> {
-                final Item i = Item.items[id];
-                i.setCount(count);
+            Arrays.asList(pd.getInventory()).forEach(items -> {
+                final Item i = Item.items[items.getId()];
+                i.setCount(items.getCount());
                 inventory.addItem(i);
-            }));
+            });
             getPlayerInventory().setUsableItem(gameAPI.getGame().getPlayerData().getItem());
         } else {
             getPlayerInventory().setUsableItem(Item.hand);
         }
+
+        options = new Options(gameAPI, this);
     }
 
     @Override
@@ -129,21 +130,19 @@ public class Player extends Creature {
 
         // Inventory
         inventory.tick();
-        if (chest != null) {
-            chest.tick();
-            chest.checkKeys();
-        }
 
-        if (!(((PlayerInventory)inventory).getUsableItem() instanceof WeaponItem)) {
+        if (!(getPlayerInventory().getUsableItem() instanceof WeaponItem)) {
             setDamage(DEFAULT_DAMAGE);
         } else {
-            setDamage(((WeaponItem) ((PlayerInventory)inventory).getUsableItem()).getDamage() + DEFAULT_DAMAGE);
+            setDamage(((WeaponItem) getPlayerInventory().getUsableItem()).getDamage() + DEFAULT_DAMAGE);
         }
+
+        if (options.isEnabled()) options.tick();
     }
 
     @Override
     public void die() {
-        Log.log(Log.LogType.DANGER, "You lose");
+        Log.danger("You lose");
         gameAPI.getWorld().getEntityManager().freezeAll();
     }
 
@@ -160,20 +159,20 @@ public class Player extends Creature {
 
     public void postRender(Graphics g) {
         renderInfo(g);
-        //map.paintMap(g);
         inventory.render(g);
-        if (chest != null) chest.render(g);
+
+        if (options.isEnabled()) options.render(g);
     }
 
     private void renderInfo(Graphics g) {
-        if (((PlayerInventory)inventory).isActive()) {
+        if (inventory.isActive()) {
             //Money
             g.drawImage(Assets.coin, 10, 5, 32, 32, null);
             Text.drawString(g, "x" + getMoney(), 35, Assets.HEIGHT - 3, 2);
 
             //Keys (?)
             g.drawImage(Assets.key, 10, Assets.HEIGHT + 8, 32, 32, null);
-            Text.drawString(g, "x" + inventory.keyCount(), 35, (Assets.HEIGHT * 2) - 3, 2);
+            Text.drawString(g, "x" + inventory.itemCount(Item.keyItem), 35, (Assets.HEIGHT * 2) - 3, 2);
 
             //XP
             drawImage(g, Assets.xp, 4);
@@ -202,8 +201,8 @@ public class Player extends Creature {
         drawString(g, getArmor(),  3);
 
         //Item
-        g.drawImage(((PlayerInventory)inventory).getUsableItem().getTexture(), 1160, 670, null);
-        Text.drawString(g, ((PlayerInventory)inventory).getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, false, Color.BLACK, 2);
+        g.drawImage(getPlayerInventory().getUsableItem().getTexture(), 1160, 670, null);
+        Text.drawString(g, getPlayerInventory().getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, false, Color.BLACK, 2);
 
         if (getHealth() <= 0) {
             Text.drawString(g, "You lose", 125, 530, Color.BLACK, 3);
@@ -215,18 +214,19 @@ public class Player extends Creature {
         xMove = 0;
         yMove = 0;
 
-        if (gameAPI.getKeyManager().tests) {
+        if (gameAPI.getKeyManager().test2) {
             //Log.log("\n\n" + Utils.getNearbyEntities(getLocation(), 0.5).toString());
             //new Door(GameAPI, 0, 0, "main").changeWorld();
             setHunger(getMaxHunger());
             addExp(20);
             setHealth(getMaxHealth());
-            gameAPI.getWorld().getEntityManager().freezeCreatures();
+            //gameAPI.getWorld().getEntityManager().freezeCreatures();
+            inventory.addItem(Item.sword);
         }
 
-        if (gameAPI.getKeyManager().esc) {
-            FileUtils.save(this);
-            System.exit(0);
+        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+            gameAPI.getEntityManager().freezeAll();
+            options.setEnabled(!options.isEnabled());
         }
 
         if (gameAPI.getKeyManager().debug) {
@@ -284,7 +284,7 @@ public class Player extends Creature {
             Sound.ENTITY_WALK_GRASS.play();
         }
 
-        if (gameAPI.getMouseManager().isRightPressed()) ((PlayerInventory)inventory).getUsableItem().use(this);
+        if (gameAPI.getMouseManager().isRightPressed()) getPlayerInventory().getUsableItem().use(this);
 
         if (gameAPI.getKeyManager().shift) {
             if (hunger <= 0.0) {

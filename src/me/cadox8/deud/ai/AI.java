@@ -10,6 +10,7 @@ import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.managers.EntityManager;
 
 import java.awt.*;
+import java.util.Optional;
 import java.util.Random;
 
 public abstract class AI {
@@ -43,13 +44,12 @@ public abstract class AI {
 
 
     public boolean isTracking() {
-        for (Entity e : gameAPI.getWorld().getEntityManager().getEntities()) {
-            if (e instanceof Player) {
-                if (getTrackingArea().intersects(e.getCollisionBounds(0, 0))) {
-                    player = (Player) e;
-                    return true;
-                }
-            }
+        final Optional<Entity> optionalPlayer = gameAPI.getWorld().getEntityManager().getEntities().stream().filter(e -> e instanceof Player).findAny();
+        if (!optionalPlayer.isPresent()) return false;
+        final Player player = (Player) optionalPlayer.get();
+        if (getTrackingArea().intersects(player.getCollisionBounds(0, 0))) {
+            this.player = player;
+            return true;
         }
         return false;
     }

@@ -1,7 +1,8 @@
-# Cusotm .gitignore
+# Custom .gitignore
 .idea/
 Deud.iml
 lib/
 out/
-MapGenerator/MapGenerator.iml
+mapeditor/node_modules
+mapeditor/mapeditor.iml
 /Deud/

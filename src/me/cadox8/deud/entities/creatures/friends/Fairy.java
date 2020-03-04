@@ -14,7 +14,7 @@ public class Fairy extends Friendly {
 
         bounds.x = 12;
         bounds.y = 23;
-        bounds.width = 17;
+        bounds.width = 20;
         bounds.height = 19;
 
         //Animatons

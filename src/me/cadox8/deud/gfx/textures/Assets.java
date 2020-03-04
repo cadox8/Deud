@@ -35,6 +35,9 @@ public class Assets {
     // Particles
     public static BufferedImage[] explosion;
 
+    // Selector
+    public static BufferedImage optionsSelector;
+
     public static void init() {
         sprites = new Sprites(Utils.loadImage("/textures/sprites/terrain.png"));
         dirt = getImage(7, 1);
@@ -80,6 +83,7 @@ public class Assets {
         sprites = new Sprites(Utils.loadImage("/textures/sprites/castle.png"));
 
         brick = getImage(1, 1);
+        optionsSelector = getImage(3, 7);
 
         sprites = new Sprites(Utils.loadImage("/textures/sprites/basic.png"));
 

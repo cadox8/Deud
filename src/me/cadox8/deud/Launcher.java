@@ -12,6 +12,8 @@ import java.io.File;
 
 public class Launcher {
 
+    public static final int VERSION_ID = 1;
+
     public static final String VERSION = "Release 1.0";
     public static final String GAME_FILE = "." + File.separator + "Deud" + File.separator;
 
@@ -21,7 +23,7 @@ public class Launcher {
         try {
             if (!new JavaCheck().hasJavaVersion()) throw new JavaVersionException("Deud needs Java 1.9 or above to run");
         } catch (JavaVersionException e) {
-            Log.log(Log.LogType.DANGER, e.getMessage());
+            Log.danger(e.getMessage());
             return;
         }
         FileUtils.checkFile();

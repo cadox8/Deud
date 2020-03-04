@@ -37,6 +37,7 @@ Player: 0
 |Sign       |500        |
 |Chest      |501        |
 |RewardChest|502        |
+|Light      |503        |
 
 ### Projectiles (900-1000)
 |Name       |ID         |

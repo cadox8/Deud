@@ -11,11 +11,16 @@
 
 package me.cadox8.deud.nysvaui;
 
+import me.cadox8.deud.items.Item;
+import me.cadox8.deud.nysvaui.components.images.UIImageButton;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class NysvaManager {
 
@@ -37,6 +42,12 @@ public class NysvaManager {
     public void addObject(NysvaUI object) {
         synchronized (objects) {
             objects.add(object);
+        }
+    }
+
+    public void setObject(int slot, NysvaUI object) {
+        synchronized (objects) {
+            objects.set(slot, object);
         }
     }
 
@@ -66,6 +77,7 @@ public class NysvaManager {
      * Removes all the objects
      */
     public void removeAllObjects() {
+        if (objects.isEmpty()) return;
         synchronized (objects) {
             final Iterator<NysvaUI> it = objects.iterator();
             while (it.hasNext()) it.remove();
@@ -85,6 +97,23 @@ public class NysvaManager {
         synchronized (objects) {
             try {
                 objects.stream().filter(NysvaUI::isEnabled).forEach(NysvaUI::tick);
+                reorder();
+            } catch (ConcurrentModificationException e) {}
+        }
+    }
+
+    public void tick(ArrayList<Item> items) {
+        final AtomicInteger index = new AtomicInteger(0);
+        synchronized (objects) {
+            try {
+                objects.stream().filter(NysvaUI::isEnabled).forEach(o -> {
+                    if (o instanceof UIImageButton) {
+                        ((UIImageButton) o).changeImage(items.get(index.getAndAdd(1)).getTexture());
+                        o.tick();
+                    }
+                });
+                index.set(0);
+                //reorder();
             } catch (ConcurrentModificationException e) {}
         }
     }
@@ -105,6 +134,16 @@ public class NysvaManager {
     }
     public void onMouseClicked(MouseEvent e) {
         objects.forEach(o -> o.onMouseClicked(e));
+    }
+
+    private void reorder() {
+        final Comparator<NysvaUI> itemDataComparator = (NysvaUI a, NysvaUI b) -> {
+            if (a.getExtraData() == null) a.setExtraData(-5);
+            if (b.getExtraData() == null) b.setExtraData(-5);
+            if ((int)a.getExtraData() < (int)b.getExtraData()) return -1;
+            return 1;
+        };
+        objects.sort(itemDataComparator);
     }
 
     public ArrayList<NysvaUI> getObjects() {

@@ -4,8 +4,6 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.Creature;
 
-import java.awt.*;
-
 public abstract class Friendly extends Creature {
 
     public Friendly(int id, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y, int width, int height) {

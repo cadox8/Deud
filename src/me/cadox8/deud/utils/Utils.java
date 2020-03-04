@@ -35,6 +35,10 @@ public class Utils {
         return builder.toString();
     }
 
+    public static BufferedImage loadTextures(String path) {
+        return loadImage("/textures/gui/" + path);
+    }
+
     public static BufferedImage loadImage(String path) {
         try {
             return ImageIO.read(Utils.class.getResource(path));

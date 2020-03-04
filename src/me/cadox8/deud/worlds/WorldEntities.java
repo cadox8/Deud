@@ -12,7 +12,7 @@ import me.cadox8.deud.entities.statics.trees.DeadTree;
 import me.cadox8.deud.entities.statics.trees.NormalTree;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.gfx.textures.Models;
-import me.cadox8.deud.inventory.StaticInventory;
+import me.cadox8.deud.inventory.statics.StaticInventory;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.utils.Log;
 
@@ -77,6 +77,9 @@ public class WorldEntities {
                         en = new DeadTree(gameAPI, l.getX(), l.getY());
                         ((DeadTree)en).setTreeType(e.getTreeType());
                         break;
+                    case LIGHT:
+                        en = new Light(gameAPI, (int)l.getX(), (int)l.getY(), e.getRadius(), e.getLuminosity());
+                        break;
 
                     default:
                         en = (Entity) type.getSupClass().getConstructors()[0].newInstance(gameAPI, l.getX(), l.getY());
@@ -93,7 +96,7 @@ public class WorldEntities {
 
                 entityManager.addEntity(en);
             } catch (IllegalAccessException | InvocationTargetException | InstantiationException er) {
-                Log.log(Log.LogType.DANGER, "Error while loading entities. " + er.getMessage());
+                Log.danger("Error while loading entities. " + er.getMessage());
                 er.printStackTrace();
                 System.exit(5);
             }

@@ -15,6 +15,7 @@ import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
 import me.cadox8.deud.managers.DamageManager;
 import me.cadox8.deud.saves.PlayerData;
+import me.cadox8.deud.states.EditorState;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.MenuState;
 import me.cadox8.deud.states.State;
@@ -41,6 +42,7 @@ public class Game implements Runnable {
     private Graphics g;
 
     //States
+    @Getter @Setter public State editorState;
     @Getter @Setter public State gameState;
     public State menuState;
 
@@ -53,8 +55,6 @@ public class Game implements Runnable {
 
     //Camera
     @Getter private GameCamera gameCamera;
-
-    @Getter @Setter private static boolean first = true;
 
     //gameAPI
     @Getter private GameAPI gameAPI;
@@ -87,6 +87,7 @@ public class Game implements Runnable {
         gameAPI = new GameAPI(this);
         gameCamera = new GameCamera(gameAPI, 0, 0);
 
+        editorState = new EditorState(gameAPI);
         gameState = new GameState(gameAPI, "springwood");
         menuState = new MenuState(gameAPI);
 

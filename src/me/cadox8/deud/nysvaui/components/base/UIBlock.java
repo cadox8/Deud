@@ -44,7 +44,7 @@ public class UIBlock extends NysvaUI {
     public void render(Graphics g) {
         final Graphics2D g2 = (Graphics2D) g;
         g2.setColor(background.getColor());
-        final Rectangle r = getUIDimension().getBounds();
+        final Rectangle r = getUiDimension().getBounds();
 
         if (isRounded()) {
             final RoundRectangle2D r2 = new RoundRectangle2D.Double(r.getX(), r.getY(), r.getWidth(), r.getHeight(), roundRadius, roundRadius);
@@ -54,6 +54,7 @@ public class UIBlock extends NysvaUI {
             g2.draw(r);
             g2.fill(r);
         }
+
         if (!components.isEmpty()) components.forEach(c -> c.render(g));
     }
 
@@ -67,12 +68,12 @@ public class UIBlock extends NysvaUI {
     }
 
     public void addUIComponent(NysvaUI component) {
-        final UIDimension childComponent = component.getUIDimension();
-        final UIDimension rd = new UIDimension(childComponent.getRefX() + getUIDimension().getX() + 5, 5 + childComponent.getRefY() + getUIDimension().getY(), childComponent.getWidth(), childComponent.getHeight());
-        rd.setRefX(component.getUIDimension().getRefX());
-        rd.setRefY(component.getUIDimension().getRefY());
-        component.setUIDimension(rd);
-        component.setMaxWidth(getUIDimension().getMaxWidth());
+        final UIDimension childComponent = component.getUiDimension();
+        final UIDimension rd = new UIDimension(childComponent.getRefX() + getUiDimension().getX() + 5, 5 + childComponent.getRefY() + getUiDimension().getY(), childComponent.getWidth(), childComponent.getHeight());
+        rd.setRefX(component.getUiDimension().getRefX());
+        rd.setRefY(component.getUiDimension().getRefY());
+        component.setUiDimension(rd);
+        component.setMaxWidth(getUiDimension().getMaxWidth());
         components.add(component);
         component.setParent(this);
     }
@@ -92,8 +93,9 @@ public class UIBlock extends NysvaUI {
         return rounded;
     }
 
-    public void setRounded(boolean rounded) {
+    public UIBlock setRounded(boolean rounded) {
         this.rounded = rounded;
+        return this;
     }
 
     public int getRoundRadius() {
@@ -102,6 +104,7 @@ public class UIBlock extends NysvaUI {
 
     public void setRoundRadius(int roundRadius) {
         if (roundRadius < 0 || roundRadius > 100) throw new IllegalArgumentException("The round radius must be between 0 and 100 (" + roundRadius + ")");
+        setRounded(true);
         this.roundRadius = roundRadius;
     }
 }

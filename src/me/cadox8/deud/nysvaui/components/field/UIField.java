@@ -12,33 +12,43 @@
 package me.cadox8.deud.nysvaui.components.field;
 
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.nysvaui.ClickListener;
 import me.cadox8.deud.nysvaui.NysvaUI;
+import me.cadox8.deud.nysvaui.components.base.UIBlock;
+import me.cadox8.deud.nysvaui.helpers.NysvaColor;
 
 import java.awt.*;
 
 public class UIField extends NysvaUI {
 
+    private UIBlock base;
+
     private ClickListener clicker;
 
-    private String text;
+    private String text = "";
     private int maxCharacters;
 
-    public UIField(GameAPI api) {
-        super(api);
+    public UIField(GameAPI gameAPI) {
+        super(gameAPI);
+
+        base = new UIBlock(gameAPI, NysvaColor.WHITE);
 
         clicker = () -> {
-            //api.getKeyManager().setWritingTo(this);
+            api.getKeyManager().setWritingTo(this);
         };
     }
 
     @Override
     public void tick() {
+        base.setUiDimension(getUiDimension());
         if (api.getKeyManager().getWritingTo() == null) return;
     }
 
     @Override
     public void render(Graphics g) {
+        base.render(g);
+        Text.drawString(g, text, getUiDimension().getX() + 3, getUiDimension().getY() + getUiDimension().getHeight() / 2 + 6, false, Color.BLACK, 1);
     }
 
     @Override
@@ -47,7 +57,7 @@ public class UIField extends NysvaUI {
     }
 
     private boolean canWrite(Graphics g, String text) {
-        return g.getFontMetrics(g.getFont()).stringWidth(text) > getUIDimension().getWidth() || text.length() < maxCharacters;
+        return g.getFontMetrics(g.getFont()).stringWidth(text) > getUiDimension().getWidth() || text.length() < maxCharacters;
     }
 
     public String getText() {

@@ -21,14 +21,9 @@ public class FriendsAI extends AI {
     @Override
     public void getMove() {
         if (isNoAI()) return;
-        randomMove(creature);
 
-        if (isAngry()) {
-            if (isTracking()) {
-                trackPlayer(creature);
-            } else {
-                randomMove(creature);
-            }
+        if (isAngry() && isTracking()) {
+            trackPlayer(creature);
         } else {
             randomMove(creature);
         }

@@ -14,7 +14,6 @@ import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Updater;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -37,38 +36,44 @@ public class MenuState extends State {
 
             Sound.TOWN_MUSIC.playLoop();
 
-            gameAPI.getGame().getDisplay().getFrame().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
+            //gameAPI.getGame().getDisplay().getFrame().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
         });
         final UIImageButton exit = new UIImageButton(gameAPI, GUI.exit[0], () -> System.exit(0));
-        final UIImage logo = new UIImage(gameAPI, GUI.logo);
-        final UITextButton update = new UITextButton(gameAPI, "New version available: " + Updater.getWebVersion() + " ⇩", () -> {
-            try {
-                Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
-            } catch (URISyntaxException | IOException e) {
-                Log.log(Log.LogType.DANGER, "Link doesn't exist");
-                e.printStackTrace();
-            }
+
+        final UIImageButton logo = new UIImageButton(gameAPI, GUI.logo, () -> {
+            gameAPI.getMouseManager().setNysvaUI(null);
+            setState(gameAPI.getGame().getEditorState());
         });
 
-
-        background.setUIDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
-        start.setUIDimension(new UIDimension(150, 650, 200, 100));
-        exit.setUIDimension(new UIDimension(900, 650, 200, 100));
-        logo.setUIDimension(new UIDimension(gameAPI.getWidth() - 97, 0, 97, 151));
+        background.setUiDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
+        start.setUiDimension(new UIDimension(150, 650, 200, 100));
+        exit.setUiDimension(new UIDimension(900, 650, 200, 100));
+        logo.setUiDimension(new UIDimension(gameAPI.getWidth() - 97, 0, 97, 151));
 
         background.setResize(false);
         logo.setResize(false);
 
-        if (Updater.timeToUpdate()) nysvaManager.addObject(update);
-
         nysvaManager.addObject(background);
+
+        if (Updater.checkForUpdate()) {
+            final UITextButton update = new UITextButton(gameAPI, "New version available: " + Updater.latestVersion().getVersion() + " ⇩", () -> {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
+                } catch (URISyntaxException | IOException e) {
+                    Log.danger("Link doesn't exist");
+                    e.printStackTrace();
+                }
+            });
+
+            nysvaManager.addObject(update);
+        }
+
         nysvaManager.addObject(start);
         nysvaManager.addObject(exit);
         nysvaManager.addObject(logo);
 
         gameAPI.getMouseManager().setNysvaUI(nysvaManager);
     }
-
 
 
     @Override
@@ -81,6 +86,6 @@ public class MenuState extends State {
         nysvaManager.render(g);
         g.setColor(Color.WHITE);
         g.drawString("Version: " + Launcher.VERSION, 5, 795);
-        g.drawString("© Deud 2016-2019 - The Game is property of Cadox8", 955, 795);
+        g.drawString("© Deud 2016-2019 - This Game is property of Cadox8", 795, 795);
     }
 }

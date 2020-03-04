@@ -12,9 +12,9 @@ import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.projectile.Projectile;
 import me.cadox8.deud.events.projectiles.ProjectileHitEvent;
-import me.cadox8.deud.inventory.CreatureInventory;
 import me.cadox8.deud.inventory.Inventory;
-import me.cadox8.deud.inventory.PlayerInventory;
+import me.cadox8.deud.inventory.creature.CreatureInventory;
+import me.cadox8.deud.inventory.creature.PlayerInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.utils.Log;
@@ -98,6 +98,7 @@ public abstract class Entity {
 
     public abstract void tick();
     public abstract void fixAnimations();
+    public abstract void postRender(Graphics g);
     public abstract void render(Graphics g);
     public abstract void preRender(Graphics g);
     public abstract void getHurt();
@@ -109,9 +110,15 @@ public abstract class Entity {
         if (!isDamageable()) return;
 
         int amt = attacker.getDamage() + (int) (DMG_UP_PER_LVL * attacker.getLevel());
-        if (attacker instanceof Monster && ((Monster) attacker).getCreatureInventory().getUsableItem() instanceof WeaponItem) amt += ((WeaponItem) ((Monster) attacker).getCreatureInventory().getUsableItem()).getDamage();
-        setHealth(getHealth() - gameAPI.getDamageManager().effectiveDamage(amt, getENTITY_TYPE(), (((CreatureInventory) attacker.getInventory()).getUsableItem())));
-        health -= amt;
+
+        if (attacker instanceof Monster) {
+            final Monster monster = (Monster) attacker;
+            if (monster.getCreatureInventory().getUsableItem() instanceof WeaponItem) {
+                final WeaponItem item = (WeaponItem) monster.getCreatureInventory().getUsableItem();
+                amt += item.getDamage();
+                setHealth(getHealth() - gameAPI.getDamageManager().effectiveDamage(amt, getENTITY_TYPE(), item));
+            }
+        }
 
         if (this instanceof Creature) {
             if (attacker instanceof Monster) ((CreatureInventory) attacker.getInventory()).getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
@@ -156,6 +163,10 @@ public abstract class Entity {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    protected Point entityCenter() {
+        return new Point((int) (getWidth()/2 + x - gameAPI.getGameCamera().getXOffset()), (int) (getHeight()/2 + y - gameAPI.getGameCamera().getYOffset()));
     }
 
     public void addExp(double xp) {
@@ -213,7 +224,12 @@ public abstract class Entity {
     }
     public void dropItem(Item item, float percent, int xPos, int yPos){
         if (item == null) return;
-        if (percent >= new Random().nextFloat()) gameAPI.getWorld().getItemManager().addItem(item.createNew(xPos, yPos, item.getCount()));
+        if (percent >= new Random().nextFloat()) {
+            final Random r = new Random();
+            final int amount = r.nextInt(15) + 45;
+
+            gameAPI.getWorld().getItemManager().addItem(item.createNew(xPos + (r.nextBoolean() ? amount : -amount), yPos + (r.nextBoolean() ? amount : -amount), item.getCount()));
+        }
     }
 
     public Location getLocation() {

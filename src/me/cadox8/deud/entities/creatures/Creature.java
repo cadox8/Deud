@@ -6,6 +6,7 @@ import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
+import me.cadox8.deud.entities.statics.Light;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
@@ -23,6 +24,8 @@ public abstract class Creature extends Entity {
 
     @Getter @Setter protected boolean freeze = false;
 
+    @Getter @Setter protected Light light;
+
     public Creature(int id, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
         this(id, name, type, gameAPI, x, y, width, height, 0);
     }
@@ -32,6 +35,8 @@ public abstract class Creature extends Entity {
         speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
+
+        light = new Light(gameAPI, (int)getX(), (int)getY(), 100, 1.3F).setStatic(false);
     }
 
     @Override
@@ -40,6 +45,9 @@ public abstract class Creature extends Entity {
     }
 
     public void fixAnimations() {
+        light.setX((int)entityCenter().getX());
+        light.setY((int)entityCenter().getY());
+
         if (animations[0] != null) Arrays.asList(animations).forEach(a -> a.setSpeed((int)(speed * 166.66)));
     }
 
@@ -102,6 +110,9 @@ public abstract class Creature extends Entity {
 
     @Override
     public void preRender(Graphics g) {}
+
+    @Override
+    public void postRender(Graphics g) {}
 
     @Override
     public void getHurt() {}
