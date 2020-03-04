@@ -58,7 +58,7 @@ public class MenuState extends State {
         if (Updater.checkForUpdate()) {
             final UITextButton update = new UITextButton(gameAPI, "New version available: " + Updater.latestVersion().getVersion() + " ⇩", () -> {
                 try {
-                    Desktop.getDesktop().browse(new URI("https://cadox8.github.io/Deud/index.html"));
+                    Desktop.getDesktop().browse(new URI("https://cadox8.es/deud"));
                 } catch (URISyntaxException | IOException e) {
                     Log.danger("Link doesn't exist");
                     e.printStackTrace();

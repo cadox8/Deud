@@ -15,12 +15,13 @@ import java.util.Arrays;
 public class Updater {
 
     public static boolean checkForUpdate() {
+        Log.log("Web Version: " + latestVersion().getVersion() + ", Game Version: " + Launcher.VERSION);
         return webVersion().getLatest() > Launcher.VERSION_ID;
     }
 
     public static Versions webVersion() {
         try {
-            URLConnection connection = new URL("https://cadox8.github.io/Deud/versions.json").openConnection();
+            URLConnection connection = new URL("https://cadox8.es/deud/versions.json").openConnection();
             final String redirect = connection.getHeaderField("Location");
             if (redirect != null) connection = new URL(redirect).openConnection();
             final BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
