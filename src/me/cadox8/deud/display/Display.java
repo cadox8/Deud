@@ -6,6 +6,7 @@ import me.cadox8.deud.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Display {
 
@@ -46,5 +47,10 @@ public class Display {
         frame.add(canvas);
         frame.pack();
         frame.setLocationRelativeTo(null);
+    }
+
+    public void changeCursor(BufferedImage image) {
+        final Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(image , new Point(frame.getX(), frame.getY()), "deud1");
+        frame.setCursor(c);
     }
 }

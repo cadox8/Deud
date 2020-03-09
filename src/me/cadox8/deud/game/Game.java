@@ -89,6 +89,8 @@ public class Game implements Runnable {
         Assets.init();
         Models.init();
 
+        display.changeCursor(GUI.pointer);
+
         gameAPI = new GameAPI(this, config);
         gameCamera = new GameCamera(gameAPI, 0, 0);
 

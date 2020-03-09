@@ -29,6 +29,9 @@ public class GUI {
     // Utils
     public static BufferedImage none;
 
+    // Pointers
+    public static BufferedImage pointer;
+
     public static void init() {
         Sprites gui = new Sprites(Utils.loadImage("/textures/gui/gui.png"));
 
@@ -63,5 +66,9 @@ public class GUI {
 
         // Utils
         none = gui.coloredSprite(32, 32, new Color(0, 0, 0, 255));
+
+        //
+        gui = new Sprites(Utils.loadImage("/textures/gui/pointers.png"));
+        pointer = gui.crop(1, 0, 30, 30);
     }
 }
