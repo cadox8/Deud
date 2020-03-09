@@ -14,6 +14,8 @@ public class Sound {
 
     public static final Sound TOWN_MUSIC = new Sound("town", -35f);
 
+    public static final Sound MENU = new Sound("menu", -22f);
+
     private Clip clip;
 
     public Sound(String sound, float value) {
@@ -21,7 +23,7 @@ public class Sound {
             clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("/sounds/" + sound + ".wav"))));
             final FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(value - (value * (1 - GameAPI.getInstance().getConfig().getSounds().getMasterVolume())));
+            gainControl.setValue(value - (value * (1 - GameAPI.getInstance().getConfig().getMasterVolume())));
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);

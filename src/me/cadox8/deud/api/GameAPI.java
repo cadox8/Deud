@@ -28,9 +28,9 @@ public class GameAPI {
 
     @Getter private static GameAPI instance; // This is f*king sh*t, but for now it will work...
 
-    public GameAPI(Game game) {
+    public GameAPI(Game game, Config config) {
         this.game = game;
-        this.config = FileUtils.loadConfig();
+        this.config = config;
 
         instance = this;
     }

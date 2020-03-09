@@ -148,9 +148,10 @@ public class Save {
         final BufferedWriter w = new BufferedWriter(new FileWriter(file));
         final JsonObject data = new JsonObject();
 
-        data.addProperty("masterVolume", cfn.getSounds().getMasterVolume());
-        data.addProperty("musicVolume", cfn.getSounds().getMusicVolume());
-        data.addProperty("entitiesVolume", cfn.getSounds().getEntitiesVolume());
+        data.addProperty("fullScreen", cfn.isFullScreen());
+        data.addProperty("masterVolume", cfn.getMasterVolume());
+        data.addProperty("musicVolume", cfn.getMusicVolume());
+        data.addProperty("entitiesVolume", cfn.getEntitiesVolume());
 
         if (file.exists()) file.delete(); file.mkdirs();
 

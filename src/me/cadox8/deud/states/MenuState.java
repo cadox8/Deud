@@ -4,6 +4,7 @@ import lombok.NonNull;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.audio.Sound;
+import me.cadox8.deud.gfx.fonts.Text;
 import me.cadox8.deud.gfx.textures.GUI;
 import me.cadox8.deud.nysvaui.NysvaManager;
 import me.cadox8.deud.nysvaui.components.images.UIImage;
@@ -22,8 +23,12 @@ public class MenuState extends State {
 
     private final NysvaManager nysvaManager;
 
+    private final Sound menu = Sound.MENU;
+
     public MenuState(@NonNull GameAPI gameAPI) {
         super(gameAPI);
+
+        menu.playLoop();
 
         nysvaManager = new NysvaManager();
 
@@ -34,6 +39,7 @@ public class MenuState extends State {
 
             if (gameAPI.getGame().getPlayerData() == null) gameAPI.getPlayer().setNick("Arya");
 
+            menu.stop();
             Sound.TOWN_MUSIC.playLoop();
 
             //gameAPI.getGame().getDisplay().getFrame().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
@@ -84,8 +90,7 @@ public class MenuState extends State {
     @Override
     public void render(Graphics g) {
         nysvaManager.render(g);
-        g.setColor(Color.WHITE);
-        g.drawString("Version: " + Launcher.VERSION, 5, 795);
-        g.drawString("© Deud 2016-2019 - This Game is property of Cadox8", 795, 795);
+        Text.drawString(g, "Version: " + Launcher.VERSION, 5, 795, Color.WHITE, 2);
+        Text.drawString(g, "© Deud 2016-2019 - This Game is property of Cadox8", 795, 795, Color.WHITE, 2);
     }
 }

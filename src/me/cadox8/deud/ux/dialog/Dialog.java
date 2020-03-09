@@ -62,7 +62,7 @@ public class Dialog {
         int p = 1;
         for (String s : renderText()) {
             s = s.replaceAll("%npc%", npc == null ? "" : npc.getDisplayName()).replaceAll("%player%", player.getNick());
-            Text.drawString(g, s, 150, gameApi.getHeight() - 122 + (p * 20), Color.WHITE, 2);
+            Text.drawString(g, s, 140, gameApi.getHeight() - 115 + (p * 20), Color.WHITE, 2);
             p++;
         }
     }

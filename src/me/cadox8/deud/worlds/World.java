@@ -13,15 +13,20 @@ import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.managers.ItemManager;
+import me.cadox8.deud.nysvaui.components.base.UIBlock;
+import me.cadox8.deud.nysvaui.helpers.NysvaColor;
+import me.cadox8.deud.nysvaui.helpers.UIDimension;
 import me.cadox8.deud.particles.Particle;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.tiles.Tiles;
+import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,6 +43,10 @@ public class World {
     private String path;
 
     private boolean dark;
+
+    //
+    private final UIBlock base;
+    //
 
     //Entities
     @Getter private final EntityManager entityManager;
@@ -65,6 +74,9 @@ public class World {
         addEntities();
 
         particles = new ArrayList<>();
+
+        base = new UIBlock(gameAPI, NysvaColor.BLACK);
+        base.setUiDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
     }
 
     public void addParticles(@NonNull Particle particle) {
@@ -94,6 +106,8 @@ public class World {
     }
 
     public void render(Graphics g) {
+        base.render(g);
+
         int xStart = (int) Math.max(0, gameAPI.getGameCamera().getXOffset() / Tile.TILEWIDTH);
         int xEnd = (int) Math.min(width, (gameAPI.getGameCamera().getXOffset() + gameAPI.getWidth()) / Tile.TILEWIDTH + 1);
         int yStart = (int) Math.max(0, gameAPI.getGameCamera().getYOffset() / Tile.TILEHEIGHT);
@@ -117,6 +131,7 @@ public class World {
     public Tile getTile(int x, int y) {
         if (x < 0 || y < 0 || x >= width || y >= height) return Tiles.VOID.build();
         final TileUtils tu = tiles[x][y];
+        if (tu == null) return Tiles.VOID.build();
         return Tiles.getTile(tu.getId(), tu.getSubID());
     }
 

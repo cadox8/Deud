@@ -5,13 +5,12 @@ import lombok.Data;
 @Data
 public class Config {
 
-    private final Sounds sounds = new Sounds();
+    private boolean fullScreen = true;
 
-    @Data
-    public static class Sounds {
-        private final float masterVolume = 1f;
+    private float masterVolume = 1;
 
-        private final float musicVolume = 1f;
-        private final float entitiesVolume = 1f;
-    }
+    private float musicVolume = 1;
+    private float entitiesVolume = 1;
+
+    public Config() {}
 }

@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class Updater {
 
     public static boolean checkForUpdate() {
-        Log.log("Web Version: " + latestVersion().getVersion() + ", Game Version: " + Launcher.VERSION);
+        Log.log("Web Version: " + latestVersion().getVersion() + " || Game Version: " + Launcher.VERSION);
         return webVersion().getLatest() > Launcher.VERSION_ID;
     }
 
@@ -33,7 +33,9 @@ public class Updater {
         } catch (IOException e) {
             final Versions versions = new Versions();
             versions.latest = Launcher.VERSION_ID;
-            versions.older = new Versions.VersionData[0];
+            final Versions.VersionData[] d = new Versions.VersionData[1];
+            d[0] = new Versions.VersionData(Launcher.VERSION_ID, Launcher.VERSION);
+            versions.older = d;
             return versions;
         }
     }

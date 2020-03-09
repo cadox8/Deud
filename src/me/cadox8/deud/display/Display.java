@@ -1,6 +1,7 @@
 package me.cadox8.deud.display;
 
 import lombok.Getter;
+import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 
 import javax.swing.*;
@@ -11,23 +12,27 @@ public class Display {
     @Getter private JFrame frame;
     @Getter private Canvas canvas;
 
-    private String title;
-    private int width, height;
+    private final String title;
+    private final int width;
+    private final int height;
 
-    public Display(String title, int width, int height) {
+    private final boolean fullScreen;
+
+    public Display(String title, int width, int height, boolean fullScreen) {
         this.title = title;
         this.width = width;
         this.height = height;
+        this.fullScreen = fullScreen;
 
         createDisplay();
     }
 
     private void createDisplay() {
         frame = new JFrame(title);
-        frame.setUndecorated(false);
         frame.setSize(new Dimension(width, height));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setResizable(false);
+        frame.setResizable(true);
+        frame.setUndecorated(fullScreen);
         frame.setVisible(true);
 
         canvas = new Canvas();

@@ -71,7 +71,7 @@ public enum Tiles {
     }
 
     public static Tile getTile(int id, int subID) {
-        return Arrays.stream(values()).filter(t -> t.id == id && t.subID == subID).findFirst().orElse(VOID).build();
+        return Arrays.stream(values()).filter(t -> t.id == id && t.subID == subID).findAny().orElse(Tiles.VOID).build();
     }
 
     public Tile build() {

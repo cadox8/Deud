@@ -8,13 +8,14 @@ import me.cadox8.deud.utils.Discord;
 import me.cadox8.deud.utils.JavaCheck;
 import me.cadox8.deud.utils.Log;
 
+import java.awt.*;
 import java.io.File;
 
 public class Launcher {
 
     public static final int VERSION_ID = 1;
 
-    public static final String VERSION = "Release 1.0";
+    public static final String VERSION = "Release 1.0 - Beta";
     public static final String GAME_FILE = "." + File.separator + "Deud" + File.separator;
 
     @Getter private static Discord discord;
@@ -28,6 +29,11 @@ public class Launcher {
         }
         FileUtils.checkFile();
         discord = new Discord();
-        new Game("Deud" + " ~~ " + VERSION, 1250, 800).start();
+        //new Game("Deud" + " ~~ " + VERSION, 1250, 800).start();
+        new Game("Deud" + " ~~ " + VERSION, getDimension().width, getDimension().height).start();
+    }
+
+    private static Dimension getDimension() {
+        return Toolkit.getDefaultToolkit().getScreenSize();
     }
 }

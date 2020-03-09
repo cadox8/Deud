@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.config.Config;
 import me.cadox8.deud.display.Display;
 import me.cadox8.deud.entities.EntityData;
+import me.cadox8.deud.generator.WorldGenerator;
 import me.cadox8.deud.gfx.GameCamera;
 import me.cadox8.deud.gfx.fonts.Fonts;
 import me.cadox8.deud.gfx.textures.Assets;
@@ -14,6 +16,7 @@ import me.cadox8.deud.gfx.textures.Models;
 import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
 import me.cadox8.deud.managers.DamageManager;
+import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.saves.PlayerData;
 import me.cadox8.deud.states.EditorState;
 import me.cadox8.deud.states.GameState;
@@ -71,7 +74,9 @@ public class Game implements Runnable {
     }
 
     private void init() {
-        display = new Display(title, width, height);
+        final Config config = FileUtils.loadConfig();
+
+        display = new Display(title, width, height, config.isFullScreen());
         display.getFrame().addKeyListener(keyManager);
         display.getFrame().addMouseListener(mouseManager);
         display.getFrame().addMouseMotionListener(mouseManager);
@@ -84,7 +89,7 @@ public class Game implements Runnable {
         Assets.init();
         Models.init();
 
-        gameAPI = new GameAPI(this);
+        gameAPI = new GameAPI(this, config);
         gameCamera = new GameCamera(gameAPI, 0, 0);
 
         editorState = new EditorState(gameAPI);
