@@ -23,7 +23,7 @@ public class UIButton extends UIText {
 
     private ClickListener clicker;
 
-    private final UIBlock block = new UIBlock(api, NysvaColor.YELLOW);
+    private final UIBlock block = new UIBlock(gameAPI, NysvaColor.YELLOW);
 
     /**
      * Generates a Button Object

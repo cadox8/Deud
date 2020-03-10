@@ -13,6 +13,8 @@ public class Display {
     @Getter private JFrame frame;
     @Getter private Canvas canvas;
 
+    @Getter private final Toolkit toolkit;
+
     private final String title;
     private final int width;
     private final int height;
@@ -24,6 +26,8 @@ public class Display {
         this.width = width;
         this.height = height;
         this.fullScreen = fullScreen;
+
+        this.toolkit = Toolkit.getDefaultToolkit();
 
         createDisplay();
     }
@@ -50,7 +54,7 @@ public class Display {
     }
 
     public void changeCursor(BufferedImage image) {
-        final Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(image , new Point(frame.getX(), frame.getY()), "deud1");
+        final Cursor c = toolkit.createCustomCursor(image , new Point(frame.getX(), frame.getY()), "deud1");
         frame.setCursor(c);
     }
 }

@@ -4,7 +4,7 @@ import me.cadox8.deud.ai.entities.FriendsAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
-import me.cadox8.deud.gfx.textures.Models;
+import me.cadox8.deud.graphics.textures.Models;
 import me.cadox8.deud.items.Item;
 
 public class Fairy extends Friendly {

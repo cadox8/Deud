@@ -2,7 +2,7 @@ package me.cadox8.deud.achievement;
 
 import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.gfx.textures.Assets;
+import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.nysvaui.components.base.UIBlock;
 import me.cadox8.deud.nysvaui.components.images.UIImage;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;

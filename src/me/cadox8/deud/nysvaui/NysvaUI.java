@@ -29,7 +29,7 @@ public abstract class NysvaUI {
 
     private final long componentID;
 
-    protected final GameAPI api;
+    protected final GameAPI gameAPI;
 
     protected UIDimension uiDimension;
 
@@ -51,9 +51,9 @@ public abstract class NysvaUI {
     /**
      * Default NysvaUI constructor
      */
-    public NysvaUI(GameAPI api) {
+    public NysvaUI(GameAPI gameAPI) {
         componentID = new Random().nextLong();
-        this.api = api;
+        this.gameAPI = gameAPI;
 
         components = new ArrayList<>();
         setUiDimension(new UIDimension());

@@ -6,7 +6,7 @@ import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
-import me.cadox8.deud.gfx.textures.Assets;
+import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.states.GameState;

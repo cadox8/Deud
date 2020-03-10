@@ -15,9 +15,10 @@ import me.cadox8.deud.entities.statics.Chest;
 import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.Shop;
 import me.cadox8.deud.entities.statics.sign.Sign;
-import me.cadox8.deud.gfx.fonts.Text;
-import me.cadox8.deud.gfx.textures.Assets;
-import me.cadox8.deud.gfx.textures.Models;
+import me.cadox8.deud.graphics.fonts.Text;
+import me.cadox8.deud.graphics.textures.Assets;
+import me.cadox8.deud.graphics.textures.GUI;
+import me.cadox8.deud.graphics.textures.Models;
 import me.cadox8.deud.inventory.creature.PlayerInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.weapons.WeaponItem;
@@ -184,6 +185,9 @@ public class Player extends Creature {
 /*        g.drawImage(Assets.xp, 10, (Assets.HEIGHT * 2) + 8, 32, 32, null);
         Text.drawString(g, attackTimer >= 300 ? "Attack" : attackTimer + "ms", 35, (Assets.HEIGHT * 3) - 3, 2);*/
 
+        g.drawImage(GUI.hud, 0, 5, 320, 96, null);
+        g.drawImage(GUI.hud2, 12, 106, 50, 50, null);
+
         //Damage
         drawImage(g, Assets.sword, 0);
         drawString(g, getDamage(), 0);
@@ -201,7 +205,7 @@ public class Player extends Creature {
         drawString(g, getArmor(),  3);
 
         //Item
-        g.drawImage(getPlayerInventory().getUsableItem().getTexture(), 1160, 670, null);
+        g.drawImage(getPlayerInventory().getUsableItem().getTexture(), 22, 115, null);
         Text.drawString(g, getPlayerInventory().getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, false, Color.BLACK, 2);
 
         if (getHealth() <= 0) {
@@ -314,28 +318,37 @@ public class Player extends Creature {
 
     //
     private void drawImage(Graphics g, BufferedImage image, int pos){
-        int infoY = 644;
-        int infoX = 10;
+        final int infoY = 20;
+        final int infoX = 25;
         int y = infoY;
+        int x = infoX;
 
         if (pos != 0) y += Assets.HEIGHT * pos;
-        if (pos == 4) infoX += 3;
 
-        g.drawImage(image, infoX, y, 32, 32, null);
+        if (pos >= 2) {
+            y = infoY + (Assets.HEIGHT * (pos - 2));
+            x = 150;
+        }
+
+        g.drawImage(image, x, y, 32, 32, null);
     }
 
     private void drawString(Graphics g, double value, int pos){
         drawString(g, value + "", pos);
     }
     private void drawString(Graphics g, String text, int pos){
-        int infoY = 665;
-        int infoX = 45;
+        final int infoY = 41;
+        final int infoX = 60;
         int y = infoY;
+        int x = infoX;
 
         if (pos != 0) y += (Assets.HEIGHT * pos);
-        if (pos == 4) y -= 6;
-        if (pos == 5) y = infoY + (Assets.HEIGHT * (pos - 1)) + 9;
 
-        Text.drawString(g, text, infoX, y, false, Color.BLACK, 2);
+        if (pos >= 2) {
+            y = infoY + (Assets.HEIGHT * (pos - 2));
+            x = 185;
+        }
+
+        Text.drawString(g, text, x, y, false, Color.WHITE, 2);
     }
 }

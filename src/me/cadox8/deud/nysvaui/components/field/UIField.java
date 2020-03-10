@@ -12,7 +12,7 @@
 package me.cadox8.deud.nysvaui.components.field;
 
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.gfx.fonts.Text;
+import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.nysvaui.ClickListener;
 import me.cadox8.deud.nysvaui.NysvaUI;
 import me.cadox8.deud.nysvaui.components.base.UIBlock;
@@ -35,14 +35,14 @@ public class UIField extends NysvaUI {
         base = new UIBlock(gameAPI, NysvaColor.WHITE);
 
         clicker = () -> {
-            api.getKeyManager().setWritingTo(this);
+            this.gameAPI.getKeyManager().setWritingTo(this);
         };
     }
 
     @Override
     public void tick() {
         base.setUiDimension(getUiDimension());
-        if (api.getKeyManager().getWritingTo() == null) return;
+        if (gameAPI.getKeyManager().getWritingTo() == null) return;
     }
 
     @Override

@@ -1,6 +1,6 @@
-package me.cadox8.deud.gfx.textures;
+package me.cadox8.deud.graphics.textures;
 
-import me.cadox8.deud.gfx.Sprites;
+import me.cadox8.deud.graphics.Sprites;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
@@ -19,6 +19,10 @@ public class GUI {
 
     // Dialog
     public static BufferedImage dialog;
+
+    // Hud
+    public static BufferedImage hud;
+    public static BufferedImage hud2;
 
     // Inventory
     public static BufferedImage inventory, invSelector, chest;
@@ -53,6 +57,9 @@ public class GUI {
         logo = Utils.loadImage("/utils/icon.png");
         dialog = Utils.loadTextures("dialog.png");
 
+        hud = Utils.loadTextures("hud.png");
+        hud2 = Utils.loadTextures("hud2.png");
+
         // Inventory
         chest = Utils.loadTextures("chest.png");
 
@@ -65,7 +72,7 @@ public class GUI {
         editorGUI = Utils.loadTextures("editor/editor.png");
 
         // Utils
-        none = gui.coloredSprite(32, 32, new Color(0, 0, 0, 255));
+        none = Sprites.coloredSprite(32, 32, new Color(0, 0, 0, 255));
 
         //
         gui = new Sprites(Utils.loadImage("/textures/gui/pointers.png"));

@@ -1,7 +1,7 @@
 package me.cadox8.deud.items.potions;
 
 import me.cadox8.deud.entities.creatures.player.Player;
-import me.cadox8.deud.gfx.textures.Assets;
+import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.items.Item;
 
 public class HealthPotion extends PotionItem {

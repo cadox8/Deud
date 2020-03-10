@@ -1,6 +1,6 @@
-package me.cadox8.deud.gfx.textures;
+package me.cadox8.deud.graphics.textures;
 
-import me.cadox8.deud.gfx.Sprites;
+import me.cadox8.deud.graphics.Sprites;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.image.BufferedImage;

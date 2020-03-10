@@ -1,15 +1,16 @@
-package me.cadox8.deud.gfx;
+package me.cadox8.deud.graphics;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RasterFormatException;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class Sprites {
 
-    private BufferedImage sprites;
+    private final BufferedImage sprites;
 
     public BufferedImage crop(int x, int y, int width, int height) {
         try {
@@ -21,7 +22,7 @@ public class Sprites {
         }
     }
 
-    public BufferedImage coloredSprite(int width, int height, Color color) {
+    public static BufferedImage coloredSprite(int width, int height, Color color) {
         BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
         for (int y = 0; y < height; y++) {

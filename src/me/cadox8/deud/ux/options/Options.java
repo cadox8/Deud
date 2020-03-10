@@ -38,10 +38,13 @@ public class Options {
         resume.resizeFont(32);
 
         resume.setUiDimension(new UIDimension(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 - 35, 220, 35));
-        exit.setUiDimension(new UIDimension(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 + 35, 150, 35));
+        exit.setUiDimension(new UIDimension(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 + 35, 220, 35));
 
         resume.getBaseBlock().setRoundRadius(15);
         exit.getBaseBlock().setRoundRadius(15);
+
+        resume.adjust();
+        exit.adjust();
 
         nysvaManager.addObject(base);
         nysvaManager.addObject(resume);

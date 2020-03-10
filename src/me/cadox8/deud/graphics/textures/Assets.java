@@ -1,6 +1,6 @@
-package me.cadox8.deud.gfx.textures;
+package me.cadox8.deud.graphics.textures;
 
-import me.cadox8.deud.gfx.Sprites;
+import me.cadox8.deud.graphics.Sprites;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
@@ -103,8 +103,8 @@ public class Assets {
 
         fire = getImage(7, 0);
 
-        bug = sprites.randomImage(WIDTH, HEIGHT);
-        voidImg = sprites.coloredSprite(WIDTH, HEIGHT, Color.BLACK);
+        bug = Sprites.randomImage(WIDTH, HEIGHT);
+        voidImg = Sprites.coloredSprite(WIDTH, HEIGHT, Color.BLACK);
 
         save = getImage(2, 0);
         key = getImage(3, 0);

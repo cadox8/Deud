@@ -1,7 +1,7 @@
 package me.cadox8.deud.tiles;
 
 import me.cadox8.deud.animations.Animation;
-import me.cadox8.deud.gfx.textures.Assets;
+import me.cadox8.deud.graphics.textures.Assets;
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;

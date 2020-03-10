@@ -1,15 +1,17 @@
-package me.cadox8.deud.gfx;
+package me.cadox8.deud.graphics;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.tiles.Tile;
 
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class GameCamera {
 
-    private GameAPI gameAPI;
+    private final GameAPI gameAPI;
     @Getter private float xOffset, yOffset;
 
     private void checkBlankSpace() {

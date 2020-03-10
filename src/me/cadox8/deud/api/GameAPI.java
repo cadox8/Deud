@@ -5,12 +5,11 @@ import lombok.Setter;
 import me.cadox8.deud.config.Config;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.game.Game;
-import me.cadox8.deud.gfx.GameCamera;
+import me.cadox8.deud.graphics.GameCamera;
 import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
 import me.cadox8.deud.managers.DamageManager;
 import me.cadox8.deud.managers.EntityManager;
-import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.worlds.World;
 
 import java.awt.*;

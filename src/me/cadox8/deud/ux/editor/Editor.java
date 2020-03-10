@@ -2,7 +2,7 @@ package me.cadox8.deud.ux.editor;
 
 import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.gfx.textures.GUI;
+import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.nysvaui.NysvaManager;
 import me.cadox8.deud.nysvaui.NysvaUI;
 import me.cadox8.deud.nysvaui.components.field.UIField;

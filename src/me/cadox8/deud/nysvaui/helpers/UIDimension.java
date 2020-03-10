@@ -69,6 +69,10 @@ public class UIDimension {
         setY(getY() + y);
         return this;
     }
+    public UIDimension setWidth(int width) {
+        this.width = width;
+        return this;
+    }
 
     public static UIDimension fromUIDimension(UIDimension uiDimension) {
         return new UIDimension(uiDimension.getX(), uiDimension.getY(), uiDimension.getWidth(), uiDimension.getHeight());
