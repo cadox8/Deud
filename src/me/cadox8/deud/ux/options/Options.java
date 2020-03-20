@@ -14,9 +14,9 @@ import java.awt.*;
 
 public class Options {
 
-    private GameAPI gameAPI;
+    private final GameAPI gameAPI;
 
-    private NysvaManager nysvaManager;
+    private final NysvaManager nysvaManager;
 
     @Getter private boolean enabled = false;
 

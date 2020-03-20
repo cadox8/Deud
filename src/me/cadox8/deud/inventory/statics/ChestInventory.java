@@ -1,6 +1,7 @@
 package me.cadox8.deud.inventory.statics;
 
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.items.Item;
 
 public class ChestInventory extends StaticInventory {
@@ -12,7 +13,7 @@ public class ChestInventory extends StaticInventory {
 
         addItems(Item.sword, Item.keyItem, Item.chickenItem);
 
-        loadBaseInventory(676, 130);
+        loadBaseInventory(676, 130, GUI.chest);
 
         gameAPI.getMouseManager().setNysvaUI(getNysvaManager());
     }

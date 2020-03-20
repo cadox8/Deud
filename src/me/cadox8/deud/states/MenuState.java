@@ -52,8 +52,8 @@ public class MenuState extends State {
         });
 
         background.setUiDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
-        start.setUiDimension(new UIDimension(150, 650, 200, 100));
-        exit.setUiDimension(new UIDimension(900, 650, 200, 100));
+        start.setUiDimension(new UIDimension(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 - 65, 200, 100));
+        exit.setUiDimension(new UIDimension(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 + 65, 200, 100));
         logo.setUiDimension(new UIDimension(gameAPI.getWidth() - 97, 0, 97, 151));
 
         background.setResize(false);
@@ -70,7 +70,7 @@ public class MenuState extends State {
                     e.printStackTrace();
                 }
             });
-
+            update.setUiDimension(new UIDimension(5, 40, 200, 20));
             nysvaManager.addObject(update);
         }
 
@@ -90,7 +90,7 @@ public class MenuState extends State {
     @Override
     public void render(Graphics g) {
         nysvaManager.render(g);
-        Text.drawString(g, "Version: " + Launcher.VERSION, 5, 795, Color.WHITE, 2);
-        Text.drawString(g, "© Deud 2016-2019 - This Game is property of Cadox8", 795, 795, Color.WHITE, 2);
+        Text.drawString(g, "Version: " + Launcher.VERSION, 5, 20, Color.WHITE, 2);
+        Text.drawString(g, "© Deud 2016-2019 - This Game is property of Cadox8", gameAPI.getWidth() - 550, gameAPI.getHeight() - 20, Color.WHITE, 2);
     }
 }

@@ -1,4 +1,4 @@
-package me.cadox8.deud.gfx.fonts;
+package me.cadox8.deud.graphics.fonts;
 
 import java.awt.*;
 

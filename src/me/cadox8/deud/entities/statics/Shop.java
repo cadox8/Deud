@@ -5,6 +5,7 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.graphics.textures.Assets;
+import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.inventory.statics.ShopInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.tiles.Tile;
@@ -62,8 +63,8 @@ public class Shop extends StaticEntity {
 
     public void open(@NonNull Player p) {
         //if (hasDropped) return;
-        getInventory().setActive(true);
-        p.getPlayerInventory().setActive(true);
+        getInventory().setActive(true, GUI.chest);
+        p.getPlayerInventory().setActive(true, GUI.inventory);
         gameAPI.getEntityManager().freezePlayer();
     }
 

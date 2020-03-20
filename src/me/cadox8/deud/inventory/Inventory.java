@@ -13,6 +13,7 @@ import me.cadox8.deud.nysvaui.components.images.UIImageButton;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
@@ -46,8 +47,8 @@ public abstract class Inventory {
     public abstract void tick();
     public abstract void render(Graphics g);
 
-    protected void loadBaseInventory(int xPos, int yPos) {
-        final UIImage gui = new UIImage(gameAPI, GUI.chest);
+    protected void loadBaseInventory(int xPos, int yPos, BufferedImage baseTexture) {
+        final UIImage gui = new UIImage(gameAPI, baseTexture);
         gui.setUiDimension(new UIDimension(650, 50, GUI.chest.getWidth(), GUI.chest.getHeight()));
         gui.setResize(false);
 
@@ -105,8 +106,8 @@ public abstract class Inventory {
         }, () -> drawItemInfo(g, null, xPosText, yPosText));
     }
 
-    public void setActive(boolean active) {
-        loadBaseInventory(676, 130);
+    public void setActive(boolean active, BufferedImage baseTexture) {
+        loadBaseInventory(676, 130, baseTexture);
         this.active = active;
     }
 
