@@ -13,8 +13,6 @@ public class SwordItem extends WeaponItem {
         super(texture, id, name, damage);
 
         addAttributes(new Knockback(this.getGameAPI(), 12));
-
-        addMetadatas(new Metadata("areaRadius", 0.0D));
     }
 
     @Override

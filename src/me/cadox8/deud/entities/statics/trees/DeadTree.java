@@ -4,6 +4,7 @@ import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.graphics.textures.Assets;
+import me.cadox8.deud.items.Items;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
@@ -17,6 +18,11 @@ public class DeadTree extends Tree {
         bounds.y = (int) (height / 1.5f) - 17;
         bounds.width = width - 10;
         bounds.height = (int) (height - height / 1.5f);
+    }
+
+    @Override
+    public void die() {
+        dropItem(Items.getWoodItem().randomAmount(1, 2));
     }
 
     @Override

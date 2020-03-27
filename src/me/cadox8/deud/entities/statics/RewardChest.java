@@ -8,6 +8,7 @@ import me.cadox8.deud.attributes.Explosion;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.Items;
 
 public class RewardChest extends Chest {
 
@@ -18,11 +19,11 @@ public class RewardChest extends Chest {
     }
 
     public void open(Player p) {
-        if (p.getPlayerInventory().itemCount(Item.keyItem) == 0 || open) return;
+        if (p.getPlayerInventory().itemCount(Items.getKeyItem()) == 0 || open) return;
         open = true;
-        p.getPlayerInventory().removeItem(Item.keyItem.setCount(1));
+        p.getPlayerInventory().removeItem(Items.getKeyItem().setCount(1));
 
-        p.getPlayerInventory().addItem(Item.getRandom(Item.hand, Item.keyItem));
+        p.getPlayerInventory().addItem(Item.getRandom(Items.getHand()));
 
         if (isExplosive()) new Explosion(this.getGameAPI(),5, 0.3).perform(this, null);
     }

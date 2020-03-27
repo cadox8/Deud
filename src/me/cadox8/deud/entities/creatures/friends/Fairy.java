@@ -5,7 +5,7 @@ import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.graphics.textures.Models;
-import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.Items;
 
 public class Fairy extends Friendly {
 
@@ -33,6 +33,6 @@ public class Fairy extends Friendly {
     @Override
     public void die() {
         adjustXP(0.13f);
-        dropItem(Item.keyItem);
+        dropItem(Items.getKeyItem());
     }
 }

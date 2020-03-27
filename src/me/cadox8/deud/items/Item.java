@@ -7,14 +7,6 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.attributes.Attribute;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.graphics.textures.Assets;
-import me.cadox8.deud.items.food.ChickenItem;
-import me.cadox8.deud.items.objects.*;
-import me.cadox8.deud.items.potions.HealthPotion;
-import me.cadox8.deud.items.potions.PotionItem;
-import me.cadox8.deud.items.weapons.HandItem;
-import me.cadox8.deud.items.weapons.SwordItem;
-import me.cadox8.deud.items.weapons.WeaponItem;
-import me.cadox8.deud.utils.Metadata;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -27,25 +19,6 @@ public abstract class Item {
 
     public static Item[] items = new Item[9]; //All items
 
-    //Bug
-    public static final ObjectItem bugItem = new BugItem(Assets.bug, 5, "3RR0R");
-
-    //Objects
-    public static final ObjectItem woodItem = new WoodItem(Assets.wood, 0, "Wood");
-    public static final ObjectItem rockItem = new RockItem(Assets.stone, 1, "Rock");
-    public static final ObjectItem keyItem = new KeyItem(Assets.key, 2, "Key");
-    public static final ObjectItem mapItem = new MapItem(null, 7, "Map");
-
-    //Food
-    public static final ChickenItem chickenItem = new ChickenItem(Assets.food, 3, "Chicken", 3);
-
-    //Weapons
-    public static final WeaponItem hand = new HandItem(Assets.hand, 4, "Hand", 1);
-    public static final WeaponItem sword = new SwordItem(Assets.sword, 8, "Sword", 5);
-
-    // Potions
-    public static final PotionItem healthPotion = new HealthPotion(6, 1);
-
 
     // Class
     public static final int ITEMWIDTH = 64, ITEMHEIGHT = 64;
@@ -56,8 +29,6 @@ public abstract class Item {
     @Getter @Setter protected String name;
 
     @Getter @Setter private List<Attribute> attributes;
-
-    @Getter @Setter private List<Metadata> metadatas;
 
     @Getter @Setter protected Rectangle bounds;
 
@@ -75,7 +46,6 @@ public abstract class Item {
         this.name = name;
         this.count = 1;
         this.attributes = new ArrayList<>();
-        this.metadatas = new ArrayList<>();
 
         bounds = new Rectangle(x, y, ITEMWIDTH, ITEMHEIGHT);
 
@@ -88,7 +58,7 @@ public abstract class Item {
     public void removeItem(@NonNull Player p) {
         if (getCount() == 1) {
             p.getPlayerInventory().removeItem(this);
-            p.getPlayerInventory().setUsableItem(Item.hand);
+            p.getPlayerInventory().setUsableItem(Items.getHand());
             return;
         }
         count--;
@@ -97,15 +67,6 @@ public abstract class Item {
     public Item addAttributes(@NonNull Attribute... attributes) {
         this.attributes.addAll(Arrays.asList(attributes));
         return this;
-    }
-
-    public Item addMetadatas(@NonNull Metadata... metadatas) {
-        this.metadatas.addAll(Arrays.asList(metadatas));
-        return this;
-    }
-
-    public Object getMetadataValue(String key) {
-        return metadatas.stream().filter(m -> m.getMetadataName().equalsIgnoreCase(key)).findAny().orElseGet(null);
     }
 
     public void tick(){
@@ -150,9 +111,15 @@ public abstract class Item {
 
         i.setCount(1);
 
-        if (banedIDs.length >= items.length) return bugItem;
-        if (baned.contains(i.getId()) || i.getId() == bugItem.getId()) return getRandom(banedIDs);
+        if (banedIDs.length >= items.length) return Items.getBugItem();
+        if (baned.contains(i.getId()) || i.getId() == Items.getBugItem().getId()) return getRandom(banedIDs);
         return i;
+    }
+
+    public Item randomAmount(int min, int max) {
+        final Random r = new Random();
+        setCount(r.nextInt(r.nextInt(max) - r.nextInt(min)));
+        return this;
     }
 
     public Item addCount(int count) {

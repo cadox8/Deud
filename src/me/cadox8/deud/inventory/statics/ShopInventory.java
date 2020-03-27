@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.Items;
 
 public class ShopInventory extends StaticInventory {
 
@@ -13,7 +14,7 @@ public class ShopInventory extends StaticInventory {
 
         setSize(size);
 
-        addItems(Item.sword, Item.keyItem, Item.chickenItem);
+        addItems(Items.getSword(), Items.getChickenItem(), Items.getWoodItem());
 
         loadBaseInventory(676, 130, GUI.chest);
 

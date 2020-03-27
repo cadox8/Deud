@@ -5,6 +5,7 @@ import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.Items;
 import me.cadox8.deud.nysvaui.components.images.UIImageButton;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
 
@@ -38,7 +39,7 @@ public class PlayerInventory extends CreatureInventory {
 
         if (!isActive()) return;
 
-        if (!hasItem(getUsableItem())) setUsableItem(Item.hand);
+        if (!hasItem(getUsableItem())) setUsableItem(Items.getHand());
 
         getNysvaManager().tick(getItems());
         selectedItem.tick();

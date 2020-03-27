@@ -4,7 +4,7 @@ import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.graphics.textures.Assets;
-import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.Items;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
@@ -22,7 +22,7 @@ public class Rock extends StaticEntity {
 
     @Override
     public void die() {
-        dropItem(Item.rockItem);
+        dropItem(Items.getRockItem());
     }
 
     @Override

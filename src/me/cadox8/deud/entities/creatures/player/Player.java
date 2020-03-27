@@ -21,6 +21,7 @@ import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.graphics.textures.Models;
 import me.cadox8.deud.inventory.creature.PlayerInventory;
 import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.Items;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.quests.Quest;
@@ -107,7 +108,7 @@ public class Player extends Creature {
             });
             getPlayerInventory().setUsableItem(gameAPI.getGame().getPlayerData().getItem());
         } else {
-            getPlayerInventory().setUsableItem(Item.hand);
+            getPlayerInventory().setUsableItem(Items.getHand());
         }
 
         options = new Options(gameAPI, this);
@@ -173,7 +174,7 @@ public class Player extends Creature {
 
             //Keys (?)
             g.drawImage(Assets.key, 10, Assets.HEIGHT + 8, 32, 32, null);
-            Text.drawString(g, "x" + inventory.itemCount(Item.keyItem), 35, (Assets.HEIGHT * 2) - 3, 2);
+            Text.drawString(g, "x" + inventory.itemCount(Items.getKeyItem()), 35, (Assets.HEIGHT * 2) - 3, 2);
 
             //XP
             drawImage(g, Assets.xp, 4);
@@ -225,7 +226,7 @@ public class Player extends Creature {
             addExp(20);
             setHealth(getMaxHealth());
             //gameAPI.getWorld().getEntityManager().freezeCreatures();
-            inventory.addItem(Item.sword);
+            inventory.addItem(Items.getSword());
         }
 
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {

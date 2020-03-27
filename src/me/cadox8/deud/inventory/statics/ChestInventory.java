@@ -2,7 +2,7 @@ package me.cadox8.deud.inventory.statics;
 
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.graphics.textures.GUI;
-import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.Items;
 
 public class ChestInventory extends StaticInventory {
 
@@ -11,7 +11,7 @@ public class ChestInventory extends StaticInventory {
 
         setSize(size);
 
-        addItems(Item.sword, Item.keyItem, Item.chickenItem);
+        addItems(Items.getSword(), Items.getChickenItem(), Items.getWoodItem());
 
         loadBaseInventory(676, 130, GUI.chest);
 

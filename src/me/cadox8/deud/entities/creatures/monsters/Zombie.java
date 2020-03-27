@@ -6,7 +6,7 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.graphics.textures.Models;
 import me.cadox8.deud.inventory.creature.CreatureInventory;
-import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.Items;
 
 public class Zombie extends Monster {
 
@@ -39,6 +39,6 @@ public class Zombie extends Monster {
     @Override
     public void die() {
         adjustXP(0.3f);
-        dropItem(Item.chickenItem);
+        dropItem(Items.getChickenItem());
     }
 }

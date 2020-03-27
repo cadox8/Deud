@@ -5,12 +5,13 @@ import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.Items;
 
 import java.awt.*;
 
 public class StaticInventory extends Inventory {
 
-    @Getter @Setter protected Item usableItem = Item.hand;
+    @Getter @Setter protected Item usableItem = Items.getHand();
 
     public StaticInventory(GameAPI gameAPI) {
         super(gameAPI);
