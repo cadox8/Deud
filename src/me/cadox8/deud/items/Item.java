@@ -98,11 +98,12 @@ public abstract class Item {
     }
 
     public static Item getRandom() {
-        return getRandom(5);
+        return getRandom(Items.getBugItem().getId());
     }
     public static Item getRandom(Item... banedIDs) {
         final Integer[] ids = new Integer[banedIDs.length];
-        int x = 0;
+        ids[0] = Items.getBugItem().getId();
+        int x = 1;
 
         for (Item i : banedIDs) {
             ids[x] = i.getId();
@@ -123,7 +124,7 @@ public abstract class Item {
 
     public Item randomAmount(int min, int max) {
         final Random r = new Random();
-        setCount(r.nextInt(r.nextInt(max) - r.nextInt(min)));
+        setCount(r.nextInt((max - min) + 1) + min);
         return this;
     }
 

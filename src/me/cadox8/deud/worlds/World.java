@@ -125,7 +125,7 @@ public class World {
         //Entities
         entityManager.render(g, dark);
 
-        particles.forEach(p -> p.render(g, 5, 5));
+        particles.forEach(p -> p.render(g, 100, 15));
     }
 
     public Tile getTile(int x, int y) {

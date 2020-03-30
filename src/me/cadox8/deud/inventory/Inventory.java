@@ -6,11 +6,13 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.Items;
 import me.cadox8.deud.nysvaui.NysvaManager;
 import me.cadox8.deud.nysvaui.NysvaUI;
 import me.cadox8.deud.nysvaui.components.images.UIImage;
 import me.cadox8.deud.nysvaui.components.images.UIImageButton;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
+import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -94,7 +96,7 @@ public abstract class Inventory {
     protected void drawItemInfo(Graphics g, Item item, int xPosText, int yPosText) {
         String infoText = "";
         if (item != null) infoText = item.getName() + " x" + item.getCount();
-        if (item == null || item.getId() == 5) infoText = "---------";
+        if (item == null || item.getId() == Items.getBugItem().getId()) infoText = "---------";
         Text.drawString(g, infoText, xPosText, yPosText, false, 2);
     }
 

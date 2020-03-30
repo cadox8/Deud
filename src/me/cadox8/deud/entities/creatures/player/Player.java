@@ -30,6 +30,7 @@ import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 import me.cadox8.deud.ux.dialog.Dialog;
+import me.cadox8.deud.ux.hud.Hud;
 import me.cadox8.deud.ux.options.Options;
 
 import java.awt.*;
@@ -163,59 +164,20 @@ public class Player extends Creature {
     }
 
     public void postRender(Graphics g) {
-        renderInfo(g);
-        inventory.render(g);
-
-        if (options.isEnabled()) options.render(g);
-    }
-
-    private void renderInfo(Graphics g) {
-        if (inventory.isActive()) {
-            //Money
-            g.drawImage(Assets.coin, 10, 5, 32, 32, null);
-            Text.drawString(g, "x" + getMoney(), 35, Assets.HEIGHT - 3, 2);
-
-            //Keys (?)
-            g.drawImage(Assets.key, 10, Assets.HEIGHT + 8, 32, 32, null);
-            Text.drawString(g, "x" + inventory.itemCount(Items.getKeyItem()), 35, (Assets.HEIGHT * 2) - 3, 2);
-
-            //XP
-            drawImage(g, Assets.xp, 4);
-            drawString(g, "Level: " + getLevel(), 4);
-            if (getLevel() != 30) drawString(g, "XP: " + getXp() + "/" + xpToNextLevel(), 5);
-        }
-
         //Cooldown
 /*        g.drawImage(Assets.xp, 10, (Assets.HEIGHT * 2) + 8, 32, 32, null);
         Text.drawString(g, attackTimer >= 300 ? "Attack" : attackTimer + "ms", 35, (Assets.HEIGHT * 3) - 3, 2);*/
 
-        g.drawImage(GUI.hud, 0, 5, 320, 96, null);
-        g.drawImage(GUI.hud2, 12, 106, 50, 50, null);
+        new Hud(this).render(g);
 
-        //Damage
-        drawImage(g, Assets.sword, 0);
-        drawString(g, getDamage(), 0);
-
-        //Health
-        drawImage(g, Assets.hearth, 1);
-        drawString(g, getHealth() + "/" + getMaxHealth(), 1);
-
-        //FoodItem
-        drawImage(g, Assets.food, 2);
-        drawString(g, Utils.round(2, getHunger()) + "/" + getMaxHunger(), 2);
-
-        //Armor
-        drawImage(g, Assets.shield, 3);
-        drawString(g, getArmor(),  3);
-
-        //Item
-        g.drawImage(getPlayerInventory().getUsableItem().getTexture(), 22, 115, null);
-        Text.drawString(g, getPlayerInventory().getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, false, Color.BLACK, 2);
+        inventory.render(g);
 
         if (getHealth() <= 0) {
             Text.drawString(g, "You lose", 125, 530, Color.BLACK, 3);
             Text.drawString(g, ":(", 367, 515, Color.BLACK, 0);
         }
+
+        if (options.isEnabled()) options.render(g);
     }
 
     private void getInput() {
@@ -243,30 +205,7 @@ public class Player extends Creature {
 
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {
             final Entity en = EntityManager.getEntity(this, 0, 0);
-            if (en == null) return;
-            if (en instanceof Chest) {
-                final Chest chest = (Chest) en;
-                chest.open(this);
-            }
-            if (en instanceof Shop) {
-                final Shop shop = (Shop) en;
-                shop.open(this);
-            }
-            if (en instanceof Door) {
-                final Door door = (Door) en;
-                door.changeWorld(this);
-            }
-            if (en instanceof Sign) {
-                final Sign sign = (Sign) en;
-                final Dialog dialog = new Dialog(gameAPI, this).addText(sign.getText());
-                ((GameState) gameAPI.getGame().getGameState()).setDialog(dialog);
-            }
-            if (en instanceof Npc) {
-                final Npc npc = (Npc) en;
-                if (npc.getText().isEmpty()) return;
-                final Dialog dialog = new Dialog(gameAPI, this, npc);
-                ((GameState) gameAPI.getGame().getGameState()).setDialog(dialog);
-            }
+            new EntityInteract(gameAPI, en, this).interact();
         }
 
         if (isFreeze()) return;
@@ -317,42 +256,5 @@ public class Player extends Creature {
 
     public boolean hasMoney(double amount) {
         return money >= amount;
-    }
-
-
-    //
-    private void drawImage(Graphics g, BufferedImage image, int pos){
-        final int infoY = 20;
-        final int infoX = 25;
-        int y = infoY;
-        int x = infoX;
-
-        if (pos != 0) y += Assets.HEIGHT * pos;
-
-        if (pos >= 2) {
-            y = infoY + (Assets.HEIGHT * (pos - 2));
-            x = 150;
-        }
-
-        g.drawImage(image, x, y, 32, 32, null);
-    }
-
-    private void drawString(Graphics g, double value, int pos){
-        drawString(g, value + "", pos);
-    }
-    private void drawString(Graphics g, String text, int pos){
-        final int infoY = 41;
-        final int infoX = 60;
-        int y = infoY;
-        int x = infoX;
-
-        if (pos != 0) y += (Assets.HEIGHT * pos);
-
-        if (pos >= 2) {
-            y = infoY + (Assets.HEIGHT * (pos - 2));
-            x = 185;
-        }
-
-        Text.drawString(g, text, x, y, false, Color.WHITE, 2);
     }
 }

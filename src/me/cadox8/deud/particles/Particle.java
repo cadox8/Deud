@@ -9,10 +9,14 @@ import java.awt.image.BufferedImage;
 
 public enum Particle {
 
-    EXPLOSION(Assets.explosion, 1);
+    EXPLOSION(Assets.explosion, 1),
+    EXCLAMATION(Assets.exclamation, 2);
 
     @Getter private final Animation animation;
 
+    Particle(BufferedImage image, int velocity) {
+        this(new BufferedImage[]{image}, velocity);
+    }
     Particle(BufferedImage[] images, int velocity) {
         animation = new Animation(velocity * 100, images);
     }

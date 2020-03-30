@@ -34,6 +34,7 @@ public class Assets {
 
     // Particles
     public static BufferedImage[] explosion;
+    public static BufferedImage exclamation;
 
     // Selector
     public static BufferedImage optionsSelector;
@@ -119,6 +120,9 @@ public class Assets {
 
         sprites = new Sprites(Utils.loadImage("/textures/sprites/particles.png"));
         explosion = getParticles(96, 96, 7);
+
+        sprites = new Sprites(Utils.loadImage("/emotes/excl.png"));
+        explosion = getParticles(16, 16, 1);
     }
 
     private static BufferedImage getImage(int x, int y) {

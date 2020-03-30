@@ -9,8 +9,8 @@ public class Config {
 
     private boolean fullScreen = true;
 
+    // Sound
     private float masterVolume = 1;
-
     private float musicVolume = 1;
     private float entitiesVolume = 1;
 

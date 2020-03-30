@@ -20,6 +20,7 @@ public class AnimationBump extends Animation {
         this.y = entity.getY() - (float)entity.getBounds().getHeight();
     }
 
+    @Override
     public void tick() {
         timer += System.currentTimeMillis() - lastTime;
         lastTime = System.currentTimeMillis();

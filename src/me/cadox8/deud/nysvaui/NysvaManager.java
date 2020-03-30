@@ -108,8 +108,13 @@ public class NysvaManager {
             try {
                 objects.stream().filter(NysvaUI::isEnabled).forEach(o -> {
                     if (o instanceof UIImageButton) {
-                        ((UIImageButton) o).changeImage(items.get(index.getAndAdd(1)).getTexture());
-                        o.tick();
+                        try {
+                            ((UIImageButton) o).changeImage(items.get(index.getAndAdd(1)).getTexture());
+                            o.tick();
+                        } catch (IndexOutOfBoundsException e) {
+                            ((UIImageButton) o).changeImage(items.get(index.addAndGet(-1)).getTexture());
+                            o.tick();
+                        }
                     }
                 });
                 index.set(0);
