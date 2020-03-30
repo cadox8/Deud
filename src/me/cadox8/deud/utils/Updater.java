@@ -15,7 +15,8 @@ import java.util.Arrays;
 public class Updater {
 
     public static boolean checkForUpdate() {
-        Log.system("Web Version: " + latestVersion().getVersion() + " || Game Version: " + Launcher.VERSION);
+        Log.system("Web Version: " + latestVersion().getVersion());
+        Log.system("Game Version: " + Launcher.VERSION);
         return webVersion().getLatest() > Launcher.VERSION_ID;
     }
 
