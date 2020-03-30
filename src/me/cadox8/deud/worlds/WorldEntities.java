@@ -88,6 +88,9 @@ public class WorldEntities {
                 en.setMaxHealth(e.getMaxHealth());
                 en.setHealth(e.getHealth());
 
+                en.setLevel(e.getLevel());
+                en.setXP(e.getExperience());
+
                 if (e.getInventory() != null) {
                     final StaticInventory inv = new StaticInventory(gameAPI);
                     inv.addItems(e.getInventory());

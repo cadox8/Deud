@@ -10,6 +10,9 @@ public class PlayerData {
     private String nick;
     private double money = 0;
     private int health = 0;
+    private int level = 0;
+    private double experience = 0;
+
     private LocationUtils location = new LocationUtils();
     private ItemUtils[] inventory = new ItemUtils[0];
     private ItemUtils item = new ItemUtils();

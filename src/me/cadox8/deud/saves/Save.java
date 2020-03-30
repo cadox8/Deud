@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.config.Config;
 import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Door;
@@ -40,6 +41,8 @@ public class Save {
         data.addProperty("nick", player.getNick());
         data.addProperty("health", player.getHealth());
         data.addProperty("money", player.getMoney());
+        data.addProperty("level", player.getLevel());
+        data.addProperty("experience", player.getXp());
 
         final JsonArray inv = new JsonArray();
         i.getItems().forEach(item -> {
@@ -84,6 +87,9 @@ public class Save {
             en.addProperty("maxHealth", e.getMaxHealth());
             en.add("location", gson.toJsonTree(e.getLocation().serializeLocation()).getAsJsonObject());
 
+            en.addProperty("level", e.getLevel());
+            en.addProperty("experience", e.getXp());
+
             if (e.getInventory() != null) {
                 final JsonArray items = new JsonArray();
                 e.getInventory().getItems().forEach(i -> {
@@ -94,7 +100,6 @@ public class Save {
                 });
                 en.add("inventory", items);
             }
-
 
             if (e instanceof Tree) en.addProperty("treeType", ((Tree) e).getTreeType());
 

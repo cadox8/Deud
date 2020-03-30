@@ -95,6 +95,9 @@ public class Player extends Creature {
             setHealth(pd.getHealth());
             setMoney(pd.getMoney());
 
+            setLevel(pd.getLevel());
+            setXP(pd.getExperience());
+
             setX(loc.getX());
             setY(loc.getY());
             setDirection(loc.getDirection());
