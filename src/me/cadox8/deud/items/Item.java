@@ -17,7 +17,7 @@ import java.util.Random;
 
 public abstract class Item {
 
-    public static Item[] items = new Item[9]; //All items
+    private static final Item[] items = new Item[9]; //All items
 
 
     // Class
@@ -55,20 +55,6 @@ public abstract class Item {
     public abstract void use(@NonNull Player p);
     public abstract Item createNew(int x, int y, int count);
 
-    public void removeItem(@NonNull Player p) {
-        if (getCount() == 1) {
-            p.getPlayerInventory().removeItem(this);
-            p.getPlayerInventory().setUsableItem(Items.getHand());
-            return;
-        }
-        count--;
-    }
-
-    public Item addAttributes(@NonNull Attribute... attributes) {
-        this.attributes.addAll(Arrays.asList(attributes));
-        return this;
-    }
-
     public void tick(){
         if(gameAPI.getWorld().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)){
             pickedUp = true;
@@ -83,6 +69,25 @@ public abstract class Item {
 
     public void render(Graphics g, int x, int y){
         g.drawImage(texture, x, y, 32, 32, null);
+    }
+
+    public static Item get(int id) {
+        return items[id];
+    }
+
+
+    public void removeItem(@NonNull Player p) {
+        if (getCount() == 1) {
+            p.getPlayerInventory().removeItem(this);
+            p.getPlayerInventory().setUsableItem(Items.getHand());
+            return;
+        }
+        count--;
+    }
+
+    public Item addAttributes(@NonNull Attribute... attributes) {
+        this.attributes.addAll(Arrays.asList(attributes));
+        return this;
     }
 
     public void setPosition(int x, int y) {
@@ -107,7 +112,7 @@ public abstract class Item {
     }
     public static Item getRandom(Integer... banedIDs) {
         final List<Integer> baned = Arrays.asList(banedIDs);
-        final Item i = items[new Random().nextInt(items.length)];
+        final Item i = get(new Random().nextInt(items.length));
 
         i.setCount(1);
 

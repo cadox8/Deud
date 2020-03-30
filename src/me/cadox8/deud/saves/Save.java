@@ -148,14 +148,14 @@ public class Save {
         final BufferedWriter w = new BufferedWriter(new FileWriter(file));
         final JsonObject data = new JsonObject();
 
-        data.addProperty("fullScreen", cfn.isFullScreen());
+/*        data.addProperty("fullScreen", cfn.isFullScreen());
         data.addProperty("masterVolume", cfn.getMasterVolume());
         data.addProperty("musicVolume", cfn.getMusicVolume());
-        data.addProperty("entitiesVolume", cfn.getEntitiesVolume());
+        data.addProperty("entitiesVolume", cfn.getEntitiesVolume());*/
 
         if (file.exists()) file.delete(); file.mkdirs();
 
-        w.write(gson.toJson(data));
+        w.write(gson.toJson(cfn));
         w.close();
 
         Log.success("Config saved successfully");

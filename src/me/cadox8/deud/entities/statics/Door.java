@@ -39,7 +39,7 @@ public class Door extends StaticEntity {
 
     public void changeWorld(Player p) {
         if (!canOpen(p)) {
-            ((GameState)getGameAPI().getGame().getGameState()).setDialog(new Dialog(getGameAPI(), p).addText(Arrays.asList("You need " + Item.items[neededItem].getName() + " to open this")));
+            ((GameState)getGameAPI().getGame().getGameState()).setDialog(new Dialog(getGameAPI(), p).addText(Arrays.asList("You need " + Item.get(neededItem).getName() + " to open this")));
             return;
         }
         if (!new File("resources/worlds/" + map + "/world.txt").exists()) {

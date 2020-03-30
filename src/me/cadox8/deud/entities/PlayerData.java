@@ -1,4 +1,4 @@
-package me.cadox8.deud.saves;
+package me.cadox8.deud.entities;
 
 import lombok.Data;
 import me.cadox8.deud.entities.Location;
@@ -22,13 +22,13 @@ public class PlayerData {
     }
 
     public Item getItem() {
-        return Item.items[item.getId()].setCount(item.getCount());
+        return Item.get(item.getId()).setCount(item.getCount());
     }
 
     public Item[] getInventory() {
         if (inventory == null) return new Item[0];
         final Item[] it = new Item[inventory.length];
-        for (int x = 0; x < it.length; x++) it[x] = Item.items[inventory[x].getId()].setCount(inventory[x].getCount());
+        for (int x = 0; x < it.length; x++) it[x] = Item.get(inventory[x].getId()).setCount(inventory[x].getCount());
         return it;
     }
 

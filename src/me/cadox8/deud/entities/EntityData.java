@@ -15,7 +15,6 @@ import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.trees.DeadTree;
 import me.cadox8.deud.entities.statics.trees.NormalTree;
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.saves.PlayerData;
 
 import java.util.Arrays;
 import java.util.List;
@@ -65,7 +64,7 @@ public class EntityData {
         public Item[] getInventory() {
             if (inventory == null) return new Item[0];
             final Item[] it = new Item[inventory.length];
-            for (int x = 0; x < it.length; x++) it[x] = Item.items[inventory[x].getId()].setCount(inventory[x].getCount());
+            for (int x = 0; x < it.length; x++) it[x] = Item.get(inventory[x].getId()).setCount(inventory[x].getCount());
             return it;
         }
 

@@ -1,5 +1,6 @@
 package me.cadox8.deud.audio;
 
+import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.utils.Log;
 
@@ -18,12 +19,15 @@ public class Sound {
 
     private Clip clip;
 
+    @Setter private static GameAPI gameAPI;
+
+    private final float volume;
+
     public Sound(String sound, float value) {
+        this.volume = value;
         try {
             clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("/sounds/" + sound + ".wav"))));
-            final FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(value - (value * (1 - GameAPI.getInstance().getConfig().getMasterVolume())));
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
@@ -32,8 +36,12 @@ public class Sound {
 
     public void play() {
         try {
+            setVolume();
             clip.start();
-            if (!clip.isRunning()) clip.setFramePosition(0);
+            if (!clip.isRunning()) {
+                setVolume();
+                clip.setFramePosition(0);
+            }
         } catch(Exception e) {
             Log.danger(e.getCause());
         }
@@ -41,8 +49,12 @@ public class Sound {
 
     public void playLoop() {
         try {
+            setVolume();
             clip.start();
-            if (hasFinished()) clip.start();
+            if (hasFinished()) {
+                setVolume();
+                clip.start();
+            }
         } catch(Exception e) {
             Log.danger(e.getCause());
         }
@@ -58,6 +70,7 @@ public class Sound {
 
     public void resume() {
         if(clip.isOpen()){
+            setVolume();
             clip.start();
         } else {
             play();
@@ -74,5 +87,10 @@ public class Sound {
     public boolean hasFinished() {
         if (clip == null) return false;
         return clip.getFramePosition() == clip.getFrameLength();
+    }
+
+    public void setVolume() {
+        final FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(volume - (volume * (1 - gameAPI.getConfig().getMasterVolume())));
     }
 }

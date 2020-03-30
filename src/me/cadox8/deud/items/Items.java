@@ -15,21 +15,21 @@ import me.cadox8.deud.items.weapons.WeaponItem;
 public class Items {
 
     //Bug
-    @Getter private static final ObjectItem bugItem = new BugItem(Assets.bug, 5, "3RR0R");
+    @Getter private static final ObjectItem bugItem = new BugItem(Assets.bug, 0, "3RR0R");
 
     //Objects
-    @Getter private static final ObjectItem woodItem = new WoodItem(Assets.wood, 0, "Wood");
-    @Getter private static final ObjectItem rockItem = new RockItem(Assets.stone, 1, "Rock");
-    @Getter private static final ObjectItem keyItem = new KeyItem(Assets.key, 2, "Key");
-    @Getter private static final ObjectItem mapItem = new MapItem(null, 7, "Map");
+    @Getter private static final ObjectItem woodItem = new WoodItem(Assets.wood, 1, "Wood");
+    @Getter private static final ObjectItem rockItem = new RockItem(Assets.stone, 2, "Rock");
+    @Getter private static final ObjectItem keyItem = new KeyItem(Assets.key, 3, "Key");
+    @Getter private static final ObjectItem mapItem = new MapItem(null, 4, "Map");
 
     //Food
-    @Getter private static final ChickenItem chickenItem = new ChickenItem(Assets.food, 3, "Chicken", 3);
+    @Getter private static final ChickenItem chickenItem = new ChickenItem(Assets.food, 5, "Chicken", 3);
 
     //Weapons
-    @Getter private static final WeaponItem hand = new HandItem(Assets.hand, 4, "Hand", 1);
-    @Getter private static final WeaponItem sword = new SwordItem(Assets.sword, 8, "Sword", 5);
+    @Getter private static final WeaponItem hand = new HandItem(Assets.hand, 6, "Hand", 1);
+    @Getter private static final WeaponItem sword = new SwordItem(Assets.sword, 7, "Sword", 5);
 
     // Potions
-    @Getter private static final PotionItem healthPotion = new HealthPotion(6, 1);
+    @Getter private static final PotionItem healthPotion = new HealthPotion(8, 1);
 }

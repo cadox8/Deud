@@ -6,6 +6,7 @@ import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.config.Config;
 import me.cadox8.deud.entities.EntityData;
+import me.cadox8.deud.entities.PlayerData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.utils.Log;
 
@@ -39,9 +40,11 @@ public class FileUtils {
         final Save configSave = new Save(config);
 
         try {
+            Log.system("-----------------");
             playerSave.savePlayer(player);
             entitySave.saveEntities(gameAPI.getEntityManager().getEntities(), gameAPI.getWorld().worldName());
             configSave.saveConfig(gameAPI.getConfig());
+            Log.system("-----------------");
         } catch (IOException e) {
             Log.danger("Could not save a file!");
             Log.danger(e.getMessage());

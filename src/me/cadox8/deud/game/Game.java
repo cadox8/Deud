@@ -16,7 +16,7 @@ import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
 import me.cadox8.deud.managers.DamageManager;
 import me.cadox8.deud.saves.FileUtils;
-import me.cadox8.deud.saves.PlayerData;
+import me.cadox8.deud.entities.PlayerData;
 import me.cadox8.deud.states.EditorState;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.MenuState;
@@ -29,6 +29,8 @@ import java.awt.image.BufferStrategy;
 public class Game implements Runnable {
 
     @Getter private static Game instance;
+
+    @Getter private Config config;
 
     @Getter private Display display;
     @Getter private final int width, height;
@@ -73,7 +75,7 @@ public class Game implements Runnable {
     }
 
     private void init() {
-        final Config config = FileUtils.loadConfig();
+        config = FileUtils.loadConfig();
 
         display = new Display(title, width, height, config.isFullScreen());
         display.getFrame().addKeyListener(keyManager);
@@ -90,7 +92,7 @@ public class Game implements Runnable {
 
         display.changeCursor(GUI.pointer);
 
-        gameAPI = new GameAPI(this, config);
+        gameAPI = new GameAPI(this);
         gameCamera = new GameCamera(gameAPI, 0, 0);
 
         editorState = new EditorState(gameAPI);

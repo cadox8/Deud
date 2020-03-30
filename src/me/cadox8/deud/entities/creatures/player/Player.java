@@ -25,7 +25,7 @@ import me.cadox8.deud.items.Items;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.quests.Quest;
-import me.cadox8.deud.saves.PlayerData;
+import me.cadox8.deud.entities.PlayerData;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
@@ -99,10 +99,10 @@ public class Player extends Creature {
             setY(loc.getY());
             setDirection(loc.getDirection());
 
-            Log.log("Player nick: " + getNick());
+            Log.system("Player nick: " + getNick());
 
             Arrays.asList(pd.getInventory()).forEach(items -> {
-                final Item i = Item.items[items.getId()];
+                final Item i = Item.get(items.getId());
                 i.setCount(items.getCount());
                 inventory.addItem(i);
             });

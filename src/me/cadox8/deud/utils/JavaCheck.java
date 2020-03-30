@@ -8,7 +8,7 @@ public class JavaCheck {
 
     public JavaCheck() {
         final double version = Double.parseDouble(System.getProperty("java.runtime.version").split("\\.")[0] + "." + System.getProperty("java.runtime.version").split("\\.")[1]);
-        Log.log("Java Version: " + version);
+        Log.system("Java Version: " + version);
         if (version >= MIN_JAVA_VERSION) javaVersion = true;
     }
 

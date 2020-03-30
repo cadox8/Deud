@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class Config {
 
+    private boolean debug = true;
+
     private boolean fullScreen = true;
 
     private float masterVolume = 1;

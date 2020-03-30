@@ -4,6 +4,8 @@ import com.diogonunes.jcdp.color.ColoredPrinter;
 import com.diogonunes.jcdp.color.api.Ansi;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import me.cadox8.deud.api.GameAPI;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +15,7 @@ public class Log {
 
     @RequiredArgsConstructor
     public enum LogType {
+        SYSTEM("[System]"),
         SUCCESS("[Success]"),
         NORMAL(""),
         WARNING("[Warning]"),
@@ -22,11 +25,23 @@ public class Log {
         @Getter private final String prefix;
     }
 
+    @Setter private static GameAPI gameAPI;
+
     private static final ColoredPrinter debug = new ColoredPrinter.Builder(1, true).foreground(Ansi.FColor.MAGENTA).build();
     private static final ColoredPrinter danger = new ColoredPrinter.Builder(1, true).foreground(Ansi.FColor.RED).build();
     private static final ColoredPrinter warning = new ColoredPrinter.Builder(1, true).foreground(Ansi.FColor.YELLOW).build();
     private static final ColoredPrinter normal = new ColoredPrinter.Builder(1, true).foreground(Ansi.FColor.WHITE).build();
     private static final ColoredPrinter success = new ColoredPrinter.Builder(1, true).foreground(Ansi.FColor.GREEN).build();
+    private static final ColoredPrinter system = new ColoredPrinter.Builder(1, true).foreground(Ansi.FColor.CYAN).build();
+
+    /**
+     * Logs the info as Debug System
+     *
+     * @param info The object to be logged
+     */
+    public static void system(Object info){
+        log(system, LogType.SYSTEM, info);
+    }
 
     /**
      * Logs the info as Debug
@@ -34,7 +49,7 @@ public class Log {
      * @param info The object to be logged
      */
     public static void log(Object info){
-        log(debug, LogType.DEBUG, info);
+        if (gameAPI.isDebug()) log(debug, LogType.DEBUG, info);
     }
 
     /**
