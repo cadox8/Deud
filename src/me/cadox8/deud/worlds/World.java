@@ -2,31 +2,28 @@ package me.cadox8.deud.worlds;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.game.Game;
+import me.cadox8.deud.managers.EmotesManager;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.managers.ItemManager;
+import me.cadox8.deud.managers.ParticleManager;
 import me.cadox8.deud.nysvaui.components.base.UIBlock;
 import me.cadox8.deud.nysvaui.helpers.NysvaColor;
 import me.cadox8.deud.nysvaui.helpers.UIDimension;
 import me.cadox8.deud.particles.Particle;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.tiles.Tiles;
-import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,13 +31,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class World {
 
-    private GameAPI gameAPI;
+    private final GameAPI gameAPI;
 
     @Getter private int width, height;
     private int spawnX, spawnY;
     private TileUtils[][] tiles;
 
-    private String path;
+    private final String path;
 
     private boolean dark;
 
@@ -50,10 +47,15 @@ public class World {
 
     //Entities
     @Getter private final EntityManager entityManager;
+
     // Item
     @Getter private final ItemManager itemManager;
 
-    private final ArrayList<Particle> particles;
+    // Particles
+    @Getter private final ParticleManager particleManager;
+
+    // Particles
+    @Getter private final EmotesManager emotesManager;
 
     public World(@NonNull GameAPI gameAPI, String path) {
         this.gameAPI = gameAPI;
@@ -70,17 +72,13 @@ public class World {
 
         this.entityManager = new EntityManager(gameAPI, new Player(gameAPI, loc.getX(), loc.getY()));
         this.itemManager = new ItemManager(gameAPI);
+        this.particleManager = new ParticleManager(gameAPI);
+        this.emotesManager = new EmotesManager(gameAPI);
 
         addEntities();
 
-        particles = new ArrayList<>();
-
         base = new UIBlock(gameAPI, NysvaColor.BLACK);
         base.setUiDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
-    }
-
-    public void addParticles(@NonNull Particle particle) {
-        particles.add(particle);
     }
 
     private void addEntities() {
@@ -99,10 +97,8 @@ public class World {
     public void tick() {
         itemManager.tick();
         entityManager.tick();
-
-        // Particles
-        particles.forEach(Particle::tick);
-        particles.removeIf(p -> p.getAnimation().hasEnd());
+        particleManager.tick();
+        emotesManager.tick();
     }
 
     public void render(Graphics g) {
@@ -120,12 +116,11 @@ public class World {
             }
         }
 
-        // Items
-        itemManager.render(g);
-        //Entities
-        entityManager.render(g, dark);
 
-        particles.forEach(p -> p.render(g, 100, 15));
+        itemManager.render(g);
+        entityManager.render(g, dark);
+        particleManager.render(g);
+        emotesManager.render(g);
     }
 
     public Tile getTile(int x, int y) {
@@ -161,6 +156,7 @@ public class World {
                 y.incrementAndGet();
             }
         });
+        worldData.getParticles().forEach(p -> getParticleManager().addParticle(p));
     }
 
     @Override
@@ -194,8 +190,23 @@ public class World {
 
         private final String[] tiles;
 
+        private final ParticleData[] particles;
+
         public List<String> getTiles() {
             return Arrays.asList(tiles);
+        }
+
+        public List<Particle> getParticles() {
+            final List<Particle> particle = new ArrayList<>();
+            Arrays.asList(particles).forEach(p -> particle.add(Particle.valueOf(p.getName()).setPosition(p.getX(), p.getY())));
+            return particle;
+        }
+
+        @Data
+        @RequiredArgsConstructor
+        private static class ParticleData {
+            private final String name;
+            private final int x, y;
         }
     }
 }

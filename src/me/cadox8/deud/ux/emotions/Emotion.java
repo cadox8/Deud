@@ -1,17 +1,22 @@
 package me.cadox8.deud.ux.emotions;
 
+import lombok.Getter;
 import me.cadox8.deud.animations.AnimationBump;
 import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.Location;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Emotion {
 
-    private final AnimationBump anim;
+    @Getter private final AnimationBump anim;
 
     public Emotion(BufferedImage image, Entity entity) {
-        anim = new AnimationBump(1, image, entity);
+        this(image, entity.getLocation());
+    }
+    public Emotion(BufferedImage image, Location location) {
+        anim = new AnimationBump(1, image, location);
     }
 
     public void render(Graphics g) {

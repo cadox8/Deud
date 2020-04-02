@@ -21,6 +21,15 @@ public class Launcher {
     @Getter private static Discord discord;
 
     public static void main(String[] args) {
+        checks();
+        discord = new Discord();
+        final Game game = new Game("Deud" + " ~~ " + VERSION, getDimension().width, getDimension().height); //new Game("Deud" + " ~~ " + VERSION, 1250, 800).start();
+
+        game.start();
+    }
+
+
+    private static void checks() {
         try {
             if (!new JavaCheck().hasJavaVersion()) throw new JavaVersionException("Deud needs Java 1.9 or above to run");
         } catch (JavaVersionException e) {
@@ -28,9 +37,6 @@ public class Launcher {
             return;
         }
         FileUtils.checkFile();
-        discord = new Discord();
-        //new Game("Deud" + " ~~ " + VERSION, 1250, 800).start();
-        new Game("Deud" + " ~~ " + VERSION, getDimension().width, getDimension().height).start();
     }
 
     private static Dimension getDimension() {

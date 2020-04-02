@@ -1,6 +1,7 @@
 package me.cadox8.deud.particles;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.graphics.textures.Assets;
 
@@ -14,14 +15,20 @@ public enum Particle {
 
     @Getter private final Animation animation;
 
+    @Getter private int priority, x, y;
+
     Particle(BufferedImage image, int velocity) {
         this(new BufferedImage[]{image}, velocity);
     }
     Particle(BufferedImage[] images, int velocity) {
         animation = new Animation(velocity * 100, images);
+
+        this.priority = 0;
+        this.x = 0;
+        this.y = 0;
     }
 
-    public void render(Graphics g, int x, int y) {
+    public void render(Graphics g) {
         g.drawImage(animation.getCurrentFrame(), x, y, null);
     }
 
@@ -31,6 +38,17 @@ public enum Particle {
 
     public Particle withEnd() {
         animation.withEnd(true);
+        return this;
+    }
+
+    public Particle setPriority(int priority) {
+        this.priority = priority;
+        return this;
+    }
+
+    public Particle setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
         return this;
     }
 }

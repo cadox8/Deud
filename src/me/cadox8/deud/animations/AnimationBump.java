@@ -2,6 +2,7 @@ package me.cadox8.deud.animations;
 
 import lombok.Getter;
 import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.Location;
 
 import java.awt.image.BufferedImage;
 
@@ -10,14 +11,17 @@ public class AnimationBump extends Animation {
     private final float x, y;
     @Getter private float newX, newY;
 
-    public AnimationBump(int speed, BufferedImage frame, Entity entity) {
-        this(speed, new BufferedImage[]{frame}, entity);
+    public AnimationBump(int speed, BufferedImage frame, Location location) {
+        this(speed, new BufferedImage[]{frame}, location);
     }
-    public AnimationBump(int speed, BufferedImage[] frames, Entity entity) {
+    public AnimationBump(int speed, BufferedImage frame, Entity entity) {
+        this(speed, new BufferedImage[]{frame}, entity.getLocation());
+    }
+    public AnimationBump(int speed, BufferedImage[] frames, Location location) {
         super(speed, frames);
 
-        this.x = entity.getX();
-        this.y = entity.getY() - (float)entity.getBounds().getHeight();
+        this.x = location.getX();
+        this.y = location.getY();
     }
 
     @Override
