@@ -73,9 +73,8 @@ public class Npc extends Creature {
         inventory.getItems().forEach(i -> dropItem(i, new Random().nextFloat()));
     }
 
-    public Npc addTexts(String... texts) {
+    public void addTexts(String... texts) {
         this.text.addAll(Arrays.asList(texts));
-        return this;
     }
     public void setAngry(boolean angry) {
         ((FriendsAI)ai).setAngry(angry);
@@ -84,7 +83,9 @@ public class Npc extends Creature {
     public void addQuest(Quest quest) {
         this.quest = quest;
     }
-
+    public boolean hasQuest() {
+        return this.quest != null;
+    }
     public Quest getQuest() {
         return quest;
     }

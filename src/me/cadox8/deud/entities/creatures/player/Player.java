@@ -158,6 +158,8 @@ public class Player extends Creature {
         g.drawImage(getCurrentAnimationFrame(), (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
 
         //if (GameAPI.isDebug()) {
+            g.setColor(Color.black);
+            g.fillRect(1100, 775, 130, 30);
             g.setColor(Color.WHITE);
             g.drawString("X: " + x + " Y: " + y + " Dir: " + direction, 1105, 795);
         //}

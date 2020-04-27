@@ -9,7 +9,7 @@ import me.cadox8.deud.entities.creatures.Creature;
 
 public class FriendsAI extends AI {
 
-    private Creature creature;
+    private final Creature creature;
 
     @Setter @Getter private boolean angry;
 

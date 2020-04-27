@@ -31,7 +31,7 @@ public class EntityData {
     }
 
     @Data
-    public class Entities {
+    public static class Entities {
 
         private String type = "";
         private int health = 0;
@@ -72,7 +72,7 @@ public class EntityData {
         }
 
         @Data
-        public class ItemHelper {
+        public static class ItemHelper {
             private int id = 0;
             private int count = 0;
         }
@@ -99,10 +99,10 @@ public class EntityData {
         ARROW(Arrow.class),
         HOUSE(House.class);
 
-        private Class<? extends Entity> supClass;
+        private final Class<? extends Entity> supClass;
 
         public static EntityType parseClass(String name) {
-            return Arrays.asList(EntityType.values()).stream().filter(e -> e.name().toLowerCase().equalsIgnoreCase(name.toLowerCase())).findFirst().orElse(null);
+            return Arrays.stream(EntityType.values()).filter(e -> e.name().toLowerCase().equalsIgnoreCase(name.toLowerCase())).findFirst().orElse(null);
         }
     }
 }

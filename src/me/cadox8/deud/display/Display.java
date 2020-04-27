@@ -46,7 +46,7 @@ public class Display {
         canvas.setMinimumSize(new Dimension(width, height));
         canvas.setFocusable(false);
 
-        frame.setIconImage(Utils.loadImage("/utils/icon.png")); //Icon
+        frame.setIconImage(Utils.loadImage("/utils/icon.png"));
 
         frame.add(canvas);
         frame.pack();
@@ -54,7 +54,7 @@ public class Display {
     }
 
     public void changeCursor(BufferedImage image) {
-        final Cursor c = toolkit.createCustomCursor(image , new Point(frame.getX(), frame.getY()), "deud1");
+        final Cursor c = toolkit.createCustomCursor(image , new Point(frame.getX(), frame.getY()), "deud");
         frame.setCursor(c);
     }
 }
