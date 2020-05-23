@@ -9,12 +9,12 @@
  *
  */
 
-package me.cadox8.deud.nysvaui.components.base;
+package me.cadox8.deud.ui.components.base;
 
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.nysvaui.NysvaUI;
-import me.cadox8.deud.nysvaui.helpers.NysvaColor;
-import me.cadox8.deud.nysvaui.helpers.UIDimension;
+import me.cadox8.deud.ui.NysvaUI;
+import me.cadox8.deud.ui.helpers.NysvaColor;
+import me.cadox8.deud.ui.helpers.UIDimension;
 
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
@@ -37,7 +37,6 @@ public class UIBlock extends NysvaUI {
 
     @Override
     public void tick() {
-        if (!components.isEmpty()) components.forEach(NysvaUI::tick);
     }
 
     @Override
@@ -54,28 +53,14 @@ public class UIBlock extends NysvaUI {
             g2.draw(r);
             g2.fill(r);
         }
-
-        if (!components.isEmpty()) components.forEach(c -> c.render(g));
     }
 
     @Override
     public void onClick() {
-        if (!components.isEmpty()) components.forEach(NysvaUI::onClick);
     }
 
     public void transparentBackground(int alpha) {
         setBackground(background.transparent(alpha));
-    }
-
-    public void addUIComponent(NysvaUI component) {
-        final UIDimension childComponent = component.getUiDimension();
-        final UIDimension rd = new UIDimension(childComponent.getRefX() + getUiDimension().getX() + 5, 5 + childComponent.getRefY() + getUiDimension().getY(), childComponent.getWidth(), childComponent.getHeight());
-        rd.setRefX(component.getUiDimension().getRefX());
-        rd.setRefY(component.getUiDimension().getRefY());
-        component.setUiDimension(rd);
-        component.setMaxWidth(getUiDimension().getMaxWidth());
-        components.add(component);
-        component.setParent(this);
     }
 
     public NysvaColor getBackground() {

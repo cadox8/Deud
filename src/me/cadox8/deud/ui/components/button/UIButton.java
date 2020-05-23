@@ -9,13 +9,13 @@
  *
  */
 
-package me.cadox8.deud.nysvaui.components.button;
+package me.cadox8.deud.ui.components.button;
 
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.nysvaui.ClickListener;
-import me.cadox8.deud.nysvaui.components.base.UIBlock;
-import me.cadox8.deud.nysvaui.components.text.UIText;
-import me.cadox8.deud.nysvaui.helpers.NysvaColor;
+import me.cadox8.deud.ui.ClickListener;
+import me.cadox8.deud.ui.components.base.UIBlock;
+import me.cadox8.deud.ui.components.text.UIText;
+import me.cadox8.deud.ui.helpers.NysvaColor;
 
 import java.awt.*;
 

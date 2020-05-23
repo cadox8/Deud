@@ -4,6 +4,7 @@ import lombok.NonNull;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.audio.Sound;
+import me.cadox8.deud.audio.Sounds;
 import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.ui.NysvaManager;
@@ -23,7 +24,7 @@ public class MenuState extends State {
 
     private final NysvaManager nysvaManager;
 
-    private final Sound menu = Sound.MENU;
+    private final Sound menu = Sounds.MENU.getSound();
 
     public MenuState(@NonNull GameAPI gameAPI) {
         super(gameAPI);
@@ -40,7 +41,7 @@ public class MenuState extends State {
             if (gameAPI.getGame().getPlayerData() == null) gameAPI.getPlayer().setNick("Arya");
 
             menu.stop();
-            Sound.TOWN_MUSIC.playLoop();
+            Sounds.TOWN_MUSIC.playLoop();
 
             //gameAPI.getGame().getDisplay().getFrame().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
         });

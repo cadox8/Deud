@@ -9,7 +9,7 @@
  *
  */
 
-package me.cadox8.deud.nysvaui.helpers;
+package me.cadox8.deud.ui.helpers;
 
 import lombok.Data;
 import lombok.ToString;

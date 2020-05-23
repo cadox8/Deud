@@ -6,6 +6,7 @@ import lombok.Setter;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.audio.Sound;
+import me.cadox8.deud.audio.Sounds;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
@@ -215,22 +216,22 @@ public class Player extends Creature {
         if (gameAPI.getKeyManager().up) {
             yMove = -speed;
             setDirection(1);
-            Sound.ENTITY_WALK_GRASS.play();
+            Sounds.ENTITY_WALK_GRASS.play();
         }
         if (gameAPI.getKeyManager().down) {
             yMove = speed;
             setDirection(0);
-            Sound.ENTITY_WALK_GRASS.play();
+            Sounds.ENTITY_WALK_GRASS.play();
         }
         if (gameAPI.getKeyManager().left) {
             xMove = -speed;
             setDirection(3);
-            Sound.ENTITY_WALK_GRASS.play();
+            Sounds.ENTITY_WALK_GRASS.play();
         }
         if (gameAPI.getKeyManager().right) {
             xMove = speed;
             setDirection(2);
-            Sound.ENTITY_WALK_GRASS.play();
+            Sounds.ENTITY_WALK_GRASS.play();
         }
 
         if (gameAPI.getMouseManager().isRightPressed()) getPlayerInventory().getUsableItem().use(this);

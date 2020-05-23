@@ -9,7 +9,7 @@
  *
  */
 
-package me.cadox8.deud.nysvaui.helpers;
+package me.cadox8.deud.ui.helpers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class NysvaUtils {
 
-    private static Random r = new Random();
+    private static final Random r = new Random();
     private static NysvaColor lastColor = null;
 
     public static NysvaColor randomColor(NysvaColor... exclude) {
@@ -33,6 +33,7 @@ public class NysvaUtils {
     public static NysvaColor randomColor(List<NysvaColor> selectedColors) {
         final NysvaColor color = selectedColors.get(r.nextInt(selectedColors.size()));
         if (lastColor != null && color.getRGB() == lastColor.getRGB()) return randomColor(selectedColors);
+        lastColor = color;
         return color;
     }
 }

@@ -1,7 +1,7 @@
-package me.cadox8.deud.nysvaui.components.text;
+package me.cadox8.deud.ui.components.text;
 
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.nysvaui.ClickListener;
+import me.cadox8.deud.ui.ClickListener;
 
 public class UITextButton extends UIText {
 
