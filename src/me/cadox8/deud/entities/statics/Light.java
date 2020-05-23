@@ -12,7 +12,7 @@ public class Light extends StaticEntity {
     @Getter @Setter private int radius;
     @Getter @Setter private Color[] colors;
 
-    @Getter private float luminosity;
+    @Getter @Setter private float luminosity;
 
     private boolean staticLight = true;
 
@@ -37,13 +37,9 @@ public class Light extends StaticEntity {
     @Override
     public void postRender(Graphics g) {
         final Graphics2D g2 = (Graphics2D)g;
-        final RadialGradientPaint p;
-
-        if (isStatic()) {
-            p = new RadialGradientPaint(new Point((int)x - (int)gameAPI.getGameCamera().getXOffset(), (int)y - (int)gameAPI.getGameCamera().getYOffset()), radius, dist, colors);
-        } else {
-            p = new RadialGradientPaint(new Point((int)x, (int)y), radius, dist, colors);
-        }
+        Point point = new Point((int)x, (int)y);
+        if (isStatic()) point = new Point((int)x - (int)gameAPI.getGameCamera().getXOffset(), (int)y - (int)gameAPI.getGameCamera().getYOffset());
+        final RadialGradientPaint p = new RadialGradientPaint(point, radius, dist, colors);
 
         g2.setPaint(p);
         g2.fillRect((int)x - radius, (int)y - radius, radius * 2, radius * 2);

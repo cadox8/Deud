@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Sign extends StaticEntity {
 
-    private BufferedImage img;
+    private final BufferedImage img;
     @Setter @Getter private Sign sign;
     @Getter private List<String> text;
 
