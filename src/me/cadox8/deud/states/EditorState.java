@@ -2,7 +2,7 @@ package me.cadox8.deud.states;
 
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.nysvaui.NysvaManager;
+import me.cadox8.deud.ui.NysvaManager;
 import me.cadox8.deud.ux.editor.Editor;
 
 import java.awt.*;

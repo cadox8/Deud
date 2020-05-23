@@ -9,7 +9,7 @@
  *
  */
 
-package me.cadox8.deud.nysvaui;
+package me.cadox8.deud.ui;
 
 public interface ClickListener {
 

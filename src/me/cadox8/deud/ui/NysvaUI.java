@@ -9,13 +9,13 @@
  *
  */
 
-package me.cadox8.deud.nysvaui;
+package me.cadox8.deud.ui;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.nysvaui.helpers.UIDimension;
+import me.cadox8.deud.ui.helpers.UIDimension;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -33,17 +33,12 @@ public abstract class NysvaUI {
 
     protected UIDimension uiDimension;
 
-    private boolean draggable = false;
     protected boolean hovering = false;
     protected boolean enabled = true;
 
+    @Getter @Setter private boolean clickable = true;
+
     protected Font font = GameAPI.getGameFont();
-
-    protected int maxWidth = -1;
-
-    private NysvaUI parent;
-    protected List<NysvaUI> components;
-    protected int marginX, marginY;
 
     @Getter @Setter protected Object extraData = null;
     @Getter @Setter protected boolean reorder = false;
@@ -55,11 +50,7 @@ public abstract class NysvaUI {
         componentID = new Random().nextLong();
         this.gameAPI = gameAPI;
 
-        components = new ArrayList<>();
         setUiDimension(new UIDimension());
-
-        marginX = 5;
-        marginY = 10;
     }
 
     public abstract void tick();
@@ -73,19 +64,6 @@ public abstract class NysvaUI {
 
     public void onMouseMove(MouseEvent e) {
         hovering = getUiDimension().getBounds().contains(e.getX(), e.getY());
-    }
-
-    public void onMouseDragged(MouseEvent e) {
-        if (hovering && isDraggable()) {
-            getUiDimension().setX(getUiDimension().getX() + (e.getX() - getUiDimension().getX()));
-            getUiDimension().setY(getUiDimension().getY() + (e.getY() - getUiDimension().getY()));
-        }
-
-        // Move all components inside
-        if (!components.isEmpty()) components.forEach(c -> {
-            c.getUiDimension().setX(c.getParent().getUiDimension().getX() + c.getUiDimension().getRefX());
-            c.getUiDimension().setY(c.getParent().getUiDimension().getY() + c.getUiDimension().getRefY());
-        });
     }
 
     public void onMouseClicked(MouseEvent e) {
@@ -110,19 +88,6 @@ public abstract class NysvaUI {
     }
     public void setUiDimension(UIDimension uiDimension) {
         this.uiDimension = uiDimension;
-        setMaxWidth(uiDimension.getMaxWidth());
-    }
-
-    public void setMaxWidth(int maxWidth) {
-        this.maxWidth = maxWidth;
-    }
-
-    public boolean isDraggable() {
-        return draggable;
-    }
-
-    public void setDraggable(boolean draggable) {
-        this.draggable = draggable;
     }
 
     public boolean isHovering() {
@@ -150,14 +115,6 @@ public abstract class NysvaUI {
     }
     public void resizeFont(int size) {
         customizeFont(0, size);
-    }
-
-    public NysvaUI getParent() {
-        return parent;
-    }
-
-    public void setParent(NysvaUI parent) {
-        this.parent = parent;
     }
 
     public long getComponentID() {

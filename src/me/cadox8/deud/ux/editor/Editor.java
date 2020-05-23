@@ -3,13 +3,13 @@ package me.cadox8.deud.ux.editor;
 import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.graphics.textures.GUI;
-import me.cadox8.deud.nysvaui.NysvaManager;
-import me.cadox8.deud.nysvaui.NysvaUI;
-import me.cadox8.deud.nysvaui.components.field.UIField;
-import me.cadox8.deud.nysvaui.components.images.UIImage;
-import me.cadox8.deud.nysvaui.components.text.UIText;
-import me.cadox8.deud.nysvaui.helpers.NysvaColor;
-import me.cadox8.deud.nysvaui.helpers.UIDimension;
+import me.cadox8.deud.ui.NysvaManager;
+import me.cadox8.deud.ui.NysvaUI;
+import me.cadox8.deud.ui.components.field.UIField;
+import me.cadox8.deud.ui.components.images.UIImage;
+import me.cadox8.deud.ui.components.text.UIText;
+import me.cadox8.deud.ui.helpers.NysvaColor;
+import me.cadox8.deud.ui.helpers.UIDimension;
 
 import java.util.Arrays;
 

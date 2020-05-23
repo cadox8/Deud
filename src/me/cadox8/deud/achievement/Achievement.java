@@ -3,9 +3,9 @@ package me.cadox8.deud.achievement;
 import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.graphics.textures.Assets;
-import me.cadox8.deud.nysvaui.components.base.UIBlock;
-import me.cadox8.deud.nysvaui.components.images.UIImage;
-import me.cadox8.deud.nysvaui.helpers.UIDimension;
+import me.cadox8.deud.ui.components.base.UIBlock;
+import me.cadox8.deud.ui.components.images.UIImage;
+import me.cadox8.deud.ui.helpers.UIDimension;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -34,8 +34,6 @@ public class Achievement {
         block.setRounded(true);
 
         image.setUiDimension(new UIDimension(5, 18, 64, 64));
-
-        block.addUIComponent(image);
         block.render(g);
     }
 }

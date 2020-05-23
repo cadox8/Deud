@@ -6,11 +6,11 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.audio.Sound;
 import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.GUI;
-import me.cadox8.deud.nysvaui.NysvaManager;
-import me.cadox8.deud.nysvaui.components.images.UIImage;
-import me.cadox8.deud.nysvaui.components.images.UIImageButton;
-import me.cadox8.deud.nysvaui.components.text.UITextButton;
-import me.cadox8.deud.nysvaui.helpers.UIDimension;
+import me.cadox8.deud.ui.NysvaManager;
+import me.cadox8.deud.ui.components.images.UIImage;
+import me.cadox8.deud.ui.components.images.UIImageButton;
+import me.cadox8.deud.ui.components.text.UITextButton;
+import me.cadox8.deud.ui.helpers.UIDimension;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Updater;
 

@@ -9,10 +9,10 @@
  *
  */
 
-package me.cadox8.deud.nysvaui;
+package me.cadox8.deud.ui;
 
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.nysvaui.components.images.UIImageButton;
+import me.cadox8.deud.ui.components.images.UIImageButton;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -102,27 +102,6 @@ public class NysvaManager {
         }
     }
 
-    public void tick(ArrayList<Item> items) {
-        final AtomicInteger index = new AtomicInteger(0);
-        synchronized (objects) {
-            try {
-                objects.stream().filter(NysvaUI::isEnabled).forEach(o -> {
-                    if (o instanceof UIImageButton) {
-                        try {
-                            ((UIImageButton) o).changeImage(items.get(index.getAndAdd(1)).getTexture());
-                            o.tick();
-                        } catch (IndexOutOfBoundsException e) {
-                            ((UIImageButton) o).changeImage(items.get(index.addAndGet(-1)).getTexture());
-                            o.tick();
-                        }
-                    }
-                });
-                index.set(0);
-                //reorder();
-            } catch (ConcurrentModificationException e) {}
-        }
-    }
-
     public void render(Graphics g) {
         synchronized (objects) {
             try {
@@ -131,14 +110,11 @@ public class NysvaManager {
         }
     }
 
-    public void onMouseDragged(MouseEvent e) {
-        objects.forEach(o -> o.onMouseDragged(e));
-    }
     public void onMouseMove(MouseEvent e) {
         objects.forEach(o -> o.onMouseMove(e));
     }
     public void onMouseClicked(MouseEvent e) {
-        objects.forEach(o -> o.onMouseClicked(e));
+        objects.stream().filter(NysvaUI::isClickable).forEach(o -> o.onMouseClicked(e));
     }
 
     private void reorder() {

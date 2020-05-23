@@ -7,12 +7,11 @@ import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.Items;
-import me.cadox8.deud.nysvaui.NysvaManager;
-import me.cadox8.deud.nysvaui.NysvaUI;
-import me.cadox8.deud.nysvaui.components.images.UIImage;
-import me.cadox8.deud.nysvaui.components.images.UIImageButton;
-import me.cadox8.deud.nysvaui.helpers.UIDimension;
-import me.cadox8.deud.utils.Log;
+import me.cadox8.deud.ui.NysvaManager;
+import me.cadox8.deud.ui.NysvaUI;
+import me.cadox8.deud.ui.components.images.UIImage;
+import me.cadox8.deud.ui.components.images.UIImageButton;
+import me.cadox8.deud.ui.helpers.UIDimension;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -53,6 +52,7 @@ public abstract class Inventory {
         final UIImage gui = new UIImage(gameAPI, baseTexture);
         gui.setUiDimension(new UIDimension(650, 50, GUI.chest.getWidth(), GUI.chest.getHeight()));
         gui.setResize(false);
+        gui.setClickable(false);
 
         getNysvaManager().addObject(gui);
 
@@ -72,11 +72,11 @@ public abstract class Inventory {
                 if (selectedSlot == -1) {
                     selectedSlot = getItems().indexOf(i);
                 } else {
-                    final Item selectedItem = getItems().get(selectedSlot);
+/*                    final Item selectedItem = getItems().get(selectedSlot);
                     final Item newItem = getItems().get(getItems().indexOf(i));
                     getItems().set(getItems().indexOf(i), selectedItem);
                     getItems().set(selectedSlot, newItem);
-                    selectedSlot = -1;
+                    selectedSlot = -1;*/
                 }
             });
             item.setUiDimension(new UIDimension(xPos + (xSlot.get() * 64) + 1, yPos + (ySlot.get() * 64) + 1, 60, 60));

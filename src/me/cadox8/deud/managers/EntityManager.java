@@ -8,9 +8,9 @@ import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Light;
-import me.cadox8.deud.nysvaui.components.base.UIBlock;
-import me.cadox8.deud.nysvaui.helpers.NysvaColor;
-import me.cadox8.deud.nysvaui.helpers.UIDimension;
+import me.cadox8.deud.ui.components.base.UIBlock;
+import me.cadox8.deud.ui.helpers.NysvaColor;
+import me.cadox8.deud.ui.helpers.UIDimension;
 import me.cadox8.deud.utils.Log;
 
 import java.awt.*;

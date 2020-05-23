@@ -6,8 +6,8 @@ import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.Items;
-import me.cadox8.deud.nysvaui.components.images.UIImageButton;
-import me.cadox8.deud.nysvaui.helpers.UIDimension;
+import me.cadox8.deud.ui.components.images.UIImageButton;
+import me.cadox8.deud.ui.helpers.UIDimension;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -41,8 +41,7 @@ public class PlayerInventory extends CreatureInventory {
 
         if (!hasItem(getUsableItem())) setUsableItem(Items.getHand());
 
-        getNysvaManager().tick(getItems());
-        selectedItem.tick();
+        getNysvaManager().tick();
     }
 
     @Override
@@ -52,8 +51,6 @@ public class PlayerInventory extends CreatureInventory {
         getNysvaManager().render(g);
         selectedItem.render(g);
         hoverSelector(g, 855, 646);
-
-        //getNysvaManager().getObjects().forEach(o -> o.renderUIDimension(g));
     }
 
     public void setUsableItem(Item item) {

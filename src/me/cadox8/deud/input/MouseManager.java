@@ -2,7 +2,7 @@ package me.cadox8.deud.input;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.nysvaui.NysvaManager;
+import me.cadox8.deud.ui.NysvaManager;
 
 import java.awt.event.*;
 
