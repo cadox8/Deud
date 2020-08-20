@@ -3,11 +3,14 @@ package me.cadox8.deud.ux.editor;
 import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.graphics.textures.GUI;
+import me.cadox8.deud.states.State;
 import me.cadox8.deud.ui.NysvaManager;
 import me.cadox8.deud.ui.NysvaUI;
+import me.cadox8.deud.ui.components.button.UIButton;
 import me.cadox8.deud.ui.components.field.UIField;
 import me.cadox8.deud.ui.components.images.UIImage;
 import me.cadox8.deud.ui.components.text.UIText;
+import me.cadox8.deud.ui.components.text.UITextButton;
 import me.cadox8.deud.ui.helpers.NysvaColor;
 import me.cadox8.deud.ui.helpers.UIDimension;
 
@@ -34,17 +37,24 @@ public class Editor {
         final UIImage background = new UIImage(gameAPI, GUI.backgroundEditor);
         final UIText playerNameLabel = new UIText(gameAPI, "Nick: ");
         final UIField playerName = new UIField(gameAPI);
+        final UITextButton exit = new UITextButton(gameAPI, "Back to Menu", () -> {
+            System.out.println("test");
+            gameAPI.getMouseManager().setNysvaUI(null);
+            State.setState(gameAPI.getGame().getMenuState());
+        });
         
 
         background.setUiDimension(new UIDimension(-15, -15, screenWidth + 30, screenHeight + 30));
         playerName.setUiDimension(new UIDimension((screenWidth / 2) - 100, 20, 200, 20));
         playerNameLabel.setUiDimension(new UIDimension((screenWidth / 2) - 155, 20, 100, 20));
+        exit.setUiDimension(new UIDimension(5, 5, 200, 200));
 
         background.setResize(false);
         playerNameLabel.setTextColor(NysvaColor.WHITE);
         playerName.setText("Testing");
+        exit.setTextColor(NysvaColor.WHITE);
 
-        add(background, playerName, playerNameLabel);
+        add(background, playerName, playerNameLabel, exit);
     }
 
     private void add(NysvaUI... components) {

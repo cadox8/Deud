@@ -32,7 +32,7 @@ public class Door extends StaticEntity {
         setDamageable(false);
 
         bounds.x = 2;
-        bounds.y = (int) (height / 2f);
+        bounds.y = (int) (height / 2f) - 15;
         bounds.width = width - 6;
         bounds.height = (int) (height - height / 2f);
     }

@@ -11,8 +11,6 @@ import java.awt.*;
 
 public class CreatureInventory extends Inventory {
 
-    @Getter @Setter protected Item usableItem = Items.getHand();
-
     public CreatureInventory(GameAPI gameAPI) {
         super(gameAPI);
 

@@ -24,8 +24,12 @@ public class PlayerInventory extends CreatureInventory {
 
         gameAPI.getMouseManager().setNysvaUI(getNysvaManager());
 
-        selectedItem = new UIImageButton(gameAPI, getUsableItem().getTexture(), () -> {});
+        selectedItem = new UIImageButton(gameAPI, getUsableItem().getTexture(), () -> setUsableItem(Items.getHand()));
         selectedItem.setUiDimension(new UIDimension(676 + 5 + 64, 130 + 5 + (64 * 6), 55, 55));
+        selectedItem.setExtraData(109994);
+        selectedItem.setResize(false);
+
+        getNysvaManager().addObject(selectedItem);
     }
 
     @Override
@@ -36,11 +40,10 @@ public class PlayerInventory extends CreatureInventory {
             gameAPI.getEntityManager().getEntities().stream().filter(e -> e instanceof Sign).forEach(e -> ((Sign) e).setSign(null));
             setSelectedSlot(-1);
         }
-
         if (!isActive()) return;
 
         if (!hasItem(getUsableItem())) setUsableItem(Items.getHand());
-
+        selectedItem.changeImage(getUsableItem().getTexture());
         getNysvaManager().tick();
     }
 

@@ -25,10 +25,10 @@ public class Animation {
     }
 
     public void tick() {
+        if (end) return;
         timer += System.currentTimeMillis() - lastTime;
         lastTime = System.currentTimeMillis();
 
-        if (end) return;
         if (timer > speed) {
             index++;
             timer = 0;
@@ -41,6 +41,10 @@ public class Animation {
 
     public BufferedImage getCurrentFrame() {
         return frames[index];
+    }
+
+    public BufferedImage getFirstFrame() {
+        return frames[0];
     }
 
     public void withEnd(boolean end) {

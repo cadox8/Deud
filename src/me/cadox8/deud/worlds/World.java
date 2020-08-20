@@ -116,7 +116,6 @@ public class World {
             }
         }
 
-
         itemManager.render(g);
         entityManager.render(g, dark);
         particleManager.render(g);

@@ -24,18 +24,7 @@ public enum Tiles {
     GRASS_DIRT_SQUARE_3(5, 2, Assets.grass_dirt2),
     GRASS_DIRT_SQUARE_4(5, 3, Assets.grass_dirt2),
     SAND(6, Assets.sand),
-    BUG(7, Assets.bug, true),
-
-    // House 2
-    HOUSE2_R1(19, Assets.house2[0], true),
-    HOUSE2_R2(20, Assets.house2[3], true),
-    HOUSE2_R3(21, Assets.house2[6], true),
-    HOUSE2_R4(22, Assets.house2[1], true),
-    HOUSE2_W1(23, Assets.house2[7], true),
-    HOUSE2_R5(24, Assets.house2[2], true),
-    HOUSE2_R6(25, Assets.house2[5], true),
-    HOUSE2_R7(26, Assets.house2[8], true),
-    HOUSE2_JOIN(27, Assets.house2[4], true);
+    BUG(7, Assets.bug, true);
 
     private final int id;
     private final int subID;

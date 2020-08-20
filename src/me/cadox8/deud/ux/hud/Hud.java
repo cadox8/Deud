@@ -37,7 +37,7 @@ public class Hud {
 
         //Item
         g.drawImage(player.getPlayerInventory().getUsableItem().getTexture(), 22, 115, null);
-        Text.drawString(g, player.getPlayerInventory().getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, false, Color.BLACK, 2);
+        //Text.drawString(g, player.getPlayerInventory().getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, false, Color.BLACK, 2);
     }
 
     //

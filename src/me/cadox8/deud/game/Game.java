@@ -48,7 +48,7 @@ public class Game implements Runnable {
     //States
     @Getter @Setter public State editorState;
     @Getter @Setter public State gameState;
-    public State menuState;
+    @Getter public State menuState;
 
     // DamageManager
     @Getter private DamageManager damageManager;

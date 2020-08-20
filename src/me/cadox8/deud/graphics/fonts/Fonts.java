@@ -22,7 +22,7 @@ public class Fonts {
         return deudFonts.get(id);
     }
 
-    public static Font loadFont(String path, float size) {
+    private static Font loadFont(String path, float size) {
         try {
             return Font.createFont(Font.TRUETYPE_FONT, new File(path)).deriveFont(Font.PLAIN, size);
         } catch (FontFormatException | IOException e) {

@@ -34,6 +34,8 @@ public abstract class Inventory {
 
     @Getter private final NysvaManager nysvaManager;
 
+    @Getter @Setter protected Item usableItem = Items.getHand();
+
     public Inventory(GameAPI gameAPI) {
         this.gameAPI = gameAPI;
         items = new ArrayList<>();
@@ -69,15 +71,9 @@ public abstract class Inventory {
             if (ySlot.get() > 6) return;
 
             final UIImageButton item = new UIImageButton(gameAPI, i.getTexture(), () -> {
-                if (selectedSlot == -1) {
-                    selectedSlot = getItems().indexOf(i);
-                } else {
-/*                    final Item selectedItem = getItems().get(selectedSlot);
-                    final Item newItem = getItems().get(getItems().indexOf(i));
-                    getItems().set(getItems().indexOf(i), selectedItem);
-                    getItems().set(selectedSlot, newItem);
-                    selectedSlot = -1;*/
-                }
+                if (selectedSlot == -1) selectedSlot = getItems().indexOf(i);
+
+                if (getItems().get(selectedSlot).getId() == 7 && getUsableItem().getId() != 7) setUsableItem(getItems().get(selectedSlot));
             });
             item.setUiDimension(new UIDimension(xPos + (xSlot.get() * 64) + 1, yPos + (ySlot.get() * 64) + 1, 60, 60));
             item.setExtraData(items.indexOf(i));
@@ -103,6 +99,10 @@ public abstract class Inventory {
     protected void hoverSelector(Graphics g, int xPosText, int yPosText) {
         final Optional<NysvaUI> hover = getNysvaManager().getObjects().stream().filter(n -> n instanceof UIImageButton).filter(NysvaUI::isHovering).findAny();
         hover.ifPresentOrElse(nysvaUI -> {
+            if ((int)nysvaUI.getExtraData() == 109994) {
+                drawItemInfo(g, null, xPosText, yPosText);
+                return;
+            }
             g.drawImage(GUI.invSelector, nysvaUI.getUiDimension().getX(), nysvaUI.getUiDimension().getY(), null);
             drawItemInfo(g, items.get((int)hover.get().getExtraData()), 855, 646);
         }, () -> drawItemInfo(g, null, xPosText, yPosText));

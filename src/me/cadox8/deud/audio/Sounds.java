@@ -3,7 +3,6 @@ package me.cadox8.deud.audio;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Getter
 public enum Sounds {
 
@@ -19,8 +18,13 @@ public enum Sounds {
     private final String name;
     private final float volume;
 
-    public Sound getSound() {
-        return new Sound(name, volume);
+    private final Sound sound;
+
+    Sounds(final String name, final float volume) {
+        this.name = name;
+        this.volume = volume;
+
+        this.sound = new Sound(name, volume);
     }
 
     public void play() {

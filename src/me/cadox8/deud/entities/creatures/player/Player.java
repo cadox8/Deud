@@ -60,16 +60,18 @@ public class Player extends Creature {
     public Player(@NonNull GameAPI gameAPI, float x, float y) {
         super(1, "Player", EntityData.EntityType.PLAYER, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
+        setMoving(false);
+
         bounds.x = 11;
         bounds.y = 44;
         bounds.width = 43;
         bounds.height = 21;
 
         // Animations
-        animDown = new Animation((int)(speed * 600), Models.player_down);
-        animUp = new Animation((int)(speed * 600), Models.player_up);
-        animLeft = new Animation((int)(speed * 600), Models.player_left);
-        animRight = new Animation((int)(speed * 600), Models.player_right);
+        animDown = new Animation((int)(speed * 0.2), Models.player_down);
+        animUp = new Animation((int)(speed * 0.2), Models.player_up);
+        animLeft = new Animation((int)(speed * 0.2), Models.player_left);
+        animRight = new Animation((int)(speed * 0.2), Models.player_right);
 
         inventory = new PlayerInventory(gameAPI, this);
 
@@ -212,6 +214,8 @@ public class Player extends Creature {
         }
 
         if (isFreeze()) return;
+
+        setMoving(gameAPI.getKeyManager().up || gameAPI.getKeyManager().down || gameAPI.getKeyManager().left || gameAPI.getKeyManager().right);
 
         if (gameAPI.getKeyManager().up) {
             yMove = -speed;

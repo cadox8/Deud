@@ -73,6 +73,8 @@ public abstract class Entity {
 
     @Setter protected Inventory inventory;
 
+    @Getter @Setter protected boolean moving = true;
+
     @Getter @Setter protected Animation animDown, animUp, animLeft, animRight;
     @Getter @Setter protected Animation[] animations = new Animation[4];
 
@@ -94,7 +96,6 @@ public abstract class Entity {
 
         bounds = new Rectangle(0, 0, width, height);
     }
-
 
     public abstract void tick();
     public abstract void fixAnimations();
@@ -206,12 +207,16 @@ public abstract class Entity {
     protected BufferedImage getCurrentAnimationFrame() {
         switch (direction) {
             case 1:
+                if (!isMoving()) return animUp.getFirstFrame();
                 return animUp.getCurrentFrame();
             case 2:
+                if (!isMoving()) return animRight.getFirstFrame();
                 return animRight.getCurrentFrame();
             case 3:
+                if (!isMoving()) return animLeft.getFirstFrame();
                 return animLeft.getCurrentFrame();
             default:
+                if (!isMoving()) return animDown.getFirstFrame();
                 return animDown.getCurrentFrame();
         }
     }

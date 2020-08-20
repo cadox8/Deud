@@ -3,6 +3,7 @@ package me.cadox8.deud.ux.options;
 import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.states.State;
 import me.cadox8.deud.ui.NysvaManager;
 import me.cadox8.deud.ui.components.base.UIBlock;
 import me.cadox8.deud.ui.components.text.UISelectedTextButton;
@@ -29,25 +30,36 @@ public class Options {
 
         final UISelectedTextButton resume = new UISelectedTextButton(gameAPI, "Resume Game", () -> setEnabled(false));
 
+        final UISelectedTextButton menu = new UISelectedTextButton(gameAPI, "Main Menu", () -> {
+            FileUtils.save(player, gameAPI);
+            gameAPI.getMouseManager().setNysvaUI(null);
+            State.setState(gameAPI.getGame().getMenuState());
+        });
+
         final UISelectedTextButton exit = new UISelectedTextButton(gameAPI, "Exit Game", () -> {
             FileUtils.save(player, gameAPI);
             System.exit(0);
         });
 
         exit.resizeFont(32);
+        menu.resizeFont(32);
         resume.resizeFont(32);
 
         resume.setUiDimension(new UIDimension(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 - 35, 220, 35));
+        menu.setUiDimension(new UIDimension(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2, 220, 35));
         exit.setUiDimension(new UIDimension(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 + 35, 220, 35));
 
         resume.getBaseBlock().setRoundRadius(15);
+        menu.getBaseBlock().setRoundRadius(15);
         exit.getBaseBlock().setRoundRadius(15);
 
         resume.adjust();
+        menu.adjust();
         exit.adjust();
 
         nysvaManager.addObject(base);
         nysvaManager.addObject(resume);
+        nysvaManager.addObject(menu);
         nysvaManager.addObject(exit);
 
         gameAPI.getMouseManager().setNysvaUI(nysvaManager);
