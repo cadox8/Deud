@@ -12,12 +12,12 @@ import me.cadox8.deud.managers.EmotesManager;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.managers.ItemManager;
 import me.cadox8.deud.managers.ParticleManager;
-import me.cadox8.deud.ui.components.base.UIBlock;
-import me.cadox8.deud.ui.helpers.NysvaColor;
-import me.cadox8.deud.ui.helpers.UIDimension;
 import me.cadox8.deud.particles.Particle;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.tiles.Tiles;
+import me.cadox8.deud.ui.components.base.UIBlock;
+import me.cadox8.deud.ui.helpers.NysvaColor;
+import me.cadox8.deud.ui.helpers.UIDimension;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
@@ -35,7 +35,7 @@ public class World {
 
     @Getter private int width, height;
     private int spawnX, spawnY;
-    private TileUtils[][] tiles;
+    @Getter private TileUtils[][] tiles;
 
     private final String path;
 
@@ -171,7 +171,7 @@ public class World {
     }
 
     @RequiredArgsConstructor
-    private static class TileUtils {
+    public static class TileUtils {
         @Getter private final int id;
         @Getter private final int subID;
     }

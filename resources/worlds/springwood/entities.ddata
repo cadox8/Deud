@@ -50,7 +50,7 @@
         "y": 550.0,
         "direction": 0
       },
-      "map": "test",
+      "map": "house",
       "neededItem": -1
     },
     {
@@ -75,7 +75,7 @@
         "y": 1050.0,
         "direction": 0
       },
-      "map": "test",
+      "map": "house",
       "neededItem": -1
     },
     {

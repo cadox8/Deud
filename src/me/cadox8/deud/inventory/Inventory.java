@@ -72,7 +72,6 @@ public abstract class Inventory {
 
             final UIImageButton item = new UIImageButton(gameAPI, i.getTexture(), () -> {
                 if (selectedSlot == -1) selectedSlot = getItems().indexOf(i);
-
                 if (getItems().get(selectedSlot).getId() == 7 && getUsableItem().getId() != 7) setUsableItem(getItems().get(selectedSlot));
             });
             item.setUiDimension(new UIDimension(xPos + (xSlot.get() * 64) + 1, yPos + (ySlot.get() * 64) + 1, 60, 60));

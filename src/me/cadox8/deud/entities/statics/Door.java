@@ -42,7 +42,7 @@ public class Door extends StaticEntity {
             ((GameState)getGameAPI().getGame().getGameState()).setDialog(new Dialog(getGameAPI(), p).addText(Arrays.asList("You need " + Item.get(neededItem).getName() + " to open this")));
             return;
         }
-        if (!new File("resources/worlds/" + map + "/world.txt").exists()) {
+        if (!new File("resources/worlds/" + map + "/world.dworld").exists()) {
             ((GameState)getGameAPI().getGame().getGameState()).setDialog(new Dialog(getGameAPI(), p).addText(Arrays.asList("You hear sounds inside but the door seems to be locked")));
             return;
         }
