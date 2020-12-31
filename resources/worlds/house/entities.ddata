@@ -3,7 +3,7 @@
     {
       "type": "Chest",
       "location": {
-        "world": "springwood",
+        "world": "house",
         "x": 250.0,
         "y": 100.0,
         "direction": 2

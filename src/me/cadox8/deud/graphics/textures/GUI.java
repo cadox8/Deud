@@ -52,9 +52,9 @@ public class GUI {
         buttons[0] = gui.crop(0, 71, 90, 16);
         buttons[1] = gui.crop(92, 71, 90, 16);
 
-        background = Utils.loadImage("/utils/menu.png");
+        background = Utils.loadImage("/textures/utils/menu.png");
 
-        logo = Utils.loadImage("/utils/icon.png");
+        logo = Utils.loadImage("/textures/utils/icon.png");
         dialog = Utils.loadTextures("dialog.png");
 
         hud = Utils.loadTextures("hud.png");

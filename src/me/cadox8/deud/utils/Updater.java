@@ -17,7 +17,7 @@ public class Updater {
     public static boolean checkForUpdate() {
         Log.system("Web Version: " + latestVersion().getVersion());
         Log.system("Game Version: " + Launcher.VERSION);
-        return webVersion().getLatest() > Launcher.VERSION_ID;
+        return webVersion().getLatest() > Launcher.BUILD_NUMBER;
     }
 
     public static Versions webVersion() {
@@ -33,16 +33,16 @@ public class Updater {
             return new GsonBuilder().setPrettyPrinting().create().fromJson(sb.toString(), Versions.class);
         } catch (IOException e) {
             final Versions versions = new Versions();
-            versions.latest = Launcher.VERSION_ID;
+            versions.latest = Launcher.BUILD_NUMBER;
             final Versions.VersionData[] d = new Versions.VersionData[1];
-            d[0] = new Versions.VersionData(Launcher.VERSION_ID, Launcher.VERSION);
+            d[0] = new Versions.VersionData(Launcher.BUILD_NUMBER, Launcher.VERSION);
             versions.older = d;
             return versions;
         }
     }
 
     private static Versions.VersionData getVersion(int id) {
-        return Arrays.stream(webVersion().getOlder()).filter(v -> v.id == id).findAny().orElse(new Versions.VersionData(Launcher.VERSION_ID, Launcher.VERSION));
+        return Arrays.stream(webVersion().getOlder()).filter(v -> v.getBuild() == id).findAny().orElse(new Versions.VersionData(Launcher.BUILD_NUMBER, Launcher.VERSION));
     }
 
     public static Versions.VersionData latestVersion() {
@@ -58,7 +58,7 @@ public class Updater {
         @Data
         @AllArgsConstructor
         public static class VersionData {
-            private int id;
+            private int build;
             private String version;
         }
     }

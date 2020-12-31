@@ -1,7 +1,6 @@
 package me.cadox8.deud.display;
 
 import lombok.Getter;
-import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 
 import javax.swing.*;
@@ -46,7 +45,7 @@ public class Display {
         canvas.setMinimumSize(new Dimension(width, height));
         canvas.setFocusable(false);
 
-        frame.setIconImage(Utils.loadImage("/utils/icon.png"));
+        frame.setIconImage(Utils.loadImage("/textures/utils/icon.png"));
 
         frame.add(canvas);
         frame.pack();

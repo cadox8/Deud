@@ -77,6 +77,7 @@ public abstract class Inventory {
             item.setUiDimension(new UIDimension(xPos + (xSlot.get() * 64) + 1, yPos + (ySlot.get() * 64) + 1, 60, 60));
             item.setExtraData(items.indexOf(i));
             item.setReorder(true);
+            item.setResize(false);
 
             getNysvaManager().addObject(item);
 

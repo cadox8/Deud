@@ -1,7 +1,16 @@
 {
-  "start": {
-    "id": 0,
-    "name": "Start",
-    "icon": null
-  }
+  "achievements": [
+    {
+      "name": "",
+      "description": "",
+      "icon": ""
+    }
+  ],
+  "secret": [
+    {
+      "name": "",
+      "description": "",
+      "icon": ""
+    }
+  ]
 }

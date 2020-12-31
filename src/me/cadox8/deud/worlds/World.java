@@ -134,10 +134,8 @@ public class World {
 
         width = worldData.getWidth();
         height = worldData.getHeight();
-        spawnX = worldData.getPlayerX();
-        spawnY = worldData.getPlayerY();
 
-        dark = worldData.isDark();
+        dark = worldData.getLight() == 0;
 
         tiles = new TileUtils[width][height];
         final AtomicInteger x = new AtomicInteger(0);
@@ -179,13 +177,11 @@ public class World {
     @RequiredArgsConstructor
     @ToString
     private static class WorldData {
+        @Getter private final int version;
         @Getter private final int width;
         @Getter private final int height;
 
-        @Getter private final int playerX;
-        @Getter private final int playerY;
-
-        @Getter private final boolean dark;
+        @Getter private final float light;
 
         private final String[] tiles;
 
@@ -206,6 +202,8 @@ public class World {
         private static class ParticleData {
             private final String name;
             private final int x, y;
+            private final boolean persistent;
+            private boolean show;
         }
     }
 }

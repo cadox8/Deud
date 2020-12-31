@@ -13,7 +13,7 @@ import java.io.File;
 
 public class Launcher {
 
-    public static final int VERSION_ID = 1;
+    public static final int BUILD_NUMBER = 1;
 
     public static final String VERSION = "Release 1.0 - Beta";
     public static final String GAME_FILE = "." + File.separator + "Deud" + File.separator;
