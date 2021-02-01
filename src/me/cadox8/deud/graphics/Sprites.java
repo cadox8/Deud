@@ -1,6 +1,5 @@
 package me.cadox8.deud.graphics;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.awt.*;

@@ -1,7 +1,6 @@
 package me.cadox8.deud.audio;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 public enum Sounds {

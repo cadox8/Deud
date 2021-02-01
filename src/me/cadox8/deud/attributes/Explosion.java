@@ -3,7 +3,6 @@ package me.cadox8.deud.attributes;
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
-import me.cadox8.deud.utils.Utils;
 
 public class Explosion extends Attribute {
 
@@ -28,7 +27,7 @@ public class Explosion extends Attribute {
 
     @Override
     public void run() {
-        Utils.getNearbyEntities(damager.getLocation(), radius).forEach(e -> e.hurt(damager));
+        //Utils.getNearbyEntities(damager.getLocation(), radius).forEach(e -> e.hurt(damager));
         stop();
     }
 }

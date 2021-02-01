@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.Launcher;
 import me.cadox8.deud.config.Config;
 import me.cadox8.deud.entities.Entity;
-import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Door;

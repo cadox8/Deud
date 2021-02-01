@@ -14,7 +14,6 @@ package me.cadox8.deud.ui.components.base;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.ui.NysvaUI;
 import me.cadox8.deud.ui.helpers.NysvaColor;
-import me.cadox8.deud.ui.helpers.UIDimension;
 
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;

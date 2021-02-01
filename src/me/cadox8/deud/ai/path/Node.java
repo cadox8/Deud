@@ -1,23 +1,24 @@
 package me.cadox8.deud.ai.path;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+public class Node implements Comparable {
 
-@Getter
-@Setter
-@ToString
-public class Node {
-    
-    public int x;
-    public int y;
-    public double hValue;
-    public int gValue;
-    public double fValue;
     public Node parent;
+    public int x, y;
+    public double g;
+    public double h;
 
-    public Node(int x, int y) {
-        this.x = x;
-        this.y = y;
+    Node(Node parent, int xpos, int ypos, double g, double h) {
+        this.parent = parent;
+        this.x = xpos;
+        this.y = ypos;
+        this.g = g;
+        this.h = h;
+    }
+
+    // Compare by f value (g + h)
+    @Override
+    public int compareTo(Object o) {
+        final Node that = (Node) o;
+        return (int)((this.g + this.h) - (that.g + that.h));
     }
 }

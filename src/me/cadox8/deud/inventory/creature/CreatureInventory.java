@@ -1,11 +1,7 @@
 package me.cadox8.deud.inventory.creature;
 
-import lombok.Getter;
-import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.inventory.Inventory;
-import me.cadox8.deud.items.Item;
-import me.cadox8.deud.items.Items;
 
 import java.awt.*;
 

@@ -1,6 +1,6 @@
 package me.cadox8.deud.entities.creatures.monsters;
 
-import me.cadox8.deud.ai.entities.MonstersAI;
+import me.cadox8.deud.ai.entities.MonstersEntityAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
@@ -30,7 +30,7 @@ public class Zombie extends Monster {
 
         setAttackCooldown(1000);
 
-        ai = new MonstersAI(gameAPI, this, getSpeed(), 10, 200, 200);
+        entityAi = new MonstersEntityAI(this, 10);
 
         inventory = new CreatureInventory(gameAPI);
     }

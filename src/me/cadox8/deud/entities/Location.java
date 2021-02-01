@@ -56,6 +56,12 @@ public class Location {
         return (int) (getY() - location.getY());
     }
 
+    public double distance(Location target) {
+        final float px = target.getX() - this.getX();
+        final float py = target.getY() - this.getY();
+        return Math.sqrt(px * px + py * py);
+    }
+
     public boolean equals(double x, double y) {
         return getX() == x && getY() == y;
     }

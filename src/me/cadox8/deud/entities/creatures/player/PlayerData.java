@@ -1,4 +1,4 @@
-package me.cadox8.deud.entities;
+package me.cadox8.deud.entities.creatures.player;
 
 import lombok.Data;
 import me.cadox8.deud.entities.Location;

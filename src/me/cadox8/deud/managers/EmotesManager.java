@@ -4,12 +4,10 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.particles.Particle;
 import me.cadox8.deud.ux.emotions.Emotion;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 
 public class EmotesManager {

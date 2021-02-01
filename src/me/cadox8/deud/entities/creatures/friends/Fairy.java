@@ -1,6 +1,6 @@
 package me.cadox8.deud.entities.creatures.friends;
 
-import me.cadox8.deud.ai.entities.FriendsAI;
+import me.cadox8.deud.ai.entities.FriendsEntityAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
@@ -27,7 +27,7 @@ public class Fairy extends Friendly {
         setDamage(0);
         setSpeed(10.0f);
 
-        ai = new FriendsAI(gameAPI, this, getSpeed(), 50);
+        entityAi = new FriendsEntityAI(this, 50);
     }
 
     @Override

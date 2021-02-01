@@ -1,7 +1,6 @@
 package me.cadox8.deud.particles;
 
 import lombok.Getter;
-import lombok.Setter;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.graphics.textures.Assets;
 

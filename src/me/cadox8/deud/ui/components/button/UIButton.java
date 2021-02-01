@@ -21,7 +21,7 @@ import java.awt.*;
 
 public class UIButton extends UIText {
 
-    private ClickListener clicker;
+    private final ClickListener clicker;
 
     private final UIBlock block = new UIBlock(gameAPI, NysvaColor.YELLOW);
 

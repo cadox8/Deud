@@ -32,6 +32,6 @@ public abstract class Friendly extends Creature {
         xMove = 0;
         yMove = 0;
 
-        ai.getMove();
+        entityAi.move();
     }
 }

@@ -6,7 +6,6 @@ import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.states.State;
 import me.cadox8.deud.ui.NysvaManager;
 import me.cadox8.deud.ui.NysvaUI;
-import me.cadox8.deud.ui.components.button.UIButton;
 import me.cadox8.deud.ui.components.field.UIField;
 import me.cadox8.deud.ui.components.images.UIImage;
 import me.cadox8.deud.ui.components.text.UIText;

@@ -1,6 +1,6 @@
 package me.cadox8.deud.entities.creatures.monsters;
 
-import me.cadox8.deud.ai.entities.MonstersAI;
+import me.cadox8.deud.ai.entities.MonstersEntityAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
@@ -29,7 +29,7 @@ public class Ghost extends Monster {
 
         setAttackCooldown(800);
 
-        ai = new MonstersAI(gameAPI, this, getSpeed(), 5, 250, 250);
+        entityAi = new MonstersEntityAI(this, 5);
 
         inventory = new CreatureInventory(gameAPI);
     }

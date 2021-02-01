@@ -5,20 +5,12 @@ import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.audio.Sound;
 import me.cadox8.deud.audio.Sounds;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
-import me.cadox8.deud.entities.creatures.npcs.Npc;
-import me.cadox8.deud.entities.statics.Chest;
-import me.cadox8.deud.entities.statics.Door;
-import me.cadox8.deud.entities.statics.Shop;
-import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.graphics.fonts.Text;
-import me.cadox8.deud.graphics.textures.Assets;
-import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.graphics.textures.Models;
 import me.cadox8.deud.inventory.creature.PlayerInventory;
 import me.cadox8.deud.items.Item;
@@ -26,17 +18,12 @@ import me.cadox8.deud.items.Items;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.quests.Quest;
-import me.cadox8.deud.entities.PlayerData;
-import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.utils.Log;
-import me.cadox8.deud.utils.Utils;
-import me.cadox8.deud.ux.dialog.Dialog;
 import me.cadox8.deud.ux.hud.Hud;
 import me.cadox8.deud.ux.options.Options;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
 public class Player extends Creature {

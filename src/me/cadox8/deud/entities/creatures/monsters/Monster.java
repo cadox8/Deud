@@ -34,7 +34,7 @@ public abstract class Monster extends Creature {
         xMove = 0;
         yMove = 0;
 
-        ai.getMove();
+        entityAi.move();
     }
 
     public CreatureInventory getCreatureInventory() {

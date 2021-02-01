@@ -3,7 +3,7 @@ package me.cadox8.deud.entities;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import me.cadox8.deud.ai.AI;
+import me.cadox8.deud.ai.EntityAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.Creature;
@@ -42,7 +42,7 @@ public abstract class Entity {
 
     @Getter @Setter protected GameAPI gameAPI;
 
-    @Getter @Setter protected AI ai;
+    @Getter @Setter protected EntityAI entityAi;
 
     @Getter @Setter protected float x, y;
     @Getter @Setter protected int width, height;

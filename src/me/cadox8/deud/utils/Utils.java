@@ -1,12 +1,12 @@
 package me.cadox8.deud.utils;
 
-import lombok.NonNull;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.Location;
+import me.cadox8.deud.entities.statics.Light;
+import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.worlds.World;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Utils {
@@ -87,7 +88,22 @@ public class Utils {
         return new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR).filter(texture, new BufferedImage(texture.getHeight(), texture.getWidth(), texture.getType()));
     }
 
-    public static ArrayList<Entity> getNearbyEntities(Location center, double radius) {
+    public static int[] locationToTile(float x, float y) {
+        final int[] tiles = new int[2];
+        return tiles;
+    }
+
+    public static List<Entity> getNearbyEntities(Location center, double radius) {
+        final double radius2 = radius + Tile.TILEHEIGHT;
+        System.out.println(radius);
+        final World world = center.getWorld();
+        return world.getEntityManager().getEntities().stream().filter(e -> !(e instanceof Light)).filter(e -> {
+            System.out.println("Center: " + center.toString() + " Entity: " + e.getINTERNAL_NAME() + " " + e.getLocation().toString() + " " + center.distance(e.getLocation()) + " " + (center.distance(e.getLocation()) <= radius2));
+            return center.distance(e.getLocation()) <= radius2 && center.distance(e.getLocation()) != 0;
+        }).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+/*    public static ArrayList<Entity> getNearbyEntities(Location center, double radius) {
         final World world = center.getWorld();
         final Circle2D circle = new Circle2D(center.getX(), center.getY(), radius);
         return world.getEntityManager().getEntities().stream().filter(e -> circle.contains(e.getX(), e.getY())).collect(Collectors.toCollection(ArrayList::new));
@@ -97,5 +113,5 @@ public class Utils {
         final World world = center.getWorld();
         final Circle2D circle = new Circle2D(center.getX(), center.getY(), radius);
         return world.getEntityManager().getEntities().stream().filter(e -> !e.equals(excepts)).filter(e -> circle.contains(e.getX(), e.getY())).collect(Collectors.toCollection(ArrayList::new));
-    }
+    }*/
 }

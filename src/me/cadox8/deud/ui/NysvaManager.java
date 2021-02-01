@@ -11,16 +11,12 @@
 
 package me.cadox8.deud.ui;
 
-import me.cadox8.deud.items.Item;
-import me.cadox8.deud.ui.components.images.UIImageButton;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class NysvaManager {
 

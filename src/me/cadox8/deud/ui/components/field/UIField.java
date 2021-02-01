@@ -24,7 +24,7 @@ public class UIField extends NysvaUI {
 
     private UIBlock base;
 
-    private ClickListener clicker;
+    private final ClickListener clicker;
 
     private String text = "";
     private int maxCharacters;

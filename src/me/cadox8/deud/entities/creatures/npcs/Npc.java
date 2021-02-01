@@ -2,7 +2,7 @@ package me.cadox8.deud.entities.creatures.npcs;
 
 import lombok.Getter;
 import lombok.NonNull;
-import me.cadox8.deud.ai.entities.FriendsAI;
+import me.cadox8.deud.ai.entities.FriendsEntityAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
@@ -55,7 +55,7 @@ public class Npc extends Creature {
         animations[2] = animLeft;
         animations[3] = animRight;
 
-        ai = new FriendsAI(gameAPI, this, getSpeed(), 50);
+        entityAi = new FriendsEntityAI(this, 50);
     }
 
     @Override
@@ -75,9 +75,6 @@ public class Npc extends Creature {
 
     public void addTexts(String... texts) {
         this.text.addAll(Arrays.asList(texts));
-    }
-    public void setAngry(boolean angry) {
-        ((FriendsAI)ai).setAngry(angry);
     }
 
     public void addQuest(Quest quest) {
