@@ -18,6 +18,7 @@ import me.cadox8.deud.tiles.Tiles;
 import me.cadox8.deud.ui.components.base.UIBlock;
 import me.cadox8.deud.ui.helpers.NysvaColor;
 import me.cadox8.deud.ui.helpers.UIDimension;
+import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
@@ -154,6 +155,8 @@ public class World {
             }
         });
         worldData.getParticles().forEach(p -> getParticleManager().addParticle(p));
+
+        Log.success("World " + worldData.name + " loaded! v" + worldData.version);
     }
 
     @Override
@@ -177,7 +180,8 @@ public class World {
     @RequiredArgsConstructor
     @ToString
     private static class WorldData {
-        @Getter private final int version;
+        @Getter private final String version;
+        @Getter private final String name;
         @Getter private final int width;
         @Getter private final int height;
 

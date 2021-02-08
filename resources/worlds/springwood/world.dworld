@@ -1,5 +1,6 @@
 {
-  "version": 1.0,
+  "version": "1.0",
+  "name": "Springwood",
   "width": 40,
   "height": 40,
   "playerX": 100,
