@@ -40,7 +40,7 @@ public class Path {
         this.xend = xend;
         this.yend = yend;
         this.closed.add(this.now);
-        addNeigborsToOpenList();
+        addNeighboursToOpenList();
         while (this.now.x != this.xend || this.now.y != this.yend) {
             if (this.open.isEmpty()) { // Nothing to examine
                 return null;
@@ -48,7 +48,7 @@ public class Path {
             this.now = this.open.get(0); // get first node (lowest f score)
             this.open.remove(0); // remove it
             this.closed.add(this.now); // and add to the closed
-            addNeigborsToOpenList();
+            addNeighboursToOpenList();
         }
         this.path.add(0, this.now);
         while (this.now.x != this.xstart || this.now.y != this.ystart) {
@@ -77,7 +77,7 @@ public class Path {
             return Math.abs(this.now.x + dx - this.xend) + Math.abs(this.now.y + dy - this.yend); // else return "Manhattan distance"
         }
     }
-    private void addNeigborsToOpenList() {
+    private void addNeighboursToOpenList() {
         Node node;
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
@@ -85,6 +85,11 @@ public class Path {
                     continue; // skip if diagonal movement is not allowed
                 }
                 node = new Node(this.now, this.now.x + x, this.now.y + y, this.now.g, this.distance(x, y));
+/*                System.out.println((x != 0 || y != 0));
+                System.out.println(this.now.x + x >= 0 && this.now.x + x < this.maze[0].length);
+                System.out.println(this.now.y + y >= 0 && this.now.y + y < this.maze.length);
+                System.out.println(this.maze[this.now.y + y][this.now.x + x] != -1);
+                System.out.println(!findNeighborInList(this.open, node) && !findNeighborInList(this.closed, node));*/
                 if ((x != 0 || y != 0) // not this.now
                         && this.now.x + x >= 0 && this.now.x + x < this.maze[0].length // check maze boundaries
                         && this.now.y + y >= 0 && this.now.y + y < this.maze.length

@@ -24,7 +24,7 @@ public abstract class EntityAI {
     private final int delay;
     private final double radius;
 
-    @Getter @Setter protected boolean noAI = false;
+    @Getter @Setter protected boolean hasAI = true;
 
     protected int movementDelay = 0;
 
@@ -45,7 +45,7 @@ public abstract class EntityAI {
     public abstract void move();
 
     protected boolean canTrack() {
-        return this.getPlayerInRadius() != null || !this.noAI;
+        return this.getPlayerInRadius() != null || this.hasAI;
     }
 
     protected List<Node> getPath(Location location) {
@@ -55,8 +55,18 @@ public abstract class EntityAI {
         if (this.getPlayerInRadius() == null) return new ArrayList<>();
         final int[] start = Utils.locationToTile(entity.getX(), entity.getY());
         final int[] end = Utils.locationToTile(xEnd, yEnd);
+        final int[][] maze = new int[this.gameAPI.getWorld().getWidth()][this.gameAPI.getWorld().getHeight()];
 
-        return new Path(null, start[0], start[1]).findPathTo(end[0], end[1]);
+        int y = 0;
+
+        for (int i = 0; i < maze[0].length; i++) {
+            maze[i][y] = this.gameAPI.getWorld().getTiles()[i][y].getId();
+            if (i >= maze[0].length) {
+                i = 0;
+                y++;
+            }
+        }
+        return new Path(maze, start[0], start[1]).findPathTo(end[0], end[1]);
     }
 
     private boolean isOnDelay() {

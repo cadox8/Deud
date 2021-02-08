@@ -90,17 +90,15 @@ public class Utils {
 
     public static int[] locationToTile(float x, float y) {
         final int[] tiles = new int[2];
+        tiles[0] = (int) (x / Tile.TILEWIDTH);
+        tiles[1] = (int) (y / Tile.TILEHEIGHT);
         return tiles;
     }
 
     public static List<Entity> getNearbyEntities(Location center, double radius) {
         final double radius2 = radius + Tile.TILEHEIGHT;
-        System.out.println(radius);
         final World world = center.getWorld();
-        return world.getEntityManager().getEntities().stream().filter(e -> !(e instanceof Light)).filter(e -> {
-            System.out.println("Center: " + center.toString() + " Entity: " + e.getINTERNAL_NAME() + " " + e.getLocation().toString() + " " + center.distance(e.getLocation()) + " " + (center.distance(e.getLocation()) <= radius2));
-            return center.distance(e.getLocation()) <= radius2 && center.distance(e.getLocation()) != 0;
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return world.getEntityManager().getEntities().stream().filter(e -> !(e instanceof Light)).filter(e -> center.distance(e.getLocation()) <= radius2 && center.distance(e.getLocation()) != 0).collect(Collectors.toCollection(ArrayList::new));
     }
 
 /*    public static ArrayList<Entity> getNearbyEntities(Location center, double radius) {

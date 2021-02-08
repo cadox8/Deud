@@ -10,23 +10,23 @@ import java.util.List;
 public class MonstersEntityAI extends EntityAI {
 
     public MonstersEntityAI(@NonNull Creature creature, int delay) {
-        super(creature, delay, 20);
+        super(creature, delay, 200);
     }
 
     @Override
     public void move() {
-        if (!this.canTrack()) {
-            this.randomMove();
-        } else {
+        if (this.canTrack()) {
             final List<Node> path = this.getPath(this.getPlayerInRadius().getLocation());
 
             if (path == null) {
                 this.randomMove();
             } else {
                 path.forEach(node -> {
-                    System.out.print("[" + node.x + ", " + node.y + "] ");
+                    System.out.println("[" + node.x + ", " + node.y + "] ");
                 });
             }
+        } else {
+            this.randomMove();
         }
     }
 }
