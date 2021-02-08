@@ -1,11 +1,15 @@
 package me.cadox8.deud.inventory.creature;
 
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.Entity;
+import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.ItemType;
 import me.cadox8.deud.items.Items;
+import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.ui.components.images.UIImageButton;
 import me.cadox8.deud.ui.helpers.UIDimension;
 
@@ -59,5 +63,12 @@ public class PlayerInventory extends CreatureInventory {
     public void setUsableItem(Item item) {
         if (item == null) return;
         this.usableItem = item;
+
+        // Change damage on Item set
+        if (this.usableItem.getType() == ItemType.WEAPON) {
+            player.setDamage(((WeaponItem) this.usableItem).getDamage() + player.getDamage());
+        } else {
+            player.setDamage(Entity.DEFAULT_DAMAGE);
+        }
     }
 }

@@ -95,6 +95,10 @@ public class Utils {
         return tiles;
     }
 
+    public static float tileToLocation(int i) {
+        return i * Tile.TILEWIDTH;
+    }
+
     public static List<Entity> getNearbyEntities(Location center, double radius) {
         final double radius2 = radius + Tile.TILEHEIGHT;
         final World world = center.getWorld();

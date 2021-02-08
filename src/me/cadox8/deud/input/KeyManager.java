@@ -12,7 +12,7 @@ public class KeyManager implements KeyListener {
 
     private boolean[] keys, justPressed, cantPress;
     public boolean up, down, left, right, shift, space, drop, esc;
-    public boolean debug, tests, test2;
+    public boolean debug, tests;
 
     @Getter @Setter private UIField writingTo;
 
@@ -48,8 +48,7 @@ public class KeyManager implements KeyListener {
         drop = keys[KeyEvent.VK_Q];
 
         debug = keys[KeyEvent.VK_F1];
-        tests = keys[KeyEvent.VK_F2];
-        test2 = keys[KeyEvent.VK_G];
+        tests = keys[KeyEvent.VK_G];
 
         esc = keys[KeyEvent.VK_ESCAPE];
     }

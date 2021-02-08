@@ -6,13 +6,13 @@ import lombok.Getter;
 public enum Sounds {
 
     // UI Music
-    MENU("menu", -22f),
+    MENU("menu", 0),
 
-    // Towns Music
-    TOWN_MUSIC("town", -35f),
+    // Arena Music
+    TOWN_MUSIC("town", 15f),
 
-    // Utils Music
-    ENTITY_WALK_GRASS("entity_walk_grass", -22f);
+    // Misc Music
+    ENTITY_WALK_GRASS("entity_walk_grass", 0);
 
     private final String name;
     private final float volume;
@@ -21,7 +21,7 @@ public enum Sounds {
 
     Sounds(final String name, final float volume) {
         this.name = name;
-        this.volume = volume;
+        this.volume = -22f + (-volume);
 
         this.sound = new Sound(name, volume);
     }

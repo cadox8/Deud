@@ -21,7 +21,7 @@ public class GameAPI {
     @Getter private final Game game;
     @Getter @Setter private World world;
 
-    @Getter @Setter private boolean debug = false;
+    @Getter @Setter private boolean debug = true; // Development Only!
 
     @Getter @Setter private static Font gameFont = new Font("'Arial'", Font.PLAIN, 12);
 

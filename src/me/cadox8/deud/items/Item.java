@@ -27,6 +27,7 @@ public abstract class Item {
     @Getter protected final BufferedImage texture;
     @Getter protected final int id;
     @Getter @Setter protected String name;
+    @Getter protected ItemType type;
 
     @Getter @Setter private List<Attribute> attributes;
 
@@ -48,6 +49,8 @@ public abstract class Item {
         this.attributes = new ArrayList<>();
 
         bounds = new Rectangle(x, y, ITEMWIDTH, ITEMHEIGHT);
+
+        this.type = ItemType.NONE;
 
         items[id] = this;
     }

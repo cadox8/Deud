@@ -32,9 +32,9 @@ public abstract class Entity {
     @Getter private final EntityData.EntityType ENTITY_TYPE;
     //
 
-    protected static final int DEFAULT_HEALTH = 10;
-    protected static final int DEFAULT_DAMAGE = 3;
-    protected static final float DEFAULT_ARMOR = 0;
+    public static final int DEFAULT_HEALTH = 10;
+    public static final int DEFAULT_DAMAGE = 3;
+    public static final float DEFAULT_ARMOR = 0;
 
     private static final double DMG_UP_PER_LVL = 0.13;
     private static final double HEALTH_UP_PER_LVL = 0.17;
@@ -105,6 +105,7 @@ public abstract class Entity {
     public abstract void getHurt();
     public abstract void die();
 
+    // ToDo: Remake
     public void hurt(Entity attacker) {
         Log.log(getINTERNAL_NAME() + " Health: " + getHealth());
         getHurt();

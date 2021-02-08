@@ -103,4 +103,8 @@ public abstract class EntityAI {
         }
         entity.setDirection(direction);
     }
+
+    protected Creature getCreature() {
+        return (Creature) this.entity;
+    }
 }

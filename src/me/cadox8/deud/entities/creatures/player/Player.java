@@ -14,6 +14,7 @@ import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.Models;
 import me.cadox8.deud.inventory.creature.PlayerInventory;
 import me.cadox8.deud.items.Item;
+import me.cadox8.deud.items.ItemType;
 import me.cadox8.deud.items.Items;
 import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.managers.EntityManager;
@@ -127,12 +128,6 @@ public class Player extends Creature {
         // Inventory
         inventory.tick();
 
-        if (!(getPlayerInventory().getUsableItem() instanceof WeaponItem)) {
-            setDamage(DEFAULT_DAMAGE);
-        } else {
-            setDamage(((WeaponItem) getPlayerInventory().getUsableItem()).getDamage() + DEFAULT_DAMAGE);
-        }
-
         if (options.isEnabled()) options.tick();
     }
 
@@ -147,12 +142,12 @@ public class Player extends Creature {
     public void render(Graphics g) {
         g.drawImage(getCurrentAnimationFrame(), (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
 
-        //if (GameAPI.isDebug()) {
+        if (gameAPI.isDebug()) {
             g.setColor(Color.black);
-            g.fillRect(1100, 775, 130, 30);
+            g.fillRect(gameAPI.getWidth() - 130, 30, 130, 30);
             g.setColor(Color.WHITE);
-            g.drawString("X: " + x + " Y: " + y + " Dir: " + direction, 1105, 795);
-        //}
+            g.drawString("X: " + x + " Y: " + y + " Dir: " + direction, gameAPI.getWidth() - 120, 10);
+        }
     }
 
     public void postRender(Graphics g) {
@@ -176,13 +171,10 @@ public class Player extends Creature {
         xMove = 0;
         yMove = 0;
 
-        if (gameAPI.getKeyManager().test2) {
-            //Log.log("\n\n" + Utils.getNearbyEntities(getLocation(), 0.5).toString());
-            //new Door(GameAPI, 0, 0, "main").changeWorld();
+        if (gameAPI.getKeyManager().tests) {
             setHunger(getMaxHunger());
             addExp(20);
             setHealth(getMaxHealth());
-            //gameAPI.getWorld().getEntityManager().freezeCreatures();
             inventory.addItem(Items.getSword());
         }
 
@@ -193,6 +185,7 @@ public class Player extends Creature {
 
         if (gameAPI.getKeyManager().debug) {
             gameAPI.setDebug(!gameAPI.isDebug());
+            Log.log("Debug mode " + (gameAPI.isDebug() ? "Enabled" : "Disabled"));
         }
 
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {
