@@ -1,11 +1,11 @@
 package me.cadox8.deud.inventory.creature;
 
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.inventory.Inventory;
+import me.cadox8.deud.inventory.Inventory2;
 
 import java.awt.*;
 
-public class CreatureInventory extends Inventory {
+public class CreatureInventory extends Inventory2 {
 
     public CreatureInventory(GameAPI gameAPI) {
         super(gameAPI);

@@ -23,7 +23,6 @@ public class UIBlock extends NysvaUI {
     private NysvaColor background;
 
     private boolean rounded = false;
-
     private int roundRadius = 35;
 
     public UIBlock(GameAPI api) {
@@ -35,8 +34,7 @@ public class UIBlock extends NysvaUI {
     }
 
     @Override
-    public void tick() {
-    }
+    public void tick() {}
 
     @Override
     public void render(Graphics g) {
@@ -55,8 +53,7 @@ public class UIBlock extends NysvaUI {
     }
 
     @Override
-    public void onClick() {
-    }
+    public void onClick() {}
 
     public void transparentBackground(int alpha) {
         setBackground(background.transparent(alpha));

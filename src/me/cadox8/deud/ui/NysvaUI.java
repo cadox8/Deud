@@ -34,6 +34,7 @@ public abstract class NysvaUI {
     protected boolean hovering = false;
     protected boolean enabled = true;
 
+    @Getter @Setter private boolean hoverable = true;
     @Getter @Setter private boolean clickable = true;
 
     protected Font font = GameAPI.getGameFont();

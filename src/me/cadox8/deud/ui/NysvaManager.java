@@ -107,7 +107,7 @@ public class NysvaManager {
     }
 
     public void onMouseMove(MouseEvent e) {
-        objects.forEach(o -> o.onMouseMove(e));
+        objects.stream().filter(NysvaUI::isHoverable).forEach(o -> o.onMouseMove(e));
     }
     public void onMouseClicked(MouseEvent e) {
         objects.stream().filter(NysvaUI::isClickable).forEach(o -> o.onMouseClicked(e));

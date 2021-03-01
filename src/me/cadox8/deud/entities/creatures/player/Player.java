@@ -12,11 +12,9 @@ import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.Models;
-import me.cadox8.deud.inventory.creature.PlayerInventory;
+import me.cadox8.deud.inventory.creature.PlayerInventory2;
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.items.ItemType;
 import me.cadox8.deud.items.Items;
-import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.quests.Quest;
 import me.cadox8.deud.utils.Log;
@@ -61,7 +59,7 @@ public class Player extends Creature {
         animLeft = new Animation((int)(speed * 0.2), Models.player_left);
         animRight = new Animation((int)(speed * 0.2), Models.player_right);
 
-        inventory = new PlayerInventory(gameAPI, this);
+        inventory = new PlayerInventory2(gameAPI, this);
 
         setMaxHunger(10);
         setHunger(getMaxHunger());
@@ -237,8 +235,8 @@ public class Player extends Creature {
         }
     }
 
-    public PlayerInventory getPlayerInventory() {
-        return (PlayerInventory) inventory;
+    public PlayerInventory2 getPlayerInventory() {
+        return (PlayerInventory2) inventory;
     }
 
     public boolean hasMoney(double amount) {

@@ -16,7 +16,7 @@ import me.cadox8.deud.entities.statics.Light;
 import me.cadox8.deud.entities.statics.chest.RewardChest;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.trees.Tree;
-import me.cadox8.deud.inventory.creature.PlayerInventory;
+import me.cadox8.deud.inventory.creature.PlayerInventory2;
 import me.cadox8.deud.utils.Log;
 import net.arikia.dev.drpc.DiscordRPC;
 
@@ -34,7 +34,7 @@ public class Save {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public void savePlayer(Player player) throws IOException {
-        final PlayerInventory i = player.getPlayerInventory();
+        final PlayerInventory2 i = player.getPlayerInventory();
         final JsonObject data = new JsonObject();
 
         data.addProperty("nick", player.getNick());

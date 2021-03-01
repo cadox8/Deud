@@ -12,11 +12,8 @@ import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.projectile.Projectile;
 import me.cadox8.deud.events.projectiles.ProjectileHitEvent;
-import me.cadox8.deud.inventory.Inventory;
-import me.cadox8.deud.inventory.creature.CreatureInventory;
-import me.cadox8.deud.inventory.creature.PlayerInventory;
+import me.cadox8.deud.inventory.Inventory2;
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.items.weapons.WeaponItem;
 import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
@@ -71,7 +68,7 @@ public abstract class Entity {
 
     @Getter @Setter protected Entity killer;
 
-    @Setter protected Inventory inventory;
+    @Setter protected Inventory2 inventory;
 
     @Getter @Setter protected boolean moving = true;
 
@@ -161,7 +158,7 @@ public abstract class Entity {
         setHealth(0);
     }
 
-    public Inventory getInventory() {
+    public Inventory2 getInventory() {
         return inventory;
     }
 
