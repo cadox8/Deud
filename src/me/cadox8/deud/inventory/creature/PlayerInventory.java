@@ -28,7 +28,7 @@ public class PlayerInventory extends CreatureInventory {
 
         gameAPI.getMouseManager().setNysvaUI(getNysvaManager());
 
-        selectedItem = new UIImageButton(gameAPI, getUsableItem().getTexture(), () -> setUsableItem(Items.getHand()));
+        selectedItem = new UIImageButton(gameAPI, getUsableItem().getTexture(), () -> setUsableItem(Items.HAND.item()));
         selectedItem.setUiDimension(new UIDimension(676 + 5 + 64, 130 + 5 + (64 * 6), 55, 55));
         selectedItem.setExtraData(109994);
         selectedItem.setResize(false);
@@ -46,7 +46,7 @@ public class PlayerInventory extends CreatureInventory {
         }
         if (!isActive()) return;
 
-        if (!hasItem(getUsableItem())) setUsableItem(Items.getHand());
+        if (!hasItem(getUsableItem())) setUsableItem(Items.HAND.item());
         selectedItem.changeImage(getUsableItem().getTexture());
         getNysvaManager().tick();
     }
@@ -66,7 +66,7 @@ public class PlayerInventory extends CreatureInventory {
 
         // Change damage on Item set
         if (this.usableItem.getType() == ItemType.WEAPON) {
-            player.setDamage(((WeaponItem) this.usableItem).getDamage() + player.getDamage());
+            player.setDamage((int) (this.usableItem.getDamage() + player.getDamage()));
         } else {
             player.setDamage(Entity.DEFAULT_DAMAGE);
         }

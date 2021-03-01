@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class StaticInventory extends Inventory {
 
-    @Getter @Setter protected Item usableItem = Items.getHand();
+    @Getter @Setter protected Item usableItem = Items.HAND.item();
 
     public StaticInventory(GameAPI gameAPI) {
         super(gameAPI);

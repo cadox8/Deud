@@ -13,7 +13,7 @@ import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.House;
 import me.cadox8.deud.entities.statics.Light;
-import me.cadox8.deud.entities.statics.RewardChest;
+import me.cadox8.deud.entities.statics.chest.RewardChest;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.trees.Tree;
 import me.cadox8.deud.inventory.creature.PlayerInventory;

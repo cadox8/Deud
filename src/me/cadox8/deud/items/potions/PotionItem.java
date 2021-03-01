@@ -11,11 +11,10 @@ public abstract class PotionItem extends Item {
     private final PotionType potionType;
 
     public PotionItem(BufferedImage texture, int id, String name, int level, PotionType potionType) {
-        super(texture, id, name);
+        super(texture, id, name, ItemType.POTION);
 
         this.level = Math.min(level, 3);
         this.potionType = potionType;
-        this.type = ItemType.POTION;
     }
 
     public enum PotionType {

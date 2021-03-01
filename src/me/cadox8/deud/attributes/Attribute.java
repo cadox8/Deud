@@ -5,6 +5,7 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.runnable.DeudTask;
 
+@Deprecated
 public abstract class Attribute extends DeudTask {
 
     protected final GameAPI GameAPI;

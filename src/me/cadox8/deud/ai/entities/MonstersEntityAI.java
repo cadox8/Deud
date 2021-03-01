@@ -18,7 +18,7 @@ public class MonstersEntityAI extends EntityAI {
     @Override
     public void move() {
         if (this.canTrack()) {
-            final List<Node> path = this.getPath(this.getPlayerInRadius().getLocation());
+            /*final List<Node> path = this.getPath(this.getPlayerInRadius().getLocation());
 
             if (path == null) {
                 this.randomMove();
@@ -47,7 +47,7 @@ public class MonstersEntityAI extends EntityAI {
                 path.forEach(node -> {
                     System.out.println("[" + node.x + ", " + node.y + "] ");
                 });
-            }
+            }*/
         } else {
             this.randomMove();
         }

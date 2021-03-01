@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
-import me.cadox8.deud.entities.statics.Chest;
+import me.cadox8.deud.entities.statics.chest.Chest;
 import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.Shop;
 import me.cadox8.deud.entities.statics.sign.Sign;

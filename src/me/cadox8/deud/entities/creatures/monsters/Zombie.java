@@ -39,6 +39,6 @@ public class Zombie extends Monster {
     @Override
     public void die() {
         adjustXP(0.3f);
-        dropItem(Items.getChickenItem());
+        dropItem(Items.CHICKEN.item());
     }
 }

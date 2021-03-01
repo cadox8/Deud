@@ -11,7 +11,7 @@ public class ChestInventory extends StaticInventory {
 
         setSize(size);
 
-        addItems(Items.getSword(), Items.getChickenItem(), Items.getWoodItem());
+        addItems(Items.SWORD.item(), Items.CHICKEN.item(), Items.WOOD.item());
 
         loadBaseInventory(676, 130, GUI.chest);
 

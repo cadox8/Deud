@@ -22,7 +22,7 @@ public class Rock extends StaticEntity {
 
     @Override
     public void die() {
-        dropItem(Items.getRockItem());
+        dropItem(Items.STONE.item());
     }
 
     @Override

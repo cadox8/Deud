@@ -103,7 +103,7 @@ public class Player extends Creature {
             });
             getPlayerInventory().setUsableItem(gameAPI.getGame().getPlayerData().getItem());
         } else {
-            getPlayerInventory().setUsableItem(Items.getHand());
+            getPlayerInventory().setUsableItem(Items.HAND.item());
         }
 
         options = new Options(gameAPI, this);
@@ -175,7 +175,7 @@ public class Player extends Creature {
             setHunger(getMaxHunger());
             addExp(20);
             setHealth(getMaxHealth());
-            inventory.addItem(Items.getSword());
+            inventory.addItem(Items.SWORD.item());
         }
 
         if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {

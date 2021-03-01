@@ -1,33 +1,28 @@
-package me.cadox8.deud.entities.statics;
+package me.cadox8.deud.entities.statics.chest;
 
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.entities.statics.StaticEntity;
 import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.inventory.statics.ChestInventory;
+import me.cadox8.deud.items.Item;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Chest extends StaticEntity {
 
-    // Only for instances
-    protected Chest(int id, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y) {
-        super(id, name, type, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
-    }
-
     public Chest(@NonNull GameAPI gameAPI, float x, float y) {
-        this(gameAPI,x, y, false);
-    }
-    public Chest(@NonNull GameAPI gameAPI, float x, float y, boolean explosive) {
         super(501, "Chest", EntityData.EntityType.CHEST, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
-        setExplosive(explosive);
 
-        setDamage(3);
+        setDamage(0);
         setLevel(0);
 
         inventory = new ChestInventory(gameAPI, 20);

@@ -115,17 +115,15 @@ public abstract class Entity {
 
         if (attacker instanceof Monster) {
             final Monster monster = (Monster) attacker;
-            if (monster.getCreatureInventory().getUsableItem() instanceof WeaponItem) {
-                final WeaponItem item = (WeaponItem) monster.getCreatureInventory().getUsableItem();
-                amt += item.getDamage();
-                setHealth(getHealth() - gameAPI.getDamageManager().effectiveDamage(amt, getENTITY_TYPE(), item));
-            }
+            final Item item = monster.getCreatureInventory().getUsableItem();
+            amt += item.getDamage();
+            setHealth(getHealth() - gameAPI.getDamageManager().effectiveDamage(amt, getENTITY_TYPE(), item));
         }
 
         if (this instanceof Creature) {
-            if (attacker instanceof Monster) ((CreatureInventory) attacker.getInventory()).getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
-            if (attacker instanceof Npc) ((CreatureInventory) attacker.getInventory()).getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
-            if (attacker instanceof Player) ((PlayerInventory) attacker.getInventory()).getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
+            if (attacker instanceof Monster) attacker.getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
+            if (attacker instanceof Npc) attacker.getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
+            if (attacker instanceof Player) attacker.getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
         }
 
         if (attacker instanceof Projectile) {

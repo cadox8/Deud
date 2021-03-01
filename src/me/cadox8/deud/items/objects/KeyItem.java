@@ -1,14 +1,15 @@
 package me.cadox8.deud.items.objects;
 
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.items.Item;
 
 import java.awt.image.BufferedImage;
 
 public class KeyItem extends ObjectItem {
 
-    public KeyItem(BufferedImage texture, int id, String name) {
-        super(texture, id, name);
+    public KeyItem() {
+        super(Assets.key, 2, "Key");
     }
 
     @Override
@@ -18,7 +19,7 @@ public class KeyItem extends ObjectItem {
 
     @Override
     public Item createNew(int x, int y, int count) {
-        final Item i = new KeyItem(texture, id, name);
+        final Item i = new KeyItem();
         i.setPosition(x, y);
         i.setCount(count);
         return i;

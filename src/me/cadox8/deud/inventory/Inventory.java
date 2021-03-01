@@ -34,7 +34,7 @@ public abstract class Inventory {
 
     @Getter private final NysvaManager nysvaManager;
 
-    @Getter @Setter protected Item usableItem = Items.getHand();
+    @Getter @Setter protected Item usableItem = Items.HAND.item();
 
     public Inventory(GameAPI gameAPI) {
         this.gameAPI = gameAPI;
@@ -92,7 +92,7 @@ public abstract class Inventory {
     protected void drawItemInfo(Graphics g, Item item, int xPosText, int yPosText) {
         String infoText = "";
         if (item != null) infoText = item.getName() + " x" + item.getCount();
-        if (item == null || item.getId() == Items.getBugItem().getId()) infoText = "---------";
+        if (item == null) infoText = "---------";
         Text.drawString(g, infoText, xPosText, yPosText, false, 2);
     }
 

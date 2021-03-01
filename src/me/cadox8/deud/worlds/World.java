@@ -154,9 +154,8 @@ public class World {
                 y.incrementAndGet();
             }
         });
-        worldData.getParticles().forEach(p -> getParticleManager().addParticle(p));
 
-        Log.success("World " + worldData.name + " loaded! v" + worldData.version);
+        Log.success("World " + worldData.getName() + " loaded! v" + worldData.getVersion());
     }
 
     @Override
@@ -175,39 +174,5 @@ public class World {
     public static class TileUtils {
         @Getter private final int id;
         @Getter private final int subID;
-    }
-
-    @RequiredArgsConstructor
-    @ToString
-    private static class WorldData {
-        @Getter private final String version;
-        @Getter private final String name;
-        @Getter private final int width;
-        @Getter private final int height;
-
-        @Getter private final float light;
-
-        private final String[] tiles;
-
-        private final ParticleData[] particles;
-
-        public List<String> getTiles() {
-            return Arrays.asList(tiles);
-        }
-
-        public List<Particle> getParticles() {
-            final List<Particle> particle = new ArrayList<>();
-            Arrays.asList(particles).forEach(p -> particle.add(Particle.valueOf(p.getName()).setPosition(p.getX(), p.getY())));
-            return particle;
-        }
-
-        @Data
-        @RequiredArgsConstructor
-        private static class ParticleData {
-            private final String name;
-            private final int x, y;
-            private final boolean persistent;
-            private boolean show;
-        }
     }
 }

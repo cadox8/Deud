@@ -14,8 +14,6 @@ public class ShopInventory extends StaticInventory {
 
         setSize(size);
 
-        addItems(Items.getSword(), Items.getChickenItem(), Items.getWoodItem());
-
         loadBaseInventory(676, 130, GUI.chest);
 
         gameAPI.getMouseManager().setNysvaUI(getNysvaManager());

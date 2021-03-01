@@ -12,8 +12,6 @@ import java.awt.*;
 
 public abstract class StaticEntity extends Entity {
 
-    @Getter @Setter protected boolean explosive = false;
-
     public StaticEntity(int id, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
         super(id, name, type, gameAPI, x, y, width, height, 0);
     }

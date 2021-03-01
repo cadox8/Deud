@@ -8,8 +8,8 @@ public class HealthPotion extends PotionItem {
 
     private final int BASE_HEALTH = 3;
 
-    public HealthPotion(int id, int level) {
-        super(Assets.xp, id, "Health Potion", level, PotionType.HEALTH);
+    public HealthPotion(int level) {
+        super(Assets.xp, 5, "Health Potion", level, PotionType.HEALTH);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class HealthPotion extends PotionItem {
 
     @Override
     public Item createNew(int x, int y, int count) {
-        final Item i = new HealthPotion(getId(), level);
+        final Item i = new HealthPotion(level);
         i.setPosition(x, y);
         i.setCount(count);
         return i;

@@ -33,6 +33,6 @@ public class Fairy extends Friendly {
     @Override
     public void die() {
         adjustXP(0.13f);
-        dropItem(Items.getKeyItem());
+        dropItem(Items.KEY.item());
     }
 }

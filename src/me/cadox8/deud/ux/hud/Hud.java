@@ -28,7 +28,7 @@ public class Hud {
         drawString(g, player.getHealth() + "/" + player.getMaxHealth(), 1);
 
         //Food
-        drawImage(g, Assets.food, 2);
+        drawImage(g, Assets.chicken, 2);
         drawString(g, Utils.round(2, player.getHunger()) + "/" + Utils.round(2, player.getMaxHunger()), 2);
 
         //Armor

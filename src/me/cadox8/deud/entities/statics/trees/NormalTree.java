@@ -7,6 +7,7 @@ import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.items.Items;
 
 import java.awt.*;
+import java.util.Objects;
 
 public class NormalTree extends Tree {
 
@@ -21,7 +22,7 @@ public class NormalTree extends Tree {
 
     @Override
     public void die() {
-        dropItem(Items.getWoodItem().randomAmount(2, 6));
+        dropItem(Objects.requireNonNull(Items.WOOD.item()).randomAmount(2, 6));
     }
 
     @Override

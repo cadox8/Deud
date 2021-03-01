@@ -26,7 +26,7 @@ public class Assets {
     public static BufferedImage wood, mp3,  sushi, chest;
     public static BufferedImage key, save;
 
-    public static BufferedImage food, hearth, shield, xp, coin, sword, hand;
+    public static BufferedImage chicken, hearth, shield, xp, coin, sword, hand;
 
     public static BufferedImage fire;
 
@@ -113,7 +113,7 @@ public class Assets {
         xp = getImage(4, 0);
         sword = getImage(2, 1);
         hand = getImage(3, 1);
-        food = getImage(1, 1);
+        chicken = getImage(1, 1);
         hearth = getImage(0, 1);
         shield = getImage(1, 0);
         coin = getImage(8, 0);

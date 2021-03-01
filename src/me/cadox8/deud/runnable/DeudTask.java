@@ -3,6 +3,10 @@ package me.cadox8.deud.runnable;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * All methods only accepts seconds!
+ *
+ */
 public abstract class DeudTask extends TimerTask implements Runnable {
 
     private final Timer timer;

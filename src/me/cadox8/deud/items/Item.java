@@ -17,80 +17,63 @@ import java.util.Random;
 
 public abstract class Item {
 
-    private static final Item[] items = new Item[9]; //All items
-
-
-    // Class
-    public static final int ITEMWIDTH = 64, ITEMHEIGHT = 64;
-
     @Getter @Setter protected GameAPI gameAPI;
-    @Getter protected final BufferedImage texture;
-    @Getter protected final int id;
-    @Getter @Setter protected String name;
-    @Getter protected ItemType type;
 
+    @Getter protected final int id;
+    @Getter protected final BufferedImage texture;
+    @Getter @Setter protected String name;
+    @Getter protected final ItemType type;
+
+    @Deprecated
     @Getter @Setter private List<Attribute> attributes;
 
-    @Getter @Setter protected Rectangle bounds;
+    @Getter protected final Rectangle bounds;
 
     @Getter protected int x, y, count;
     @Getter @Setter protected boolean pickedUp = false;
 
-    @Getter @Setter protected boolean infinity = false;
+    @Getter @Setter protected boolean infinity;
+    @Getter @Setter protected float durability;
 
     @Getter @Setter protected double sellAmount = 0;
     @Getter @Setter protected double buyAmount = 0;
 
-    public Item(BufferedImage texture, int id, String name) {
+    @Getter @Setter protected double damage = 0;
+
+    public Item(BufferedImage texture, int id, String name, ItemType type) {
         this.texture = texture == null ? Assets.bug : texture;
         this.id = id;
         this.name = name;
         this.count = 1;
+        this.type = type;
+
         this.attributes = new ArrayList<>();
 
-        bounds = new Rectangle(x, y, ITEMWIDTH, ITEMHEIGHT);
+        this.infinity = false;
+        this.durability = 1.0f;
 
-        this.type = ItemType.NONE;
-
-        items[id] = this;
+        bounds = new Rectangle(x, y, 64, 64);
     }
 
     public abstract void use(@NonNull Player p);
+
+    @Deprecated
     public abstract Item createNew(int x, int y, int count);
 
-    public void tick(){
-        if(gameAPI.getWorld().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)){
+    public void tick() {
+        if (gameAPI.getWorld().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)) {
             pickedUp = true;
             gameAPI.getWorld().getPlayer().getPlayerInventory().addItem(this);
         }
     }
 
-    public void render(Graphics g){
-        if(gameAPI == null) return;
-        render(g, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()));
-    }
-
-    public void render(Graphics g, int x, int y){
-        g.drawImage(texture, x, y, 32, 32, null);
-    }
-
-    public static Item get(int id) {
-        return items[id];
-    }
-
-
     public void removeItem(@NonNull Player p) {
         if (getCount() == 1) {
             p.getPlayerInventory().removeItem(this);
-            p.getPlayerInventory().setUsableItem(Items.getHand());
+            p.getPlayerInventory().setUsableItem(Items.HAND.item());
             return;
         }
         count--;
-    }
-
-    public Item addAttributes(@NonNull Attribute... attributes) {
-        this.attributes.addAll(Arrays.asList(attributes));
-        return this;
     }
 
     public void setPosition(int x, int y) {
@@ -100,43 +83,31 @@ public abstract class Item {
         bounds.y = y;
     }
 
-    public static Item getRandom() {
-        return getRandom(Items.getBugItem().getId());
-    }
-    public static Item getRandom(Item... banedIDs) {
-        final Integer[] ids = new Integer[banedIDs.length];
-        ids[0] = Items.getBugItem().getId();
-        int x = 1;
-
-        for (Item i : banedIDs) {
-            ids[x] = i.getId();
-            x++;
-        }
-        return getRandom(ids);
-    }
-    public static Item getRandom(Integer... banedIDs) {
-        final List<Integer> baned = Arrays.asList(banedIDs);
-        final Item i = get(new Random().nextInt(items.length));
-
-        i.setCount(1);
-
-        if (banedIDs.length >= items.length) return Items.getBugItem();
-        if (baned.contains(i.getId()) || i.getId() == Items.getBugItem().getId()) return getRandom(banedIDs);
-        return i;
-    }
-
-    public Item randomAmount(int min, int max) {
-        final Random r = new Random();
-        setCount(r.nextInt((max - min) + 1) + min);
-        return this;
-    }
-
     public Item addCount(int count) {
         return setCount(getCount() + count);
     }
+
     public Item setCount(int count) {
         this.count = count;
         return this;
+    }
+
+    public Item randomAmount(int min, int max) {
+        this.setCount(new Random().nextInt(max + 1 - min) + min);
+        return this;
+    }
+
+    public static Item get(int id) {
+        return Items.getItem(id);
+    }
+
+    public void render(Graphics g) {
+        if (gameAPI == null) return;
+        render(g, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()));
+    }
+
+    public void render(Graphics g, int x, int y) {
+        g.drawImage(texture, x, y, 32, 32, null);
     }
 
     @Override

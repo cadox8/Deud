@@ -1,18 +1,19 @@
 package me.cadox8.deud.items.objects;
 
+import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.items.Item;
 
 import java.awt.image.BufferedImage;
 
 public class WoodItem extends ObjectItem {
 
-    public WoodItem(BufferedImage texture, int id, String name) {
-        super(texture, id, name);
+    public WoodItem() {
+        super(Assets.wood, 0, "Wood");
     }
 
     @Override
     public Item createNew(int x, int y, int count) {
-        final Item i = new WoodItem(texture, id, name);
+        final Item i = new WoodItem();
         i.setPosition(x, y);
         i.setCount(count);
         return i;

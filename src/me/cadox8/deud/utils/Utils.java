@@ -104,16 +104,4 @@ public class Utils {
         final World world = center.getWorld();
         return world.getEntityManager().getEntities().stream().filter(e -> !(e instanceof Light)).filter(e -> center.distance(e.getLocation()) <= radius2 && center.distance(e.getLocation()) != 0).collect(Collectors.toCollection(ArrayList::new));
     }
-
-/*    public static ArrayList<Entity> getNearbyEntities(Location center, double radius) {
-        final World world = center.getWorld();
-        final Circle2D circle = new Circle2D(center.getX(), center.getY(), radius);
-        return world.getEntityManager().getEntities().stream().filter(e -> circle.contains(e.getX(), e.getY())).collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public static ArrayList<Entity> getNearbyEntities(Location center, double radius, @NonNull Entity excepts) {
-        final World world = center.getWorld();
-        final Circle2D circle = new Circle2D(center.getX(), center.getY(), radius);
-        return world.getEntityManager().getEntities().stream().filter(e -> !e.equals(excepts)).filter(e -> circle.contains(e.getX(), e.getY())).collect(Collectors.toCollection(ArrayList::new));
-    }*/
 }

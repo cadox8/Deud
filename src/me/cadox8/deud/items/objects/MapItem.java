@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 
 public class MapItem extends ObjectItem {
 
-    public MapItem(BufferedImage texture, int id, String name) {
-        super(texture, id, name);
+    public MapItem() {
+        super(null, 3, "Map");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class MapItem extends ObjectItem {
 
     @Override
     public Item createNew(int x, int y, int count) {
-        final Item i = new BugItem(texture, id, name);
+        final Item i = new MapItem();
         i.setPosition(x, y);
         i.setCount(count);
         return i;

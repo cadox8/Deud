@@ -9,8 +9,7 @@ import java.awt.image.BufferedImage;
 public abstract class ObjectItem extends Item {
 
     public ObjectItem(BufferedImage texture, int id, String name) {
-        super(texture, id, name);
-        this.type = ItemType.OBJECT;
+        super(texture, id, name, ItemType.OBJECT);
     }
 
     @Override
