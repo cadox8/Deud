@@ -9,7 +9,7 @@ public enum Sounds {
     MENU("menu", 0),
 
     // Arena Music
-    TOWN_MUSIC("town", 15f),
+    TOWN_MUSIC("town", 6f),
 
     // Misc Music
     ENTITY_WALK_GRASS("entity_walk_grass", 0);

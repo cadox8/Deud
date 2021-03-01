@@ -24,7 +24,7 @@ import java.util.Random;
 public abstract class Entity {
 
     // Internal Data
-    @Getter private final int INTERNAL_ID;
+    @Getter private final String UUID;
     @Getter private final String INTERNAL_NAME;
     @Getter private final EntityData.EntityType ENTITY_TYPE;
     //
@@ -75,9 +75,9 @@ public abstract class Entity {
     @Getter @Setter protected Animation animDown, animUp, animLeft, animRight;
     @Getter @Setter protected Animation[] animations = new Animation[4];
 
-    public Entity(int id, String name, EntityData.EntityType ENTITY_TYPE, @NonNull GameAPI gameAPI, float x, float y, int width, int height, int level) {
-        INTERNAL_ID = id;
-        INTERNAL_NAME = name;
+    public Entity(String uuid, String name, EntityData.EntityType ENTITY_TYPE, @NonNull GameAPI gameAPI, float x, float y, int width, int height, int level) {
+        this.UUID = uuid;
+        this.INTERNAL_NAME = name;
         this.ENTITY_TYPE = ENTITY_TYPE;
 
         this.gameAPI = gameAPI;
@@ -253,6 +253,6 @@ public abstract class Entity {
 
     @Override
     public String toString() {
-        return "Entity: {ID: " + getINTERNAL_ID() + ", Name: " + getINTERNAL_NAME() + ", X: " + getX() + ", Y: " + getY() + "}";
+        return "Entity: {ID: " + getUUID() + ", Name: " + getINTERNAL_NAME() + ", X: " + getX() + ", Y: " + getY() + "}";
     }
 }

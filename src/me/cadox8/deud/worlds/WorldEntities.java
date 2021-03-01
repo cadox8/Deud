@@ -9,6 +9,7 @@ import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.statics.*;
 import me.cadox8.deud.entities.statics.chest.Chest;
 import me.cadox8.deud.entities.statics.chest.RewardChest;
+import me.cadox8.deud.entities.statics.chest.TrapChest;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.trees.DeadTree;
 import me.cadox8.deud.entities.statics.trees.NormalTree;
@@ -19,6 +20,8 @@ import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.utils.Log;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class WorldEntities {
 
@@ -46,13 +49,22 @@ public class WorldEntities {
 
                 switch (type) {
                     case CHEST:
-                        en = new Chest(gameAPI, l.getX(), l.getY());
-                        en.getInventory().addItems(e.getInventory());
-                        break;
-                    case REWARDCHEST:
-                        en = new RewardChest(gameAPI, l.getX(), l.getY());
-                        ((RewardChest)en).setOpen(e.isOpen());
-                        en.getInventory().addItem(e.getInventory()[0]);
+                        switch (Chest.ChestType.valueOf(e.getChestType())) {
+                            case REWARD -> {
+                                en = new RewardChest(gameAPI, l.getX(), l.getY(), e.isNeedKey(), Chest.ChestType.valueOf(e.getChestType()));
+                                ((RewardChest) en).setOpen(e.isOpen());
+                                Arrays.asList(e.getPool()).forEach(i -> ((RewardChest) en).addToPool(i.getId()));
+                            }
+                            case TRAP -> {
+                                en = new TrapChest(gameAPI, l.getX(), l.getY(), e.isNeedKey());
+                                ((TrapChest) en).setOpen(e.isOpen());
+                                Arrays.asList(e.getPool()).forEach(i -> ((RewardChest) en).addToPool(i.getId()));
+                            }
+                            default -> {
+                                en = new Chest(gameAPI, l.getX(), l.getY(), Chest.ChestType.valueOf(e.getChestType()));
+                                en.getInventory().addItems(e.getInventory());
+                            }
+                        }
                         break;
                     case SIGN:
                         en = new Sign(gameAPI, l.getX(), l.getY(), e.getText());

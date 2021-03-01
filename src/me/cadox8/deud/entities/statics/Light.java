@@ -23,7 +23,7 @@ public class Light extends StaticEntity {
     }
 
     public Light(GameAPI gameAPI, int x, int y, int radius, float luminosity, Color color) {
-        super(503, "Light", EntityData.EntityType.LIGHT, gameAPI, x, y, 0, 0);
+        super("16c2f2a2-af1e-46f7-9374-27a9dc3dbe74", "Light", EntityData.EntityType.LIGHT, gameAPI, x, y, 0, 0);
 
         this.luminosity = luminosity;
         this.radius = radius;

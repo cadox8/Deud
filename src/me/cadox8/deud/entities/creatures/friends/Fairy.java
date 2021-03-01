@@ -10,7 +10,7 @@ import me.cadox8.deud.items.Items;
 public class Fairy extends Friendly {
 
     public Fairy(GameAPI gameAPI, float x, float y) {
-        super(4, "Fairy", EntityData.EntityType.FAIRY, gameAPI, x, y, 42, 42);
+        super("a26e2385-d2bc-4445-a232-6ee60aa53c66", "Fairy", EntityData.EntityType.FAIRY, gameAPI, x, y, 42, 42);
 
         bounds.x = 12;
         bounds.y = 23;

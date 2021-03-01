@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.ui.NysvaManager;
 import me.cadox8.deud.ui.components.images.UIImage;
@@ -56,6 +57,13 @@ public abstract class Inventory {
     protected abstract void loadItems();
 
 
+    protected void drawItemInfo(Graphics g, Item item, int xPosText, int yPosText) {
+        String infoText = "";
+        if (item != null) infoText = item.getName() + " x" + item.getCount();
+        if (item == null) infoText = "---------";
+        Text.drawString(g, infoText, xPosText, yPosText, false, 2);
+    }
+
     protected void base(BufferedImage baseImage) {
         final UIImage base = new UIImage(gameAPI, baseImage);
         base.setUiDimension(new UIDimension(this.baseX, this.baseY, baseImage.getWidth(), baseImage.getHeight()));
@@ -70,25 +78,30 @@ public abstract class Inventory {
         this.loadItems();
     }
 
-    // ToDo: Change
+
     // Inventory methods
     public void addItems(Item... items) {
         Arrays.asList(items).forEach(this::addItem);
     }
     public void addItem(Item item) {
-        items.stream().filter(i -> i.getId() == item.getId()).findFirst().ifPresentOrElse(i -> i.addCount(item.getCount()), () -> {
-            items.add(item);
-        });
+        items.stream().filter(i -> i.getId() == item.getId()).findFirst().ifPresentOrElse(i -> i.addCount(item.getCount()), () -> items.add(item));
     }
 
     public void removeItem(Item item) {
+        this.removeItem(item, -1);
+    }
+    public void removeItem(Item item, int amount) {
         if (items.size() == 0) return;
         items.stream().filter(it -> it.getId() == item.getId()).findFirst().ifPresent(i -> {
-            if (i.getCount() - item.getCount() <= 0) {
+            if (amount == -1) {
                 items.remove(item);
                 return;
             }
-            i.setCount(i.getCount() - item.getCount());
+            if (i.getCount() - amount <= 0) {
+                items.remove(item);
+                return;
+            }
+            i.setCount(i.getCount() - amount);
         });
     }
 

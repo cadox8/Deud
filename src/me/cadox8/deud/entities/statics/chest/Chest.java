@@ -1,5 +1,6 @@
 package me.cadox8.deud.entities.statics.chest;
 
+import lombok.Getter;
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
@@ -17,8 +18,12 @@ import java.util.List;
 
 public class Chest extends StaticEntity {
 
-    public Chest(@NonNull GameAPI gameAPI, float x, float y) {
-        super(501, "Chest", EntityData.EntityType.CHEST, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    @Getter private final ChestType chestType;
+
+    public Chest(@NonNull GameAPI gameAPI, float x, float y, ChestType chestType) {
+        super("fc356233-0700-49a3-98bd-bd2350acd339", "Chest", EntityData.EntityType.CHEST, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+
+        this.chestType = chestType;
 
         setDamageable(false);
 
@@ -46,5 +51,9 @@ public class Chest extends StaticEntity {
     @Override
     public void render(Graphics g) {
         g.drawImage(Assets.chest, (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
+    }
+
+    public enum ChestType {
+        NORMAL, REWARD, TRAP
     }
 }

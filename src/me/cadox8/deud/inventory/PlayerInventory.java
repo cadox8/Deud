@@ -3,14 +3,18 @@ package me.cadox8.deud.inventory;
 import lombok.NonNull;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.sign.Sign;
+import me.cadox8.deud.graphics.fonts.Text;
+import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.ItemType;
 import me.cadox8.deud.items.Items;
+import me.cadox8.deud.ui.NysvaUI;
 import me.cadox8.deud.ui.components.images.UIImageButton;
 import me.cadox8.deud.ui.helpers.UIDimension;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class PlayerInventory extends Inventory {
@@ -49,6 +53,15 @@ public class PlayerInventory extends Inventory {
         if (!this.isActive()) return;
 
         getNysvaManager().render(g);
+
+        final Optional<NysvaUI> item = this.getNysvaManager().getObjects().stream().filter(n -> n instanceof UIImageButton).filter(NysvaUI::isHovering).findAny();
+        if (item.isPresent()) {
+            final UIImageButton button = (UIImageButton) item.get();
+            g.drawImage(GUI.invSelector, button.getUiDimension().getX(), button.getUiDimension().getY(), null);
+            drawItemInfo(g, items.get((int)button.getExtraData()), 855, 646);
+        } else {
+            drawItemInfo(g, null, 855, 646);
+        }
     }
 
     @Override
@@ -60,9 +73,13 @@ public class PlayerInventory extends Inventory {
             if (ySlot.get() > 6) return;
 
             final UIImageButton item = new UIImageButton(this.gameAPI, i.getTexture(), () -> {
-
+                this.selectedSlot = this.items.indexOf(i);
+                // ToDo: move
             });
             item.setUiDimension(new UIDimension(this.itemX + (xSlot.get() * 64) + 1, this.itemY + (ySlot.get() * 64) + 1, 60, 60));
+            item.setReorder(true);
+            item.setResize(false);
+            item.setExtraData(this.items.indexOf(i));
         });
     }
 

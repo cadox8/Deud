@@ -37,7 +37,7 @@ public class Sound {
                 clip.setFramePosition(0);
             }
         } catch(Exception e) {
-            Log.danger(e.getCause());
+            Log.danger(e.getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ public class Sound {
                 clip.start();
             }
         } catch(Exception e) {
-            Log.danger(e.getCause());
+            Log.danger(e.getMessage());
         }
     }
 

@@ -22,7 +22,7 @@ public class Sign extends StaticEntity {
     @Getter @Setter private boolean shown = false;
 
     public Sign(@NonNull GameAPI gameAPI, float x, float y, List<String> text) {
-        super(500, "Sign", EntityData.EntityType.SIGN, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super("b06ff805-c536-41fd-b49f-3bd195c1eeff", "Sign", EntityData.EntityType.SIGN, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
 
@@ -46,6 +46,6 @@ public class Sign extends StaticEntity {
 
     @Override
     public String toString() {
-        return "Entity: {ID: " + getINTERNAL_ID() + ", Name: " + getINTERNAL_NAME() + ", X: " + getX() + ", Y: " + getY() + ", Type: " + getENTITY_TYPE() + ", Text: " + getText().toString() + "}";
+        return "Entity: {ID: " + getUUID() + ", Name: " + getINTERNAL_NAME() + ", X: " + getX() + ", Y: " + getY() + ", Type: " + getENTITY_TYPE() + ", Text: " + getText().toString() + "}";
     }
 }

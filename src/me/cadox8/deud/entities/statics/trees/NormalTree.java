@@ -12,7 +12,7 @@ import java.util.Objects;
 public class NormalTree extends Tree {
 
     public NormalTree(@NonNull GameAPI gameAPI, float x, float y) {
-        super(100, "NormalTree", EntityData.EntityType.NORMALTREE, gameAPI, x, y);
+        super("29eb011a-e0ce-473c-ba8e-fd0ec3bfa2aa", "NormalTree", EntityData.EntityType.NORMALTREE, gameAPI, x, y);
 
         bounds.x = 10;
         bounds.y = (int) (height / 1.5f);

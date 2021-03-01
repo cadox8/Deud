@@ -20,7 +20,7 @@ public class FileUtils {
     private static final File config = new File(Launcher.GAME_FILE, "config.json");
 
     public static void checkFile() {
-        final File file = new File(Launcher.GAME_FILE + "saves/entities");
+        final File file = new File(Launcher.GAME_FILE + "saves/worlds");
         try {
             if (!saves.exists()) {
                 saves.getParentFile().mkdirs();
@@ -81,7 +81,7 @@ public class FileUtils {
 
     // Entity Data
     public static EntityData loadEntities(String world) {
-        final File saveEntities = new File(Launcher.GAME_FILE + "saves/entities", "ent_" + world +".ddata");
+        final File saveEntities = new File(Launcher.GAME_FILE + "saves/worlds", world +".dworld");
         if (!saveEntities.exists()) return null;
 
         try {

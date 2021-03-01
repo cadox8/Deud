@@ -12,8 +12,8 @@ import java.awt.*;
 
 public abstract class StaticEntity extends Entity {
 
-    public StaticEntity(int id, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
-        super(id, name, type, gameAPI, x, y, width, height, 0);
+    public StaticEntity(String uuid, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
+        super(uuid, name, type, gameAPI, x, y, width, height, 0);
     }
 
     @Override

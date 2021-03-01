@@ -13,7 +13,9 @@ import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.House;
 import me.cadox8.deud.entities.statics.Light;
+import me.cadox8.deud.entities.statics.chest.Chest;
 import me.cadox8.deud.entities.statics.chest.RewardChest;
+import me.cadox8.deud.entities.statics.chest.TrapChest;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.trees.Tree;
 import me.cadox8.deud.inventory.creature.PlayerInventory2;
@@ -73,7 +75,7 @@ public class Save {
 
     public void saveEntities(List<Entity> entities, String worldName) throws IOException {
         final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        final File saveEntities = new File(Launcher.GAME_FILE + "saves/entities", "ent_" + worldName +".ddata");
+        final File saveEntities = new File(Launcher.GAME_FILE + "saves/worlds", worldName +".dworld");
 
         final JsonObject data = new JsonObject();
         final JsonArray ent = new JsonArray();
@@ -81,7 +83,9 @@ public class Save {
         entities.stream().filter(e -> !(e instanceof Player)).forEach(e -> {
             final JsonObject en = new JsonObject();
 
+            en.addProperty("uuid", e.getUUID());
             en.addProperty("type", e.getINTERNAL_NAME());
+            en.addProperty("entityType", e.getENTITY_TYPE().name());
             en.addProperty("health", e.getHealth());
             en.addProperty("maxHealth", e.getMaxHealth());
             en.add("location", gson.toJsonTree(e.getLocation().serializeLocation()).getAsJsonObject());
@@ -102,8 +106,18 @@ public class Save {
 
             if (e instanceof Tree) en.addProperty("treeType", ((Tree) e).getTreeType());
 
+            if (e instanceof Chest) en.addProperty("chestType", ((Chest) e).getChestType().name());
+
             if (e instanceof RewardChest) {
                 en.addProperty("open", ((RewardChest)e).isOpen());
+                en.addProperty("needKey", ((RewardChest) e).isNeedKey());
+                final JsonArray items = new JsonArray();
+                ((RewardChest) e).getPool().forEach(i -> {
+                    final JsonObject item = new JsonObject();
+                    item.addProperty("id", i.getId());
+                    items.add(item);
+                });
+                en.add("inventory", items);
             }
 
             if (e instanceof Sign) {

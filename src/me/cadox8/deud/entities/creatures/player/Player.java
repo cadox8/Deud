@@ -44,7 +44,7 @@ public class Player extends Creature {
     @Getter @Setter private Options options;
 
     public Player(@NonNull GameAPI gameAPI, float x, float y) {
-        super(1, "Player", EntityData.EntityType.PLAYER, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+        super("9ad2cbee-f134-480a-9681-edf174dde4bb", "Player", EntityData.EntityType.PLAYER, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         setMoving(false);
 

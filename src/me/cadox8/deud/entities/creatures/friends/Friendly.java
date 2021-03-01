@@ -6,12 +6,12 @@ import me.cadox8.deud.entities.creatures.Creature;
 
 public abstract class Friendly extends Creature {
 
-    public Friendly(int id, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y, int width, int height) {
-        this(id, name, type, gameAPI, x, y, width, height, 0);
+    public Friendly(String uuid, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y, int width, int height) {
+        this(uuid, name, type, gameAPI, x, y, width, height, 0);
     }
 
-    public Friendly(int id, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y, int width, int height, int level) {
-        super(id, name, type, gameAPI, x, y, width, height, level);
+    public Friendly(String uuid, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y, int width, int height, int level) {
+        super(uuid, name, type, gameAPI, x, y, width, height, level);
     }
 
     @Override

@@ -13,7 +13,7 @@ import java.awt.*;
 public class DeadTree extends Tree {
 
     public DeadTree(@NonNull GameAPI gameAPI, float x, float y) {
-        super(101, "DeadTree", EntityData.EntityType.DEADTREE, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super("2a774d31-d937-46ef-bdde-ad97a4ece468", "DeadTree", EntityData.EntityType.DEADTREE, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         bounds.x = 0;
         bounds.y = (int) (height / 1.5f) - 17;

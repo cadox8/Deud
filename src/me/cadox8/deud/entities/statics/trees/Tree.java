@@ -11,11 +11,11 @@ public abstract class Tree extends StaticEntity {
 
     @Getter @Setter protected int treeType = 0;
 
-    public Tree(int id, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y) {
-        this (id, name, type, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public Tree(String uuid, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y) {
+        this(uuid, name, type, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
     }
-    public Tree(int id, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y, int width, int height) {
-        super(id, name, type, gameAPI, x, y, width, height);
+    public Tree(String uuid, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y, int width, int height) {
+        super(uuid, name, type, gameAPI, x, y, width, height);
     }
 
     @Override

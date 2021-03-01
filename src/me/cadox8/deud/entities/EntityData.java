@@ -65,7 +65,10 @@ public class EntityData {
             return new Location(location.getX(), location.getY(),location.getDirection());
         }
 
+        public boolean needKey = false;
         public boolean open = false;
+        public String chestType = Chest.ChestType.NORMAL.name();
+        public ItemHelper[] pool = new ItemHelper[0];
 
         public Item[] getInventory() {
             if (inventory == null) return new Item[0];
@@ -90,7 +93,6 @@ public class EntityData {
         GHOST(Ghost.class),
         FAIRY(Fairy.class),
         CHEST(Chest.class),
-        REWARDCHEST(RewardChest.class),
         LIGHT(Light.class),
         ROCK(Rock.class),
         SIGN(Sign.class),
@@ -105,7 +107,7 @@ public class EntityData {
         private final Class<? extends Entity> supClass;
 
         public static EntityType parseClass(String name) {
-            return Arrays.stream(EntityType.values()).filter(e -> e.name().toLowerCase().equalsIgnoreCase(name.toLowerCase())).findFirst().orElse(null);
+            return Arrays.stream(EntityType.values()).filter(e -> e.name().equalsIgnoreCase(name)).findFirst().orElse(null);
         }
     }
 }

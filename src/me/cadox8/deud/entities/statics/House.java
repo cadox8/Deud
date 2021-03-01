@@ -15,7 +15,7 @@ public class House extends StaticEntity {
     @Getter private final int houseType;
 
     public House(@NonNull GameAPI gameAPI, float x, float y, int houseType) {
-        super(252, "House", EntityData.EntityType.HOUSE, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super("3472051a-67ed-49f5-b566-d0d893ffaa66", "House", EntityData.EntityType.HOUSE, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         this.houseType = houseType;
 

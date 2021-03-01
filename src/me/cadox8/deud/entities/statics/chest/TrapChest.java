@@ -12,7 +12,7 @@ public class TrapChest extends RewardChest {
         this(gameAPI, x, y, false);
     }
     public TrapChest(@NonNull GameAPI gameAPI, float x, float y, boolean needKey) {
-        super(gameAPI, x, y, needKey);
+        super(gameAPI, x, y, needKey, ChestType.TRAP);
 
         setDamage(DEFAULT_DAMAGE);
         setLevel(1);

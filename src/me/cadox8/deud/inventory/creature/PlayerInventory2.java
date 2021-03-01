@@ -16,13 +16,13 @@ import me.cadox8.deud.ui.helpers.UIDimension;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class PlayerInventory extends CreatureInventory {
+public class PlayerInventory2 extends CreatureInventory {
 
     private final Player player;
 
     private final UIImageButton selectedItem;
 
-    public PlayerInventory(GameAPI gameAPI, Player player) {
+    public PlayerInventory2(GameAPI gameAPI, Player player) {
         super(gameAPI);
         this.player = player;
 

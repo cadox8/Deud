@@ -24,7 +24,6 @@ public class Launcher {
         checks();
         discord = new Discord();
         final Game game = new Game("Deud" + " ~~ " + VERSION, getDimension().width, getDimension().height); //new Game("Deud" + " ~~ " + VERSION, 1250, 800).start();
-
         game.start();
     }
 

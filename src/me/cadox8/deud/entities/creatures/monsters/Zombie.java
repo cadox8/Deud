@@ -11,7 +11,7 @@ import me.cadox8.deud.items.Items;
 public class Zombie extends Monster {
 
     public Zombie(GameAPI gameAPI, float x, float y) {
-        super(2, "Zombie", EntityData.EntityType.ZOMBIE, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+        super("f71c5cef-46a6-42e2-b6cf-60c69de977cd", "Zombie", EntityData.EntityType.ZOMBIE, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         bounds.x = 20;
         bounds.y = 44;

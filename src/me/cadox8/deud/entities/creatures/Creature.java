@@ -26,12 +26,12 @@ public abstract class Creature extends Entity {
 
     @Getter @Setter protected Light light;
 
-    public Creature(int id, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
-        this(id, name, type, gameAPI, x, y, width, height, 0);
+    public Creature(String uuid, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
+        this(uuid, name, type, gameAPI, x, y, width, height, 0);
     }
 
-    public Creature(int id, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height, int level) {
-        super(id, name, type, gameAPI, x, y, width, height, level);
+    public Creature(String uuid, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height, int level) {
+        super(uuid, name, type, gameAPI, x, y, width, height, level);
         speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;

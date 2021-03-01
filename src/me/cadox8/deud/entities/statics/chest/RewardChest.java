@@ -22,10 +22,10 @@ public class RewardChest extends Chest {
     @Getter @Setter protected List<Item> pool;
 
     public RewardChest(@NonNull GameAPI gameAPI, float x, float y) {
-        this(gameAPI, x, y, false);
+        this(gameAPI, x, y, false, ChestType.REWARD);
     }
-    public RewardChest(@NonNull GameAPI gameAPI, float x, float y, boolean needKey) {
-        super(gameAPI, x, y);
+    public RewardChest(@NonNull GameAPI gameAPI, float x, float y, boolean needKey, ChestType type) {
+        super(gameAPI, x, y, type);
 
         this.needKey = needKey;
         this.pool = new ArrayList<>();
@@ -44,5 +44,9 @@ public class RewardChest extends Chest {
     protected boolean canOpen(Player player) {
         if (this.isOpen()) return true;
         return this.needKey && !player.getInventory().hasItem(Objects.requireNonNull(Items.KEY.item()));
+    }
+
+    public void addToPool(int id) {
+        this.pool.add(Items.getItem(id));
     }
 }

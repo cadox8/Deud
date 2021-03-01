@@ -23,8 +23,8 @@ public abstract class Projectile extends Creature {
 
     @Getter @Setter private float distance;
 
-    public Projectile(int id, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, BufferedImage texture, float x, float y, int width, int height) {
-        super(id, name, type, gameAPI, x, y, width, height, 0);
+    public Projectile(String uuid, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, BufferedImage texture, float x, float y, int width, int height) {
+        super(uuid, name, type, gameAPI, x, y, width, height, 0);
         this.texture = texture;
 
         attributes = new ArrayList<>();

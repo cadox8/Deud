@@ -25,7 +25,7 @@ public class Npc extends Creature {
     private Quest quest;
 
     public Npc(@NonNull GameAPI gameAPI, float x, float y, String displayName, BufferedImage[]... textures) {
-        super(5, "NPC", EntityData.EntityType.NPC, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+        super("fb32b568-aa91-46d9-99a9-fe1b90fb8599", "NPC", EntityData.EntityType.NPC, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         this.displayName = displayName;
         this.text = new ArrayList<>();

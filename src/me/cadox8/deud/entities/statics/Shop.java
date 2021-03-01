@@ -18,7 +18,7 @@ public class Shop extends StaticEntity {
     private boolean hasDropped = false;
 
     public Shop(@NonNull GameAPI gameAPI, float x, float y, Item... drops) {
-        super(252, "Shop", EntityData.EntityType.SHOP, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super("79ee0aa3-4815-4653-abbe-fcf09ff81c46", "Shop", EntityData.EntityType.SHOP, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         inventory = new ShopInventory(gameAPI, 20);
 
