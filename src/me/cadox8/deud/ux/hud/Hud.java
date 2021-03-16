@@ -5,6 +5,7 @@ import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.graphics.textures.GUI;
+import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
@@ -36,7 +37,7 @@ public class Hud {
         drawString(g, player.getArmor(),  3);
 
         //Item
-        g.drawImage(player.getPlayerInventory().getUsableItem().getTexture(), 22, 115, null);
+        g.drawImage(player.getPlayerInventory().getEquipment().get(Inventory.Equipment.HAND).getTexture(), 22, 115, null);
         //Text.drawString(g, player.getPlayerInventory().getUsableItem().getName(), 1150, 686 + Assets.HEIGHT, false, Color.BLACK, 2);
     }
 

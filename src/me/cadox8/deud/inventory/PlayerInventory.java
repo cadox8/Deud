@@ -28,6 +28,8 @@ public class PlayerInventory extends Inventory {
         this.itemY = 130;
 
         gameAPI.getMouseManager().setNysvaUI(getNysvaManager());
+
+        this.base(GUI.inventory);
     }
 
     @Override
@@ -80,10 +82,26 @@ public class PlayerInventory extends Inventory {
             item.setReorder(true);
             item.setResize(false);
             item.setExtraData(this.items.indexOf(i));
+
+            getNysvaManager().addObject(item);
+        });
+
+        this.getEquipment().values().forEach(i -> {
+            if (i == null) return;
+            final UIImageButton item = new UIImageButton(this.gameAPI, i.getTexture(), () -> {
+                this.selectedSlot = this.items.indexOf(i);
+                // ToDo: move
+            });
+            item.setUiDimension(new UIDimension(this.itemX + (xSlot.get() * 64) + 1, this.itemY + (ySlot.get() * 64) + 1, 60, 60));
+            item.setReorder(true);
+            item.setResize(false);
+            item.setExtraData(this.items.indexOf(i));
+
+            getNysvaManager().addObject(item);
         });
     }
 
-    private void setHandItem(Item item) {
+    public void setHandItem(Item item) {
         if (item == null) return;
         this.equipment.put(Equipment.HAND, item);
     }

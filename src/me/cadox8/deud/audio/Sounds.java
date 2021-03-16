@@ -9,7 +9,7 @@ public enum Sounds {
     MENU("menu", 0),
 
     // Arena Music
-    TOWN_MUSIC("town", 6f),
+    TOWN_MUSIC("town", 13f),
 
     // Misc Music
     ENTITY_WALK_GRASS("entity_walk_grass", 0);
@@ -19,11 +19,11 @@ public enum Sounds {
 
     private final Sound sound;
 
-    Sounds(final String name, final float volume) {
+    Sounds(final String name, final double volume) {
         this.name = name;
-        this.volume = -22f + (-volume);
+        this.volume = -22f + (float)(-volume);
 
-        this.sound = new Sound(name, volume);
+        this.sound = new Sound(name, this.volume);
     }
 
     public void play() {

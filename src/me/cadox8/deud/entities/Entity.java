@@ -12,7 +12,7 @@ import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.projectile.Projectile;
 import me.cadox8.deud.events.projectiles.ProjectileHitEvent;
-import me.cadox8.deud.inventory.Inventory2;
+import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.utils.Log;
 
@@ -68,7 +68,7 @@ public abstract class Entity {
 
     @Getter @Setter protected Entity killer;
 
-    @Setter protected Inventory2 inventory;
+    @Setter protected Inventory inventory;
 
     @Getter @Setter protected boolean moving = true;
 
@@ -112,16 +112,16 @@ public abstract class Entity {
 
         if (attacker instanceof Monster) {
             final Monster monster = (Monster) attacker;
-            final Item item = monster.getCreatureInventory().getUsableItem();
+            final Item item = monster.getCreatureInventory().getEquipment().get(Inventory.Equipment.HAND);
             amt += item.getDamage();
             setHealth(getHealth() - gameAPI.getDamageManager().effectiveDamage(amt, getENTITY_TYPE(), item));
         }
 
-        if (this instanceof Creature) {
+/*        if (this instanceof Creature) {
             if (attacker instanceof Monster) attacker.getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
             if (attacker instanceof Npc) attacker.getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
             if (attacker instanceof Player) attacker.getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
-        }
+        }*/
 
         if (attacker instanceof Projectile) {
             new ProjectileHitEvent(getGameAPI(), ((Projectile)attacker), this).onEvent();
@@ -158,7 +158,7 @@ public abstract class Entity {
         setHealth(0);
     }
 
-    public Inventory2 getInventory() {
+    public Inventory getInventory() {
         return inventory;
     }
 

@@ -15,10 +15,9 @@ import me.cadox8.deud.entities.statics.House;
 import me.cadox8.deud.entities.statics.Light;
 import me.cadox8.deud.entities.statics.chest.Chest;
 import me.cadox8.deud.entities.statics.chest.RewardChest;
-import me.cadox8.deud.entities.statics.chest.TrapChest;
 import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.entities.statics.trees.Tree;
-import me.cadox8.deud.inventory.creature.PlayerInventory2;
+import me.cadox8.deud.inventory.PlayerInventory;
 import me.cadox8.deud.utils.Log;
 import net.arikia.dev.drpc.DiscordRPC;
 
@@ -35,8 +34,8 @@ public class Save {
 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public void savePlayer(Player player) throws IOException {
-        final PlayerInventory2 i = player.getPlayerInventory();
+    public void savePlayer(Player player) throws NullPointerException, IOException {
+        final PlayerInventory i = player.getPlayerInventory();
         final JsonObject data = new JsonObject();
 
         data.addProperty("nick", player.getNick());
@@ -52,14 +51,22 @@ public class Save {
             it.addProperty("count", item.getCount());
             inv.add(it);
         });
+
         data.add("inventory", inv);
 
-        data.add("location", gson.toJsonTree(player.getLocation().serializeLocation()).getAsJsonObject());
+        final JsonArray equip = new JsonArray();
+        i.getEquipment().keySet().forEach(k -> {
+            if (i.getEquipment().get(k) == null) return;
+            final JsonObject it = new JsonObject();
+            it.addProperty("slot", k.name());
+            it.addProperty("id", i.getEquipment().get(k).getId());
+            it.addProperty("count", i.getEquipment().get(k).getCount());
+            equip.add(it);
+        });
 
-        final JsonObject item = new JsonObject();
-        item.addProperty("id", i.getUsableItem().getId());
-        item.addProperty("count", i.getUsableItem().getCount());
-        data.add("item", item);
+        data.add("equip", equip);
+
+        data.add("location", gson.toJsonTree(player.getLocation().serializeLocation()).getAsJsonObject());
 
         final BufferedWriter w = new BufferedWriter(new FileWriter(file));
 

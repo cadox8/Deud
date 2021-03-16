@@ -39,8 +39,6 @@ public class Chest extends StaticEntity {
     }
 
     public void open(@NonNull Player p) {
-        getInventory().setActive(true, GUI.chest);
-        p.getPlayerInventory().setActive(true, GUI.inventory);
         gameAPI.getEntityManager().freezePlayer();
     }
 

@@ -26,7 +26,7 @@ public abstract class Inventory {
 
     @Getter @Setter protected int selectedSlot;
 
-    @Getter @Setter protected HashMap<Equipment, Item> equipment;
+    @Getter protected HashMap<Equipment, Item> equipment;
 
     @Getter protected boolean active;
 
@@ -56,7 +56,6 @@ public abstract class Inventory {
     public abstract void render(Graphics g);
     protected abstract void loadItems();
 
-
     protected void drawItemInfo(Graphics g, Item item, int xPosText, int yPosText) {
         String infoText = "";
         if (item != null) infoText = item.getName() + " x" + item.getCount();
@@ -85,6 +84,10 @@ public abstract class Inventory {
     }
     public void addItem(Item item) {
         items.stream().filter(i -> i.getId() == item.getId()).findFirst().ifPresentOrElse(i -> i.addCount(item.getCount()), () -> items.add(item));
+    }
+
+    public void setEquipment(Equipment equipment, Item item) {
+        this.equipment.put(equipment, item);
     }
 
     public void removeItem(Item item) {

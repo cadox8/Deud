@@ -2,7 +2,11 @@ package me.cadox8.deud.entities.creatures.player;
 
 import lombok.Data;
 import me.cadox8.deud.entities.Location;
+import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.items.Item;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 public class PlayerData {
@@ -15,7 +19,7 @@ public class PlayerData {
 
     private LocationUtils location = new LocationUtils();
     private ItemUtils[] inventory = new ItemUtils[0];
-    private ItemUtils item = new ItemUtils();
+    private ItemUtils2[] equip = new ItemUtils2[0];
 
     public LocationUtils locUtils() {
         return location;
@@ -24,8 +28,11 @@ public class PlayerData {
         return new Location(location.getX(), location.getY(), location.getDirection());
     }
 
-    public Item getItem() {
-        return Item.get(item.getId()).setCount(item.getCount());
+    public Map<Inventory.Equipment, Item> getEquipment() {
+        if (equip == null) return new HashMap<>();
+        final HashMap<Inventory.Equipment, Item> equipment = new HashMap<>();
+        for (ItemUtils2 itemUtils : equip) equipment.put(Inventory.Equipment.valueOf(itemUtils.getSlot()), Item.get(itemUtils.getId()).setCount(itemUtils.getCount()));
+        return equipment;
     }
 
     public Item[] getInventory() {
@@ -37,6 +44,12 @@ public class PlayerData {
 
     @Data
     public static class ItemUtils {
+        private int id = 0;
+        private int count = 0;
+    }
+    @Data
+    public static class ItemUtils2 {
+        private String slot = "";
         private int id = 0;
         private int count = 0;
     }

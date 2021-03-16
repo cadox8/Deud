@@ -7,6 +7,7 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.attributes.Attribute;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.graphics.textures.Assets;
+import me.cadox8.deud.inventory.Inventory;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -70,7 +71,7 @@ public abstract class Item {
     public void removeItem(@NonNull Player p) {
         if (getCount() == 1) {
             p.getPlayerInventory().removeItem(this);
-            p.getPlayerInventory().setUsableItem(Items.HAND.item());
+            p.getPlayerInventory().setEquipment(Inventory.Equipment.HAND, Items.HAND.item());
             return;
         }
         count--;

@@ -12,9 +12,7 @@ public class ShopInventory extends StaticInventory {
     public ShopInventory(GameAPI gameAPI, int size) {
         super(gameAPI);
 
-        setSize(size);
-
-        loadBaseInventory(676, 130, GUI.chest);
+        //loadBaseInventory(676, 130, GUI.chest);
 
         gameAPI.getMouseManager().setNysvaUI(getNysvaManager());
     }

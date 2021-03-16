@@ -13,6 +13,7 @@ import me.cadox8.deud.items.weapons.SwordItem;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 public enum Items {
@@ -39,6 +40,6 @@ public enum Items {
     }
 
     public static Item getItem(int id) {
-        return Arrays.stream(Items.values()).filter(i -> i.getId() == id).findAny().orElse(null).item();
+        return Objects.requireNonNull(Arrays.stream(Items.values()).filter(i -> i.getId() == id).findAny().orElse(null)).item();
     }
 }

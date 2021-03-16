@@ -12,7 +12,8 @@ import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.Models;
-import me.cadox8.deud.inventory.creature.PlayerInventory2;
+import me.cadox8.deud.inventory.Inventory;
+import me.cadox8.deud.inventory.PlayerInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.Items;
 import me.cadox8.deud.managers.EntityManager;
@@ -59,7 +60,7 @@ public class Player extends Creature {
         animLeft = new Animation((int)(speed * 0.2), Models.player_left);
         animRight = new Animation((int)(speed * 0.2), Models.player_right);
 
-        inventory = new PlayerInventory2(gameAPI, this);
+        inventory = new PlayerInventory(this);
 
         setMaxHunger(10);
         setHunger(getMaxHunger());
@@ -99,9 +100,9 @@ public class Player extends Creature {
                 i.setCount(items.getCount());
                 inventory.addItem(i);
             });
-            getPlayerInventory().setUsableItem(gameAPI.getGame().getPlayerData().getItem());
+            pd.getEquipment().keySet().forEach(k -> getPlayerInventory().setEquipment(k, pd.getEquipment().get(k)));
         } else {
-            getPlayerInventory().setUsableItem(Items.HAND.item());
+            getPlayerInventory().setHandItem(Items.HAND.item());
         }
 
         options = new Options(gameAPI, this);
@@ -216,7 +217,7 @@ public class Player extends Creature {
             Sounds.ENTITY_WALK_GRASS.play();
         }
 
-        if (gameAPI.getMouseManager().isRightPressed()) getPlayerInventory().getUsableItem().use(this);
+        if (gameAPI.getMouseManager().isRightPressed()) getPlayerInventory().getEquipment().get(Inventory.Equipment.HAND).use(this);
 
         if (gameAPI.getKeyManager().shift) {
             if (hunger <= 0.0) {
@@ -235,8 +236,8 @@ public class Player extends Creature {
         }
     }
 
-    public PlayerInventory2 getPlayerInventory() {
-        return (PlayerInventory2) inventory;
+    public PlayerInventory getPlayerInventory() {
+        return (PlayerInventory) inventory;
     }
 
     public boolean hasMoney(double amount) {

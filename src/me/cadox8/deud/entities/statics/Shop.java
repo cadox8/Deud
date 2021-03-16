@@ -63,8 +63,6 @@ public class Shop extends StaticEntity {
 
     public void open(@NonNull Player p) {
         //if (hasDropped) return;
-        getInventory().setActive(true, GUI.chest);
-        p.getPlayerInventory().setActive(true, GUI.inventory);
         gameAPI.getEntityManager().freezePlayer();
     }
 

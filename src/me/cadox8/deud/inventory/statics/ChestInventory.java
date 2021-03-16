@@ -9,11 +9,9 @@ public class ChestInventory extends StaticInventory {
     public ChestInventory(GameAPI gameAPI, int size) {
         super(gameAPI);
 
-        setSize(size);
-
         addItems(Items.SWORD.item(), Items.CHICKEN.item(), Items.WOOD.item());
 
-        loadBaseInventory(676, 130, GUI.chest);
+        //loadBaseInventory(676, 130, GUI.chest);
 
         gameAPI.getMouseManager().setNysvaUI(getNysvaManager());
     }

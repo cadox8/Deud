@@ -45,7 +45,7 @@ public class FileUtils {
             entitySave.saveEntities(gameAPI.getEntityManager().getEntities(), gameAPI.getWorld().worldName());
             configSave.saveConfig(gameAPI.getConfig());
             Log.system("-----------------");
-        } catch (IOException e) {
+        } catch (NullPointerException | IOException e) {
             Log.danger("Could not save a file!");
             Log.danger(e.getMessage());
         }
