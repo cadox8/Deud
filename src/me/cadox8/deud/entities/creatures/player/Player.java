@@ -17,7 +17,6 @@ import me.cadox8.deud.inventory.PlayerInventory;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.Items;
 import me.cadox8.deud.managers.EntityManager;
-import me.cadox8.deud.quests.Quest;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.ux.hud.Hud;
 import me.cadox8.deud.ux.options.Options;
@@ -39,8 +38,6 @@ public class Player extends Creature {
 
     //Utils
     private float old_speed = -1;
-
-    @Getter @Setter private Quest assignedQuest;
 
     @Getter @Setter private Options options;
 

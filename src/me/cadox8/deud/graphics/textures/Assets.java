@@ -1,6 +1,6 @@
 package me.cadox8.deud.graphics.textures;
 
-import me.cadox8.deud.graphics.Sprites;
+import me.cadox8.deud.graphics.Sprite;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 public class Assets {
 
     public static final int WIDTH = 32, HEIGHT = 32;
-    private static Sprites sprites;
+    private static Sprite sprite;
 
     //Tiles
     public static BufferedImage dirt, grass, grass_dirt1, grass_dirt2, sand, brick, door, door2, sign;
@@ -40,7 +40,7 @@ public class Assets {
     public static BufferedImage optionsSelector;
 
     public static void init() {
-        sprites = new Sprites(Utils.loadImage("/textures/sprites/terrain.png"));
+        sprite = new Sprite(Utils.loadImage("/textures/sprites/terrain.png"));
         dirt = getImage(7, 1);
         grass = getImage(1, 11);
         grass_dirt1 = getImage(7, 0);
@@ -59,7 +59,7 @@ public class Assets {
             }
         }
 
-        sprites = new Sprites(Utils.loadImage("/textures/sprites/objects.png"));
+        sprite = new Sprite(Utils.loadImage("/textures/sprites/objects.png"));
         deadTree = new BufferedImage[10];
         int y_Tree = 0;
         int x_Tree = 16;
@@ -73,7 +73,7 @@ public class Assets {
         }
         deadTree[9] = getImage(16, 3);
 
-        sprites = new Sprites(Utils.loadImage("/textures/sprites/buildings.png"));
+        sprite = new Sprite(Utils.loadImage("/textures/sprites/buildings.png"));
 
         house1 = getHouse(9, 0, 12);
         house2 = getHouse(12, 9, 12);
@@ -81,21 +81,21 @@ public class Assets {
         door = getImage(5, 9);
         door2 = getImage(5, 10);
 
-        sprites = new Sprites(Utils.loadImage("/textures/sprites/castle.png"));
+        sprite = new Sprite(Utils.loadImage("/textures/sprites/castle.png"));
 
         brick = getImage(1, 1);
         optionsSelector = getImage(3, 7);
 
-        sprites = new Sprites(Utils.loadImage("/textures/sprites/basic.png"));
+        sprite = new Sprite(Utils.loadImage("/textures/sprites/basic.png"));
 
         sand = getImage(3, 0);
-        sign = sprites.crop(0, 32, 30, 42);
+        sign = sprite.crop(0, 32, 30, 42);
 
         tree = getImage(7, 0);
         tree2 = getImage(8, 0);
         stone = getImage(6, 0);
 
-        sprites = new Sprites(Utils.loadImage("/textures/sprites/items.png"));
+        sprite = new Sprite(Utils.loadImage("/textures/sprites/items.png"));
 
         wood = getImage(0, 0);
         mp3 = getImage(5, 0);
@@ -104,8 +104,8 @@ public class Assets {
 
         fire = getImage(7, 0);
 
-        bug = Sprites.randomImage(WIDTH, HEIGHT);
-        voidImg = Sprites.coloredSprite(WIDTH, HEIGHT, Color.BLACK);
+        bug = Sprite.randomImage(WIDTH, HEIGHT);
+        voidImg = Sprite.coloredSprite(WIDTH, HEIGHT, Color.BLACK);
 
         save = getImage(2, 0);
         key = getImage(3, 0);
@@ -118,10 +118,10 @@ public class Assets {
         shield = getImage(1, 0);
         coin = getImage(8, 0);
 
-        sprites = new Sprites(Utils.loadImage("/textures/sprites/particles.png"));
+        sprite = new Sprite(Utils.loadImage("/textures/sprites/particles.png"));
         explosion = getParticles(96, 96, 7);
 
-        sprites = new Sprites(Utils.loadImage("/emotes/excl.png"));
+        sprite = new Sprite(Utils.loadImage("/emotes/excl.png"));
         explosion = getParticles(16, 16, 1);
     }
 
@@ -130,7 +130,7 @@ public class Assets {
     }
 
     private static BufferedImage getImage(int x, int y, int width, int height) {
-        return sprites.crop(width * x, height * y, width, height);
+        return sprite.crop(width * x, height * y, width, height);
     }
 
     private static BufferedImage[] getParticles(int width, int height, int image) {

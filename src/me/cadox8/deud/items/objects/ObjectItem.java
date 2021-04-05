@@ -2,7 +2,6 @@ package me.cadox8.deud.items.objects;
 
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.items.ItemType;
 
 import java.awt.image.BufferedImage;
 

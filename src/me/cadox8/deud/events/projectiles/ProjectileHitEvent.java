@@ -17,7 +17,7 @@ public class ProjectileHitEvent extends ProjectileEvent {
     @Override
     public void onEvent() {
         if (damaged == null) return; //No hit
-        if (!projectile.getAttributes().isEmpty()) projectile.getAttributes().forEach(a -> a.perform(projectile, damaged));
+
         projectile.setActive(false);
     }
 }

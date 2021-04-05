@@ -1,8 +1,6 @@
 package me.cadox8.deud.entities.statics;
 
-import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;

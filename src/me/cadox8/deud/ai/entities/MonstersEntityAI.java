@@ -2,12 +2,7 @@ package me.cadox8.deud.ai.entities;
 
 import lombok.NonNull;
 import me.cadox8.deud.ai.EntityAI;
-import me.cadox8.deud.ai.path.Node;
-import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
-import me.cadox8.deud.utils.Utils;
-
-import java.util.List;
 
 public class MonstersEntityAI extends EntityAI {
 

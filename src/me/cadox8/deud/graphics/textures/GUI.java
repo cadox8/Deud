@@ -1,6 +1,6 @@
 package me.cadox8.deud.graphics.textures;
 
-import me.cadox8.deud.graphics.Sprites;
+import me.cadox8.deud.graphics.Sprite;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
@@ -37,7 +37,7 @@ public class GUI {
     public static BufferedImage pointer;
 
     public static void init() {
-        Sprites gui = new Sprites(Utils.loadImage("/textures/gui/gui.png"));
+        Sprite gui = new Sprite(Utils.loadImage("/textures/gui/gui.png"));
 
         // Menu
         play = new BufferedImage[2];
@@ -72,10 +72,10 @@ public class GUI {
         editorGUI = Utils.loadTextures("editor/editor.png");
 
         // Utils
-        none = Sprites.coloredSprite(32, 32, new Color(0, 0, 0, 255));
+        none = Sprite.coloredSprite(32, 32, new Color(0, 0, 0, 255));
 
         //
-        gui = new Sprites(Utils.loadImage("/textures/gui/pointers.png"));
+        gui = new Sprite(Utils.loadImage("/textures/gui/pointers.png"));
         pointer = gui.crop(1, 0, 30, 30);
     }
 }

@@ -3,8 +3,6 @@ package me.cadox8.deud.items.objects;
 import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.items.Item;
 
-import java.awt.image.BufferedImage;
-
 public class WoodItem extends ObjectItem {
 
     public WoodItem() {

@@ -4,7 +4,6 @@ import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.graphics.textures.Assets;
-import me.cadox8.deud.items.Items;
 import me.cadox8.deud.items.objects.WoodItem;
 import me.cadox8.deud.tiles.Tile;
 

@@ -4,16 +4,12 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.attributes.Attribute;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.inventory.Inventory;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public abstract class Item {
@@ -24,9 +20,6 @@ public abstract class Item {
     @Getter protected final BufferedImage texture;
     @Getter @Setter protected String name;
     @Getter protected final ItemType type;
-
-    @Deprecated
-    @Getter @Setter private List<Attribute> attributes;
 
     @Getter protected final Rectangle bounds;
 
@@ -47,8 +40,6 @@ public abstract class Item {
         this.name = name;
         this.count = 1;
         this.type = type;
-
-        this.attributes = new ArrayList<>();
 
         this.infinity = false;
         this.durability = 1.0f;
@@ -114,5 +105,9 @@ public abstract class Item {
     @Override
     public String toString() {
         return "Item:{ID: " + id + ", Name: " + name + ", Amount: " + count + "}";
+    }
+
+    public enum ItemType {
+        NONE, OBJECT, FOOD, POTION, WEAPON
     }
 }

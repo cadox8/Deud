@@ -1,7 +1,6 @@
 package me.cadox8.deud.inventory.statics;
 
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.items.Items;
 
 public class ChestInventory extends StaticInventory {

@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.attributes.Attribute;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
@@ -19,15 +18,12 @@ import java.util.List;
 public abstract class Projectile extends Creature {
 
     @Setter protected BufferedImage texture;
-    @Getter @Setter private List<Attribute> attributes;
 
     @Getter @Setter private float distance;
 
     public Projectile(String uuid, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, BufferedImage texture, float x, float y, int width, int height) {
         super(uuid, name, type, gameAPI, x, y, width, height, 0);
         this.texture = texture;
-
-        attributes = new ArrayList<>();
 
         distance = 20.0F;
     }
@@ -67,10 +63,6 @@ public abstract class Projectile extends Creature {
                     break;
             }
         }
-    }
-
-    public void addAttributes(Attribute... attributes) {
-        this.attributes.addAll(Arrays.asList(attributes));
     }
 
     @Override

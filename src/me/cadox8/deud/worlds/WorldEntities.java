@@ -6,7 +6,10 @@ import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
-import me.cadox8.deud.entities.statics.*;
+import me.cadox8.deud.entities.statics.Door;
+import me.cadox8.deud.entities.statics.House;
+import me.cadox8.deud.entities.statics.Light;
+import me.cadox8.deud.entities.statics.Shop;
 import me.cadox8.deud.entities.statics.chest.Chest;
 import me.cadox8.deud.entities.statics.chest.RewardChest;
 import me.cadox8.deud.entities.statics.chest.TrapChest;
@@ -21,7 +24,6 @@ import me.cadox8.deud.utils.Log;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class WorldEntities {
 

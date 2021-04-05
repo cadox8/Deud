@@ -9,7 +9,7 @@ import java.awt.event.*;
 public class MouseManager implements MouseListener, MouseMotionListener, MouseWheelListener {
 
     @Getter private boolean leftPressed, rightPressed;
-    private int mouseX, mouseY, mouseXClick, mouseYClick;
+    @Getter private int mouseX, mouseY, mouseXClick, mouseYClick;
     @Setter @Getter private NysvaManager nysvaUI;
 
     //Mouse

@@ -10,7 +10,9 @@ import java.util.Arrays;
 
 public class KeyManager implements KeyListener {
 
-    private boolean[] keys, justPressed, cantPress;
+    private final boolean[] keys;
+    private final boolean[] justPressed;
+    private final boolean[] cantPress;
     public boolean up, down, left, right, shift, space, drop, esc;
     public boolean debug, tests;
 

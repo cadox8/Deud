@@ -3,9 +3,7 @@ package me.cadox8.deud.inventory.statics;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.items.Items;
 
 public class ShopInventory extends StaticInventory {
 

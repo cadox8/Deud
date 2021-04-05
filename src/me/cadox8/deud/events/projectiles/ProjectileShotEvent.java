@@ -27,7 +27,6 @@ public class ProjectileShotEvent extends ProjectileEvent {
                 break;
         }
         projectile.setTexture(item.getTexture());
-        projectile.setAttributes(item.getAttributes());
         gameAPI.getEntityManager().addEntity(projectile);
     }
 

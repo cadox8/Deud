@@ -7,14 +7,10 @@ import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.StaticEntity;
 import me.cadox8.deud.graphics.textures.Assets;
-import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.inventory.statics.ChestInventory;
-import me.cadox8.deud.items.Item;
 import me.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Chest extends StaticEntity {
 

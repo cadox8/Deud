@@ -3,7 +3,6 @@ package me.cadox8.deud.items.food;
 import lombok.Getter;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.items.ItemType;
 
 import java.awt.image.BufferedImage;
 

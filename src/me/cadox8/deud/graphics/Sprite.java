@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RasterFormatException;
 
 @RequiredArgsConstructor
-public class Sprites {
+public class Sprite {
 
     private final BufferedImage sprites;
 

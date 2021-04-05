@@ -20,7 +20,7 @@ import java.util.List;
 public abstract class Inventory {
 
     protected final GameAPI gameAPI;
-    @Getter private final NysvaManager nysvaManager;
+    @Getter protected final NysvaManager nysvaManager;
 
     @Getter protected List<Item> items;
 
@@ -66,6 +66,7 @@ public abstract class Inventory {
     protected void base(BufferedImage baseImage) {
         final UIImage base = new UIImage(gameAPI, baseImage);
         base.setUiDimension(new UIDimension(this.baseX, this.baseY, baseImage.getWidth(), baseImage.getHeight()));
+
         // Prevents any interaction
         base.setResize(false);
         base.setClickable(false);
@@ -83,7 +84,7 @@ public abstract class Inventory {
         Arrays.asList(items).forEach(this::addItem);
     }
     public void addItem(Item item) {
-        items.stream().filter(i -> i.getId() == item.getId()).findFirst().ifPresentOrElse(i -> i.addCount(item.getCount()), () -> items.add(item));
+        items.stream().filter(i -> i.getId() == item.getId()).findAny().ifPresentOrElse(i -> i.addCount(item.getCount()), () -> items.add(item));
     }
 
     public void setEquipment(Equipment equipment, Item item) {

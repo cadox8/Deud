@@ -4,6 +4,7 @@ import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.runnable.ChestExplosionDelayedTask;
+
 import java.util.Random;
 
 public class TrapChest extends RewardChest {

@@ -1,7 +1,6 @@
 package me.cadox8.deud.items.weapons;
 
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.items.ItemType;
 
 import java.awt.image.BufferedImage;
 

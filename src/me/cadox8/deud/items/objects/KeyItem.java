@@ -4,8 +4,6 @@ import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.items.Item;
 
-import java.awt.image.BufferedImage;
-
 public class KeyItem extends ObjectItem {
 
     public KeyItem() {

@@ -1,6 +1,6 @@
 package me.cadox8.deud.graphics.textures;
 
-import me.cadox8.deud.graphics.Sprites;
+import me.cadox8.deud.graphics.Sprite;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.image.BufferedImage;
@@ -9,7 +9,7 @@ public class Models {
 
     private static final int width = 32, height = 32;
 
-    private static Sprites model;
+    private static Sprite model;
 
     public static BufferedImage[] player_down, player_up, player_left, player_right;
 
@@ -24,7 +24,7 @@ public class Models {
 
     public static void init() {
         //Player
-        model = new Sprites(Utils.loadImage("/textures/models/female.png"));
+        model = new Sprite(Utils.loadImage("/textures/models/female.png"));
 
         player_down = new BufferedImage[3];
         player_up = new BufferedImage[3];
@@ -37,7 +37,7 @@ public class Models {
         setImage(model, player_left, 3);
 
         //Fairy
-        model = new Sprites(Utils.loadImage("/textures/models/fairy.png"));
+        model = new Sprite(Utils.loadImage("/textures/models/fairy.png"));
 
         fairy_down = new BufferedImage[3];
         fairy_up = new BufferedImage[3];
@@ -50,7 +50,7 @@ public class Models {
         setImage(model, fairy_left, 3);
 
         //Zombie
-        model = new Sprites(Utils.loadImage("/textures/models/zombie.png"));
+        model = new Sprite(Utils.loadImage("/textures/models/zombie.png"));
 
         zombie_down = new BufferedImage[3];
         zombie_up = new BufferedImage[3];
@@ -63,7 +63,7 @@ public class Models {
         setImage(model, zombie_left, 3);
 
         //Ghost
-        model = new Sprites(Utils.loadImage("/textures/models/ghost.png"));
+        model = new Sprite(Utils.loadImage("/textures/models/ghost.png"));
 
         ghost_down = new BufferedImage[3];
         ghost_up = new BufferedImage[3];
@@ -76,7 +76,7 @@ public class Models {
         setImage(model, ghost_left, 3);
 
         //Npc
-        model = new Sprites(Utils.loadImage("/textures/models/npc1.png"));
+        model = new Sprite(Utils.loadImage("/textures/models/npc1.png"));
 
         npc_down = new BufferedImage[3];
         npc_up = new BufferedImage[3];
@@ -89,7 +89,7 @@ public class Models {
         setImage(model, npc_left, 3);
     }
 
-    private static void setImage(Sprites model, BufferedImage[] image, int direction) {
+    private static void setImage(Sprite model, BufferedImage[] image, int direction) {
         switch (direction) {
             case 0:
                 image[0] = model.crop(width, 0, width, height);

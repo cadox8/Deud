@@ -15,8 +15,6 @@ import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.graphics.textures.Models;
 import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
-import me.cadox8.deud.items.Item;
-import me.cadox8.deud.items.Items;
 import me.cadox8.deud.managers.DamageManager;
 import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.states.EditorState;
