@@ -3,8 +3,8 @@ package me.cadox8.deud.entities.statics.chest;
 import lombok.Getter;
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.entities.statics.StaticEntity;
 import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.inventory.statics.ChestInventory;
@@ -17,14 +17,13 @@ public class Chest extends StaticEntity {
     @Getter private final ChestType chestType;
 
     public Chest(@NonNull GameAPI gameAPI, float x, float y, ChestType chestType) {
-        super("fc356233-0700-49a3-98bd-bd2350acd339", "Chest", EntityData.EntityType.CHEST, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super("fc356233-0700-49a3-98bd-bd2350acd339", "Chest", EntityType.CHEST, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         this.chestType = chestType;
 
         setDamageable(false);
 
         setDamage(0);
-        setLevel(0);
 
         inventory = new ChestInventory(gameAPI, 20);
 

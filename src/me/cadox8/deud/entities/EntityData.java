@@ -1,21 +1,11 @@
 package me.cadox8.deud.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.entities.creatures.friends.Fairy;
-import me.cadox8.deud.entities.creatures.monsters.Ghost;
-import me.cadox8.deud.entities.creatures.monsters.Zombie;
-import me.cadox8.deud.entities.creatures.npcs.Npc;
-import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.creatures.player.PlayerData;
-import me.cadox8.deud.entities.projectile.Arrow;
-import me.cadox8.deud.entities.statics.*;
+import me.cadox8.deud.entities.enums.Direction;
 import me.cadox8.deud.entities.statics.chest.Chest;
-import me.cadox8.deud.entities.statics.sign.Sign;
-import me.cadox8.deud.entities.statics.trees.DeadTree;
-import me.cadox8.deud.entities.statics.trees.NormalTree;
 import me.cadox8.deud.items.Item;
 
 import java.util.Arrays;
@@ -61,7 +51,7 @@ public class EntityData {
         }
         public List<String> getText() { return Arrays.asList(text); }
         public Location getLocation() {
-            return new Location(location.getX(), location.getY(),location.getDirection());
+            return new Location(location.getX(), location.getY(), Direction.valueOf(location.getDirection()));
         }
 
         public boolean needKey = false;
@@ -80,33 +70,6 @@ public class EntityData {
         public static class ItemHelper {
             private int id = 0;
             private int count = 0;
-        }
-    }
-
-    @AllArgsConstructor
-    @Getter
-    public enum EntityType {
-
-        PLAYER(Player.class),
-        ZOMBIE(Zombie.class),
-        GHOST(Ghost.class),
-        FAIRY(Fairy.class),
-        CHEST(Chest.class),
-        LIGHT(Light.class),
-        ROCK(Rock.class),
-        SIGN(Sign.class),
-        NORMALTREE(NormalTree.class),
-        DEADTREE(DeadTree.class),
-        DOOR(Door.class),
-        SHOP(Shop.class),
-        NPC(Npc.class),
-        ARROW(Arrow.class),
-        HOUSE(House.class);
-
-        private final Class<? extends Entity> supClass;
-
-        public static EntityType parseClass(String name) {
-            return Arrays.stream(EntityType.values()).filter(e -> e.name().equalsIgnoreCase(name)).findFirst().orElse(null);
         }
     }
 }

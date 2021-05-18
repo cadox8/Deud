@@ -41,8 +41,6 @@ public class Save {
         data.addProperty("nick", player.getNick());
         data.addProperty("health", player.getHealth());
         data.addProperty("money", player.getMoney());
-        data.addProperty("level", player.getLevel());
-        data.addProperty("experience", player.getXp());
 
         final JsonArray inv = new JsonArray();
         i.getItems().forEach(item -> {
@@ -96,9 +94,6 @@ public class Save {
             en.addProperty("health", e.getHealth());
             en.addProperty("maxHealth", e.getMaxHealth());
             en.add("location", gson.toJsonTree(e.getLocation().serializeLocation()).getAsJsonObject());
-
-            en.addProperty("level", e.getLevel());
-            en.addProperty("experience", e.getXp());
 
             if (e.getInventory() != null) {
                 final JsonArray items = new JsonArray();

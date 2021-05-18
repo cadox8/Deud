@@ -3,14 +3,14 @@ package me.cadox8.deud.entities.creatures.monsters;
 import me.cadox8.deud.ai.entities.MonstersEntityAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.EntityData;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.graphics.textures.Models;
 import me.cadox8.deud.inventory.creature.CreatureInventory;
 
 public class Ghost extends Monster {
 
     public Ghost(GameAPI gameAPI, float x, float y) {
-        super("36913f63-3654-4940-aed7-d06b81b200c4", "Ghost", EntityData.EntityType.GHOST, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+        super("36913f63-3654-4940-aed7-d06b81b200c4", "Ghost", EntityType.GHOST, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         bounds.x = 20;
         bounds.y = 44;
@@ -36,6 +36,5 @@ public class Ghost extends Monster {
 
     @Override
     public void die() {
-        adjustXP(0.13f);
     }
 }

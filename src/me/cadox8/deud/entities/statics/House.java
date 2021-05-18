@@ -3,7 +3,7 @@ package me.cadox8.deud.entities.statics;
 import lombok.Getter;
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.EntityData;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.tiles.Tile;
 
@@ -15,7 +15,7 @@ public class House extends StaticEntity {
     @Getter private final int houseType;
 
     public House(@NonNull GameAPI gameAPI, float x, float y, int houseType) {
-        super("3472051a-67ed-49f5-b566-d0d893ffaa66", "House", EntityData.EntityType.HOUSE, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super("3472051a-67ed-49f5-b566-d0d893ffaa66", "House", EntityType.HOUSE, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         this.houseType = houseType;
 

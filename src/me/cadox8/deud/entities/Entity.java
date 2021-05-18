@@ -8,6 +8,8 @@ import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.monsters.Monster;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.entities.enums.Direction;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.entities.projectile.Projectile;
 import me.cadox8.deud.events.projectiles.ProjectileHitEvent;
 import me.cadox8.deud.inventory.Inventory;
@@ -16,7 +18,6 @@ import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.text.DecimalFormat;
 import java.util.Random;
 
 public abstract class Entity {
@@ -24,16 +25,16 @@ public abstract class Entity {
     // Internal Data
     @Getter private final String UUID;
     @Getter private final String INTERNAL_NAME;
-    @Getter private final EntityData.EntityType ENTITY_TYPE;
+    @Getter private final EntityType ENTITY_TYPE;
     //
 
-    public static final int DEFAULT_HEALTH = 10;
-    public static final int DEFAULT_DAMAGE = 3;
-    public static final float DEFAULT_ARMOR = 0;
+    // Defaults
 
-    private static final double DMG_UP_PER_LVL = 0.13;
-    private static final double HEALTH_UP_PER_LVL = 0.17;
-    private static final double ARMOR_UP_PER_LVL = 0.09;
+    protected final int DEFAULT_HEALTH = 10;
+    protected final int DEFAULT_DAMAGE = 3;
+    protected final float DEFAULT_ARMOR = 0;
+
+    //
 
     @Getter @Setter protected GameAPI gameAPI;
 
@@ -46,17 +47,12 @@ public abstract class Entity {
     @Getter @Setter private double armor;
     @Getter @Setter private int maxHealth;
 
-    @Getter private double xp;
-    @Getter private int level;
-    @Getter private static final int BASE_XP = 40;
-    @Getter private static final int MAX_LEVEL = 30;
-
     @Getter @Setter private boolean damageable = true;
 
     // Attack timer
     @Getter @Setter protected long lastAttackTimer, attackCooldown = 400, attackTimer = attackCooldown;
 
-    @Getter @Setter protected int direction = 0; //0 = South, 1 = North, 2 = East, 3 = West
+    @Getter @Setter protected Direction direction;
 
     @Getter @Setter private boolean active = true;
 
@@ -73,7 +69,7 @@ public abstract class Entity {
     @Getter @Setter protected Animation animDown, animUp, animLeft, animRight;
     @Getter @Setter protected Animation[] animations = new Animation[4];
 
-    public Entity(String uuid, String name, EntityData.EntityType ENTITY_TYPE, @NonNull GameAPI gameAPI, float x, float y, int width, int height, int level) {
+    public Entity(String uuid, String name, EntityType ENTITY_TYPE, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
         this.UUID = uuid;
         this.INTERNAL_NAME = name;
         this.ENTITY_TYPE = ENTITY_TYPE;
@@ -83,11 +79,12 @@ public abstract class Entity {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.level = level;
 
         health = DEFAULT_HEALTH;
         damage = DEFAULT_DAMAGE;
         armor = DEFAULT_ARMOR;
+
+        this.direction = Direction.SOUTH;
 
         bounds = new Rectangle(0, 0, width, height);
     }
@@ -100,35 +97,41 @@ public abstract class Entity {
     public abstract void getHurt();
     public abstract void die();
 
-    // ToDo: Remake
+    /**
+     * Hurt main method
+     *
+     * getHurt(); method is thrown BEFORE checking if the entity can have any damage. This is to animate the entity and more things.
+     *
+     * @param attacker The attacker
+     *
+     * @see #getHurt()
+     */
     public void hurt(Entity attacker) {
-        Log.log(getINTERNAL_NAME() + " Health: " + getHealth());
-        getHurt();
-        if (!isDamageable()) return;
+        Log.log(this.getINTERNAL_NAME() + " - Health: " + getHealth());
+        this.getHurt();
 
-        int amt = attacker.getDamage() + (int) (DMG_UP_PER_LVL * attacker.getLevel());
+        if (!this.isDamageable()) return;
+        int damage = attacker.getDamage(); // Initial damage
 
+        // If the attacker is a Monster
         if (attacker instanceof Monster) {
             final Monster monster = (Monster) attacker;
-            final Item item = monster.getCreatureInventory().getEquipment().get(Inventory.Equipment.HAND);
-            amt += item.getDamage();
-            setHealth(getHealth() - gameAPI.getDamageManager().effectiveDamage(amt, getENTITY_TYPE(), item));
+            final Item handItem = monster.getCreatureInventory().getEquipment(Inventory.Equipment.HAND);
+            damage += handItem.getDamage();
         }
-
-/*        if (this instanceof Creature) {
-            if (attacker instanceof Monster) attacker.getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
-            if (attacker instanceof Npc) attacker.getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
-            if (attacker instanceof Player) attacker.getInventory().getUsableItem().getAttributes().forEach(a -> a.perform(attacker, this));
-        }*/
 
         if (attacker instanceof Projectile) {
-            new ProjectileHitEvent(getGameAPI(), ((Projectile)attacker), this).onEvent();
+            final Projectile projectile = (Projectile) attacker;
+            new ProjectileHitEvent(this.gameAPI, projectile, this).onEvent();
+            damage += projectile.getDamage();
         }
+
+        this.setHealth(this.getHealth() - damage);
 
         if (health <= 0) {
             if (!(this instanceof Player)) active = false;
             this.killer = attacker;
-            die();
+            this.die();
         }
     }
 
@@ -164,54 +167,16 @@ public abstract class Entity {
         return new Point((int) (getWidth()/2 + x - gameAPI.getGameCamera().getXOffset()), (int) (getHeight()/2 + y - gameAPI.getGameCamera().getYOffset()));
     }
 
-    public void addExp(double xp) {
-        if (getLevel() >= MAX_LEVEL) {
-            setXP(BASE_XP * MAX_LEVEL);
-            setLevel(MAX_LEVEL);
-            return;
-        }
-        setXP(getXp() + xp);
-        if (getXPToNextLevel() <= 0) adjustLevel();
-    }
-
-    private void adjustLevel() {
-        setXP(getXp() - xpToNextLevel());
-        setLevel(getLevel() + 1);
-
-        int oldMaxHealth = getMaxHealth();
-
-        setDamage(getDamage() + (int) (DMG_UP_PER_LVL * getLevel()));
-        setMaxHealth(getMaxHealth() + (int)(HEALTH_UP_PER_LVL * getLevel()));
-        setHealth(getHealth() + (getMaxHealth() - oldMaxHealth));
-        setArmor(getArmor() + (int)(ARMOR_UP_PER_LVL * getLevel()));
-
-        if (getXPToNextLevel() <= 0) adjustLevel();
-    }
-
-    private double getXPToNextLevel() {
-        return (BASE_XP * (getLevel() + 1)) - getXp();
-    }
-
-    protected int xpToNextLevel(){
-        if (getLevel() == MAX_LEVEL) return BASE_XP * MAX_LEVEL;
-        return BASE_XP * (getLevel() + 1);
-    }
-
-
     protected BufferedImage getCurrentAnimationFrame() {
         switch (direction) {
-            case 1:
-                if (!isMoving()) return animUp.getFirstFrame();
-                return animUp.getCurrentFrame();
-            case 2:
-                if (!isMoving()) return animRight.getFirstFrame();
-                return animRight.getCurrentFrame();
-            case 3:
-                if (!isMoving()) return animLeft.getFirstFrame();
-                return animLeft.getCurrentFrame();
+            case NORTH:
+                return isMoving() ? animUp.getCurrentFrame() : animUp.getFirstFrame();
+            case EAST:
+                return isMoving() ? animRight.getCurrentFrame() : animRight.getFirstFrame();
+            case WEST:
+                return isMoving() ? animLeft.getCurrentFrame() : animLeft.getFirstFrame();
             default:
-                if (!isMoving()) return animDown.getFirstFrame();
-                return animDown.getCurrentFrame();
+                return isMoving() ? animDown.getCurrentFrame() : animDown.getFirstFrame();
         }
     }
 
@@ -233,19 +198,6 @@ public abstract class Entity {
 
     public Location getLocation() {
         return new Location(this);
-    }
-
-    //Utils
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public void setXP(double xp) {
-        if (xp <= 0) {
-            this.xp = 0;
-            return;
-        }
-        this.xp = Double.parseDouble(new DecimalFormat("#.##").format(xp).replaceAll(",", "."));
     }
 
 

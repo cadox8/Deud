@@ -10,6 +10,7 @@ import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.entities.enums.Direction;
 import me.cadox8.deud.utils.Utils;
 
 import java.util.ArrayList;
@@ -101,7 +102,7 @@ public abstract class EntityAI {
             default:
                 return;
         }
-        entity.setDirection(direction);
+        entity.setDirection(Direction.parseDirection(direction));
     }
 
     protected Creature getCreature() {

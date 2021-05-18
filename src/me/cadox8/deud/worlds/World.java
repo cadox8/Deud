@@ -9,8 +9,8 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.entities.enums.Direction;
 import me.cadox8.deud.game.Game;
-import me.cadox8.deud.managers.EmotesManager;
 import me.cadox8.deud.managers.EntityManager;
 import me.cadox8.deud.managers.ItemManager;
 import me.cadox8.deud.managers.ParticleManager;
@@ -53,9 +53,6 @@ public class World {
     // Particles
     @Getter private final ParticleManager particleManager;
 
-    // Particles
-    @Getter private final EmotesManager emotesManager;
-
     public World(@NonNull GameAPI gameAPI, String path) {
         this.gameAPI = gameAPI;
         this.path = path;
@@ -66,13 +63,12 @@ public class World {
         try {
             loc = Game.getInstance().getPlayerData().getLocation();
         } catch (NullPointerException e) {
-            loc = new Location(spawnX, spawnY, 0);
+            loc = new Location(spawnX, spawnY, Direction.SOUTH);
         }
 
         this.entityManager = new EntityManager(gameAPI, new Player(gameAPI, loc.getX(), loc.getY()));
         this.itemManager = new ItemManager(gameAPI);
         this.particleManager = new ParticleManager(gameAPI);
-        this.emotesManager = new EmotesManager(gameAPI);
 
         addEntities();
 
@@ -97,7 +93,6 @@ public class World {
         itemManager.tick();
         entityManager.tick();
         particleManager.tick();
-        emotesManager.tick();
     }
 
     public void render(Graphics g) {
@@ -118,7 +113,6 @@ public class World {
         itemManager.render(g);
         entityManager.render(g, dark);
         particleManager.render(g);
-        emotesManager.render(g);
     }
 
     public Tile getTile(int x, int y) {

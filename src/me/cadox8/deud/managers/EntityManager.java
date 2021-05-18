@@ -118,19 +118,19 @@ public class EntityManager {
         ar.height = arSize;
 
         switch (speaker.getDirection()) {
-            case 0: // Down
+            case SOUTH: // Down
                 ar.x = cb.x + cb.width / 2 - arSize / 2;
                 ar.y = cb.y + cb.height;
                 break;
-            case 1: // Up
+            case NORTH: // Up
                 ar.x = cb.x + cb.width / 2 - arSize / 2;
                 ar.y = cb.y - arSize;
                 break;
-            case 2: // Right
+            case EAST: // Right
                 ar.x = cb.x + cb.width + arSize / 4 - 4;
                 ar.y = cb.y + cb.height / 2 - arSize / 2;
                 break;
-            case 3: // Left
+            case WEST: // Left
                 ar.x = cb.x - cb.width + arSize / 4 - 1;
                 ar.y = cb.y + cb.height / 2 - arSize / 2;
                 break;
