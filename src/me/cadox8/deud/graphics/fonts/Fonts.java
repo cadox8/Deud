@@ -12,10 +12,13 @@ public class Fonts {
     public static void init() {
         deudFonts = new ArrayList<>();
 
-        deudFonts.add(loadFont("resources/fonts/deud2.ttf", 34)); //0
-        deudFonts.add(loadFont("resources/fonts/deud2.ttf", 14)); //1
-        deudFonts.add(loadFont("resources/fonts/deud2.ttf", 20)); //2
-        deudFonts.add(loadFont("resources/fonts/deud2.ttf", 108)); //3 (Death Screen)
+        deudFonts.add(loadFont("deud2", 34)); //0
+        deudFonts.add(loadFont("deud", 14)); //1
+        deudFonts.add(loadFont("deud2", 20)); //2
+        deudFonts.add(loadFont("deud2", 108)); //3 (Death Screen)
+
+        deudFonts.add(loadFont("Kylarzio", 14));
+        deudFonts.add(loadFont("KylarzioTall", 14));
     }
 
     public static Font getFont(int id) {
@@ -24,7 +27,7 @@ public class Fonts {
 
     private static Font loadFont(String path, float size) {
         try {
-            return Font.createFont(Font.TRUETYPE_FONT, new File(path)).deriveFont(Font.PLAIN, size);
+            return Font.createFont(Font.TRUETYPE_FONT, new File("resources/fonts/" + path + ".ttf")).deriveFont(Font.PLAIN, size);
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
             System.exit(1);
