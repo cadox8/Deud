@@ -5,8 +5,8 @@ import lombok.NonNull;
 import me.cadox8.deud.ai.entities.FriendsEntityAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.Creature;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.inventory.creature.CreatureInventory;
 
 import java.awt.image.BufferedImage;
@@ -22,7 +22,7 @@ public class Npc extends Creature {
     @Getter private final List<String> text;
 
     public Npc(@NonNull GameAPI gameAPI, float x, float y, String displayName, BufferedImage[]... textures) {
-        super("fb32b568-aa91-46d9-99a9-fe1b90fb8599", "NPC", EntityData.EntityType.NPC, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+        super("fb32b568-aa91-46d9-99a9-fe1b90fb8599", "NPC", EntityType.NPC, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         this.displayName = displayName;
         this.text = new ArrayList<>();

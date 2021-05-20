@@ -2,6 +2,7 @@ package me.cadox8.deud.utils;
 
 import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.Location;
+import me.cadox8.deud.entities.enums.Direction;
 import me.cadox8.deud.entities.statics.Light;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.worlds.World;
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Utils {
@@ -43,7 +45,7 @@ public class Utils {
 
     public static BufferedImage loadImage(String path) {
         try {
-            return ImageIO.read(Utils.class.getResource(path));
+            return ImageIO.read(Objects.requireNonNull(Utils.class.getResource(path)));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -60,13 +62,13 @@ public class Utils {
         }
     }
 
-    public static int directionToDegrees(int direction) {
+    public static int directionToDegrees(Direction direction) {
         switch (direction) {
-            case 0:
+            case SOUTH:
                 return 90;
-            case 1:
+            case NORTH:
                 return 270;
-            case 3:
+            case EAST:
                 return 180;
 
             default:

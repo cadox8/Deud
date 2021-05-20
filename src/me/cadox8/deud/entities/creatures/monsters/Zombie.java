@@ -3,7 +3,7 @@ package me.cadox8.deud.entities.creatures.monsters;
 import me.cadox8.deud.ai.entities.MonstersEntityAI;
 import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.EntityData;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.graphics.textures.Models;
 import me.cadox8.deud.inventory.creature.CreatureInventory;
 import me.cadox8.deud.items.Items;
@@ -11,7 +11,7 @@ import me.cadox8.deud.items.Items;
 public class Zombie extends Monster {
 
     public Zombie(GameAPI gameAPI, float x, float y) {
-        super("f71c5cef-46a6-42e2-b6cf-60c69de977cd", "Zombie", EntityData.EntityType.ZOMBIE, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+        super("f71c5cef-46a6-42e2-b6cf-60c69de977cd", "Zombie", EntityType.ZOMBIE, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         bounds.x = 20;
         bounds.y = 44;
@@ -38,7 +38,6 @@ public class Zombie extends Monster {
 
     @Override
     public void die() {
-        adjustXP(0.3f);
         dropItem(Items.CHICKEN.item());
     }
 }

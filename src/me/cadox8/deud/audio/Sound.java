@@ -8,6 +8,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import java.io.BufferedInputStream;
+import java.util.Objects;
 
 public class Sound {
 
@@ -21,7 +22,7 @@ public class Sound {
         this.volume = value;
         try {
             clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("/sounds/" + sound + ".wav"))));
+            clip.open(AudioSystem.getAudioInputStream(new BufferedInputStream(Objects.requireNonNull(Sound.class.getResourceAsStream("/sounds/" + sound + ".wav")))));
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);

@@ -13,7 +13,7 @@ public class Discord {
     }
 
     public void createNewPresence(Player p){
-        final DiscordRichPresence.Builder rich = new DiscordRichPresence.Builder("Level: " + p.getLevel()).setDetails("Map: " + p.getGameAPI().getWorld().worldName());
+        final DiscordRichPresence.Builder rich = new DiscordRichPresence.Builder("Name: " + p.getNick()).setDetails("Map: " + p.getGameAPI().getWorld().worldName());
         rich.setStartTimestamps(System.currentTimeMillis() / 1000);
         rich.setBigImage("icono_big", "DeudGame");
         DiscordRPC.discordUpdatePresence(rich.build());

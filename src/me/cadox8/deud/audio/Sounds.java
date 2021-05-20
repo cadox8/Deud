@@ -13,6 +13,7 @@ public enum Sounds {
 
     // Misc Music
     ENTITY_WALK_GRASS("entity_walk_grass", 0);
+    //EXPLOSION_1("explosion_1", 0);
 
     private final String name;
     private final float volume;

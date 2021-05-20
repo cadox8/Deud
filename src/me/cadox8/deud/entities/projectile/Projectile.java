@@ -4,16 +4,14 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
+import me.cadox8.deud.entities.enums.Direction;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.utils.Utils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public abstract class Projectile extends Creature {
 
@@ -21,48 +19,35 @@ public abstract class Projectile extends Creature {
 
     @Getter @Setter private float distance;
 
-    public Projectile(String uuid, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, BufferedImage texture, float x, float y, int width, int height) {
-        super(uuid, name, type, gameAPI, x, y, width, height, 0);
+    public Projectile(String uuid, String name, EntityType type, @NonNull GameAPI gameAPI, BufferedImage texture, float x, float y, int width, int height) {
+        super(uuid, name, type, gameAPI, x, y, width, height);
         this.texture = texture;
 
-        distance = 20.0F;
+        this.distance = 20.0F;
+
+        this.setDamageable(false);
     }
 
-    public void shot(final int direction, final Location location) {
+    public void shot(final Direction direction, Location location) {
         texture = Utils.rotateImage(Utils.directionToDegrees(direction), texture);
-        final Location finalLocation = location;
 
         switch (direction) {
-            case 1:
-                finalLocation.add(0, distance);
+            case NORTH:
+                location.add(0, distance);
                 break;
-            case 2:
-                finalLocation.add(distance, 0);
+            case EAST:
+                location.add(distance, 0);
                 break;
-            case 3:
-                finalLocation.add(-distance, 0);
+            case WEST:
+                location.add(-distance, 0);
                 break;
             default:
-                finalLocation.add(0, -distance);
+                location.add(0, -distance);
                 break;
         }
 
-        while (!finalLocation.equals(location)) {
-            switch (direction) {
-                case 1:
-                    location.add(0, 1);
-                    break;
-                case 2:
-                    location.add(1, 0);
-                    break;
-                case 3:
-                    location.add(-1, 0);
-                    break;
-                default:
-                    location.add(0, -1);
-                    break;
-            }
-        }
+        // ToDo: Projectile movement
+
     }
 
     @Override

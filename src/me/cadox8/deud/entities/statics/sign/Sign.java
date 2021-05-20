@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.EntityData;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.entities.statics.StaticEntity;
 import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.tiles.Tile;
@@ -22,7 +22,7 @@ public class Sign extends StaticEntity {
     @Getter @Setter private boolean shown = false;
 
     public Sign(@NonNull GameAPI gameAPI, float x, float y, List<String> text) {
-        super("b06ff805-c536-41fd-b49f-3bd195c1eeff", "Sign", EntityData.EntityType.SIGN, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super("b06ff805-c536-41fd-b49f-3bd195c1eeff", "Sign", EntityType.SIGN, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         setDamageable(false);
 

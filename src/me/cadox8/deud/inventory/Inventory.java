@@ -78,6 +78,9 @@ public abstract class Inventory {
         this.loadItems();
     }
 
+    public Item getEquipment(Equipment equipment) {
+        return this.equipment.get(equipment);
+    }
 
     // Inventory methods
     public void addItems(Item... items) {

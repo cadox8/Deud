@@ -7,9 +7,10 @@ import me.cadox8.deud.animations.Animation;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.audio.Sounds;
 import me.cadox8.deud.entities.Entity;
-import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
+import me.cadox8.deud.entities.enums.Direction;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.Models;
 import me.cadox8.deud.inventory.Inventory;
@@ -42,7 +43,7 @@ public class Player extends Creature {
     @Getter @Setter private Options options;
 
     public Player(@NonNull GameAPI gameAPI, float x, float y) {
-        super("9ad2cbee-f134-480a-9681-edf174dde4bb", "Player", EntityData.EntityType.PLAYER, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+        super("9ad2cbee-f134-480a-9681-edf174dde4bb", "Player", EntityType.PLAYER, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
         setMoving(false);
 
@@ -82,9 +83,6 @@ public class Player extends Creature {
             setNick(pd.getNick());
             setHealth(pd.getHealth());
             setMoney(pd.getMoney());
-
-            setLevel(pd.getLevel());
-            setXP(pd.getExperience());
 
             setX(loc.getX());
             setY(loc.getY());
@@ -169,7 +167,6 @@ public class Player extends Creature {
 
         if (gameAPI.getKeyManager().tests) {
             setHunger(getMaxHunger());
-            addExp(20);
             setHealth(getMaxHealth());
             inventory.addItem(Items.SWORD.item());
         }
@@ -195,22 +192,22 @@ public class Player extends Creature {
 
         if (gameAPI.getKeyManager().up) {
             yMove = -speed;
-            setDirection(1);
+            setDirection(Direction.NORTH);
             Sounds.ENTITY_WALK_GRASS.play();
         }
         if (gameAPI.getKeyManager().down) {
             yMove = speed;
-            setDirection(0);
+            setDirection(Direction.SOUTH);
             Sounds.ENTITY_WALK_GRASS.play();
         }
         if (gameAPI.getKeyManager().left) {
             xMove = -speed;
-            setDirection(3);
+            setDirection(Direction.WEST);
             Sounds.ENTITY_WALK_GRASS.play();
         }
         if (gameAPI.getKeyManager().right) {
             xMove = speed;
-            setDirection(2);
+            setDirection(Direction.EAST);
             Sounds.ENTITY_WALK_GRASS.play();
         }
 
