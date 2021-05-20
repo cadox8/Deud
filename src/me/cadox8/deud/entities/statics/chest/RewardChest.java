@@ -42,8 +42,8 @@ public class RewardChest extends Chest {
     }
 
     protected boolean canOpen(Player player) {
-        if (this.isOpen()) return true;
-        return this.needKey && !player.getInventory().hasItem(Objects.requireNonNull(Items.KEY.item()));
+        if (this.isOpen()) return false;
+        return this.needKey && player.getInventory().hasItem(Objects.requireNonNull(Items.KEY.item()));
     }
 
     public void addToPool(int id) {

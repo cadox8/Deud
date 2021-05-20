@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.saves.FileUtils;
@@ -25,7 +25,7 @@ public class Door extends StaticEntity {
     @Getter @Setter private int neededItem = -1;
 
     public Door(@NonNull GameAPI gameAPI, float x, float y, String map) {
-        super("1737b269-757f-4189-8ae2-6db7d25221c9", "Door", EntityData.EntityType.DOOR, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+        super("1737b269-757f-4189-8ae2-6db7d25221c9", "Door", EntityType.DOOR, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
         this.map = map;
 

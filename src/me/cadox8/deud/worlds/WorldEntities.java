@@ -6,6 +6,7 @@ import me.cadox8.deud.entities.Entity;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.entities.statics.Door;
 import me.cadox8.deud.entities.statics.House;
 import me.cadox8.deud.entities.statics.Light;
@@ -43,11 +44,11 @@ public class WorldEntities {
         Game.getInstance().getEntityData().getEntities().forEach(e -> {
             try {
                 final Location l = e.getLocation();
-                final EntityData.EntityType type = EntityData.EntityType.parseClass(e.getType());
+                final EntityType type = EntityType.parseClass(e.getType());
                 if (type == null) return;
                 final Entity en;
 
-                if (type == EntityData.EntityType.PLAYER) return;
+                if (type == EntityType.PLAYER) return;
 
                 switch (type) {
                     case CHEST:
@@ -106,9 +107,6 @@ public class WorldEntities {
                 }
                 en.setMaxHealth(e.getMaxHealth());
                 en.setHealth(e.getHealth());
-
-                en.setLevel(e.getLevel());
-                en.setXP(e.getExperience());
 
                 if (e.getInventory() != null) {
                     final StaticInventory inv = new StaticInventory(gameAPI);

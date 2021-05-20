@@ -3,6 +3,7 @@ package me.cadox8.deud.entities;
 import lombok.Getter;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
+import me.cadox8.deud.entities.enums.Direction;
 import me.cadox8.deud.worlds.World;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class Location {
     @Getter @Setter private World world;
     @Getter @Setter private float x;
     @Getter @Setter private float y;
-    @Getter @Setter private int direction;
+    @Getter @Setter private Direction direction;
 
     public Location(Entity en) {
         this.world = en.getGameAPI().getWorld();
@@ -24,10 +25,10 @@ public class Location {
         this.direction = en.getDirection();
     }
 
-    public Location(float x, float y, int direction) {
+    public Location(float x, float y, Direction direction) {
         this(gameAPI.getWorld(), x, y, direction);
     }
-    public Location(World world, float x, float y, int direction) {
+    public Location(World world, float x, float y, Direction direction) {
         this.world = world;
         this.x = x;
         this.y = y;
@@ -39,10 +40,10 @@ public class Location {
         this.y += y;
     }
 
-    public void teleport(float x, float y, int direction) {
+    public void teleport(float x, float y, Direction direction) {
         teleport(gameAPI.getWorld(), x, y, direction);
     }
-    public void teleport(World world, float x, float y, int direction) {
+    public void teleport(World world, float x, float y, Direction direction) {
         setWorld(world);
         setX(x);
         setY(y);
@@ -82,7 +83,7 @@ public class Location {
         location.put("world", getWorld().worldName());
         location.put("x", getX());
         location.put("y", getY());
-        location.put("direction", getDirection());
+        location.put("direction", getDirection().name());
 
         return location;
     }
@@ -91,7 +92,7 @@ public class Location {
         final World world = new World(gameAPI, (String)location.get("world"));
         final float x = (float)location.get("x");
         final float y = (float)location.get("y");
-        final int direction = (int)location.get("direction");
+        final Direction direction = Direction.valueOf((String) location.get("direction"));
 
         return new Location(world, x, y, direction);
     }

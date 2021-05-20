@@ -1,18 +1,14 @@
 package me.cadox8.deud.entities.creatures.monsters;
 
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.Creature;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.inventory.creature.CreatureInventory;
 
 public abstract class Monster extends Creature {
 
-    public Monster(String uuid, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y, int width, int height) {
-        this(uuid, name, type, gameAPI, x, y, width, height, 0);
-    }
-
-    public Monster(String uuid, String name, EntityData.EntityType type, GameAPI gameAPI, float x, float y, int width, int height, int level) {
-        super(uuid, name, type, gameAPI, x, y, width, height, level);
+    public Monster(String uuid, String name, EntityType type, GameAPI gameAPI, float x, float y, int width, int height) {
+        super(uuid, name, type, gameAPI, x, y, width, height);
     }
 
     @Override

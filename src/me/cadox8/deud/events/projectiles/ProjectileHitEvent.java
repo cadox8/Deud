@@ -14,10 +14,10 @@ public class ProjectileHitEvent extends ProjectileEvent {
         this.damaged = damaged;
     }
 
+    // ToDo: Projectile effects!
+
     @Override
     public void onEvent() {
-        if (damaged == null) return; //No hit
-
         projectile.setActive(false);
     }
 }

@@ -2,6 +2,7 @@ package me.cadox8.deud.entities.creatures.player;
 
 import lombok.Data;
 import me.cadox8.deud.entities.Location;
+import me.cadox8.deud.entities.enums.Direction;
 import me.cadox8.deud.inventory.Inventory;
 import me.cadox8.deud.items.Item;
 
@@ -25,7 +26,7 @@ public class PlayerData {
         return location;
     }
     public Location getLocation() {
-        return new Location(location.getX(), location.getY(), location.getDirection());
+        return new Location(location.getX(), location.getY(), Direction.valueOf(location.direction));
     }
 
     public Map<Inventory.Equipment, Item> getEquipment() {
@@ -59,6 +60,6 @@ public class PlayerData {
         private String world = "";
         private float x = 0;
         private float y = 0;
-        private int direction = 0;
+        private String direction = Direction.SOUTH.name();
     }
 }

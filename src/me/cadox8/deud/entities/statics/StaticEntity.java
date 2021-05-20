@@ -3,15 +3,15 @@ package me.cadox8.deud.entities.statics;
 import lombok.NonNull;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.Entity;
-import me.cadox8.deud.entities.EntityData;
+import me.cadox8.deud.entities.enums.EntityType;
 import me.cadox8.deud.inventory.statics.StaticInventory;
 
 import java.awt.*;
 
 public abstract class StaticEntity extends Entity {
 
-    public StaticEntity(String uuid, String name, EntityData.EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
-        super(uuid, name, type, gameAPI, x, y, width, height, 0);
+    public StaticEntity(String uuid, String name, EntityType type, @NonNull GameAPI gameAPI, float x, float y, int width, int height) {
+        super(uuid, name, type, gameAPI, x, y, width, height);
     }
 
     @Override

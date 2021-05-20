@@ -10,7 +10,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DateFormat;
+import java.time.Instant;
 import java.util.Arrays;
+import java.util.Date;
 
 public class Updater {
 
@@ -36,13 +39,13 @@ public class Updater {
             versions.latest = Launcher.BUILD_NUMBER;
             final Versions.VersionData[] d = new Versions.VersionData[1];
             d[0] = new Versions.VersionData(Launcher.BUILD_NUMBER, Launcher.VERSION);
-            versions.older = d;
+            versions.versions = d;
             return versions;
         }
     }
 
     private static Versions.VersionData getVersion(int id) {
-        return Arrays.stream(webVersion().getOlder()).filter(v -> v.getBuild() == id).findAny().orElse(new Versions.VersionData(Launcher.BUILD_NUMBER, Launcher.VERSION));
+        return Arrays.stream(webVersion().getVersions()).filter(v -> v.getBuild() == id).findAny().orElse(new Versions.VersionData(Launcher.BUILD_NUMBER, Launcher.VERSION));
     }
 
     public static Versions.VersionData latestVersion() {
@@ -53,7 +56,7 @@ public class Updater {
     public static class Versions {
 
         private int latest;
-        private VersionData[] older;
+        private VersionData[] versions;
 
         @Data
         @AllArgsConstructor
