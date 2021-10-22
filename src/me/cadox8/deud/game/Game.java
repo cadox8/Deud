@@ -9,7 +9,7 @@ import me.cadox8.deud.display.Display;
 import me.cadox8.deud.entities.EntityData;
 import me.cadox8.deud.entities.creatures.player.PlayerData;
 import me.cadox8.deud.graphics.GameCamera;
-import me.cadox8.deud.graphics.fonts.Fonts;
+import me.cadox8.deud.graphics.fonts.FontUtils;
 import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.graphics.textures.Models;
@@ -17,7 +17,6 @@ import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
 import me.cadox8.deud.managers.DamageManager;
 import me.cadox8.deud.saves.FileUtils;
-import me.cadox8.deud.states.EditorState;
 import me.cadox8.deud.states.GameState;
 import me.cadox8.deud.states.MenuState;
 import me.cadox8.deud.states.State;
@@ -46,7 +45,6 @@ public class Game implements Runnable {
     private Graphics g;
 
     //States
-    @Getter @Setter public State editorState;
     @Getter @Setter public State gameState;
     @Getter public State menuState;
 
@@ -85,7 +83,7 @@ public class Game implements Runnable {
         display.getCanvas().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseWheelListener(mouseManager);
 
-        Fonts.init();
+        FontUtils.init();
         GUI.init();
         Assets.init();
         Models.init();
@@ -95,7 +93,6 @@ public class Game implements Runnable {
         gameAPI = new GameAPI(this);
         gameCamera = new GameCamera(gameAPI, 0, 0);
 
-        editorState = new EditorState(gameAPI);
         gameState = new GameState(gameAPI, "springwood");
         menuState = new MenuState(gameAPI);
 

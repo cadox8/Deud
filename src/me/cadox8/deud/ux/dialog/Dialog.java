@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.npcs.Npc;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.graphics.fonts.Fonts;
 import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.GUI;
 
@@ -62,7 +63,7 @@ public class Dialog {
         int p = 1;
         for (String s : renderText()) {
             s = s.replaceAll("%npc%", npc == null ? "" : npc.getDisplayName()).replaceAll("%player%", player.getNick());
-            Text.drawString(g, s, 180, gameApi.getHeight() - 115 + (p * 20), Color.WHITE, 2);
+            Text.drawString(g, s, 180, gameApi.getHeight() - 115 + (p * 20), Color.WHITE, Fonts.DEUD);
             p++;
         }
     }

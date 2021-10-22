@@ -5,11 +5,11 @@ import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.saves.FileUtils;
 import me.cadox8.deud.states.State;
-import me.cadox8.deud.ui.NysvaManager;
-import me.cadox8.deud.ui.components.base.UIBlock;
-import me.cadox8.deud.ui.components.text.UISelectedTextButton;
-import me.cadox8.deud.ui.helpers.NysvaColor;
-import me.cadox8.deud.ui.helpers.UIDimension;
+import me.cadox8.deud.old_ui.NysvaManager;
+import me.cadox8.deud.old_ui.components.base.UIBlock;
+import me.cadox8.deud.old_ui.components.text.UISelectedTextButton;
+import me.cadox8.deud.old_ui.helpers.NysvaColor;
+import me.cadox8.deud.old_ui.helpers.UIDimension;
 
 import java.awt.*;
 
@@ -32,7 +32,7 @@ public class Options {
 
         final UISelectedTextButton menu = new UISelectedTextButton(gameAPI, "Main Menu", () -> {
             FileUtils.save(player, gameAPI);
-            gameAPI.getMouseManager().setNysvaUI(null);
+            gameAPI.getMouseManager().setAarinManager(null);
             State.setState(gameAPI.getGame().getMenuState());
         });
 
@@ -62,11 +62,11 @@ public class Options {
         nysvaManager.addObject(menu);
         nysvaManager.addObject(exit);
 
-        gameAPI.getMouseManager().setNysvaUI(nysvaManager);
+        gameAPI.getMouseManager().setAarinManager(nysvaManager);
     }
 
     public void tick() {
-        if (gameAPI.getMouseManager().getNysvaUI() == null) gameAPI.getMouseManager().setNysvaUI(nysvaManager);
+        if (gameAPI.getMouseManager().getAarinManager() == null) gameAPI.getMouseManager().setAarinManager(nysvaManager);
         nysvaManager.tick();
     }
 
@@ -76,6 +76,6 @@ public class Options {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-        gameAPI.getMouseManager().setNysvaUI(nysvaManager);
+        gameAPI.getMouseManager().setAarinManager(nysvaManager);
     }
 }

@@ -9,8 +9,8 @@ import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.entities.statics.Light;
 import me.cadox8.deud.ui.components.base.UIBlock;
-import me.cadox8.deud.ui.helpers.NysvaColor;
-import me.cadox8.deud.ui.helpers.UIDimension;
+import me.cadox8.deud.ui.helpers.AarinArea;
+import me.cadox8.deud.ui.helpers.AarinColor;
 import me.cadox8.deud.utils.Log;
 
 import java.awt.*;
@@ -55,8 +55,8 @@ public class EntityManager {
         entities.forEach(e -> e.preRender(g));
 
         if (isDark) {
-            final UIBlock dark = new UIBlock(gameAPI, NysvaColor.BLACK.transparent(150));
-            dark.setUiDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
+            final UIBlock dark = new UIBlock(gameAPI, AarinColor.BLACK.transparent(150), true);
+            dark.setArea(new AarinArea().addPoints(new Point(0, 0), new Point(gameAPI.getWidth(), gameAPI.getHeight())));
             dark.render(g);
         }
 

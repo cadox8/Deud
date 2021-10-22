@@ -2,7 +2,6 @@ package me.cadox8.deud.input;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.cadox8.deud.ui.components.field.UIField;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -16,14 +15,14 @@ public class KeyManager implements KeyListener {
     public boolean up, down, left, right, shift, space, drop, esc;
     public boolean debug, tests;
 
-    @Getter @Setter private UIField writingTo;
+    //@Getter @Setter private UIField writingTo;
 
     public KeyManager() {
         keys = new boolean[256];
         justPressed = new boolean[keys.length];
         cantPress = new boolean[keys.length];
 
-        writingTo = null;
+        //writingTo = null;
     }
 
     public void tick() {
@@ -74,13 +73,13 @@ public class KeyManager implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        if (writingTo != null) {
+/*        if (writingTo != null) {
             if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
                 if (writingTo.getText().toCharArray().length <= 0) return;
                 writingTo.setText(String.valueOf(Arrays.copyOfRange(writingTo.getText().toCharArray(), 0, writingTo.getText().toCharArray().length - 1)));
                 return;
             }
             writingTo.setText(writingTo.getText() + e.getKeyChar());
-        }
+        }*/
     }
 }

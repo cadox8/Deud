@@ -11,6 +11,7 @@ import me.cadox8.deud.entities.Location;
 import me.cadox8.deud.entities.creatures.Creature;
 import me.cadox8.deud.entities.enums.Direction;
 import me.cadox8.deud.entities.enums.EntityType;
+import me.cadox8.deud.graphics.fonts.Fonts;
 import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.Models;
 import me.cadox8.deud.inventory.Inventory;
@@ -154,8 +155,8 @@ public class Player extends Creature {
         inventory.render(g);
 
         if (getHealth() <= 0) {
-            Text.drawString(g, "You lose", 125, 530, Color.BLACK, 3);
-            Text.drawString(g, ":(", 367, 515, Color.BLACK, 0);
+            Text.drawString(g, "You lose", 125, 530, Color.BLACK, Fonts.DEUD_DEATH_SCREEN);
+            Text.drawString(g, ":(", 367, 515, Color.BLACK, Fonts.DEUD_TALL);
         }
 
         if (options.isEnabled()) options.render(g);

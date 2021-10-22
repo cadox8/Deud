@@ -24,6 +24,7 @@ public class GameState extends State {
         super(gameAPI);
         Location.setGameAPI(gameAPI);
         if (!change) Game.getInstance().setPlayerData(FileUtils.load());
+        // IDK why this line remains here... v
         if (Game.getInstance().getPlayerData() != null && Game.getInstance().getPlayerData().getHealth() <= 0) Game.getInstance().getPlayerData().setHealth(10); // Temporal (Maybe not so temporal...)
 
         if (!change) {

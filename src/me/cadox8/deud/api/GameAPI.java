@@ -7,6 +7,7 @@ import me.cadox8.deud.config.Config;
 import me.cadox8.deud.entities.creatures.player.Player;
 import me.cadox8.deud.game.Game;
 import me.cadox8.deud.graphics.GameCamera;
+import me.cadox8.deud.graphics.fonts.Fonts;
 import me.cadox8.deud.input.KeyManager;
 import me.cadox8.deud.input.MouseManager;
 import me.cadox8.deud.managers.DamageManager;
@@ -23,7 +24,7 @@ public class GameAPI {
 
     @Getter @Setter private boolean debug = true; // Development Only!
 
-    @Getter @Setter private static Font gameFont = new Font("'Arial'", Font.PLAIN, 12);
+    @Getter @Setter private static Fonts gameFont = Fonts.DEUD;
 
     public GameAPI(Game game) {
         this.game = game;

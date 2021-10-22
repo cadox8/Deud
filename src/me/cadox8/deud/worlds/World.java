@@ -17,8 +17,8 @@ import me.cadox8.deud.managers.ParticleManager;
 import me.cadox8.deud.tiles.Tile;
 import me.cadox8.deud.tiles.Tiles;
 import me.cadox8.deud.ui.components.base.UIBlock;
-import me.cadox8.deud.ui.helpers.NysvaColor;
-import me.cadox8.deud.ui.helpers.UIDimension;
+import me.cadox8.deud.ui.helpers.AarinArea;
+import me.cadox8.deud.ui.helpers.AarinColor;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Utils;
 
@@ -72,8 +72,8 @@ public class World {
 
         addEntities();
 
-        base = new UIBlock(gameAPI, NysvaColor.BLACK);
-        base.setUiDimension(new UIDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
+        base = new UIBlock(gameAPI, AarinColor.BLACK, true);
+        base.setArea(new AarinArea().addPoints(new Point(0, 0), new Point(gameAPI.getWidth(), gameAPI.getHeight())));
     }
 
     private void addEntities() {

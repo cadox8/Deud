@@ -2,6 +2,7 @@ package me.cadox8.deud.ux.hud;
 
 import lombok.RequiredArgsConstructor;
 import me.cadox8.deud.entities.creatures.player.Player;
+import me.cadox8.deud.graphics.fonts.Fonts;
 import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.Assets;
 import me.cadox8.deud.graphics.textures.GUI;
@@ -74,6 +75,6 @@ public class Hud {
             x = 185;
         }
 
-        Text.drawString(g, text, x, y, false, Color.WHITE, 2);
+        Text.drawString(g, text, x, y, false, Color.WHITE, Fonts.DEUD);
     }
 }

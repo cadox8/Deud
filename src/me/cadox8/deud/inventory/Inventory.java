@@ -4,14 +4,10 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.items.Item;
-import me.cadox8.deud.ui.NysvaManager;
-import me.cadox8.deud.ui.components.images.UIImage;
-import me.cadox8.deud.ui.helpers.UIDimension;
+import me.cadox8.deud.ui.AarinManager;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,7 +16,7 @@ import java.util.List;
 public abstract class Inventory {
 
     protected final GameAPI gameAPI;
-    @Getter protected final NysvaManager nysvaManager;
+    @Getter protected AarinManager aarinManager;
 
     @Getter protected List<Item> items;
 
@@ -30,11 +26,9 @@ public abstract class Inventory {
 
     @Getter protected boolean active;
 
-    protected int baseX, baseY, itemX, itemY;
-
     public Inventory(@NonNull GameAPI gameAPI) {
         this.gameAPI = gameAPI;
-        this.nysvaManager = new NysvaManager();
+        this.aarinManager = new AarinManager();
 
         this.items = new ArrayList<>();
 
@@ -42,41 +36,11 @@ public abstract class Inventory {
         this.equipment = new HashMap<>();
         Arrays.asList(Equipment.values()).forEach(e -> this.equipment.put(e, null));
 
-        //
-        this.baseX = 0;
-        this.baseY = 0;
-        this.itemX = 0;
-        this.itemY = 0;
-        //
-
         this.active = false;
     }
 
     public abstract void tick();
     public abstract void render(Graphics g);
-    protected abstract void loadItems();
-
-    protected void drawItemInfo(Graphics g, Item item, int xPosText, int yPosText) {
-        String infoText = "";
-        if (item != null) infoText = item.getName() + " x" + item.getCount();
-        if (item == null) infoText = "---------";
-        Text.drawString(g, infoText, xPosText, yPosText, false, 2);
-    }
-
-    protected void base(BufferedImage baseImage) {
-        final UIImage base = new UIImage(gameAPI, baseImage);
-        base.setUiDimension(new UIDimension(this.baseX, this.baseY, baseImage.getWidth(), baseImage.getHeight()));
-
-        // Prevents any interaction
-        base.setResize(false);
-        base.setClickable(false);
-        base.setHoverable(false);
-        //
-
-        this.nysvaManager.addObject(base);
-
-        this.loadItems();
-    }
 
     public Item getEquipment(Equipment equipment) {
         return this.equipment.get(equipment);

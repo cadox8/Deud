@@ -1,91 +1,60 @@
-/*
- * Copyright (C) AthoneDevs, Inc - All Rights Reserved (Krork Engine)
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * You are not allowed to edit or use fragments of this code for any uses
- * You are allowed to use the Engine as a dependency for your code/game
- *
- * For any question/bug/suggestion, please, mail me at cadox8@gmail.com
- * Written by Cadox8 <cadox8@gmail.com>, 24 October 2018
- *
- */
-
 package me.cadox8.deud.ui.components.base;
 
+import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
-import me.cadox8.deud.ui.NysvaUI;
-import me.cadox8.deud.ui.helpers.NysvaColor;
+import me.cadox8.deud.ui.AarinUI;
+import me.cadox8.deud.ui.helpers.AarinColor;
 
 import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
 
-public class UIBlock extends NysvaUI {
+public class UIBlock extends AarinUI {
 
-    private NysvaColor background;
+    @Getter private AarinColor color;
 
-    private boolean rounded = false;
-    private int roundRadius = 35;
+    @Getter private boolean filled;
 
-    public UIBlock(GameAPI api) {
-        this(api, NysvaColor.DARK_GRAY);
+    public UIBlock(GameAPI gameAPI) {
+        this(gameAPI, true);
     }
-    public UIBlock(GameAPI api, NysvaColor background) {
-        super(api);
-        this.background = background;
+    public UIBlock(GameAPI gameAPI, boolean filled) {
+        this(gameAPI, AarinColor.DARK_GRAY, filled);
+    }
+    public UIBlock(GameAPI gameAPI, AarinColor color, boolean filled) {
+        super(gameAPI);
+        this.color = color;
+        this.filled = filled;
+
+        this.setHoverable(false);
+        this.setClickable(false);
     }
 
     @Override
     public void tick() {}
 
     @Override
-    public void render(Graphics g) {
-        final Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(background.getColor());
-        final Rectangle r = getUiDimension().getBounds();
-
-        if (isRounded()) {
-            final RoundRectangle2D r2 = new RoundRectangle2D.Double(r.getX(), r.getY(), r.getWidth(), r.getHeight(), roundRadius, roundRadius);
-            g2.draw(r2);
-            g2.fill(r2);
-        } else {
-            g2.draw(r);
-            g2.fill(r);
-        }
+    public void render(Graphics graphics) {
+        graphics.setColor(color.getColor());
+        graphics.drawPolygon(this.getArea().getPolygon());
+        if (this.isFilled()) graphics.fillPolygon(this.getArea().getPolygon());
     }
 
     @Override
     public void onClick() {}
 
-    public void transparentBackground(int alpha) {
-        setBackground(background.transparent(alpha));
-    }
-
-    public NysvaColor getBackground() {
-        return background;
-    }
-
-    public void setBackground(NysvaColor background) {
-        setBackground(background, 255);
-    }
-    public void setBackground(NysvaColor background, int alpha) {
-        this.background = background.transparent(alpha);
-    }
-
-    public boolean isRounded() {
-        return rounded;
-    }
-
-    public UIBlock setRounded(boolean rounded) {
-        this.rounded = rounded;
+    public UIBlock setColor(int alpha) {
+        this.setColor(this.getColor().transparent(alpha));
         return this;
     }
-
-    public int getRoundRadius() {
-        return roundRadius;
+    public UIBlock setColor(AarinColor background) {
+        this.setColor(background, 255);
+        return this;
     }
-
-    public void setRoundRadius(int roundRadius) {
-        if (roundRadius < 0 || roundRadius > 100) throw new IllegalArgumentException("The round radius must be between 0 and 100 (" + roundRadius + ")");
-        setRounded(true);
-        this.roundRadius = roundRadius;
+    public UIBlock setColor(AarinColor background, int alpha) {
+        this.color = background.transparent(alpha);
+        return this;
+    }
+    public UIBlock setFilled(boolean filled) {
+        this.filled = filled;
+        return this;
     }
 }

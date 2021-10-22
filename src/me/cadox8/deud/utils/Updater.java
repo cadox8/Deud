@@ -25,7 +25,7 @@ public class Updater {
 
     public static Versions webVersion() {
         try {
-            URLConnection connection = new URL("https://cadox8.es/deud/versions.json").openConnection();
+            URLConnection connection = new URL("https://cadox8.es/deud/versions").openConnection();
             final String redirect = connection.getHeaderField("Location");
             if (redirect != null) connection = new URL(redirect).openConnection();
             final BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));

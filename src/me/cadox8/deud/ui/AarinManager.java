@@ -11,61 +11,62 @@
 
 package me.cadox8.deud.ui;
 
+import lombok.Getter;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
-public class NysvaManager {
+public class AarinManager {
 
-    private final ArrayList<NysvaUI> objects;
+    @Getter private final ArrayList<AarinUI> objects;
 
     /**
      * The constructor of the class
      */
-    public NysvaManager() {
+    public AarinManager() {
         objects = new ArrayList<>();
     }
 
     /**
-     * Adds an NysvaUI
-     * @see NysvaUI
+     * Adds an AarinUI
+     * @see AarinUI
      *
-     * @param object The NysvaUI
+     * @param object The AarinUI
      */
-    public void addObject(NysvaUI object) {
+    public void addObject(AarinUI object) {
         synchronized (objects) {
             objects.add(object);
         }
     }
 
-    public void setObject(int slot, NysvaUI object) {
+    public void setObject(int slot, AarinUI object) {
         synchronized (objects) {
             objects.set(slot, object);
         }
     }
 
     /**
-     * Removes an NysvaUI
-     * @see NysvaUI
+     * Removes an AarinUI
+     * @see AarinUI
      *
-     * @param object The NysvaUI
+     * @param object The AarinUI
      */
-    public void removeObject(NysvaUI object) {
-        removeObject(object.getComponentID());
+    public void removeObject(AarinUI object) {
+        removeObject(object.getComponentId());
     }
 
     /**
-     * Removes an NysvaUI
-     * @see NysvaUI
+     * Removes an AarinUI
+     * @see AarinUI
      *
      * @param componentID The componentID
      */
     public void removeObject(long componentID) {
         synchronized (objects) {
-            objects.removeIf(nysvaUI -> nysvaUI.getComponentID() == componentID);
+            objects.removeIf(AarinUI -> AarinUI.getComponentId() == componentID);
         }
     }
 
@@ -75,7 +76,7 @@ public class NysvaManager {
     public void removeAllObjects() {
         if (objects.isEmpty()) return;
         synchronized (objects) {
-            final Iterator<NysvaUI> it = objects.iterator();
+            final Iterator<AarinUI> it = objects.iterator();
             while (it.hasNext()) it.remove();
         }
     }
@@ -85,15 +86,14 @@ public class NysvaManager {
      *
      * @param componentID The ID of the component to search
      */
-    public NysvaUI getObject(long componentID) {
-        return objects.stream().filter(c -> c.getComponentID() == componentID).findAny().orElse(null);
+    public AarinUI getObject(long componentID) {
+        return objects.stream().filter(c -> c.getComponentId() == componentID).findAny().orElse(null);
     }
 
     public void tick() {
         synchronized (objects) {
             try {
-                objects.stream().filter(NysvaUI::isEnabled).forEach(NysvaUI::tick);
-                reorder();
+                objects.stream().filter(AarinUI::isEnabled).forEach(AarinUI::tick);
             } catch (ConcurrentModificationException e) {}
         }
     }
@@ -101,29 +101,15 @@ public class NysvaManager {
     public void render(Graphics g) {
         synchronized (objects) {
             try {
-                objects.stream().filter(NysvaUI::isEnabled).forEach(o -> o.render(g));
+                objects.stream().filter(AarinUI::isEnabled).forEach(o -> o.render(g));
             } catch (ConcurrentModificationException e) {}
         }
     }
 
     public void onMouseMove(MouseEvent e) {
-        objects.stream().filter(NysvaUI::isHoverable).forEach(o -> o.onMouseMove(e));
+        objects.stream().filter(AarinUI::isEnabled).filter(AarinUI::isHoverable).forEach(o -> o.onMouseMove(e));
     }
     public void onMouseClicked(MouseEvent e) {
-        objects.stream().filter(NysvaUI::isClickable).forEach(o -> o.onMouseClicked(e));
-    }
-
-    private void reorder() {
-        final Comparator<NysvaUI> itemDataComparator = (NysvaUI a, NysvaUI b) -> {
-            if (a.getExtraData() == null) a.setExtraData(-5);
-            if (b.getExtraData() == null) b.setExtraData(-5);
-            if ((int)a.getExtraData() < (int)b.getExtraData()) return -1;
-            return 1;
-        };
-        objects.sort(itemDataComparator);
-    }
-
-    public ArrayList<NysvaUI> getObjects() {
-        return this.objects;
+        objects.stream().filter(AarinUI::isEnabled).filter(AarinUI::isClickable).filter(AarinUI::isHoverable).filter(AarinUI::isHovering).forEach(o -> o.onMouseClicked(e));
     }
 }

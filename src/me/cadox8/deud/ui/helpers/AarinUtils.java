@@ -15,23 +15,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class NysvaUtils {
+public class AarinUtils {
 
     private static final Random r = new Random();
-    private static NysvaColor lastColor = null;
+    private static AarinColor lastColor = null;
 
-    public static NysvaColor randomColor(NysvaColor... exclude) {
-        final List<NysvaColor> colors =Arrays.asList(NysvaColor.allColors());
+    public static AarinColor randomColor(AarinColor... exclude) {
+        final List<AarinColor> colors = Arrays.asList(AarinColor.allColors());
         colors.removeAll(Arrays.asList(exclude));
         return randomColor(colors);
     }
 
-    public static NysvaColor randomColor() {
-        return randomColor(NysvaColor.allColors());
+    public static AarinColor randomColor() {
+        return randomColor(AarinColor.allColors());
     }
 
-    public static NysvaColor randomColor(List<NysvaColor> selectedColors) {
-        final NysvaColor color = selectedColors.get(r.nextInt(selectedColors.size()));
+    public static AarinColor randomColor(List<AarinColor> selectedColors) {
+        final AarinColor color = selectedColors.get(r.nextInt(selectedColors.size()));
         if (lastColor != null && color.getRGB() == lastColor.getRGB()) return randomColor(selectedColors);
         lastColor = color;
         return color;

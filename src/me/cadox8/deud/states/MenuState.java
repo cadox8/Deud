@@ -5,13 +5,14 @@ import me.cadox8.deud.Launcher;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.audio.Sound;
 import me.cadox8.deud.audio.Sounds;
+import me.cadox8.deud.graphics.fonts.Fonts;
 import me.cadox8.deud.graphics.fonts.Text;
 import me.cadox8.deud.graphics.textures.GUI;
-import me.cadox8.deud.ui.NysvaManager;
-import me.cadox8.deud.ui.components.images.UIImage;
-import me.cadox8.deud.ui.components.images.UIImageButton;
-import me.cadox8.deud.ui.components.text.UITextButton;
-import me.cadox8.deud.ui.helpers.UIDimension;
+import me.cadox8.deud.old_ui.NysvaManager;
+import me.cadox8.deud.old_ui.components.images.UIImage;
+import me.cadox8.deud.old_ui.components.images.UIImageButton;
+import me.cadox8.deud.old_ui.components.text.UITextButton;
+import me.cadox8.deud.old_ui.helpers.UIDimension;
 import me.cadox8.deud.utils.Log;
 import me.cadox8.deud.utils.Updater;
 
@@ -35,7 +36,7 @@ public class MenuState extends State {
 
         final UIImage background = new UIImage(gameAPI, GUI.background);
         final UIImageButton start = new UIImageButton(gameAPI, GUI.play[0], () -> {
-            gameAPI.getMouseManager().setNysvaUI(null);
+            gameAPI.getMouseManager().setAarinManager(null);
             setState(gameAPI.getGame().getGameState());
 
             if (gameAPI.getGame().getPlayerData() == null) gameAPI.getPlayer().setNick("Arya");
@@ -48,7 +49,7 @@ public class MenuState extends State {
         final UIImageButton exit = new UIImageButton(gameAPI, GUI.exit[0], () -> System.exit(0));
 
         final UIImageButton logo = new UIImageButton(gameAPI, GUI.logo, () -> {
-            gameAPI.getMouseManager().setNysvaUI(null);
+            gameAPI.getMouseManager().setAarinManager(null);
             setState(gameAPI.getGame().getEditorState());
         });
 
@@ -79,7 +80,7 @@ public class MenuState extends State {
         nysvaManager.addObject(exit);
         nysvaManager.addObject(logo);
 
-        gameAPI.getMouseManager().setNysvaUI(nysvaManager);
+        gameAPI.getMouseManager().setAarinManager(nysvaManager);
     }
 
 
@@ -91,7 +92,7 @@ public class MenuState extends State {
     @Override
     public void render(Graphics g) {
         nysvaManager.render(g);
-        Text.drawString(g, "Version: " + Launcher.VERSION, 5, 20, Color.WHITE, 2);
-        Text.drawString(g, "© Deud 2016-2019 - This Game is property of Cadox8", gameAPI.getWidth() - 550, gameAPI.getHeight() - 20, Color.WHITE, 2);
+        Text.drawString(g, "Version: " + Launcher.VERSION, 5, 20, Color.WHITE, Fonts.DEUD_TALL);
+        Text.drawString(g, "© Deud 2016-2021 - This Game is property of Cadox8", gameAPI.getWidth() - 550, gameAPI.getHeight() - 20, Color.WHITE, Fonts.DEUD_TALL);
     }
 }

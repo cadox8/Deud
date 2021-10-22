@@ -9,7 +9,7 @@
  *
  */
 
-package me.cadox8.deud.ui;
+package me.cadox8.deud.ui.helpers;
 
 public interface ClickListener {
 

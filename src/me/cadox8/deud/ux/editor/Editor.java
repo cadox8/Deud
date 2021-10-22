@@ -4,14 +4,14 @@ import lombok.Getter;
 import me.cadox8.deud.api.GameAPI;
 import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.states.State;
-import me.cadox8.deud.ui.NysvaManager;
-import me.cadox8.deud.ui.NysvaUI;
-import me.cadox8.deud.ui.components.field.UIField;
-import me.cadox8.deud.ui.components.images.UIImage;
-import me.cadox8.deud.ui.components.text.UIText;
-import me.cadox8.deud.ui.components.text.UITextButton;
-import me.cadox8.deud.ui.helpers.NysvaColor;
-import me.cadox8.deud.ui.helpers.UIDimension;
+import me.cadox8.deud.old_ui.NysvaManager;
+import me.cadox8.deud.old_ui.NysvaUI;
+import me.cadox8.deud.old_ui.components.field.UIField;
+import me.cadox8.deud.old_ui.components.images.UIImage;
+import me.cadox8.deud.old_ui.components.text.UIText;
+import me.cadox8.deud.old_ui.components.text.UITextButton;
+import me.cadox8.deud.old_ui.helpers.NysvaColor;
+import me.cadox8.deud.old_ui.helpers.UIDimension;
 
 import java.util.Arrays;
 
@@ -38,7 +38,7 @@ public class Editor {
         final UIField playerName = new UIField(gameAPI);
         final UITextButton exit = new UITextButton(gameAPI, "Back to Menu", () -> {
             System.out.println("test");
-            gameAPI.getMouseManager().setNysvaUI(null);
+            gameAPI.getMouseManager().setAarinManager(null);
             State.setState(gameAPI.getGame().getMenuState());
         });
         

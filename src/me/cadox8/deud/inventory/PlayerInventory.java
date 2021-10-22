@@ -6,28 +6,25 @@ import me.cadox8.deud.entities.statics.sign.Sign;
 import me.cadox8.deud.graphics.textures.GUI;
 import me.cadox8.deud.items.Item;
 import me.cadox8.deud.items.Items;
-import me.cadox8.deud.ui.NysvaUI;
-import me.cadox8.deud.ui.components.images.UIImageButton;
-import me.cadox8.deud.ui.helpers.UIDimension;
+import me.cadox8.deud.ui.AarinManager;
+import me.cadox8.deud.ui.components.inventory.UIPlayerInventory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class PlayerInventory extends Inventory {
+
+    private final UIPlayerInventory uiPlayerInventory;
 
     public PlayerInventory(@NonNull Player player) {
         super(player.getGameAPI());
 
-        this.baseX = 650;
-        this.baseY = 50;
-        this.itemX = 676;
-        this.itemY = 130;
+        this.aarinManager = new AarinManager();
 
-        gameAPI.getMouseManager().setNysvaUI(getNysvaManager());
+        this.uiPlayerInventory = new UIPlayerInventory(player.getGameAPI(), GUI.inventory);
+        this.getAarinManager().addObject(this.uiPlayerInventory);
 
-        this.base(GUI.inventory);
+        gameAPI.getMouseManager().setAarinManager(getAarinManager());
     }
 
     @Override
@@ -37,6 +34,9 @@ public class PlayerInventory extends Inventory {
             gameAPI.getWorld().getPlayer().setFreeze(this.isActive());
             gameAPI.getEntityManager().getEntities().stream().filter(e -> e instanceof Sign).forEach(e -> ((Sign) e).setSign(null));
             setSelectedSlot(-1);
+
+            this.uiPlayerInventory.addItems(this.items);
+            this.uiPlayerInventory.getItems().forEach(i -> this.getAarinManager().addObject(i));
         }
         if (this.isActive() && this.gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
             this.active = false;
@@ -45,58 +45,14 @@ public class PlayerInventory extends Inventory {
         if (!this.isActive()) return;
 
         if (this.equipment.get(Equipment.HAND) == null) this.equipment.put(Equipment.HAND, Items.HAND.item());
-        this.getNysvaManager().tick();
+        this.getAarinManager().tick();
     }
 
     @Override
     public void render(Graphics g) {
         if (!this.isActive()) return;
 
-        getNysvaManager().render(g);
-
-        final Optional<NysvaUI> item = this.getNysvaManager().getObjects().stream().filter(n -> n instanceof UIImageButton).filter(NysvaUI::isHovering).findAny();
-        if (item.isPresent()) {
-            final UIImageButton button = (UIImageButton) item.get();
-            g.drawImage(GUI.invSelector, button.getUiDimension().getX(), button.getUiDimension().getY(), null);
-            drawItemInfo(g, items.get((int)button.getExtraData()), 855, 646);
-        } else {
-            drawItemInfo(g, null, 855, 646);
-        }
-    }
-
-    @Override
-    protected void loadItems() {
-        final AtomicInteger xSlot = new AtomicInteger(0);
-        final AtomicInteger ySlot = new AtomicInteger(0);
-
-        this.items.forEach(i -> {
-            if (ySlot.get() > 6) return;
-
-            final UIImageButton item = new UIImageButton(this.gameAPI, i.getTexture(), () -> {
-                this.selectedSlot = this.items.indexOf(i);
-                // ToDo: move
-            });
-            item.setUiDimension(new UIDimension(this.itemX + (xSlot.get() * 64) + 1, this.itemY + (ySlot.get() * 64) + 1, 60, 60));
-            item.setReorder(true);
-            item.setResize(false);
-            item.setExtraData(this.items.indexOf(i));
-
-            this.nysvaManager.addObject(item);
-        });
-
-/*        this.getEquipment().values().forEach(i -> {
-            if (i == null) return;
-            final UIImageButton item = new UIImageButton(this.gameAPI, i.getTexture(), () -> {
-                this.selectedSlot = this.items.indexOf(i);
-                // ToDo: move
-            });
-            item.setUiDimension(new UIDimension(this.itemX + (xSlot.get() * 64) + 1, this.itemY + (ySlot.get() * 64) + 1, 60, 60));
-            item.setReorder(true);
-            item.setResize(false);
-            item.setExtraData(this.items.indexOf(i));
-
-            getNysvaManager().addObject(item);
-        });*/
+        getAarinManager().render(g);
     }
 
     public void setHandItem(Item item) {

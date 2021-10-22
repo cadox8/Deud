@@ -12,13 +12,13 @@ public class ShopInventory extends StaticInventory {
 
         //loadBaseInventory(676, 130, GUI.chest);
 
-        gameAPI.getMouseManager().setNysvaUI(getNysvaManager());
+        gameAPI.getMouseManager().setAarinManager(getAarinManager());
     }
 
     @Override
     public void tick() {
         if (!isActive()) return;
-        getNysvaManager().tick();
+        getAarinManager().tick();
     }
 
 /*    @Override
