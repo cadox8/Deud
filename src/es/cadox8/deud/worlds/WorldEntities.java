@@ -50,20 +50,20 @@ public class WorldEntities {
                 switch (type) {
                     case CHEST:
                         switch (Chest.ChestType.valueOf(e.getChestType())) {
-                            case REWARD -> {
+                            case REWARD:
                                 en = new RewardChest(gameAPI, l.getX(), l.getY(), e.isNeedKey(), Chest.ChestType.valueOf(e.getChestType()));
                                 ((RewardChest) en).setOpen(e.isOpen());
                                 Arrays.asList(e.getPool()).forEach(i -> ((RewardChest) en).addToPool(i.getId()));
-                            }
-                            case TRAP -> {
+                                break;
+                            case TRAP:
                                 en = new TrapChest(gameAPI, l.getX(), l.getY(), e.isNeedKey());
                                 ((TrapChest) en).setOpen(e.isOpen());
                                 Arrays.asList(e.getPool()).forEach(i -> ((RewardChest) en).addToPool(i.getId()));
-                            }
-                            default -> {
+                                break;
+                            default:
                                 en = new Chest(gameAPI, l.getX(), l.getY(), Chest.ChestType.valueOf(e.getChestType()));
                                 en.getInventory().addItems(e.getInventory());
-                            }
+                                break;
                         }
                         break;
                     case SIGN:

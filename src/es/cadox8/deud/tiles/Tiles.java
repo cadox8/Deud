@@ -75,11 +75,15 @@ public enum Tiles {
     }
 
     private int parseDegrees() {
-        return switch (subID) {
-            case 1 -> 90;
-            case 2 -> 180;
-            case 3 -> 270;
-            default -> 0;
-        };
+        switch (subID) {
+            case 1:
+                return 90;
+            case 2:
+                return 180;
+            case 3:
+                return 270;
+            default:
+                return 0;
+        }
     }
 }

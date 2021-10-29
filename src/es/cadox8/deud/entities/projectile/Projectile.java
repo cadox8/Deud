@@ -32,10 +32,18 @@ public abstract class Projectile extends Creature {
         texture = Utils.rotateImage(Utils.directionToDegrees(direction), texture);
 
         switch (direction) {
-            case NORTH -> location.add(0, distance);
-            case EAST -> location.add(distance, 0);
-            case WEST -> location.add(-distance, 0);
-            default -> location.add(0, -distance); // South
+            case NORTH:
+                location.add(0, distance);
+                break;
+            case EAST:
+                location.add(distance, 0);
+                break;
+            case WEST:
+                location.add(-distance, 0);
+                break;
+            default:
+                location.add(0, -distance); // South
+                break;
         }
 
         // ToDo: Projectile movement

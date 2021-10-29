@@ -49,11 +49,12 @@ public abstract class EntityAI {
     }
 
     protected void randomMove() {
-        if (!(this.entity instanceof final Creature creature)) return;
+        if (!(this.entity instanceof Creature)) return;
         if (this.isOnDelay()) {
             this.movementDelay--;
             return;
         }
+        final Creature creature = (Creature) this.entity;
         if (creature.isFreeze()) return;
 
         this.movementDelay = delay;

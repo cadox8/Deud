@@ -59,10 +59,15 @@ public class House extends StaticEntity {
     }
 
     private BufferedImage getImage(int type, int index) {
-        return switch (type) {
-            case 2, 4 -> Assets.house2[index];
-            case 3, 5 -> Assets.house3[index];
-            default -> Assets.house1[index];
-        };
+        switch (type) {
+            case 2:
+            case 4:
+                return Assets.house2[index];
+            case 3:
+            case 5:
+                return Assets.house3[index];
+            default:
+                return Assets.house1[index];
+        }
     }
 }
