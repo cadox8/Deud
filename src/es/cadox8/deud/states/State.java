@@ -1,0 +1,31 @@
+package es.cadox8.deud.states;
+
+import es.cadox8.deud.api.GameAPI;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+
+import java.awt.*;
+
+public abstract class State {
+
+    protected GameAPI gameAPI;
+
+    @Getter @Setter private static State state = null;
+
+    public State(@NonNull GameAPI gameAPI) {
+        this.gameAPI = gameAPI;
+    }
+
+
+    public abstract void tick();
+    public abstract void render(Graphics g);
+
+    public String toString() {
+        return "State:{Name: " + getStateName() + "}";
+    }
+
+    public String getStateName() {
+        return getClass().getSimpleName();
+    }
+}
