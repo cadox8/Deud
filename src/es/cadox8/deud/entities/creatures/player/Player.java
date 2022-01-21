@@ -2,7 +2,7 @@ package es.cadox8.deud.entities.creatures.player;
 
 import es.cadox8.deud.animations.Animation;
 import es.cadox8.deud.api.GameAPI;
-import es.cadox8.deud.audio.Sounds;
+import es.cadox8.deud.audio.SoundType;
 import es.cadox8.deud.entities.enums.Direction;
 import es.cadox8.deud.entities.enums.EntityType;
 import es.cadox8.deud.graphics.fonts.Fonts;
@@ -194,22 +194,22 @@ public class Player extends Creature {
         if (gameAPI.getKeyManager().up) {
             yMove = -speed;
             setDirection(Direction.NORTH);
-            Sounds.ENTITY_WALK_GRASS.play();
+            SoundType.ENTITY_WALK_GRASS.play();
         }
         if (gameAPI.getKeyManager().down) {
             yMove = speed;
             setDirection(Direction.SOUTH);
-            Sounds.ENTITY_WALK_GRASS.play();
+            SoundType.ENTITY_WALK_GRASS.play();
         }
         if (gameAPI.getKeyManager().left) {
             xMove = -speed;
             setDirection(Direction.WEST);
-            Sounds.ENTITY_WALK_GRASS.play();
+            SoundType.ENTITY_WALK_GRASS.play();
         }
         if (gameAPI.getKeyManager().right) {
             xMove = speed;
             setDirection(Direction.EAST);
-            Sounds.ENTITY_WALK_GRASS.play();
+            SoundType.ENTITY_WALK_GRASS.play();
         }
 
         if (gameAPI.getMouseManager().isRightPressed()) getPlayerInventory().getEquipment().get(Inventory.Equipment.HAND).use(this);

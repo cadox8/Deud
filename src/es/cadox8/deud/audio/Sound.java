@@ -31,10 +31,10 @@ public class Sound {
 
     public void play() {
         try {
-            setVolume();
+            this.setVolume();
             clip.start();
             if (!clip.isRunning()) {
-                setVolume();
+                this.setVolume();
                 clip.setFramePosition(0);
             }
         } catch(Exception e) {
@@ -44,10 +44,10 @@ public class Sound {
 
     public void playLoop() {
         try {
-            setVolume();
+            this.setVolume();
             clip.start();
-            if (hasFinished()) {
-                setVolume();
+            if (this.hasFinished()) {
+                this.setVolume();
                 clip.start();
             }
         } catch(Exception e) {
@@ -59,22 +59,21 @@ public class Sound {
         if(clip.isOpen()){
             clip.stop();
         } else {
-            play();
+            this.play();
         }
     }
 
     public void resume() {
         if(clip.isOpen()){
-            setVolume();
+            this.setVolume();
             clip.start();
         } else {
-            play();
+            this.play();
         }
     }
 
     public void stop() {
         if(!clip.isOpen()) return;
-
         clip.stop();
         clip.close();
     }

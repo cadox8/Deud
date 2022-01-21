@@ -3,7 +3,7 @@ package es.cadox8.deud.audio;
 import lombok.Getter;
 
 @Getter
-public enum Sounds {
+public enum SoundType {
 
     // UI Music
     MENU("menu", 0),
@@ -20,7 +20,7 @@ public enum Sounds {
 
     private final Sound sound;
 
-    Sounds(final String name, final double volume) {
+    SoundType(final String name, final double volume) {
         this.name = name;
         this.volume = -22f + (float)(-volume);
 

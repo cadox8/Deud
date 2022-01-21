@@ -3,7 +3,7 @@ package es.cadox8.deud.states;
 import es.cadox8.deud.Launcher;
 import es.cadox8.deud.api.GameAPI;
 import es.cadox8.deud.audio.Sound;
-import es.cadox8.deud.audio.Sounds;
+import es.cadox8.deud.audio.SoundType;
 import es.cadox8.deud.graphics.fonts.Fonts;
 import es.cadox8.deud.graphics.fonts.Text;
 import es.cadox8.deud.graphics.textures.GUI;
@@ -26,7 +26,7 @@ public class MenuState extends State {
 
     private final AarinManager aarinManager;
 
-    private final Sound menu = Sounds.MENU.getSound();
+    private final Sound menu = SoundType.MENU.getSound();
 
     public MenuState(@NonNull GameAPI gameAPI) {
         super(gameAPI);
@@ -43,7 +43,7 @@ public class MenuState extends State {
             if (gameAPI.getGame().getPlayerData() == null) gameAPI.getPlayer().setNick("Arya");
 
             menu.stop();
-            Sounds.TOWN_MUSIC.playLoop();
+            SoundType.TOWN_MUSIC.playLoop();
 
             //gameAPI.getGame().getDisplay().getFrame().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
         });
