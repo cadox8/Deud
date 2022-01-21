@@ -1,17 +1,17 @@
 package es.cadox8.deud.managers;
 
 import es.cadox8.deud.api.GameAPI;
-import es.cadox8.deud.ui.components.base.UIBlock;
-import es.cadox8.deud.ui.helpers.AarinArea;
-import es.cadox8.deud.ui.helpers.AarinColor;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
 import es.cadox8.deud.entities.Entity;
 import es.cadox8.deud.entities.creatures.Creature;
 import es.cadox8.deud.entities.creatures.player.Player;
 import es.cadox8.deud.entities.statics.light.Light;
+import es.cadox8.deud.ui.components.block.UiBlock;
+import es.cadox8.deud.ui.helpers.UiColor;
+import es.cadox8.deud.ui.helpers.UiDimension;
 import es.cadox8.deud.utils.Log;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -55,8 +55,8 @@ public class EntityManager {
         entities.forEach(e -> e.preRender(g));
 
         if (isDark) {
-            final UIBlock dark = new UIBlock(gameAPI, AarinColor.BLACK.transparent(150), true);
-            dark.setArea(new AarinArea().addPoints(new Point(0, 0), new Point(gameAPI.getWidth(), gameAPI.getHeight())));
+            final UiBlock dark = new UiBlock(UiColor.BLUE.color(150), true);
+            dark.setUiDimension(new UiDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
             dark.render(g);
         }
 

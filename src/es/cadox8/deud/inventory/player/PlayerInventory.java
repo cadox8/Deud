@@ -3,7 +3,8 @@ package es.cadox8.deud.inventory.player;
 import es.cadox8.deud.items.Item;
 import es.cadox8.deud.items.Items;
 import es.cadox8.deud.ui.AarinManager;
-import es.cadox8.deud.ui.components.inventory.UIPlayerInventory;
+import es.cadox8.deud.ui.UiManager;
+import es.cadox8.deud.ux.inventory.InventoryUx;
 import lombok.NonNull;
 import es.cadox8.deud.entities.creatures.player.Player;
 import es.cadox8.deud.entities.statics.sign.Sign;
@@ -15,14 +16,14 @@ import java.awt.event.KeyEvent;
 
 public class PlayerInventory extends Inventory {
 
-    private final UIPlayerInventory uiPlayerInventory;
+    private final InventoryUx inventoryUx;
 
     public PlayerInventory(@NonNull Player player) {
         super(player.getGameAPI());
 
-        this.aarinManager = new AarinManager();
+        this.uiManager = new UiManager();
 
-        this.uiPlayerInventory = new UIPlayerInventory(player.getGameAPI(), GUI.inventory);
+        this.inventoryUx = new UIPlayerInventory(player.getGameAPI(), GUI.inventory);
         this.getAarinManager().addObject(this.uiPlayerInventory);
 
         gameAPI.getMouseManager().setAarinManager(getAarinManager());

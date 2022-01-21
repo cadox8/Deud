@@ -2,7 +2,7 @@ package es.cadox8.deud.inventory;
 
 import es.cadox8.deud.api.GameAPI;
 import es.cadox8.deud.items.Item;
-import es.cadox8.deud.ui.AarinManager;
+import es.cadox8.deud.ui.UiManager;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -16,7 +16,23 @@ import java.util.List;
 public abstract class Inventory {
 
     protected final GameAPI gameAPI;
-    @Getter protected AarinManager aarinManager;
+
+    @Getter protected List<Item> items;
+
+    @Getter @Setter protected int selectedSlot;
+
+    @Getter protected HashMap<Equipment, Item> equipment;
+
+    @Getter protected boolean active;
+
+    public Inventory() {
+        this.gameAPI = GameAPI.getInstance();
+
+    }
+
+/*
+    protected final GameAPI gameAPI;
+    @Getter protected UiManager uiManager;
 
     @Getter protected List<Item> items;
 
@@ -28,7 +44,7 @@ public abstract class Inventory {
 
     public Inventory(@NonNull GameAPI gameAPI) {
         this.gameAPI = gameAPI;
-        this.aarinManager = new AarinManager();
+        this.uiManager = new UiManager();
 
         this.items = new ArrayList<>();
 
@@ -90,7 +106,7 @@ public abstract class Inventory {
     public int itemCount(Item item) {
         if (!hasItem(item)) return 0;
         return items.stream().filter(i -> i.getId() == item.getId()).findAny().get().getCount();
-    }
+    }*/
 
     public enum Equipment {
         HAND, HELMET, CHESTPLATE, RING, CHAIN;

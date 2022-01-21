@@ -42,10 +42,13 @@ public abstract class Entity {
 
     @Getter @Setter protected float x, y;
     @Getter @Setter protected int width, height;
-    @Getter @Setter private int health;
-    @Getter @Setter private int damage;
-    @Getter @Setter private double armor;
+
     @Getter @Setter private int maxHealth;
+    @Getter @Setter private int health;
+
+    @Getter @Setter private int damage;
+
+    @Getter @Setter private double armor;
 
     @Getter @Setter private boolean damageable = true;
 

@@ -12,9 +12,14 @@ import java.util.Map;
 @Data
 public class PlayerData {
 
-    private String nick;
     private double money = 0;
+
+    private int maxHealth = 0;
     private int health = 0;
+
+    private int maxStamina = 0;
+    private double stamina = 0.0;
+
     private int level = 0;
     private double experience = 0;
 
