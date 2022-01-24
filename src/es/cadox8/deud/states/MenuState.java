@@ -7,15 +7,13 @@ import es.cadox8.deud.audio.Sounds;
 import es.cadox8.deud.graphics.fonts.Fonts;
 import es.cadox8.deud.graphics.fonts.Text;
 import es.cadox8.deud.graphics.textures.GUI;
-import es.cadox8.deud.ui.AarinManager;
-import es.cadox8.deud.ui.components.button.UIImageButton;
-import es.cadox8.deud.ui.components.button.UITextButton;
-import es.cadox8.deud.ui.components.image.UIImage;
-import es.cadox8.deud.ui.helpers.AarinArea;
-import es.cadox8.deud.ui.helpers.AarinColor;
-import lombok.NonNull;
+import es.cadox8.deud.ui.UiManager;
+import es.cadox8.deud.ui.components.button.UiImageButton;
+import es.cadox8.deud.ui.components.button.UiTextButton;
+import es.cadox8.deud.ui.components.image.UiImage;
 import es.cadox8.deud.utils.Log;
 import es.cadox8.deud.utils.Updater;
+import lombok.NonNull;
 
 import java.awt.*;
 import java.io.IOException;
@@ -24,7 +22,7 @@ import java.net.URISyntaxException;
 
 public class MenuState extends State {
 
-    private final AarinManager aarinManager;
+    private final UiManager uiManager;
 
     private final Sound menu = Sounds.MENU.getSound();
 
@@ -33,35 +31,31 @@ public class MenuState extends State {
 
         menu.playLoop();
 
-        aarinManager = new AarinManager();
+        uiManager = new UiManager();
 
-        final UIImage background = new UIImage(gameAPI, GUI.background);
-        final UIImageButton start = new UIImageButton(gameAPI, GUI.play[0], () -> {
-            gameAPI.getMouseManager().setAarinManager(null);
+        final UiImage background = new UiImage(GUI.background);
+        final UiImageButton start = new UiImageButton(GUI.play[0], () -> {
+            gameAPI.getMouseManager().setUiManager(null);
             setState(gameAPI.getGame().getGameState());
-
-            if (gameAPI.getGame().getPlayerData() == null) gameAPI.getPlayer().setNick("Arya");
 
             menu.stop();
             Sounds.TOWN_MUSIC.playLoop();
 
             //gameAPI.getGame().getDisplay().getFrame().setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor"));
         });
-        final UIImageButton exit = new UIImageButton(gameAPI, GUI.exit[0], () -> System.exit(0));
+        final UiImageButton exit = new UiImageButton(GUI.exit[0], () -> System.exit(0));
 
-        final UIImageButton logo = new UIImageButton(gameAPI, GUI.logo, () -> {});
+        final UiImage logo = new UiImage(GUI.logo);
 
-        background.setArea(new AarinArea().addPoints(new Point(0, 0), new Point(gameAPI.getWidth(), gameAPI.getHeight())));
-        start.setArea(new AarinArea().addPoints(new Point(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 - 65), new Point(200, 100)));
-        exit.setArea(new AarinArea().addPoints(new Point(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 + 65), new Point(200, 100)));
-        logo.setArea(new AarinArea().addPoints(new Point(gameAPI.getWidth() - 97, 0), new Point(97, 151)));
+        background.setUiDimension(0, 0, this.gameAPI.getWidth(), this.gameAPI.getHeight());
+        start.setUiDimension(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 - 65, 200, 100);
+        exit.setUiDimension(gameAPI.getWidth() / 2 - (250 / 2), gameAPI.getHeight()/2 + 65, 200, 100);
+        logo.setUiDimension(this.gameAPI.getWidth() - 97, 0);
 
-        background.setResizable(false);
-
-        aarinManager.addObject(background);
+        this.uiManager.addComponent(background);
 
         if (Updater.checkForUpdate()) {
-            final UITextButton update = new UITextButton(gameAPI, AarinColor.TRANSPARENT, false, "New version available: " + Updater.latestVersion().getVersion() + " ⇩", () -> {
+            final UiTextButton update = new UiTextButton( "New version available: " + Updater.latestVersion().getVersion() + " ⇩", () -> {
                 try {
                     Desktop.getDesktop().browse(new URI("https://cadox8.es/deud"));
                 } catch (URISyntaxException | IOException e) {
@@ -69,26 +63,26 @@ public class MenuState extends State {
                     e.printStackTrace();
                 }
             });
-            update.setArea(new AarinArea().addPoints(new Point(5, 40), new Point(200, 20)));
-            aarinManager.addObject(update);
+            update.setUiDimension(5, 40, 200, 20);
+            this.uiManager.addComponent(update);
         }
 
-        aarinManager.addObject(start);
-        aarinManager.addObject(exit);
-        aarinManager.addObject(logo);
+        this.uiManager.addComponent(start);
+        this.uiManager.addComponent(exit);
+        this.uiManager.addComponent(logo);
 
-        gameAPI.getMouseManager().setAarinManager(aarinManager);
+        gameAPI.getMouseManager().setUiManager(this.uiManager);
     }
 
 
     @Override
     public void tick() {
-        aarinManager.tick();
+        this.uiManager.tick();
     }
 
     @Override
     public void render(Graphics g) {
-        aarinManager.render(g);
+        this.uiManager.render(g);
         Text.drawString(g, "Version: " + Launcher.VERSION, 5, 20, Color.WHITE, Fonts.DEUD_TALL);
         Text.drawString(g, "© Deud 2016-2021 - This Game is property of Cadox8", gameAPI.getWidth() - 550, gameAPI.getHeight() - 20, Color.WHITE, Fonts.DEUD_TALL);
     }

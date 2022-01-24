@@ -70,19 +70,11 @@ public class Dialog {
 
     private List<String> renderText() {
         final List<String> temp = new ArrayList<>();
-        int index = 0;
-
-        switch (page) {
-            case 0:
-                index = 0;
-                break;
-            case 1:
-                index = 4;
-                break;
-            case 2:
-                index = 8;
-                break;
-        }
+        int index = switch (page) {
+            case 1 -> 4;
+            case 2 -> 8;
+            default -> 0;
+        };
 
         try {
             temp.addAll(text.subList(index, Math.min(text.size(), (index + 4))));

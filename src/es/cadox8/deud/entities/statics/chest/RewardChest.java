@@ -37,13 +37,13 @@ public class RewardChest extends Chest {
 
         // ToDo: Remove 1 key
 
-        player.getInventory().addItem(this.pool.get(new Random().nextInt(this.pool.size())));
+        player.getInventory().add(this.pool.get(new Random().nextInt(this.pool.size())));
         setOpen(true);
     }
 
     protected boolean canOpen(Player player) {
         if (this.isOpen()) return false;
-        return this.needKey && player.getInventory().hasItem(Objects.requireNonNull(Items.KEY.item()));
+        return this.needKey && player.getInventory().has(Objects.requireNonNull(Items.KEY.item()));
     }
 
     public void addToPool(int id) {

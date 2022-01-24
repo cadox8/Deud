@@ -5,7 +5,7 @@ import es.cadox8.deud.entities.creatures.player.Player;
 import es.cadox8.deud.entities.enums.EntityType;
 import es.cadox8.deud.entities.statics.StaticEntity;
 import es.cadox8.deud.graphics.textures.Assets;
-import es.cadox8.deud.inventory.statics.ShopInventory;
+import es.cadox8.deud.entities.components.inventory.statics.ShopInventory;
 import es.cadox8.deud.items.Item;
 import lombok.NonNull;
 import es.cadox8.deud.tiles.Tile;
@@ -20,7 +20,7 @@ public class Shop extends StaticEntity {
     public Shop(@NonNull GameAPI gameAPI, float x, float y, Item... drops) {
         super("79ee0aa3-4815-4653-abbe-fcf09ff81c46", "Shop", EntityType.SHOP, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
-        inventory = new ShopInventory(gameAPI, 20);
+        inventory = new ShopInventory();
 
         setDamageable(false);
 

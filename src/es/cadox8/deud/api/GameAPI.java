@@ -17,6 +17,8 @@ import es.cadox8.deud.worlds.World;
 
 public class GameAPI {
 
+    @Getter private static GameAPI instance;
+
     @Getter private final Game game;
     @Getter @Setter private World world;
 
@@ -25,6 +27,7 @@ public class GameAPI {
     @Getter @Setter private static Fonts gameFont = Fonts.DEUD;
 
     public GameAPI(Game game) {
+        instance = this;
         this.game = game;
 
         setDebug(getConfig().isDebug());

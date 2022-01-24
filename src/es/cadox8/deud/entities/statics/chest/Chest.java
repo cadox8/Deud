@@ -7,7 +7,7 @@ import lombok.NonNull;
 import es.cadox8.deud.entities.creatures.player.Player;
 import es.cadox8.deud.entities.enums.EntityType;
 import es.cadox8.deud.entities.statics.StaticEntity;
-import es.cadox8.deud.inventory.statics.ChestInventory;
+import es.cadox8.deud.entities.components.inventory.statics.ChestInventory;
 import es.cadox8.deud.tiles.Tile;
 
 import java.awt.*;
@@ -25,7 +25,7 @@ public class Chest extends StaticEntity {
 
         setDamage(0);
 
-        inventory = new ChestInventory(gameAPI, 20);
+        inventory = new ChestInventory(20);
 
         bounds.x = 2;
         bounds.y = (int) (height / 2f) - 5;
