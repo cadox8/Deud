@@ -30,8 +30,6 @@ public class Ghost extends Monster {
         setAttackCooldown(800);
 
         entityAi = new MonstersEntityAI(this, 5);
-
-        inventory = new CreatureInventory(gameAPI);
     }
 
     @Override

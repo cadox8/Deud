@@ -1,30 +1,31 @@
 package es.cadox8.deud.entities.components.inventory.statics;
 
-import es.cadox8.deud.api.GameAPI;
-import es.cadox8.deud.items.Items;
+import es.cadox8.deud.entities.components.inventory.Inventory;
+import lombok.Getter;
 
-public class ChestInventory extends StaticInventory {
+import java.awt.*;
 
-    public ChestInventory(GameAPI gameAPI, int size) {
-        super(gameAPI);
+public class ChestInventory extends Inventory {
 
-        addItems(Items.SWORD.item(), Items.CHICKEN.item(), Items.WOOD.item());
+    @Getter private final int size;
 
-        //loadBaseInventory(676, 130, GUI.chest);
+    public ChestInventory(int size) {
+        super(InventoryType.CHEST);
+        this.size = size;
+    }
 
-        gameAPI.getMouseManager().setAarinManager(getAarinManager());
+    @Override
+    public void open() {
+
     }
 
     @Override
     public void tick() {
-        if (!isActive()) return;
-        getAarinManager().tick();
+
     }
 
-/*    @Override
+    @Override
     public void render(Graphics g) {
-        if (!isActive()) return;
-        getNysvaManager().render(g);
-        hoverSelector(g, 855, 646);
-    }*/
+
+    }
 }

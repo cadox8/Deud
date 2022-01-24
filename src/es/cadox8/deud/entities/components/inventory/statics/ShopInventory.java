@@ -1,39 +1,27 @@
 package es.cadox8.deud.entities.components.inventory.statics;
 
-import es.cadox8.deud.api.GameAPI;
-import es.cadox8.deud.items.Item;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import es.cadox8.deud.entities.components.inventory.Inventory;
 
-public class ShopInventory extends StaticInventory {
+import java.awt.*;
 
-    public ShopInventory(GameAPI gameAPI, int size) {
-        super(gameAPI);
+public class ShopInventory extends Inventory {
 
-        //loadBaseInventory(676, 130, GUI.chest);
+    public ShopInventory() {
+        super(InventoryType.SHOP);
+    }
 
-        gameAPI.getMouseManager().setAarinManager(getAarinManager());
+    @Override
+    public void open() {
+
     }
 
     @Override
     public void tick() {
-        if (!isActive()) return;
-        getAarinManager().tick();
+
     }
 
-/*    @Override
+    @Override
     public void render(Graphics g) {
-        if (!isActive()) return;
-        getNysvaManager().render(g);
-        hoverSelector(g, 855, 646);
-    }*/
 
-
-    @RequiredArgsConstructor
-    @Data
-    public static class ShopItem {
-
-        private final Item item;
-        private final double price;
     }
 }

@@ -1,10 +1,9 @@
 package es.cadox8.deud.entities.statics;
 
 import es.cadox8.deud.api.GameAPI;
-import es.cadox8.deud.entities.enums.EntityType;
-import es.cadox8.deud.entities.components.inventory.statics.StaticInventory;
-import lombok.NonNull;
 import es.cadox8.deud.entities.Entity;
+import es.cadox8.deud.entities.enums.EntityType;
+import lombok.NonNull;
 
 import java.awt.*;
 
@@ -30,8 +29,4 @@ public abstract class StaticEntity extends Entity {
     public void postRender(Graphics g) {}
 
     public void fixAnimations() {}
-
-    public StaticInventory getInventory() {
-        return (StaticInventory) inventory;
-    }
 }

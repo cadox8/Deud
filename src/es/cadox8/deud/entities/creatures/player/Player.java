@@ -9,7 +9,7 @@ import es.cadox8.deud.graphics.fonts.Fonts;
 import es.cadox8.deud.graphics.fonts.Text;
 import es.cadox8.deud.graphics.textures.Models;
 import es.cadox8.deud.entities.components.inventory.Inventory;
-import es.cadox8.deud.entities.components.inventory.player.PlayerInventory;
+import es.cadox8.deud.entities.components.inventory.creature.PlayerInventory;
 import es.cadox8.deud.items.Item;
 import es.cadox8.deud.items.Items;
 import es.cadox8.deud.managers.EntityManager;
@@ -47,7 +47,7 @@ public class Player extends Creature {
     public Player(@NonNull GameAPI gameAPI, float x, float y) {
         super("9ad2cbee-f134-480a-9681-edf174dde4bb", "Player", EntityType.PLAYER, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
-        this.nick = "Aarin";
+        this.nick = "Arya";
 
         this.setMoving(false);
 
@@ -99,11 +99,11 @@ public class Player extends Creature {
             Arrays.asList(pd.getInventory()).forEach(items -> {
                 final Item i = Item.get(items.getId());
                 i.setCount(items.getCount());
-                this.inventory.addItem(i);
+                this.inventory.add(i);
             });
             pd.getEquipment().keySet().forEach(k -> this.getPlayerInventory().setEquipment(k, pd.getEquipment().get(k)));
         } else {
-            this.getPlayerInventory().setHandItem(Items.HAND.item());
+            this.getPlayerInventory().setItemInHand(Items.HAND.item());
         }
 
         this.options = new Options(gameAPI, this);
@@ -176,7 +176,7 @@ public class Player extends Creature {
         if (this.gameAPI.getKeyManager().tests) {
             this.setStamina(this.getMaxStamina());
             this.setHealth(getMaxHealth());
-            this.inventory.addItem(Items.SWORD.item());
+            this.inventory.add(Items.SWORD.item());
         }
 
         if (this.gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
@@ -219,7 +219,7 @@ public class Player extends Creature {
             Sounds.ENTITY_WALK_GRASS.play();
         }
 
-        if (this.gameAPI.getMouseManager().isRightPressed()) this.getPlayerInventory().getEquipment().get(Inventory.Equipment.HAND).use(this);
+        if (this.gameAPI.getMouseManager().isRightPressed()) this.getPlayerInventory().getItemInHand().use(this);
 
         if (this.gameAPI.getKeyManager().shift) {
             if (this.stamina <= 0.0) {

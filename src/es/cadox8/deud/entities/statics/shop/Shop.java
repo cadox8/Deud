@@ -20,7 +20,7 @@ public class Shop extends StaticEntity {
     public Shop(@NonNull GameAPI gameAPI, float x, float y, Item... drops) {
         super("79ee0aa3-4815-4653-abbe-fcf09ff81c46", "Shop", EntityType.SHOP, gameAPI, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
-        inventory = new ShopInventory(gameAPI, 20);
+        inventory = new ShopInventory();
 
         setDamageable(false);
 

@@ -55,14 +55,14 @@ public abstract class Item {
     public void tick() {
         if (gameAPI.getWorld().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)) {
             pickedUp = true;
-            gameAPI.getWorld().getPlayer().getPlayerInventory().addItem(this);
+            gameAPI.getWorld().getPlayer().getPlayerInventory().add(this);
         }
     }
 
     public void removeItem(@NonNull Player p) {
         if (getCount() == 1) {
-            p.getPlayerInventory().removeItem(this);
-            p.getPlayerInventory().setEquipment(Inventory.Equipment.HAND, Items.HAND.item());
+            p.getPlayerInventory().remove(this);
+            p.getPlayerInventory().setItemInHand(Items.HAND.item());
             return;
         }
         count--;

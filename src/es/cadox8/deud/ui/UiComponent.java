@@ -16,10 +16,10 @@ public abstract class UiComponent {
 
     protected final long componentId;
 
-    protected final int layer;
+    protected int layer;
 
     protected boolean enabled;
-    protected boolean draggable;
+    protected boolean hoverable;
     protected boolean hovering;
 
     protected Font font;
@@ -32,7 +32,7 @@ public abstract class UiComponent {
         this.layer = 0;
 
         this.enabled = true;
-        this.draggable = false;
+        this.hoverable = false;
         this.hovering = false;
 
         this.font = Fonts.DEUD.font();
@@ -45,17 +45,16 @@ public abstract class UiComponent {
     public abstract void onClick();
 
     public void onMouseMove(MouseEvent e) {
-        this.setHovering(this.getUiDimension().getBounds().contains(e.getX(), e.getY()));
+        if (this.isHoverable()) this.setHovering(this.getUiDimension().getBounds().contains(e.getX(), e.getY()));
     }
 
-    public void onMouseDragged(MouseEvent e) {
-        if (hovering && isDraggable()) {
-            this.getUiDimension().addX(e.getX() - this.getUiDimension().getX());
-            this.getUiDimension().addY(e.getY() - this.getUiDimension().getY());
-        }
-    }
+    public void onMouseDragged(MouseEvent e) {}
 
     public void onMouseClicked(MouseEvent e) {
         if (this.isHovering()) this.onClick();
+    }
+
+    public void setUiDimension(int x, int y, int width, int height) {
+        this.setUiDimension(new UiDimension(x, y, width, height));
     }
 }

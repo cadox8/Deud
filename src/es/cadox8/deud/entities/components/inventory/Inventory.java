@@ -4,6 +4,7 @@ import es.cadox8.deud.api.GameAPI;
 import es.cadox8.deud.entities.components.AbstractComponent;
 import es.cadox8.deud.items.Item;
 import es.cadox8.deud.items.Items;
+import es.cadox8.deud.ui.UiManager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,18 +18,29 @@ public abstract class Inventory extends AbstractComponent {
 
     protected final GameAPI gameAPI;
 
+    @Getter protected InventoryType inventoryType;
+
     @Getter protected List<Item> items;
 
     @Getter @Setter protected int selectedSlot;
 
-    @Getter protected boolean active;
+    @Getter @Setter protected boolean active;
 
-    public Inventory() {
+    @Getter protected UiManager uiManager;
+
+    public Inventory(InventoryType inventoryType) {
         this.gameAPI = GameAPI.getInstance();
+        this.inventoryType = inventoryType;
         this.items = new ArrayList<>();
         this.selectedSlot = -1;
         this.active = false;
+        this.uiManager = new UiManager();
     }
+
+
+    public abstract void open();
+    public abstract void tick();
+    public abstract void render(Graphics g);
 
 
     public void add(Item... items) {
@@ -44,7 +56,7 @@ public abstract class Inventory extends AbstractComponent {
     }
 
     public void remove(Item item) {
-        this.remove(item, -1); // Get amount
+        this.remove(item, this.amount(item));
     }
 
     public void remove(Item item, int amount) {
@@ -79,8 +91,7 @@ public abstract class Inventory extends AbstractComponent {
         this.items.clear();
     }
 
-
-    public enum Equipment {
-        HAND, HELMET, CHESTPLATE, RING, CHAIN;
+    public enum InventoryType {
+        PLAYER, CHEST, SHOP, CREATURE;
     }
 }

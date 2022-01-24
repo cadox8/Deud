@@ -27,7 +27,7 @@ public class Npc extends Creature {
         this.displayName = displayName;
         this.text = new ArrayList<>();
 
-        inventory = new CreatureInventory(gameAPI);
+        inventory = new CreatureInventory(this);
 
         bounds.x = 20;
         bounds.y = 44;

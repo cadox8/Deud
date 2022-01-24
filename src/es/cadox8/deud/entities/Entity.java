@@ -119,7 +119,7 @@ public abstract class Entity {
         // If the attacker is a Monster
         if (attacker instanceof Monster) {
             final Monster monster = (Monster) attacker;
-            final Item handItem = monster.getCreatureInventory().getEquipment(Inventory.Equipment.HAND);
+            final Item handItem = monster.getCreatureInventory().getItemInHand();
             damage += handItem.getDamage();
         }
 

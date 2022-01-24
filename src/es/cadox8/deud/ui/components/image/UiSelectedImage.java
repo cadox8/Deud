@@ -11,6 +11,7 @@ public class UiSelectedImage extends UiImage {
         super(image);
 
         this.selector = new UiImage(selector);
+        this.setHoverable(true);
     }
 
     @Override
@@ -22,6 +23,6 @@ public class UiSelectedImage extends UiImage {
     @Override
     public void render(Graphics g) {
         super.render(g);
-        if (this.isHovering()) this.selector.render(g);
+        if (this.isHoverable() && this.isHovering()) this.selector.render(g);
     }
 }

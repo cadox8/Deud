@@ -31,8 +31,6 @@ public class Zombie extends Monster {
         setAttackCooldown(1000);
 
         entityAi = new MonstersEntityAI(this, 10);
-
-        inventory = new CreatureInventory(gameAPI);
     }
 
 

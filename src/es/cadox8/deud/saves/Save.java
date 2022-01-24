@@ -17,7 +17,7 @@ import es.cadox8.deud.entities.statics.chest.Chest;
 import es.cadox8.deud.entities.statics.chest.RewardChest;
 import es.cadox8.deud.entities.statics.sign.Sign;
 import es.cadox8.deud.entities.statics.trees.Tree;
-import es.cadox8.deud.entities.components.inventory.player.PlayerInventory;
+import es.cadox8.deud.entities.components.inventory.creature.PlayerInventory;
 import es.cadox8.deud.utils.Log;
 import net.arikia.dev.drpc.DiscordRPC;
 
@@ -53,12 +53,12 @@ public class Save {
         data.add("inventory", inv);
 
         final JsonArray equip = new JsonArray();
-        i.getEquipment().keySet().forEach(k -> {
-            if (i.getEquipment().get(k) == null) return;
+        i.getEquipments().keySet().forEach(k -> {
+            if (i.getEquipment(k) == null) return;
             final JsonObject it = new JsonObject();
             it.addProperty("slot", k.name());
-            it.addProperty("id", i.getEquipment().get(k).getId());
-            it.addProperty("count", i.getEquipment().get(k).getCount());
+            it.addProperty("id", i.getEquipment(k).getId());
+            it.addProperty("count", i.getEquipment(k).getCount());
             equip.add(it);
         });
 

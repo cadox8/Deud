@@ -9,6 +9,8 @@ public abstract class Monster extends Creature {
 
     public Monster(String uuid, String name, EntityType type, GameAPI gameAPI, float x, float y, int width, int height) {
         super(uuid, name, type, gameAPI, x, y, width, height);
+
+        inventory = new CreatureInventory(this);
     }
 
     @Override

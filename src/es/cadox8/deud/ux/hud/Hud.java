@@ -48,7 +48,7 @@ public class Hud {
         // --- ---
 
         // --- Item ---
-        final UiImage mainItem = new UiImage(this.player.getPlayerInventory().getEquipment().get(Inventory.Equipment.HAND).getTexture());
+        final UiImage mainItem = new UiImage(this.player.getPlayerInventory().getItemInHand().getTexture());
         healthIcon.setUiDimension(new UiDimension(22, 115, 32, 32));
         // --- ---
 
@@ -56,7 +56,7 @@ public class Hud {
     }
 
     public void tick() {
-        ((UiImage) this.components.get(6)).setImage(this.player.getPlayerInventory().getEquipment().get(Inventory.Equipment.HAND).getTexture());
+        ((UiImage) this.components.get(6)).setImage(this.player.getPlayerInventory().getItemInHand().getTexture());
     }
 
     public void render(Graphics g) {

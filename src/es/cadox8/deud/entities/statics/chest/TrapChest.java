@@ -23,13 +23,13 @@ public class TrapChest extends RewardChest {
     public void open(Player player) {
         if (!this.canOpen(player)) return;
 
-        player.getPlayerInventory().removeItem(Items.getItem(Items.KEY.getId()), 1);
+        player.getPlayerInventory().remove(Items.getItem(Items.KEY.getId()), 1);
 
         new ChestExplosionDelayedTask(this).scheduleDelayed(2 + new Random().nextInt(5));
 
         //Sounds.EXPLOSION_1.play();
 
-        player.getInventory().addItem(this.pool.get(new Random().nextInt(this.pool.size())));
+        player.getInventory().add(this.pool.get(new Random().nextInt(this.pool.size())));
         setOpen(true);
     }
 }

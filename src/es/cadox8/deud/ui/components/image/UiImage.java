@@ -1,6 +1,7 @@
 package es.cadox8.deud.ui.components.image;
 
 import es.cadox8.deud.ui.UiComponent;
+import es.cadox8.deud.ui.helpers.UiDimension;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -29,4 +30,8 @@ public class UiImage extends UiComponent {
 
     @Override
     public void onClick() {}
+
+    public void setUiDimension(int x, int y) {
+        this.setUiDimension(x, y, this.image.getWidth(), this.image.getHeight());
+    }
 }

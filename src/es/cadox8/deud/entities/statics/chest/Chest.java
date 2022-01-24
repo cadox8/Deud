@@ -25,7 +25,7 @@ public class Chest extends StaticEntity {
 
         setDamage(0);
 
-        inventory = new ChestInventory(gameAPI, 20);
+        inventory = new ChestInventory(20);
 
         bounds.x = 2;
         bounds.y = (int) (height / 2f) - 5;

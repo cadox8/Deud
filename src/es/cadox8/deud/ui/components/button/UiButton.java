@@ -22,6 +22,7 @@ public class UiButton extends UiComponent {
         this.clickListener = clickListener;
 
         this.base = new UiBlock(Color.YELLOW);
+        this.setHoverable(true);
     }
 
     public UiButton setTransparent() {
