@@ -2,7 +2,7 @@ package es.cadox8.deud.entities.creatures.monsters;
 
 import es.cadox8.deud.api.GameAPI;
 import es.cadox8.deud.entities.enums.EntityType;
-import es.cadox8.deud.inventory.creature.CreatureInventory;
+import es.cadox8.deud.entities.components.inventory.creature.CreatureInventory;
 import es.cadox8.deud.entities.creatures.Creature;
 
 public abstract class Monster extends Creature {

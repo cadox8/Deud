@@ -5,7 +5,7 @@ import es.cadox8.deud.entities.creatures.player.Player;
 import es.cadox8.deud.entities.enums.EntityType;
 import es.cadox8.deud.entities.statics.StaticEntity;
 import es.cadox8.deud.graphics.textures.Assets;
-import es.cadox8.deud.inventory.statics.ShopInventory;
+import es.cadox8.deud.entities.components.inventory.statics.ShopInventory;
 import es.cadox8.deud.items.Item;
 import lombok.NonNull;
 import es.cadox8.deud.tiles.Tile;

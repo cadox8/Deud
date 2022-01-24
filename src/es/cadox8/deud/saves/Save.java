@@ -17,7 +17,7 @@ import es.cadox8.deud.entities.statics.chest.Chest;
 import es.cadox8.deud.entities.statics.chest.RewardChest;
 import es.cadox8.deud.entities.statics.sign.Sign;
 import es.cadox8.deud.entities.statics.trees.Tree;
-import es.cadox8.deud.inventory.player.PlayerInventory;
+import es.cadox8.deud.entities.components.inventory.player.PlayerInventory;
 import es.cadox8.deud.utils.Log;
 import net.arikia.dev.drpc.DiscordRPC;
 

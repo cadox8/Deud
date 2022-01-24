@@ -1,4 +1,4 @@
-package es.cadox8.deud.inventory.player;
+package es.cadox8.deud.entities.components.inventory.player;
 
 import es.cadox8.deud.items.Item;
 import es.cadox8.deud.items.Items;
@@ -9,7 +9,7 @@ import lombok.NonNull;
 import es.cadox8.deud.entities.creatures.player.Player;
 import es.cadox8.deud.entities.statics.sign.Sign;
 import es.cadox8.deud.graphics.textures.GUI;
-import es.cadox8.deud.inventory.Inventory;
+import es.cadox8.deud.entities.components.inventory.Inventory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

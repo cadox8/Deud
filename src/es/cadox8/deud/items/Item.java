@@ -6,7 +6,7 @@ import lombok.Setter;
 import es.cadox8.deud.api.GameAPI;
 import es.cadox8.deud.entities.creatures.player.Player;
 import es.cadox8.deud.graphics.textures.Assets;
-import es.cadox8.deud.inventory.Inventory;
+import es.cadox8.deud.entities.components.inventory.Inventory;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

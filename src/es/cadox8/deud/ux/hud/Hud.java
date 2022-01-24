@@ -5,15 +5,11 @@ import es.cadox8.deud.ui.components.image.UiImage;
 import es.cadox8.deud.ui.components.text.UiText;
 import es.cadox8.deud.ui.helpers.UiDimension;
 import es.cadox8.deud.entities.creatures.player.Player;
-import es.cadox8.deud.graphics.fonts.Fonts;
-import es.cadox8.deud.graphics.fonts.Text;
 import es.cadox8.deud.graphics.textures.Assets;
 import es.cadox8.deud.graphics.textures.GUI;
-import es.cadox8.deud.inventory.Inventory;
-import es.cadox8.deud.utils.Utils;
+import es.cadox8.deud.entities.components.inventory.Inventory;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

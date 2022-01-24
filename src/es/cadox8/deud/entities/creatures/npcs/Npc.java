@@ -4,7 +4,7 @@ import es.cadox8.deud.ai.entities.FriendsEntityAI;
 import es.cadox8.deud.animations.Animation;
 import es.cadox8.deud.api.GameAPI;
 import es.cadox8.deud.entities.enums.EntityType;
-import es.cadox8.deud.inventory.creature.CreatureInventory;
+import es.cadox8.deud.entities.components.inventory.creature.CreatureInventory;
 import lombok.Getter;
 import lombok.NonNull;
 import es.cadox8.deud.entities.creatures.Creature;

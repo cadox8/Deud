@@ -7,7 +7,7 @@ import lombok.NonNull;
 import es.cadox8.deud.entities.creatures.player.Player;
 import es.cadox8.deud.entities.enums.EntityType;
 import es.cadox8.deud.entities.statics.StaticEntity;
-import es.cadox8.deud.inventory.statics.ChestInventory;
+import es.cadox8.deud.entities.components.inventory.statics.ChestInventory;
 import es.cadox8.deud.tiles.Tile;
 
 import java.awt.*;

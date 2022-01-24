@@ -17,7 +17,7 @@ import es.cadox8.deud.entities.statics.trees.DeadTree;
 import es.cadox8.deud.entities.statics.trees.NormalTree;
 import es.cadox8.deud.game.Game;
 import es.cadox8.deud.graphics.textures.Models;
-import es.cadox8.deud.inventory.statics.StaticInventory;
+import es.cadox8.deud.entities.components.inventory.statics.StaticInventory;
 import es.cadox8.deud.managers.EntityManager;
 import lombok.NonNull;
 import es.cadox8.deud.utils.Log;

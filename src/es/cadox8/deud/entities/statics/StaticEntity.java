@@ -2,7 +2,7 @@ package es.cadox8.deud.entities.statics;
 
 import es.cadox8.deud.api.GameAPI;
 import es.cadox8.deud.entities.enums.EntityType;
-import es.cadox8.deud.inventory.statics.StaticInventory;
+import es.cadox8.deud.entities.components.inventory.statics.StaticInventory;
 import lombok.NonNull;
 import es.cadox8.deud.entities.Entity;
 

@@ -1,11 +1,11 @@
-package es.cadox8.deud.inventory.statics;
+package es.cadox8.deud.entities.components.inventory.statics;
 
 import es.cadox8.deud.api.GameAPI;
 import es.cadox8.deud.items.Item;
 import es.cadox8.deud.items.Items;
 import lombok.Getter;
 import lombok.Setter;
-import es.cadox8.deud.inventory.Inventory;
+import es.cadox8.deud.entities.components.inventory.Inventory;
 
 import java.awt.*;
 

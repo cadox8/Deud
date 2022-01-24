@@ -1,4 +1,4 @@
-package es.cadox8.deud.inventory.statics;
+package es.cadox8.deud.entities.components.inventory.statics;
 
 import es.cadox8.deud.api.GameAPI;
 import es.cadox8.deud.items.Item;

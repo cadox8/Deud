@@ -8,7 +8,7 @@ import es.cadox8.deud.entities.creatures.player.Player;
 import es.cadox8.deud.entities.enums.Direction;
 import es.cadox8.deud.entities.enums.EntityType;
 import es.cadox8.deud.entities.projectile.Projectile;
-import es.cadox8.deud.inventory.Inventory;
+import es.cadox8.deud.entities.components.inventory.Inventory;
 import es.cadox8.deud.items.Item;
 import lombok.Getter;
 import lombok.NonNull;

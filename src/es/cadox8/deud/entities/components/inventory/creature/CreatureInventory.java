@@ -1,7 +1,7 @@
-package es.cadox8.deud.inventory.creature;
+package es.cadox8.deud.entities.components.inventory.creature;
 
 import es.cadox8.deud.api.GameAPI;
-import es.cadox8.deud.inventory.Inventory;
+import es.cadox8.deud.entities.components.inventory.Inventory;
 
 import java.awt.*;
 
