@@ -20,7 +20,7 @@ public enum Particle {
         this(new BufferedImage[]{image}, velocity);
     }
     Particle(BufferedImage[] images, int velocity) {
-        animation = new Animation(velocity * 100, images);
+        this.animation = new Animation(velocity * 100, images);
 
         this.priority = 0;
         this.x = 0;
@@ -28,15 +28,15 @@ public enum Particle {
     }
 
     public void render(Graphics g) {
-        g.drawImage(animation.getCurrentFrame(), x, y, null);
+        g.drawImage(animation.getCurrentFrame(), this.x, this.y, null);
     }
 
     public void tick() {
-        animation.tick();
+        this.animation.tick();
     }
 
     public Particle withEnd() {
-        animation.withEnd(true);
+        this.animation.withEnd(true);
         return this;
     }
 

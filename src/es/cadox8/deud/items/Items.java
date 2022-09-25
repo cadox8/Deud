@@ -18,6 +18,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public enum Items {
 
+    VOID(-1, VoidItem.class),
     WOOD(0, WoodItem.class),
     STONE(1, StoneItem.class),
     KEY(2, KeyItem.class),

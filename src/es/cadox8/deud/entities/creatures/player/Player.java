@@ -8,8 +8,8 @@ import es.cadox8.deud.entities.enums.EntityType;
 import es.cadox8.deud.graphics.fonts.Fonts;
 import es.cadox8.deud.graphics.fonts.Text;
 import es.cadox8.deud.graphics.textures.Models;
-import es.cadox8.deud.inventory.Inventory;
-import es.cadox8.deud.inventory.player.PlayerInventory;
+import es.cadox8.deud.entities.components.inventory.Inventory;
+import es.cadox8.deud.entities.components.inventory.creature.PlayerInventory;
 import es.cadox8.deud.items.Item;
 import es.cadox8.deud.items.Items;
 import es.cadox8.deud.managers.EntityManager;
@@ -29,11 +29,11 @@ import java.util.Arrays;
 
 public class Player extends Creature {
 
-    @Getter @Setter private String nick;
+    @Getter private String nick;
 
     //Stamina
-    @Getter @Setter private int maxHunger;
-    @Getter @Setter private double hunger;
+    @Getter @Setter private int maxStamina;
+    @Getter @Setter private double stamina;
 
     //Money
     @Getter @Setter private double money = 0;
@@ -41,105 +41,112 @@ public class Player extends Creature {
     //Utils
     private float old_speed = -1;
 
+    private Hud hud;
     @Getter @Setter private Options options;
 
     public Player(@NonNull GameAPI gameAPI, float x, float y) {
         super("9ad2cbee-f134-480a-9681-edf174dde4bb", "Player", EntityType.PLAYER, gameAPI, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
 
-        setMoving(false);
+        this.nick = "Arya";
 
-        bounds.x = 11;
-        bounds.y = 44;
-        bounds.width = 43;
-        bounds.height = 21;
+        this.setMoving(false);
+
+        this.bounds.x = 11;
+        this.bounds.y = 44;
+        this.bounds.width = 43;
+        this.bounds.height = 21;
 
         // Animations
-        animDown = new Animation((int)(speed * 0.2), Models.player_down);
-        animUp = new Animation((int)(speed * 0.2), Models.player_up);
-        animLeft = new Animation((int)(speed * 0.2), Models.player_left);
-        animRight = new Animation((int)(speed * 0.2), Models.player_right);
+        this.animDown = new Animation((int)(speed * 0.2), Models.player_down);
+        this.animUp = new Animation((int)(speed * 0.2), Models.player_up);
+        this.animLeft = new Animation((int)(speed * 0.2), Models.player_left);
+        this.animRight = new Animation((int)(speed * 0.2), Models.player_right);
 
-        inventory = new PlayerInventory(this);
+        this.inventory = new PlayerInventory(this);
 
-        setMaxHunger(10);
-        setHunger(getMaxHunger());
+        this.setMaxStamina(10);
+        this.setStamina(this.getMaxStamina());
 
-        setMaxHealth(10);
-        setHunger(getMaxHealth());
+        this.setMaxHealth(10);
+        this.setHealth(this.getMaxHealth());
 
-        setDamage(DEFAULT_DAMAGE);
-        setArmor(DEFAULT_ARMOR);
+        this.setDamage(DEFAULT_DAMAGE);
+        this.setArmor(DEFAULT_ARMOR);
 
-        setAttackCooldown(300);
+        this.setAttackCooldown(300);
 
-        animations[0] = animDown;
-        animations[1] = animUp;
-        animations[2] = animLeft;
-        animations[3] = animRight;
+        this.animations[0] = animDown;
+        this.animations[1] = animUp;
+        this.animations[2] = animLeft;
+        this.animations[3] = animRight;
 
         if (this.getGameAPI().getGame().getPlayerData() != null) {
             final PlayerData pd = this.getGameAPI().getGame().getPlayerData();
             final Location loc = pd.getLocation();
 
-            setNick(pd.getNick());
-            setHealth(pd.getHealth());
-            setMoney(pd.getMoney());
+            this.setMaxHealth(pd.getMaxHealth());
+            this.setHealth(pd.getHealth());
 
-            setX(loc.getX());
-            setY(loc.getY());
-            setDirection(loc.getDirection());
+            this.setMaxStamina(pd.getMaxStamina());
+            this.setStamina(pd.getStamina());
 
-            Log.system("Player nick: " + getNick());
+            this.setMoney(pd.getMoney());
+
+            this.setX(loc.getX());
+            this.setY(loc.getY());
+            this.setDirection(loc.getDirection());
 
             Arrays.asList(pd.getInventory()).forEach(items -> {
                 final Item i = Item.get(items.getId());
                 i.setCount(items.getCount());
-                inventory.addItem(i);
+                this.inventory.add(i);
             });
-            pd.getEquipment().keySet().forEach(k -> getPlayerInventory().setEquipment(k, pd.getEquipment().get(k)));
+            pd.getEquipment().keySet().forEach(k -> this.getPlayerInventory().setEquipment(k, pd.getEquipment().get(k)));
         } else {
-            getPlayerInventory().setHandItem(Items.HAND.item());
+            this.getPlayerInventory().setItemInHand(Items.HAND.item());
         }
 
-        options = new Options(gameAPI, this);
+        this.options = new Options(gameAPI, this);
+        this.hud = new Hud(this);
     }
 
     @Override
     public void tick() {
         //Animations
-        animDown.tick();
-        animUp.tick();
-        animRight.tick();
-        animLeft.tick();
+        this.animDown.tick();
+        this.animUp.tick();
+        this.animRight.tick();
+        this.animLeft.tick();
 
         //Movement
-        getInput();
-        move();
-        gameAPI.getGameCamera().centerOnEntity(this);
+        this.getInput();
+        this.move();
+        this.gameAPI.getGameCamera().centerOnEntity(this);
 
         // Attack
         EntityManager.checkAttacks(this);
 
         // Inventory
-        inventory.tick();
+        this.inventory.tick();
+        this.hud.tick();
 
-        if (options.isEnabled()) options.tick();
+        if (this.options.isEnabled()) this.options.tick();
     }
 
     @Override
     public void die() {
         Log.danger("You lose");
-        gameAPI.getWorld().getEntityManager().freezeAll();
+        this.gameAPI.getWorld().getEntityManager().freezeAll();
     }
 
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getCurrentAnimationFrame(), (int) (x - gameAPI.getGameCamera().getXOffset()), (int) (y - gameAPI.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(getCurrentAnimationFrame(), (int) (x - this.gameAPI.getGameCamera().getXOffset()), (int) (y - this.gameAPI.getGameCamera().getYOffset()), width, height, null);
 
-        if (gameAPI.isDebug()) {
+        if (this.gameAPI.isDebug()) {
             g.setColor(Color.black);
-            g.fillRect(gameAPI.getWidth() - 130, 30, 130, 30);
+            g.fillRect(this.gameAPI.getWidth() - 130, 30, 130, 30);
             g.setColor(Color.WHITE);
             g.drawString("X: " + x + " Y: " + y + " Dir: " + direction, gameAPI.getWidth() - 120, 10);
         }
@@ -150,92 +157,92 @@ public class Player extends Creature {
 /*        g.drawImage(Assets.xp, 10, (Assets.HEIGHT * 2) + 8, 32, 32, null);
         Text.drawString(g, attackTimer >= 300 ? "Attack" : attackTimer + "ms", 35, (Assets.HEIGHT * 3) - 3, 2);*/
 
-        new Hud(this).render(g);
+        this.hud.render(g);
 
-        inventory.render(g);
+        this.inventory.render(g);
 
-        if (getHealth() <= 0) {
+        if (this.getHealth() <= 0) {
             Text.drawString(g, "You lose", 125, 530, Color.BLACK, Fonts.DEUD_DEATH_SCREEN);
             Text.drawString(g, ":(", 367, 515, Color.BLACK, Fonts.DEUD_TALL);
         }
 
-        if (options.isEnabled()) options.render(g);
+        if (this.options.isEnabled()) this.options.render(g);
     }
 
     private void getInput() {
-        xMove = 0;
-        yMove = 0;
+        this.xMove = 0;
+        this.yMove = 0;
 
-        if (gameAPI.getKeyManager().tests) {
-            setHunger(getMaxHunger());
-            setHealth(getMaxHealth());
-            inventory.addItem(Items.SWORD.item());
+        if (this.gameAPI.getKeyManager().tests) {
+            this.setStamina(this.getMaxStamina());
+            this.setHealth(getMaxHealth());
+            this.inventory.add(Items.SWORD.item());
         }
 
-        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
-            gameAPI.getEntityManager().freezeAll();
-            options.setEnabled(!options.isEnabled());
+        if (this.gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+            this.gameAPI.getEntityManager().freezeAll();
+            this.options.setEnabled(!this.options.isEnabled());
         }
 
-        if (gameAPI.getKeyManager().debug) {
-            gameAPI.setDebug(!gameAPI.isDebug());
-            Log.log("Debug mode " + (gameAPI.isDebug() ? "Enabled" : "Disabled"));
+        if (this.gameAPI.getKeyManager().debug) {
+            this.gameAPI.setDebug(!this.gameAPI.isDebug());
+            Log.log("Debug mode " + (this.gameAPI.isDebug() ? "Enabled" : "Disabled"));
         }
 
-        if (gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {
+        if (this.gameAPI.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {
             final Entity en = EntityManager.getEntity(this, 0, 0);
-            new EntityInteract(gameAPI, en, this).interact();
+            new EntityInteract(this.gameAPI, en, this).interact();
         }
 
-        if (isFreeze()) return;
+        if (this.isFreeze()) return;
 
-        setMoving(gameAPI.getKeyManager().up || gameAPI.getKeyManager().down || gameAPI.getKeyManager().left || gameAPI.getKeyManager().right);
+        this.setMoving(this.gameAPI.getKeyManager().up || this.gameAPI.getKeyManager().down || this.gameAPI.getKeyManager().left || this.gameAPI.getKeyManager().right);
 
-        if (gameAPI.getKeyManager().up) {
-            yMove = -speed;
-            setDirection(Direction.NORTH);
-            SoundType.ENTITY_WALK_GRASS.play();
+        if (this.gameAPI.getKeyManager().up) {
+            this.yMove = -this.speed;
+            this.setDirection(Direction.NORTH);
+            Sounds.ENTITY_WALK_GRASS.play();
         }
-        if (gameAPI.getKeyManager().down) {
-            yMove = speed;
-            setDirection(Direction.SOUTH);
-            SoundType.ENTITY_WALK_GRASS.play();
+        if (this.gameAPI.getKeyManager().down) {
+            this.yMove = this.speed;
+            this.setDirection(Direction.SOUTH);
+            Sounds.ENTITY_WALK_GRASS.play();
         }
-        if (gameAPI.getKeyManager().left) {
-            xMove = -speed;
-            setDirection(Direction.WEST);
-            SoundType.ENTITY_WALK_GRASS.play();
+        if (this.gameAPI.getKeyManager().left) {
+            this.xMove = -this.speed;
+            this.setDirection(Direction.WEST);
+            Sounds.ENTITY_WALK_GRASS.play();
         }
-        if (gameAPI.getKeyManager().right) {
-            xMove = speed;
-            setDirection(Direction.EAST);
-            SoundType.ENTITY_WALK_GRASS.play();
+        if (this.gameAPI.getKeyManager().right) {
+            this.xMove = this.speed;
+            this.setDirection(Direction.EAST);
+            Sounds.ENTITY_WALK_GRASS.play();
         }
 
-        if (gameAPI.getMouseManager().isRightPressed()) getPlayerInventory().getEquipment().get(Inventory.Equipment.HAND).use(this);
+        if (this.gameAPI.getMouseManager().isRightPressed()) this.getPlayerInventory().getItemInHand().use(this);
 
-        if (gameAPI.getKeyManager().shift) {
-            if (hunger <= 0.0) {
-                hunger = 0;
-                if (old_speed != -1) setSpeed(old_speed);
+        if (this.gameAPI.getKeyManager().shift) {
+            if (this.stamina <= 0.0) {
+                this.stamina = 0;
+                if (this.old_speed != -1) setSpeed(this.old_speed);
                 return;
             }
-            if (old_speed == -1) old_speed = getSpeed();
-            setSpeed(5.0f);
-            hunger -= 0.02;
+            if (this.old_speed == -1) this.old_speed = getSpeed();
+            this.setSpeed(5.0f);
+            this.stamina -= 0.02;
         } else {
-            if (old_speed != -1) {
-                setSpeed(old_speed);
-                old_speed = -1;
+            if (this.old_speed != -1) {
+                this.setSpeed(this.old_speed);
+                this.old_speed = -1;
             }
         }
     }
 
     public PlayerInventory getPlayerInventory() {
-        return (PlayerInventory) inventory;
+        return (PlayerInventory) this.inventory;
     }
 
     public boolean hasMoney(double amount) {
-        return money >= amount;
+        return this.money >= amount;
     }
 }

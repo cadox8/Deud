@@ -3,24 +3,25 @@ package es.cadox8.deud.worlds;
 import es.cadox8.deud.api.GameAPI;
 import es.cadox8.deud.entities.Entity;
 import es.cadox8.deud.entities.Location;
+import es.cadox8.deud.entities.components.inventory.statics.ChestInventory;
+import es.cadox8.deud.entities.components.inventory.statics.ShopInventory;
 import es.cadox8.deud.entities.creatures.npcs.Npc;
 import es.cadox8.deud.entities.enums.EntityType;
+import es.cadox8.deud.entities.statics.chest.Chest;
+import es.cadox8.deud.entities.statics.chest.RewardChest;
+import es.cadox8.deud.entities.statics.chest.TrapChest;
 import es.cadox8.deud.entities.statics.door.Door;
 import es.cadox8.deud.entities.statics.house.House;
 import es.cadox8.deud.entities.statics.light.Light;
 import es.cadox8.deud.entities.statics.shop.Shop;
-import es.cadox8.deud.entities.statics.chest.Chest;
-import es.cadox8.deud.entities.statics.chest.RewardChest;
-import es.cadox8.deud.entities.statics.chest.TrapChest;
 import es.cadox8.deud.entities.statics.sign.Sign;
 import es.cadox8.deud.entities.statics.trees.DeadTree;
 import es.cadox8.deud.entities.statics.trees.NormalTree;
 import es.cadox8.deud.game.Game;
 import es.cadox8.deud.graphics.textures.Models;
-import es.cadox8.deud.inventory.statics.StaticInventory;
 import es.cadox8.deud.managers.EntityManager;
-import lombok.NonNull;
 import es.cadox8.deud.utils.Log;
+import lombok.NonNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -48,65 +49,60 @@ public class WorldEntities {
                 if (type == EntityType.PLAYER) return;
 
                 switch (type) {
-                    case CHEST:
+                    case CHEST -> {
                         switch (Chest.ChestType.valueOf(e.getChestType())) {
-                            case REWARD:
+                            case REWARD -> {
                                 en = new RewardChest(gameAPI, l.getX(), l.getY(), e.isNeedKey(), Chest.ChestType.valueOf(e.getChestType()));
                                 ((RewardChest) en).setOpen(e.isOpen());
                                 Arrays.asList(e.getPool()).forEach(i -> ((RewardChest) en).addToPool(i.getId()));
-                                break;
-                            case TRAP:
+                            }
+                            case TRAP -> {
                                 en = new TrapChest(gameAPI, l.getX(), l.getY(), e.isNeedKey());
                                 ((TrapChest) en).setOpen(e.isOpen());
                                 Arrays.asList(e.getPool()).forEach(i -> ((RewardChest) en).addToPool(i.getId()));
-                                break;
-                            default:
+                            }
+                            default -> {
                                 en = new Chest(gameAPI, l.getX(), l.getY(), Chest.ChestType.valueOf(e.getChestType()));
-                                en.getInventory().addItems(e.getInventory());
-                                break;
+                                en.getInventory().add(e.getInventory());
+                            }
                         }
-                        break;
-                    case SIGN:
-                        en = new Sign(gameAPI, l.getX(), l.getY(), e.getText());
-                        break;
-                    case DOOR:
+                        if (e.getInventory() != null) {
+                            final ChestInventory inv = new ChestInventory(20);
+                            inv.add(e.getInventory());
+                            en.setInventory(inv);
+                        }
+                    }
+                    case SIGN -> en = new Sign(gameAPI, l.getX(), l.getY(), e.getText());
+                    case DOOR -> {
                         en = new Door(gameAPI, l.getX(), l.getY(), e.getMap());
-                        ((Door)en).setNeededItem(e.getNeededItem());
-                        break;
-                    case SHOP:
+                        ((Door) en).setNeededItem(e.getNeededItem());
+                    }
+                    case SHOP -> {
                         en = new Shop(gameAPI, l.getX(), l.getY(), e.getInventory());
-                        break;
-                    case NPC:
+                        if (e.getInventory() != null) {
+                            final ShopInventory inv = new ShopInventory();
+                            inv.add(e.getInventory());
+                            en.setInventory(inv);
+                        }
+                    }
+                    case NPC -> {
                         en = new Npc(gameAPI, l.getX(), l.getY(), e.getDisplayName(), Models.npc_down, Models.npc_up, Models.npc_left, Models.npc_right);
                         ((Npc) en).addTexts(e.getTextArray());
-                        break;
-                    case HOUSE:
-                        en = new House(gameAPI, l.getX(), l.getY(), e.getHouseType());
-                        break;
-                    case NORMALTREE:
+                    }
+                    case HOUSE -> en = new House(gameAPI, l.getX(), l.getY(), e.getHouseType());
+                    case NORMALTREE -> {
                         en = new NormalTree(gameAPI, l.getX(), l.getY());
-                        ((NormalTree)en).setTreeType(e.getTreeType());
-                        break;
-                    case DEADTREE:
+                        ((NormalTree) en).setTreeType(e.getTreeType());
+                    }
+                    case DEADTREE -> {
                         en = new DeadTree(gameAPI, l.getX(), l.getY());
-                        ((DeadTree)en).setTreeType(e.getTreeType());
-                        break;
-                    case LIGHT:
-                        en = new Light(gameAPI, (int)l.getX(), (int)l.getY(), e.getRadius(), e.getLuminosity());
-                        break;
-
-                    default:
-                        en = (Entity) type.getSupClass().getConstructors()[0].newInstance(gameAPI, l.getX(), l.getY());
-                        break;
+                        ((DeadTree) en).setTreeType(e.getTreeType());
+                    }
+                    case LIGHT -> en = new Light(gameAPI, (int) l.getX(), (int) l.getY(), e.getRadius(), e.getLuminosity());
+                    default -> en = (Entity) type.getSupClass().getConstructors()[0].newInstance(gameAPI, l.getX(), l.getY());
                 }
                 en.setMaxHealth(e.getMaxHealth());
                 en.setHealth(e.getHealth());
-
-                if (e.getInventory() != null) {
-                    final StaticInventory inv = new StaticInventory(gameAPI);
-                    inv.addItems(e.getInventory());
-                    en.setInventory(inv);
-                }
 
                 entityManager.addEntity(en);
             } catch (IllegalAccessException | InvocationTargetException | InstantiationException er) {

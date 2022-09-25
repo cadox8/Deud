@@ -11,14 +11,10 @@ public class KeyManager implements KeyListener {
     public boolean up, down, left, right, shift, space, drop, esc;
     public boolean debug, tests;
 
-    //@Getter @Setter private UIField writingTo;
-
     public KeyManager() {
         keys = new boolean[256];
         justPressed = new boolean[keys.length];
         cantPress = new boolean[keys.length];
-
-        //writingTo = null;
     }
 
     public void tick() {
@@ -68,14 +64,5 @@ public class KeyManager implements KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-/*        if (writingTo != null) {
-            if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-                if (writingTo.getText().toCharArray().length <= 0) return;
-                writingTo.setText(String.valueOf(Arrays.copyOfRange(writingTo.getText().toCharArray(), 0, writingTo.getText().toCharArray().length - 1)));
-                return;
-            }
-            writingTo.setText(writingTo.getText() + e.getKeyChar());
-        }*/
-    }
+    public void keyTyped(KeyEvent e) {}
 }

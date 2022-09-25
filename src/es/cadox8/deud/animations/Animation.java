@@ -17,40 +17,40 @@ public class Animation {
     public Animation(int speed, BufferedImage[] frames) {
         this.speed = speed;
         this.frames = frames;
-        index = 0;
-        timer = 0;
-        lastTime = System.currentTimeMillis();
-        withEnd(false);
-        end = false;
+        this.index = 0;
+        this.timer = 0;
+        this.lastTime = System.currentTimeMillis();
+        this.withEnd(false);
+        this.end = false;
     }
 
     public void tick() {
-        if (end) return;
-        timer += System.currentTimeMillis() - lastTime;
-        lastTime = System.currentTimeMillis();
+        if (this.end) return;
+        this.timer += System.currentTimeMillis() - this.lastTime;
+        this.lastTime = System.currentTimeMillis();
 
-        if (timer > speed) {
-            index++;
-            timer = 0;
-            if (index >= frames.length) {
-                if (hasEnd()) end = true;
-                index = 0;
+        if (this.timer > this.speed) {
+            this.index++;
+            this.timer = 0;
+            if (this.index >= this.frames.length) {
+                if (this.hasEnd()) this.end = true;
+                this.index = 0;
             }
         }
     }
 
     public BufferedImage getCurrentFrame() {
-        return frames[index];
+        return this.frames[this.index];
     }
 
     public BufferedImage getFirstFrame() {
-        return frames[0];
+        return this.frames[0];
     }
 
     public void withEnd(boolean end) {
-        withEnd = end;
+        this.withEnd = end;
     }
     public boolean hasEnd() {
-        return withEnd;
+        return this.withEnd;
     }
 }

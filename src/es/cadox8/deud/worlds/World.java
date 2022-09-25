@@ -13,9 +13,8 @@ import es.cadox8.deud.managers.ItemManager;
 import es.cadox8.deud.managers.ParticleManager;
 import es.cadox8.deud.tiles.Tile;
 import es.cadox8.deud.tiles.Tiles;
-import es.cadox8.deud.ui.components.base.UIBlock;
-import es.cadox8.deud.ui.helpers.AarinArea;
-import es.cadox8.deud.ui.helpers.AarinColor;
+import es.cadox8.deud.ui.components.block.UiBlock;
+import es.cadox8.deud.ui.helpers.UiDimension;
 import es.cadox8.deud.utils.Log;
 import es.cadox8.deud.utils.Utils;
 import lombok.Getter;
@@ -40,7 +39,7 @@ public class World {
     private boolean dark;
 
     //
-    private final UIBlock base;
+    private final UiBlock base;
     //
 
     //Entities
@@ -71,8 +70,8 @@ public class World {
 
         addEntities();
 
-        base = new UIBlock(gameAPI, AarinColor.BLACK, true);
-        base.setArea(new AarinArea().addPoints(new Point(0, 0), new Point(gameAPI.getWidth(), gameAPI.getHeight())));
+        base = new UiBlock(Color.BLACK);
+        base.setUiDimension(new UiDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
     }
 
     private void addEntities() {

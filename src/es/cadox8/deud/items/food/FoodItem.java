@@ -21,14 +21,14 @@ public abstract class FoodItem extends Item {
     }
 
     private void consume(Player p) {
-        if (p.getHunger() == p.getMaxHunger()) return;
+        if (p.getStamina() == p.getMaxStamina()) return;
 
         if (!this.isInfinity()) removeItem(p);
 
-        if (p.getHunger() + foodRegen >= p.getMaxHunger()) {
-            p.setHunger(p.getMaxHunger());
+        if (p.getStamina() + foodRegen >= p.getMaxStamina()) {
+            p.setStamina(p.getMaxStamina());
             return;
         }
-        p.setHunger(p.getHunger() + foodRegen);
+        p.setStamina(p.getStamina() + foodRegen);
     }
 }

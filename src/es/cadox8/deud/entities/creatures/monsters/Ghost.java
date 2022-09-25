@@ -5,7 +5,7 @@ import es.cadox8.deud.animations.Animation;
 import es.cadox8.deud.api.GameAPI;
 import es.cadox8.deud.entities.enums.EntityType;
 import es.cadox8.deud.graphics.textures.Models;
-import es.cadox8.deud.inventory.creature.CreatureInventory;
+import es.cadox8.deud.entities.components.inventory.creature.CreatureInventory;
 
 public class Ghost extends Monster {
 
@@ -30,8 +30,6 @@ public class Ghost extends Monster {
         setAttackCooldown(800);
 
         entityAi = new MonstersEntityAI(this, 5);
-
-        inventory = new CreatureInventory(gameAPI);
     }
 
     @Override

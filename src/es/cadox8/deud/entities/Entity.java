@@ -8,7 +8,7 @@ import es.cadox8.deud.entities.creatures.player.Player;
 import es.cadox8.deud.entities.enums.Direction;
 import es.cadox8.deud.entities.enums.EntityType;
 import es.cadox8.deud.entities.projectile.Projectile;
-import es.cadox8.deud.inventory.Inventory;
+import es.cadox8.deud.entities.components.inventory.Inventory;
 import es.cadox8.deud.items.Item;
 import lombok.Getter;
 import lombok.NonNull;
@@ -42,10 +42,13 @@ public abstract class Entity {
 
     @Getter @Setter protected float x, y;
     @Getter @Setter protected int width, height;
-    @Getter @Setter private int health;
-    @Getter @Setter private int damage;
-    @Getter @Setter private double armor;
+
     @Getter @Setter private int maxHealth;
+    @Getter @Setter private int health;
+
+    @Getter @Setter private int damage;
+
+    @Getter @Setter private double armor;
 
     @Getter @Setter private boolean damageable = true;
 
@@ -116,7 +119,7 @@ public abstract class Entity {
         // If the attacker is a Monster
         if (attacker instanceof Monster) {
             final Monster monster = (Monster) attacker;
-            final Item handItem = monster.getCreatureInventory().getEquipment(Inventory.Equipment.HAND);
+            final Item handItem = monster.getCreatureInventory().getItemInHand();
             damage += handItem.getDamage();
         }
 
