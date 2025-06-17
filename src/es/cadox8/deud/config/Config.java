@@ -1,0 +1,16 @@
+package es.cadox8.deud.config;
+
+import lombok.Data;
+
+@Data
+public class Config {
+
+    private boolean debug = true;
+
+    private boolean fullScreen = true;
+
+    // Sound
+    private float masterVolume = 1;
+    private float musicVolume = 1;
+    private float entitiesVolume = 1;
+}

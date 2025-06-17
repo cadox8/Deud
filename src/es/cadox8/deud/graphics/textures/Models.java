@@ -1,0 +1,118 @@
+package es.cadox8.deud.graphics.textures;
+
+import es.cadox8.deud.graphics.Sprite;
+import es.cadox8.deud.utils.Utils;
+
+import java.awt.image.BufferedImage;
+
+public class Models {
+
+    private static final int width = 32, height = 32;
+
+    private static Sprite model;
+
+    public static BufferedImage[] player_down, player_up, player_left, player_right;
+
+    public static BufferedImage[] npc_down, npc_up, npc_left, npc_right;
+
+    public static BufferedImage[] fairy_down, fairy_up, fairy_left, fairy_right;
+
+    public static BufferedImage[] zombie_down, zombie_up, zombie_left, zombie_right;
+    public static BufferedImage[] ghost_down, ghost_up, ghost_left, ghost_right;
+
+    //Direction: 0 = South, 1 = North, 2 = East, 3 = West
+
+    public static void init() {
+        //Player
+        model = new Sprite(Utils.loadImage("/textures/models/female.png"));
+
+        player_down = new BufferedImage[3];
+        player_up = new BufferedImage[3];
+        player_right = new BufferedImage[3];
+        player_left = new BufferedImage[3];
+
+        setImage(model, player_down, 0);
+        setImage(model, player_up, 1);
+        setImage(model, player_right, 2);
+        setImage(model, player_left, 3);
+
+        //Fairy
+        model = new Sprite(Utils.loadImage("/textures/models/fairy.png"));
+
+        fairy_down = new BufferedImage[3];
+        fairy_up = new BufferedImage[3];
+        fairy_right = new BufferedImage[3];
+        fairy_left = new BufferedImage[3];
+
+        setImage(model, fairy_down, 0);
+        setImage(model, fairy_up, 1);
+        setImage(model, fairy_right, 2);
+        setImage(model, fairy_left, 3);
+
+        //Zombie
+        model = new Sprite(Utils.loadImage("/textures/models/zombie.png"));
+
+        zombie_down = new BufferedImage[3];
+        zombie_up = new BufferedImage[3];
+        zombie_right = new BufferedImage[3];
+        zombie_left = new BufferedImage[3];
+
+        setImage(model, zombie_down, 0);
+        setImage(model, zombie_up, 1);
+        setImage(model, zombie_right, 2);
+        setImage(model, zombie_left, 3);
+
+        //Ghost
+        model = new Sprite(Utils.loadImage("/textures/models/ghost.png"));
+
+        ghost_down = new BufferedImage[3];
+        ghost_up = new BufferedImage[3];
+        ghost_right = new BufferedImage[3];
+        ghost_left = new BufferedImage[3];
+
+        setImage(model, ghost_down, 0);
+        setImage(model, ghost_up, 1);
+        setImage(model, ghost_right, 2);
+        setImage(model, ghost_left, 3);
+
+        //Npc
+        model = new Sprite(Utils.loadImage("/textures/models/npc1.png"));
+
+        npc_down = new BufferedImage[3];
+        npc_up = new BufferedImage[3];
+        npc_right = new BufferedImage[3];
+        npc_left = new BufferedImage[3];
+
+        setImage(model, npc_down, 0);
+        setImage(model, npc_up, 1);
+        setImage(model, npc_right, 2);
+        setImage(model, npc_left, 3);
+    }
+
+    private static void setImage(Sprite model, BufferedImage[] image, int direction) {
+        switch (direction) {
+            case 0:
+                image[0] = model.crop(width, 0, width, height);
+                image[1] = model.crop(0, 0, width, height);
+                image[2] = model.crop(width * 2, 0, width, height);
+                return;
+            case 1:
+                image[0] = model.crop(width, height * 3, width, height);
+                image[1] = model.crop(0, height * 3, width, height);
+                image[2] = model.crop(width * 2, height * 3, width, height);
+                return;
+            case 2:
+                image[0] = model.crop(width, height * 2, width, height);
+                image[1] = model.crop(0, height * 2, width, height);
+                image[2] = model.crop(width * 2, height * 2, width, height);
+                return;
+            case 3:
+                image[0] = model.crop(width, height, width, height);
+                image[1] = model.crop(0, height, width, height);
+                image[2] = model.crop(width * 2, height, width, height);
+                return;
+            default:
+                break;
+        }
+    }
+}

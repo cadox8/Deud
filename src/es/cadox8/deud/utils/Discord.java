@@ -1,0 +1,21 @@
+package es.cadox8.deud.utils;
+
+import es.cadox8.deud.entities.creatures.player.Player;
+import net.arikia.dev.drpc.DiscordEventHandlers;
+import net.arikia.dev.drpc.DiscordRPC;
+import net.arikia.dev.drpc.DiscordRichPresence;
+
+public class Discord {
+
+    public Discord() {
+        final DiscordEventHandlers handlers = new DiscordEventHandlers.Builder().setReadyEventHandler((user) -> Log.success("Deud hooked into Discord (" + user.username + "#" + user.discriminator + ")!")).build();
+        DiscordRPC.discordInitialize("524279850887020544", handlers, true);
+    }
+
+    public void createNewPresence(Player p){
+        final DiscordRichPresence.Builder rich = new DiscordRichPresence.Builder("Name: " + p.getNick()).setDetails("Map: " + p.getGameAPI().getWorld().worldName());
+        rich.setStartTimestamps(System.currentTimeMillis() / 1000);
+        rich.setBigImage("icono_big", "DeudGame");
+        DiscordRPC.discordUpdatePresence(rich.build());
+    }
+}

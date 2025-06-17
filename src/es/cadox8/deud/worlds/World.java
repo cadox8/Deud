@@ -1,0 +1,168 @@
+package es.cadox8.deud.worlds;
+
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
+import es.cadox8.deud.api.GameAPI;
+import es.cadox8.deud.entities.EntityData;
+import es.cadox8.deud.entities.Location;
+import es.cadox8.deud.entities.creatures.player.Player;
+import es.cadox8.deud.entities.enums.Direction;
+import es.cadox8.deud.game.Game;
+import es.cadox8.deud.managers.EntityManager;
+import es.cadox8.deud.managers.ItemManager;
+import es.cadox8.deud.managers.ParticleManager;
+import es.cadox8.deud.tiles.Tile;
+import es.cadox8.deud.tiles.Tiles;
+import es.cadox8.deud.ui.components.block.UiBlock;
+import es.cadox8.deud.ui.helpers.UiDimension;
+import es.cadox8.deud.utils.Log;
+import es.cadox8.deud.utils.Utils;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
+import java.awt.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class World {
+
+    private final GameAPI gameAPI;
+
+    @Getter private int width, height;
+    private int spawnX, spawnY;
+    @Getter private TileUtils[][] tiles;
+
+    private final String path;
+
+    private boolean dark;
+
+    //
+    private final UiBlock base;
+    //
+
+    //Entities
+    @Getter private final EntityManager entityManager;
+
+    // Item
+    @Getter private final ItemManager itemManager;
+
+    // Particles
+    @Getter private final ParticleManager particleManager;
+
+    public World(@NonNull GameAPI gameAPI, String path) {
+        this.gameAPI = gameAPI;
+        this.path = path;
+        Location loc;
+
+        loadWorld(path);
+
+        try {
+            loc = Game.getInstance().getPlayerData().getLocation();
+        } catch (NullPointerException e) {
+            loc = new Location(spawnX, spawnY, Direction.SOUTH);
+        }
+
+        this.entityManager = new EntityManager(gameAPI, new Player(gameAPI, loc.getX(), loc.getY()));
+        this.itemManager = new ItemManager(gameAPI);
+        this.particleManager = new ParticleManager(gameAPI);
+
+        addEntities();
+
+        base = new UiBlock(Color.BLACK);
+        base.setUiDimension(new UiDimension(0, 0, gameAPI.getWidth(), gameAPI.getHeight()));
+    }
+
+    private void addEntities() {
+        try {
+            if (Game.getInstance().getEntityData() == null) {
+                final EntityData data = new GsonBuilder().create().fromJson(new JsonReader(new FileReader("resources/worlds/" + worldName() + "/entities.ddata")), EntityData.class);
+                Game.getInstance().setEntityData(data);
+            }
+            new WorldEntities(gameAPI, entityManager);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(5);
+        }
+    }
+
+    public void tick() {
+        itemManager.tick();
+        entityManager.tick();
+        particleManager.tick();
+    }
+
+    public void render(Graphics g) {
+        base.render(g);
+
+        int xStart = (int) Math.max(0, gameAPI.getGameCamera().getXOffset() / Tile.TILEWIDTH);
+        int xEnd = (int) Math.min(width, (gameAPI.getGameCamera().getXOffset() + gameAPI.getWidth()) / Tile.TILEWIDTH + 1);
+        int yStart = (int) Math.max(0, gameAPI.getGameCamera().getYOffset() / Tile.TILEHEIGHT);
+        int yEnd = (int) Math.min(height, (gameAPI.getGameCamera().getYOffset() + gameAPI.getHeight()) / Tile.TILEHEIGHT + 1);
+
+        for (int y = yStart; y < yEnd; y++) {
+            for (int x = xStart; x < xEnd; x++) {
+                //getTile(x, y).createNewRotated(45).render(g, (int) (x * Tile.TILEWIDTH - gameAPI.getGameCamera().getXOffset()), (int) (y * Tile.TILEHEIGHT - gameAPI.getGameCamera().getYOffset()));
+                getTile(x, y).render(g, (int) (x * Tile.TILEWIDTH - gameAPI.getGameCamera().getXOffset()), (int) (y * Tile.TILEHEIGHT - gameAPI.getGameCamera().getYOffset()));
+            }
+        }
+
+        itemManager.render(g);
+        entityManager.render(g, dark);
+        particleManager.render(g);
+    }
+
+    public Tile getTile(int x, int y) {
+        if (x < 0 || y < 0 || x >= width || y >= height) return Tiles.VOID.build();
+        final TileUtils tu = tiles[x][y];
+        if (tu == null) return Tiles.VOID.build();
+        return Tiles.getTile(tu.getId(), tu.getSubID());
+    }
+
+    private void loadWorld(String path) {
+        final WorldData worldData = new GsonBuilder().setPrettyPrinting().create().fromJson(Utils.loadFileAsString(path), WorldData.class);
+
+        width = worldData.getWidth();
+        height = worldData.getHeight();
+
+        dark = worldData.getLight() == 0;
+
+        tiles = new TileUtils[width][height];
+        final AtomicInteger x = new AtomicInteger(0);
+        final AtomicInteger y = new AtomicInteger(0);
+
+        worldData.getTiles().forEach(t -> {
+            if (t.contains(":")) {
+                final String[] parts = t.split(":");
+                tiles[x.get()][y.get()] = new TileUtils(Utils.parseInt(parts[0]), Utils.parseInt(parts[1]));
+            } else {
+                tiles[x.get()][y.get()] = new TileUtils(Utils.parseInt(t), 0);
+            }
+            if (x.incrementAndGet() >= width) {
+                x.set(0);
+                y.incrementAndGet();
+            }
+        });
+
+        Log.success("World " + worldData.getName() + " loaded! v" + worldData.getVersion());
+    }
+
+    @Override
+    public String toString() {
+        return "World{Name: " + worldName() + ", Entities: " + entityManager.getEntities().toString() + "}";
+    }
+    public String worldName() {
+        return path.split("/")[2].split("\\.")[0];
+    }
+
+    public Player getPlayer() {
+        return getEntityManager().getPlayer();
+    }
+
+    @RequiredArgsConstructor
+    public static class TileUtils {
+        @Getter private final int id;
+        @Getter private final int subID;
+    }
+}

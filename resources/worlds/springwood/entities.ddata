@@ -6,7 +6,7 @@
         "world": "springwood",
         "x": 250.0,
         "y": 100.0,
-        "direction": 2
+        "direction": "NORTH"
       },
       "inventory": []
     },
@@ -17,7 +17,7 @@
         "world": "springwood",
         "x": 350.0,
         "y": 150.0,
-        "direction": 0
+        "direction": "NORTH"
       }
     },
     {
@@ -26,7 +26,7 @@
         "world": "springwood",
         "x": 135.0,
         "y": 100.0,
-        "direction": 2
+        "direction": "NORTH"
       }
     },
     {
@@ -37,7 +37,7 @@
         "world": "springwood",
         "x": 769.0,
         "y": 520.0,
-        "direction": 0
+        "direction": "NORTH"
       }
     },
     {
@@ -48,9 +48,9 @@
         "world": "springwood",
         "x": 769.0,
         "y": 550.0,
-        "direction": 0
+        "direction": "NORTH"
       },
-      "map": "test",
+      "map": "house",
       "neededItem": -1
     },
     {
@@ -62,7 +62,7 @@
         "world": "springwood",
         "x": 769.0,
         "y": 1020.0,
-        "direction": 0
+        "direction": "NORTH"
       }
     },
     {
@@ -73,9 +73,9 @@
         "world": "springwood",
         "x": 769.0,
         "y": 1050.0,
-        "direction": 0
+        "direction": "NORTH"
       },
-      "map": "test",
+      "map": "house",
       "neededItem": -1
     },
     {
@@ -92,7 +92,7 @@
         "world": "springwood",
         "x": 350.0,
         "y": 407.0,
-        "direction": 1
+        "direction": "NORTH"
       }
     },
     {
@@ -101,7 +101,7 @@
         "world": "springwood",
         "x": 100.0,
         "y": 407.0,
-        "direction": 1
+        "direction": "NORTH"
       }
     }
   ]
